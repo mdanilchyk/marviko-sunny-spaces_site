@@ -13,7 +13,20 @@ import portfolio4 from "@/assets/portfolio-4.jpg";
 import portfolio5 from "@/assets/portfolio-5.jpg";
 import portfolio6 from "@/assets/portfolio-6.jpg";
 
+import workWindowOpen from "@/assets/work-window-open.jpg";
+import workWindowTrees from "@/assets/work-window-trees.jpg";
+import workHouseExterior from "@/assets/work-house-exterior.jpg";
+import workDoorBrown from "@/assets/work-door-brown.jpg";
+import workDoorGlass from "@/assets/work-door-glass.jpg";
+import workWindowFireplace from "@/assets/work-window-fireplace.jpg";
+
 const projects = [
+  { img: workWindowOpen, title: "Установка окон в загородном доме", category: "Окна" },
+  { img: workWindowTrees, title: "Окна с видом на сад", category: "Окна" },
+  { img: workHouseExterior, title: "Остекление частного дома", category: "Окна" },
+  { img: workDoorBrown, title: "Входная дверь ПВХ", category: "Двери" },
+  { img: workDoorGlass, title: "Дверь со стеклопакетом", category: "Двери" },
+  { img: workWindowFireplace, title: "Окна в интерьере", category: "Окна" },
   { img: portfolio1, title: "Установка окон в квартире", category: "Окна" },
   { img: portfolio2, title: "Панорамное остекление балкона", category: "Балконы" },
   { img: portfolio3, title: "Окна в спальне загородного дома", category: "Окна" },
@@ -48,7 +61,6 @@ const PortfolioPage = () => {
 
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          {/* Filters */}
           <div className="flex flex-wrap gap-2 mb-10">
             {filters.map((f) => (
               <button
@@ -65,10 +77,9 @@ const PortfolioPage = () => {
             ))}
           </div>
 
-          {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((project, i) => (
-              <AnimatedSection key={project.title + filter} delay={i * 0.08}>
+              <AnimatedSection key={project.title + filter + i} delay={i * 0.08}>
                 <div
                   className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]"
                   onClick={() => setLightbox(i)}
@@ -76,7 +87,7 @@ const PortfolioPage = () => {
                   <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: "rgba(217,79,30,0.70)" }}>
                     <Eye className="w-8 h-8 text-primary-foreground mb-2" />
-                    <span className="text-primary-foreground text-sm font-semibold">{project.title}</span>
+                    <span className="text-primary-foreground text-sm font-semibold text-center px-3">{project.title}</span>
                   </div>
                 </div>
               </AnimatedSection>
@@ -85,7 +96,6 @@ const PortfolioPage = () => {
         </div>
       </section>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {lightbox !== null && (
           <motion.div

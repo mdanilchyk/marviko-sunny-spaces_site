@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="mb-12 pb-12" style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
           <h3 className="text-lg font-bold mb-6">Сертификаты и гарантии</h3>
           <div className="flex flex-wrap gap-3">
-            {["ISO 9001", "СТБ 1108-98", "Гарантия 10 лет", "Сертификат Montblanc", "Сертификат KBE"].map((cert) => (
+            {["ISO 9001", "СТБ 1108-98", "Гарантия 10 лет", "УНП 690603009", "С 2007 года"].map((cert) => (
               <span
                 key={cert}
                 className="px-4 py-2 rounded-lg text-sm font-medium"
@@ -31,7 +31,7 @@ const Footer = () => {
               <span className="text-xl font-bold tracking-tight">Марвико</span>
             </Link>
             <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Профессиональное остекление в Минске и Минской области. Работаем с 2010 года.
+              ООО «Марвико». Производство и установка окон, дверей и балконов. Работаем с 2007 года.
             </p>
           </div>
 
@@ -56,17 +56,22 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-4">Контакты</h4>
             <div className="flex flex-col gap-3">
-              <a href="tel:+375291234567" className="flex items-center gap-2.5 text-sm text-primary">
+              <a href="tel:+375295677756" className="flex items-center gap-2.5 text-sm text-primary">
                 <Phone className="w-4 h-4" />
-                +375 (29) 123-45-67
+                +375 (29) 567-77-56
               </a>
-              <a href="mailto:info@marviko.by" className="flex items-center gap-2.5 text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
-                <Mail className="w-4 h-4" />
-                info@marviko.by
+              <p className="text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
+                Viber / Telegram: +375 (29) 567-77-56
+              </p>
+              <a href="https://www.instagram.com/okna_dveri_marviko" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
+                @okna_dveri_marviko
               </a>
               <div className="flex items-start gap-2.5 text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>г. Минск, ул. Примерная, 123</span>
+                <div>
+                  <p>Офис: г. Червень, пл. Свободы, 32, к. 206</p>
+                  <p className="mt-1">Производство: г. Червень, ул. Ленинская, 49</p>
+                </div>
               </div>
             </div>
           </div>
@@ -75,15 +80,14 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-4">Режим работы</h4>
             <div className="flex flex-col gap-2 text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
-              <p>Пн-Пт: 9:00 — 18:00</p>
-              <p>Сб: 10:00 — 15:00</p>
-              <p>Вс: выходной</p>
+              <p>Пн–Пт: 9:00 — 17:00</p>
+              <p>Сб–Вс: выходной</p>
             </div>
           </div>
         </div>
 
         <div className="mt-12 pt-8 text-center text-sm" style={{ borderTop: "1px solid rgba(255,255,255,0.1)", color: "hsl(var(--muted-foreground))" }}>
-          © {new Date().getFullYear()} Марвико. Все права защищены.
+          © {new Date().getFullYear()} ООО «Марвико», УНП 690603009. Все права защищены.
         </div>
       </div>
     </footer>

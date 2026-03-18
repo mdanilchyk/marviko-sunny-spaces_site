@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, Mail, MapPin, Clock, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, MapPin, Clock, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/marviko-logo.png";
 
@@ -21,10 +21,8 @@ const navItems: NavItem[] = [
     label: "Окна ПВХ",
     href: "/windows",
     submenu: [
-      { label: "Профиль Montblanc", href: "/windows", desc: "Надёжный немецкий профиль" },
-      { label: "Профиль Novotex", href: "/windows", desc: "Оптимальное соотношение цена-качество" },
-      { label: "Профиль KBE", href: "/windows", desc: "Премиум класс энергосбережения" },
-      { label: "Цены на окна", href: "/windows", desc: "Калькулятор и прайс-лист" },
+      { label: "Все окна ПВХ", href: "/windows", desc: "Полный каталог оконных конструкций" },
+      { label: "Цены на окна", href: "/windows", desc: "Актуальный прайс-лист" },
     ],
   },
   {
@@ -80,21 +78,20 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
               <MapPin className="w-3 h-3 opacity-60" />
-              г. Минск, ул. Примерная 10
+              г. Червень, пл. Свободы, 32
             </span>
             <span className="hidden sm:flex items-center gap-1.5">
               <Clock className="w-3 h-3 opacity-60" />
-              Пн-Пт 9:00–18:00
+              Пн–Пт 9:00–17:00
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <a href="mailto:info@marviko.by" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition-colors">
-              <Mail className="w-3 h-3 opacity-60" />
-              info@marviko.by
+            <a href="https://www.instagram.com/okna_dveri_marviko" target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition-colors">
+              Instagram
             </a>
-            <a href="tel:+375291234567" className="flex items-center gap-1.5 hover:text-accent transition-colors">
+            <a href="tel:+375295677756" className="flex items-center gap-1.5 hover:text-accent transition-colors">
               <Phone className="w-3 h-3 opacity-60" />
-              +375 (29) 123-45-67
+              +375 (29) 567-77-56
             </a>
           </div>
         </div>
@@ -103,12 +100,10 @@ const Navbar = () => {
       {/* Main navbar */}
       <nav className="bg-card/95 backdrop-blur-md" style={{ boxShadow: "0 1px 0 0 hsl(var(--border))" }}>
         <div className="container mx-auto section-padding flex items-center justify-between h-[68px]">
-          {/* Logo */}
           <Link to="/" className="flex items-center shrink-0">
             <img src={logo} alt="Марвико — окна, двери, балконы" className="h-10 w-auto" />
           </Link>
 
-          {/* Desktop nav items */}
           <div className="hidden lg:flex items-center gap-0.5">
             <Link
               to="/"
@@ -145,7 +140,6 @@ const Navbar = () => {
                   )}
                 </Link>
 
-                {/* Dropdown */}
                 <AnimatePresence>
                   {item.submenu && activeDropdown === item.label && (
                     <motion.div
@@ -180,24 +174,21 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <a href="tel:+375291234567" className="flex items-center gap-2 text-primary font-semibold text-sm">
+            <a href="tel:+375295677756" className="flex items-center gap-2 text-primary font-semibold text-sm">
               <Phone className="w-4 h-4" />
-              +375 (29) 123-45-67
+              +375 (29) 567-77-56
             </a>
             <button className="bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all duration-200">
               Заказать звонок
             </button>
           </div>
 
-          {/* Mobile toggle */}
           <button className="lg:hidden text-foreground p-2" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -207,58 +198,29 @@ const Navbar = () => {
               className="lg:hidden overflow-hidden bg-card border-t border-border"
             >
               <div className="section-padding py-4 flex flex-col gap-1">
-                <Link
-                  to="/"
-                  onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                    location.pathname === "/" ? "text-primary bg-accent-light" : "text-foreground"
-                  }`}
-                >
+                <Link to="/" onClick={() => setMobileOpen(false)} className={`px-4 py-3 rounded-lg text-base font-medium transition-colors ${location.pathname === "/" ? "text-primary bg-accent-light" : "text-foreground"}`}>
                   Главная
                 </Link>
 
                 {navItems.map((item) => (
                   <div key={item.label}>
                     <div className="flex items-center">
-                      <Link
-                        to={item.href}
-                        onClick={() => setMobileOpen(false)}
-                        className={`flex-1 px-4 py-3 rounded-lg text-base font-medium transition-colors ${
-                          location.pathname === item.href ? "text-primary bg-accent-light" : "text-foreground"
-                        }`}
-                      >
+                      <Link to={item.href} onClick={() => setMobileOpen(false)} className={`flex-1 px-4 py-3 rounded-lg text-base font-medium transition-colors ${location.pathname === item.href ? "text-primary bg-accent-light" : "text-foreground"}`}>
                         {item.label}
                       </Link>
                       {item.submenu && (
-                        <button
-                          onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)}
-                          className="p-3 text-muted-foreground"
-                        >
-                          <ChevronDown
-                            className={`w-4 h-4 transition-transform ${
-                              mobileExpanded === item.label ? "rotate-180" : ""
-                            }`}
-                          />
+                        <button onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)} className="p-3 text-muted-foreground">
+                          <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpanded === item.label ? "rotate-180" : ""}`} />
                         </button>
                       )}
                     </div>
 
                     <AnimatePresence>
                       {item.submenu && mobileExpanded === item.label && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          className="overflow-hidden"
-                        >
+                        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
                           <div className="pl-6 pb-2 flex flex-col gap-0.5">
                             {item.submenu.map((sub) => (
-                              <Link
-                                key={sub.label}
-                                to={sub.href}
-                                onClick={() => setMobileOpen(false)}
-                                className="px-4 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg hover:bg-accent-light transition-colors"
-                              >
+                              <Link key={sub.label} to={sub.href} onClick={() => setMobileOpen(false)} className="px-4 py-2 text-sm text-muted-foreground hover:text-primary rounded-lg hover:bg-accent-light transition-colors">
                                 {sub.label}
                               </Link>
                             ))}
@@ -270,9 +232,9 @@ const Navbar = () => {
                 ))}
 
                 <div className="mt-3 pt-3 border-t border-border flex flex-col gap-3">
-                  <a href="tel:+375291234567" className="flex items-center gap-2 text-primary font-semibold px-4">
+                  <a href="tel:+375295677756" className="flex items-center gap-2 text-primary font-semibold px-4">
                     <Phone className="w-4 h-4" />
-                    +375 (29) 123-45-67
+                    +375 (29) 567-77-56
                   </a>
                   <button className="bg-primary text-primary-foreground px-5 py-3 rounded-lg font-semibold mx-4">
                     Заказать звонок

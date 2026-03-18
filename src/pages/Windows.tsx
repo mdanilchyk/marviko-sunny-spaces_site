@@ -1,41 +1,40 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
+import WindowDrawing from "@/components/WindowDrawing";
 import windowForest from "@/assets/window-forest-view.jpg";
 import windowCity from "@/assets/window-city-view.jpg";
 import windowGarden from "@/assets/window-garden-view.jpg";
 
 const profiles = [
   {
-    name: "Novotex Termo",
     chambers: "4 камеры",
-    width: "70 мм",
-    glass: "Однокамерный",
-    price: "от 250 BYN",
-    features: ["Базовая теплоизоляция", "Белый профиль", "Немецкая фурнитура"],
+    width: "58 мм",
+    glass: "Двухкамерный 32 мм",
+    prices: [
+      { type: "double" as const, size: "1400×1300", price: "395 BYN" },
+      { type: "single" as const, size: "1400×800", price: "302 BYN" },
+      { type: "triple" as const, size: "1400×2000", price: "535 BYN" },
+      { type: "balcony" as const, size: "2100×1500", price: "590 BYN" },
+    ],
+    features: ["Базовая теплоизоляция", "Белый профиль", "Немецкая фурнитура Winkhaus"],
     img: windowForest,
   },
   {
-    name: "Montblanc Eco",
     chambers: "5 камер",
     width: "70 мм",
-    glass: "Двухкамерный",
-    price: "от 320 BYN",
+    glass: "Двухкамерный 40 мм",
+    prices: [
+      { type: "double" as const, size: "1400×1300", price: "414 BYN" },
+      { type: "single" as const, size: "1400×800", price: "315 BYN" },
+      { type: "triple" as const, size: "1400×2000", price: "565 BYN" },
+      { type: "balcony" as const, size: "2100×1500", price: "625 BYN" },
+    ],
     features: ["Улучшенная теплоизоляция", "Армирование 1.5 мм", "Микропроветривание"],
     img: windowCity,
     popular: true,
-  },
-  {
-    name: "KBE Engine",
-    chambers: "5 камер",
-    width: "76 мм",
-    glass: "Энергосберегающий",
-    price: "от 420 BYN",
-    features: ["Максимальная энергоэффективность", "i-стекло", "Тройной контур уплотнения"],
-    img: windowGarden,
   },
 ];
 
@@ -51,46 +50,39 @@ const WindowsPage = () => {
             <SectionLabel>Окна ПВХ</SectionLabel>
             <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Пластиковые окна для вашего дома</h1>
             <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Энергосберегающие окна из лучших профильных систем. Бесплатный замер и доставка по Минску.
+              Энергосберегающие окна с двухкамерным стеклопакетом. Бесплатный замер и доставка по Червеню и Минской области.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Profiles */}
+      {/* Price tables */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
-            <SectionLabel>Профильные системы</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-10">Выберите ваш профиль</h2>
+            <SectionLabel>Цены на окна</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-10">Выберите конфигурацию</h2>
           </AnimatedSection>
-          <div className="grid lg:grid-cols-3 gap-6">
-            {profiles.map((p, i) => (
-              <AnimatedSection key={p.name} delay={i * 0.1}>
-                <div
-                  className="rounded-xl overflow-hidden transition-shadow duration-300"
-                  style={{
-                    boxShadow: p.popular
-                      ? "0 0 0 2px hsl(var(--primary)), 0 4px 20px rgba(217,79,30,0.1)"
-                      : "0 0 0 1px hsl(var(--border))",
-                  }}
-                >
-                  <div className="h-48 relative overflow-hidden">
-                    <img src={p.img} alt={p.name} className="w-full h-full object-cover" />
+
+          <div className="flex flex-col gap-16">
+            {profiles.map((p, pi) => (
+              <AnimatedSection key={pi} delay={pi * 0.1}>
+                <div className="rounded-xl overflow-hidden border border-border" style={p.popular ? { borderColor: "hsl(var(--primary))", boxShadow: "0 0 0 1px hsl(var(--primary)), 0 4px 20px rgba(217,79,30,0.1)" } : {}}>
+                  {/* Header */}
+                  <div className="p-6 flex flex-wrap items-center gap-4 bg-card border-b border-border">
+                    <div className="flex gap-4 text-sm font-mono text-muted-foreground">
+                      <span className="px-3 py-1 rounded-md bg-accent-light text-primary font-semibold">{p.chambers}</span>
+                      <span className="px-3 py-1 rounded-md bg-accent-light text-primary font-semibold">{p.width}</span>
+                      <span className="px-3 py-1 rounded-md bg-accent-light text-primary font-semibold">{p.glass}</span>
+                    </div>
                     {p.popular && (
-                      <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">
-                        Популярный
-                      </div>
+                      <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full ml-auto">Популярный</span>
                     )}
                   </div>
-                  <div className="p-6 bg-card">
-                    <h3 className="text-xl font-bold mb-1">{p.name}</h3>
-                    <div className="flex gap-4 text-xs text-muted-foreground mb-4 font-mono">
-                      <span>{p.chambers}</span>
-                      <span>{p.width}</span>
-                      <span>{p.glass}</span>
-                    </div>
-                    <ul className="flex flex-col gap-2 mb-6">
+
+                  {/* Features */}
+                  <div className="p-6 bg-card border-b border-border">
+                    <ul className="flex flex-wrap gap-4">
                       {p.features.map((f) => (
                         <li key={f} className="flex items-center gap-2 text-sm">
                           <Check className="w-4 h-4 text-primary shrink-0" />
@@ -98,10 +90,26 @@ const WindowsPage = () => {
                         </li>
                       ))}
                     </ul>
-                    <div className="text-2xl font-extrabold text-accent mb-4">{p.price}</div>
-                    <button className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-200">
-                      Заказать расчёт
-                    </button>
+                  </div>
+
+                  {/* Price grid with window drawings */}
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4">
+                    {p.prices.map((item, i) => (
+                      <div key={i} className="p-6 flex flex-col items-center text-center border-b sm:border-r border-border last:border-r-0 bg-card hover:bg-accent-light/50 transition-colors">
+                        <div className="h-32 flex items-center justify-center mb-4 relative">
+                          {/* Background landscape hint */}
+                          <div className="absolute inset-0 rounded-lg overflow-hidden opacity-15">
+                            <img src={p.img} alt="" className="w-full h-full object-cover" />
+                          </div>
+                          <WindowDrawing type={item.type} width={120} height={120} className="relative z-10" />
+                        </div>
+                        <p className="text-xs font-mono text-muted-foreground mb-1">{item.size} мм</p>
+                        <p className="text-xl font-extrabold text-accent">{item.price}</p>
+                        <button className="mt-3 bg-primary text-primary-foreground py-2 px-5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all">
+                          Заказать
+                        </button>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </AnimatedSection>
@@ -119,7 +127,7 @@ const WindowsPage = () => {
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 gap-6">
             {[
-              { title: "Энергосбережение", desc: "Снижение теплопотерь до 40% благодаря многокамерному профилю и i-стеклу" },
+              { title: "Энергосбережение", desc: "Снижение теплопотерь до 40% благодаря многокамерному профилю" },
               { title: "Шумоизоляция", desc: "До 45 дБ снижения уровня шума с двухкамерным стеклопакетом" },
               { title: "Долговечность", desc: "Срок службы профилей — более 50 лет без потери свойств" },
               { title: "Безопасность", desc: "Детские замки, противовзломная фурнитура, закалённые стёкла" },
