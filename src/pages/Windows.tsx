@@ -4,9 +4,6 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import WindowDrawing from "@/components/WindowDrawing";
-import windowForest from "@/assets/window-forest-view.jpg";
-import windowCity from "@/assets/window-city-view.jpg";
-import windowGarden from "@/assets/window-garden-view.jpg";
 
 const profiles = [
   {
@@ -14,26 +11,24 @@ const profiles = [
     width: "58 мм",
     glass: "Двухкамерный 32 мм",
     prices: [
-      { type: "double" as const, size: "1400×1300", price: "395 BYN" },
-      { type: "single" as const, size: "1400×800", price: "302 BYN" },
-      { type: "triple" as const, size: "1400×2000", price: "535 BYN" },
-      { type: "balcony" as const, size: "2100×1500", price: "590 BYN" },
+      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "302 BYN", furniture: "Winkhaus" },
+      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "395 BYN", furniture: "Winkhaus" },
+      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "535 BYN", furniture: "Winkhaus" },
+      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "590 BYN", furniture: "Winkhaus" },
     ],
     features: ["Базовая теплоизоляция", "Белый профиль", "Немецкая фурнитура Winkhaus"],
-    img: windowForest,
   },
   {
     chambers: "5 камер",
     width: "70 мм",
     glass: "Двухкамерный 40 мм",
     prices: [
-      { type: "double" as const, size: "1400×1300", price: "414 BYN" },
-      { type: "single" as const, size: "1400×800", price: "315 BYN" },
-      { type: "triple" as const, size: "1400×2000", price: "565 BYN" },
-      { type: "balcony" as const, size: "2100×1500", price: "625 BYN" },
+      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "315 BYN", furniture: "Winkhaus" },
+      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "414 BYN", furniture: "Winkhaus" },
+      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "565 BYN", furniture: "Winkhaus" },
+      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "625 BYN", furniture: "Winkhaus" },
     ],
     features: ["Улучшенная теплоизоляция", "Армирование 1.5 мм", "Микропроветривание"],
-    img: windowCity,
     popular: true,
   },
 ];
@@ -44,12 +39,12 @@ const WindowsPage = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #2A3A4A)" }}>
+      <section className="py-20 relative" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
           <AnimatedSection>
             <SectionLabel>Окна ПВХ</SectionLabel>
             <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Пластиковые окна для вашего дома</h1>
-            <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
+            <p className="text-lg text-body text-muted-foreground max-w-xl">
               Энергосберегающие окна с двухкамерным стеклопакетом. Бесплатный замер и доставка по Червеню и Минской области.
             </p>
           </AnimatedSection>
@@ -97,14 +92,19 @@ const WindowsPage = () => {
                     {p.prices.map((item, i) => (
                       <div key={i} className="p-6 flex flex-col items-center text-center border-b sm:border-r border-border last:border-r-0 bg-card hover:bg-accent-light/50 transition-colors">
                         <div className="h-32 flex items-center justify-center mb-4 relative">
-                          {/* Background landscape hint */}
-                          <div className="absolute inset-0 rounded-lg overflow-hidden opacity-15">
-                            <img src={p.img} alt="" className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 rounded-lg overflow-hidden" style={{
+                            background: "linear-gradient(180deg, #e8f0f2 0%, #c8d8dc 50%, #a8c0a8 100%)",
+                          }}>
+                            <svg className="absolute bottom-0 left-0 right-0 w-full h-[40%]" viewBox="0 0 200 60" preserveAspectRatio="none">
+                              <path d="M0,60 L0,35 Q20,20 40,30 Q60,15 80,25 Q100,10 120,28 Q140,18 160,30 Q180,22 200,35 L200,60 Z" fill="rgba(80,120,80,0.25)" />
+                            </svg>
                           </div>
-                          <WindowDrawing type={item.type} width={120} height={120} className="relative z-10" />
+                          <WindowDrawing type={item.type} width={120} height={120} className="relative z-10" dark />
                         </div>
-                        <p className="text-xs font-mono text-muted-foreground mb-1">{item.size} мм</p>
-                        <p className="text-xl font-extrabold text-accent">{item.price}</p>
+                        <p className="text-sm font-semibold mb-1">{item.title}</p>
+                        <p className="text-xs font-mono text-muted-foreground mb-1">Размер {item.size} мм</p>
+                        <p className="text-xs text-muted-foreground mb-1">Фурнитура {item.furniture}</p>
+                        <p className="text-xl font-extrabold text-primary mt-1">{item.price}</p>
                         <button className="mt-3 bg-primary text-primary-foreground py-2 px-5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all">
                           Заказать
                         </button>
