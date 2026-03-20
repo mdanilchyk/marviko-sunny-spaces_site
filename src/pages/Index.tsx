@@ -77,48 +77,39 @@ const faqData = [
   { q: "Ваша специализация — исключительно пластиковые окна?", a: "Нет, мы готовы предложить своим клиентам широкий спектр услуг. Мы устанавливаем пластиковые окна и балконные двери, предлагаем зонирование пространства с помощью межкомнатных перегородок. Также мы выполняем работы по утеплению и отделке балконов. В качестве дополнения вы можете выбрать стильные откосы, ламинацию оконного профиля, необычный подоконник — эти детали помогут органично вписать окна в любой интерьер. Рулонные шторы или жалюзи помогут укрыться от яркого солнца, а москитная сетка — от докучливых насекомых." },
 ];
 
-const pricingCards = [
-  {
-    type: "single" as const,
-    title: "Одностворчатое окно",
-    size: "1400 × 800 мм",
-    price: "от 302 BYN",
-    specs: "4 камеры, 58 мм",
-    glass: "Стеклопакет 32 мм",
-    furniture: "Фурнитура Winkhaus",
-    featured: false,
-  },
-  {
-    type: "double" as const,
-    title: "Двустворчатое окно",
-    size: "1400 × 1300 мм",
-    price: "от 395 BYN",
-    specs: "4 камеры, 58 мм",
-    glass: "Стеклопакет 32 мм",
-    furniture: "Фурнитура Winkhaus",
-    featured: true,
-  },
-  {
-    type: "triple" as const,
-    title: "Трёхстворчатое окно",
-    size: "1400 × 2000 мм",
-    price: "от 535 BYN",
-    specs: "4 камеры, 58 мм",
-    glass: "Стеклопакет 32 мм",
-    furniture: "Фурнитура Winkhaus",
-    featured: false,
-  },
-  {
-    type: "balcony" as const,
-    title: "Балконный блок",
-    size: "2100 × 1500 мм",
-    price: "от 590 BYN",
-    specs: "4 камеры, 58 мм",
-    glass: "Стеклопакет 32 мм",
-    furniture: "Фурнитура Winkhaus",
-    featured: false,
-  },
+const profileSystems = [
+  { id: "novotex58", label: "Novotex Techno 58" },
+  { id: "novotex70", label: "Novotex Techno 70" },
+  { id: "grunhaus70", label: "Grunhaus 70" },
+  { id: "rehau70", label: "Rehau Grazio 70" },
 ];
+
+const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | "balcony"; title: string; size: string; opening: string; glass: string; furniture: string; price: string; featured: boolean }[]> = {
+  novotex58: [
+    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 302 BYN", featured: false },
+    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 395 BYN", featured: true },
+    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 575 BYN", featured: false },
+    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 590 BYN", featured: false },
+  ],
+  novotex70: [
+    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 340 BYN", featured: false },
+    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 445 BYN", featured: true },
+    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 625 BYN", featured: false },
+    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 650 BYN", featured: false },
+  ],
+  grunhaus70: [
+    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 355 BYN", featured: false },
+    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 460 BYN", featured: true },
+    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 645 BYN", featured: false },
+    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 670 BYN", featured: false },
+  ],
+  rehau70: [
+    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 380 BYN", featured: false },
+    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 490 BYN", featured: true },
+    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 680 BYN", featured: false },
+    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 710 BYN", featured: false },
+  ],
+};
 
 const portfolioItems = [
   { img: workWindowOpen, title: "Установка окон в загородном доме" },
