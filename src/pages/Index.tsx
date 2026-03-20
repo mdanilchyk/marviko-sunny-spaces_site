@@ -120,7 +120,74 @@ const portfolioItems = [
   { img: workWindowFireplace, title: "Окна в интерьере" },
 ];
 
-const Index = () => {
+const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
+  const s = "#BDBAB4";
+  const sw = 1.5;
+  const glass = "rgba(219,234,254,0.25)";
+
+  if (type === "single") return (
+    <svg width="180" height="160" viewBox="0 0 180 160">
+      <rect x="10" y="10" width="160" height="140" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      <rect x="16" y="16" width="148" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* handle */}
+      <line x1="145" y1="72" x2="145" y2="88" stroke={s} strokeWidth={2} strokeLinecap="round" />
+      {/* tilt-turn arrow */}
+      <path d="M90,130 L90,22 M86,28 L90,18 L94,28" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <path d="M22,80 L158,80 M152,76 L162,80 L152,84" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+    </svg>
+  );
+
+  if (type === "double") return (
+    <svg width="180" height="160" viewBox="0 0 180 160">
+      <rect x="10" y="10" width="160" height="140" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      {/* left pane - fixed */}
+      <rect x="16" y="16" width="71" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* right pane - tilt-turn */}
+      <rect x="93" y="16" width="71" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* handle right pane */}
+      <line x1="100" y1="72" x2="100" y2="88" stroke={s} strokeWidth={2} strokeLinecap="round" />
+      {/* tilt-turn arrows on right */}
+      <path d="M128,130 L128,22 M124,28 L128,18 L132,28" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <path d="M99,80 L158,80 M152,76 L162,80 L152,84" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+    </svg>
+  );
+
+  if (type === "triple") return (
+    <svg width="180" height="160" viewBox="0 0 220 160">
+      <rect x="10" y="10" width="200" height="140" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      {/* left - fixed */}
+      <rect x="16" y="16" width="58" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* center - fixed */}
+      <rect x="80" y="16" width="58" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* right - tilt-turn */}
+      <rect x="144" y="16" width="58" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* handle */}
+      <line x1="152" y1="72" x2="152" y2="88" stroke={s} strokeWidth={2} strokeLinecap="round" />
+      {/* tilt-turn arrows */}
+      <path d="M173,130 L173,22 M169,28 L173,18 L177,28" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <path d="M150,80 L198,80 M192,76 L202,80 L192,84" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+    </svg>
+  );
+
+  // balcony block
+  return (
+    <svg width="180" height="160" viewBox="0 0 180 180">
+      {/* window frame left (2/5) */}
+      <rect x="10" y="10" width="64" height="160" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      <rect x="16" y="16" width="52" height="148" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* door frame right (3/5) */}
+      <rect x="80" y="10" width="90" height="160" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      {/* door glass top */}
+      <rect x="86" y="16" width="78" height="92" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* door panel bottom */}
+      <rect x="86" y="114" width="78" height="50" rx="1" fill="rgba(189,186,180,0.12)" stroke={s} strokeWidth={sw} />
+      {/* door handle */}
+      <line x1="93" y1="90" x2="93" y2="106" stroke={s} strokeWidth={2} strokeLinecap="round" />
+    </svg>
+  );
+};
+
+
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
   const [contactForm, setContactForm] = useState({ name: "", phone: "", message: "" });
