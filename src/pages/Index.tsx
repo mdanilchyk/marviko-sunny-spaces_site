@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
-import WindowDrawing from "@/components/WindowDrawing";
+
 
 import heroImg from "@/assets/hero-interior.jpg";
 import serviceWindows from "@/assets/service-windows.jpg";
@@ -77,48 +77,39 @@ const faqData = [
   { q: "Ваша специализация — исключительно пластиковые окна?", a: "Нет, мы готовы предложить своим клиентам широкий спектр услуг. Мы устанавливаем пластиковые окна и балконные двери, предлагаем зонирование пространства с помощью межкомнатных перегородок. Также мы выполняем работы по утеплению и отделке балконов. В качестве дополнения вы можете выбрать стильные откосы, ламинацию оконного профиля, необычный подоконник — эти детали помогут органично вписать окна в любой интерьер. Рулонные шторы или жалюзи помогут укрыться от яркого солнца, а москитная сетка — от докучливых насекомых." },
 ];
 
-const pricingCards = [
-  {
-    type: "single" as const,
-    title: "Одностворчатое окно",
-    size: "1400 × 800 мм",
-    price: "от 302 BYN",
-    specs: "4 камеры, 58 мм",
-    glass: "Стеклопакет 32 мм",
-    furniture: "Фурнитура Winkhaus",
-    featured: false,
-  },
-  {
-    type: "double" as const,
-    title: "Двустворчатое окно",
-    size: "1400 × 1300 мм",
-    price: "от 395 BYN",
-    specs: "4 камеры, 58 мм",
-    glass: "Стеклопакет 32 мм",
-    furniture: "Фурнитура Winkhaus",
-    featured: true,
-  },
-  {
-    type: "triple" as const,
-    title: "Трёхстворчатое окно",
-    size: "1400 × 2000 мм",
-    price: "от 535 BYN",
-    specs: "4 камеры, 58 мм",
-    glass: "Стеклопакет 32 мм",
-    furniture: "Фурнитура Winkhaus",
-    featured: false,
-  },
-  {
-    type: "balcony" as const,
-    title: "Балконный блок",
-    size: "2100 × 1500 мм",
-    price: "от 590 BYN",
-    specs: "4 камеры, 58 мм",
-    glass: "Стеклопакет 32 мм",
-    furniture: "Фурнитура Winkhaus",
-    featured: false,
-  },
+const profileSystems = [
+  { id: "novotex58", label: "Novotex Techno 58" },
+  { id: "novotex70", label: "Novotex Techno 70" },
+  { id: "grunhaus70", label: "Grunhaus 70" },
+  { id: "rehau70", label: "Rehau Grazio 70" },
 ];
+
+const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | "balcony"; title: string; size: string; opening: string; glass: string; furniture: string; price: string; featured: boolean }[]> = {
+  novotex58: [
+    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 302 BYN", featured: false },
+    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 395 BYN", featured: true },
+    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 575 BYN", featured: false },
+    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 590 BYN", featured: false },
+  ],
+  novotex70: [
+    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 340 BYN", featured: false },
+    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 445 BYN", featured: true },
+    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 625 BYN", featured: false },
+    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 650 BYN", featured: false },
+  ],
+  grunhaus70: [
+    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 355 BYN", featured: false },
+    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 460 BYN", featured: true },
+    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 645 BYN", featured: false },
+    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 670 BYN", featured: false },
+  ],
+  rehau70: [
+    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 380 BYN", featured: false },
+    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 490 BYN", featured: true },
+    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 680 BYN", featured: false },
+    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 710 BYN", featured: false },
+  ],
+};
 
 const portfolioItems = [
   { img: workWindowOpen, title: "Установка окон в загородном доме" },
@@ -129,13 +120,84 @@ const portfolioItems = [
   { img: workWindowFireplace, title: "Окна в интерьере" },
 ];
 
+const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
+  const s = "#BDBAB4";
+  const sw = 1.5;
+  const glass = "rgba(219,234,254,0.25)";
+
+  if (type === "single") return (
+    <svg width="180" height="160" viewBox="0 0 180 160">
+      <rect x="10" y="10" width="160" height="140" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      <rect x="16" y="16" width="148" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* handle */}
+      <line x1="145" y1="72" x2="145" y2="88" stroke={s} strokeWidth={2} strokeLinecap="round" />
+      {/* tilt-turn arrow */}
+      <path d="M90,130 L90,22 M86,28 L90,18 L94,28" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <path d="M22,80 L158,80 M152,76 L162,80 L152,84" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+    </svg>
+  );
+
+  if (type === "double") return (
+    <svg width="180" height="160" viewBox="0 0 180 160">
+      <rect x="10" y="10" width="160" height="140" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      {/* left pane - fixed */}
+      <rect x="16" y="16" width="71" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* right pane - tilt-turn */}
+      <rect x="93" y="16" width="71" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* handle right pane */}
+      <line x1="100" y1="72" x2="100" y2="88" stroke={s} strokeWidth={2} strokeLinecap="round" />
+      {/* tilt-turn arrows on right */}
+      <path d="M128,130 L128,22 M124,28 L128,18 L132,28" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <path d="M99,80 L158,80 M152,76 L162,80 L152,84" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+    </svg>
+  );
+
+  if (type === "triple") return (
+    <svg width="180" height="160" viewBox="0 0 220 160">
+      <rect x="10" y="10" width="200" height="140" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      {/* left - fixed */}
+      <rect x="16" y="16" width="58" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* center - fixed */}
+      <rect x="80" y="16" width="58" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* right - tilt-turn */}
+      <rect x="144" y="16" width="58" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* handle */}
+      <line x1="152" y1="72" x2="152" y2="88" stroke={s} strokeWidth={2} strokeLinecap="round" />
+      {/* tilt-turn arrows */}
+      <path d="M173,130 L173,22 M169,28 L173,18 L177,28" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <path d="M150,80 L198,80 M192,76 L202,80 L192,84" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+    </svg>
+  );
+
+  // balcony block
+  return (
+    <svg width="180" height="160" viewBox="0 0 180 180">
+      {/* window frame left (2/5) */}
+      <rect x="10" y="10" width="64" height="160" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      <rect x="16" y="16" width="52" height="148" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* door frame right (3/5) */}
+      <rect x="80" y="10" width="90" height="160" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
+      {/* door glass top */}
+      <rect x="86" y="16" width="78" height="92" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
+      {/* door panel bottom */}
+      <rect x="86" y="114" width="78" height="50" rx="1" fill="rgba(189,186,180,0.12)" stroke={s} strokeWidth={sw} />
+      {/* door handle */}
+      <line x1="93" y1="90" x2="93" y2="106" stroke={s} strokeWidth={2} strokeLinecap="round" />
+    </svg>
+  );
+};
+
 const Index = () => {
+
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
   const [contactForm, setContactForm] = useState({ name: "", phone: "", message: "" });
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
   const [certModal, setCertModal] = useState<string | null>(null);
+  const [selectedProfile, setSelectedProfile] = useState("novotex58");
+
+  const currentPricing = pricingByProfile[selectedProfile];
 
   return (
     <div className="min-h-screen bg-background">
@@ -315,54 +377,111 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Pricing - LIGHT mosokna style */}
+      {/* Pricing - mosokna style clean cards */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
             <SectionLabel>Цены</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-4">Цены на наши окна</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с двухкамерным стеклопакетом, фурнитурой Winkhaus и монтажом</p>
+            <p className="text-muted-foreground text-body mb-8 max-w-xl">Стоимость окон ПВХ с монтажом. Выберите профильную систему для просмотра цен.</p>
           </AnimatedSection>
+
+          {/* Profile selector */}
+          <AnimatedSection delay={0.1}>
+            <div className="mb-10">
+              <p className="text-sm font-semibold text-foreground mb-3">Выберите профильную систему:</p>
+              <div className="flex flex-wrap gap-2">
+                {profileSystems.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => setSelectedProfile(p.id)}
+                    className="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border"
+                    style={{
+                      backgroundColor: selectedProfile === p.id ? "hsl(var(--primary))" : "white",
+                      color: selectedProfile === p.id ? "white" : "#1C1C1C",
+                      borderColor: selectedProfile === p.id ? "hsl(var(--primary))" : "#E2DDD5",
+                    }}
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {pricingCards.map((card, i) => (
-              <AnimatedSection key={card.title} delay={i * 0.1}>
+            {currentPricing.map((card, i) => (
+              <AnimatedSection key={`${selectedProfile}-${card.type}`} delay={i * 0.08}>
                 <div
-                  className="rounded-xl overflow-hidden transition-all duration-300 flex flex-col bg-card border hover:shadow-lg relative"
-                  style={{
-                    borderColor: card.featured ? "hsl(var(--primary))" : "hsl(var(--border))",
-                    boxShadow: card.featured ? "0 0 0 1px hsl(var(--primary)), 0 4px 20px rgba(217,79,30,0.1)" : undefined,
-                  }}
+                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg"
+                  style={{ border: card.featured ? "2px solid hsl(var(--primary))" : "1px solid #E2DDD5" }}
                 >
                   {card.featured && (
-                    <div className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1.5 text-center">
+                    <div
+                      className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-3 py-1 rounded-full z-10"
+                      style={{ backgroundColor: "hsl(var(--primary))", color: "white" }}
+                    >
                       Популярный
                     </div>
                   )}
-                  {/* Window drawing area with landscape */}
-                  <div className="h-44 relative overflow-hidden flex items-center justify-center" style={{
-                    background: "linear-gradient(180deg, #e8f0f2 0%, #c8d8dc 50%, #a8c0a8 100%)",
-                  }}>
-                    {/* Landscape silhouette */}
-                    <svg className="absolute bottom-0 left-0 right-0 w-full" viewBox="0 0 200 60" preserveAspectRatio="none" style={{ height: "40%" }}>
-                      <path d="M0,60 L0,35 Q20,20 40,30 Q60,15 80,25 Q100,10 120,28 Q140,18 160,30 Q180,22 200,35 L200,60 Z" fill="rgba(80,120,80,0.25)" />
-                      <path d="M0,60 L0,45 Q30,35 60,42 Q90,30 120,40 Q150,32 180,42 L200,38 L200,60 Z" fill="rgba(60,100,60,0.2)" />
-                    </svg>
-                    <WindowDrawing type={card.type} className="relative z-10 drop-shadow-md" />
+
+                  {/* SVG Window illustration */}
+                  <div className="flex items-center justify-center py-6 px-4">
+                    <PricingWindowSVG type={card.type} />
                   </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <h3 className="font-bold text-base mb-1 text-foreground">{card.title}</h3>
-                    <p className="text-xs mb-1 font-mono text-muted-foreground">Размер {card.size}</p>
-                    <p className="text-xs text-muted-foreground">{card.specs}</p>
-                    <p className="text-xs text-muted-foreground">{card.glass}</p>
-                    <p className="text-xs text-muted-foreground mb-3">{card.furniture}</p>
-                    <div className="text-xl font-extrabold mb-4 mt-auto text-primary">{card.price}</div>
-                    <button className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 text-sm">
-                      Заказать
+
+                  <div className="px-6 pb-6 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-base mb-1" style={{ color: "#1C1C1C" }}>{card.title}</h3>
+                    <p className="text-[13px] mb-2" style={{ color: "#7A7268" }}>Размер: {card.size}</p>
+                    <div className="text-[13px] leading-relaxed mb-3" style={{ color: "#7A7268" }}>
+                      <p>Тип: {card.opening}</p>
+                      <p>Стеклопакет: {card.glass}</p>
+                      <p>Фурнитура: {card.furniture}</p>
+                    </div>
+
+                    <div
+                      className="inline-block font-bold text-lg rounded-lg px-4 py-2 mb-4 mt-auto self-start"
+                      style={{ backgroundColor: "#FDF3EC", color: "#C8441A" }}
+                    >
+                      {card.price}
+                    </div>
+
+                    <button
+                      className="w-full py-3 rounded-lg font-semibold text-sm text-white transition-colors duration-200"
+                      style={{ backgroundColor: "#C8441A" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
+                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+                    >
+                      Заказать замер
                     </button>
                   </div>
                 </div>
               </AnimatedSection>
             ))}
+          </div>
+
+          {/* Note */}
+          <p className="text-xs mt-6" style={{ color: "#7A7268" }}>
+            * Цены указаны ориентировочно для стандартных размеров. Точная стоимость рассчитывается после бесплатного замера.
+          </p>
+
+          {/* CTA strip */}
+          <div
+            className="mt-8 rounded-xl px-6 sm:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+            style={{ backgroundColor: "#FDF3EC" }}
+          >
+            <p className="font-semibold text-sm sm:text-base" style={{ color: "#1C1C1C" }}>
+              Не нашли нужный размер? Получите точный расчёт бесплатно
+            </p>
+            <button
+              className="px-6 py-3 rounded-lg font-semibold text-sm text-white whitespace-nowrap flex items-center gap-2 transition-colors duration-200"
+              style={{ backgroundColor: "#C8441A" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+            >
+              Заказать замер <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
