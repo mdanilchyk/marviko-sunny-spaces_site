@@ -187,6 +187,7 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
   );
 };
 
+const Index = () => {
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
