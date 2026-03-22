@@ -413,7 +413,7 @@ const Index = () => {
           {/* Cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {pricingByProfile.novotex58.map((card, i) => (
-              <AnimatedSection key={`${selectedProfile}-${card.type}`} delay={i * 0.08}>
+              <AnimatedSection key={card.type} delay={i * 0.08}>
                 <div
                   className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg"
                   style={{ border: card.featured ? "2px solid hsl(var(--primary))" : "1px solid #E2DDD5" }}
