@@ -178,7 +178,7 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
       <SkyDefs id="b" glassY={16} glassH={148} />
       <rect x="10" y="10" width="64" height="160" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
       <rect x="16" y="16" width="52" height="148" rx="1" fill={`url(#sky-b)`} stroke={frame} strokeWidth={sw} />
-      <CityLine y={164} width={52} xOffset={16} />
+      
       <rect x="80" y="10" width="90" height="160" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
       <rect x="86" y="16" width="78" height="92" rx="1" fill={`url(#sky-b)`} stroke={frame} strokeWidth={sw} />
       <CityLine y={108} width={78} xOffset={86} />
