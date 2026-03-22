@@ -77,12 +77,6 @@ const faqData = [
   { q: "Ваша специализация — исключительно пластиковые окна?", a: "Нет, мы готовы предложить своим клиентам широкий спектр услуг. Мы устанавливаем пластиковые окна и балконные двери, предлагаем зонирование пространства с помощью межкомнатных перегородок. Также мы выполняем работы по утеплению и отделке балконов. В качестве дополнения вы можете выбрать стильные откосы, ламинацию оконного профиля, необычный подоконник — эти детали помогут органично вписать окна в любой интерьер. Рулонные шторы или жалюзи помогут укрыться от яркого солнца, а москитная сетка — от докучливых насекомых." },
 ];
 
-const profileSystems = [
-  { id: "novotex58", label: "Novotex Techno 58" },
-  { id: "novotex70", label: "Novotex Techno 70" },
-  { id: "grunhaus70", label: "Grunhaus 70" },
-  { id: "rehau70", label: "Rehau Grazio 70" },
-];
 
 const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | "balcony"; title: string; size: string; opening: string; glass: string; furniture: string; price: string; featured: boolean }[]> = {
   novotex58: [
@@ -121,68 +115,92 @@ const portfolioItems = [
 ];
 
 const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
-  const s = "#BDBAB4";
+  const frame = "#BDBAB4";
+  const frameOuter = "#A8A5A0";
   const sw = 1.5;
-  const glass = "rgba(219,234,254,0.25)";
+
+  const SkyDefs = ({ id, glassY, glassH }: { id: string; glassY: number; glassH: number }) => (
+    <defs>
+      <linearGradient id={`sky-${id}`} x1="0" y1={glassY} x2="0" y2={glassY + glassH} gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#87CEEB" />
+        <stop offset="40%" stopColor="#B8D4E8" />
+        <stop offset="70%" stopColor="#D4E8F0" />
+        <stop offset="100%" stopColor="#E8F4F8" />
+      </linearGradient>
+    </defs>
+  );
+
+  const CityLine = ({ y, width: w, xOffset = 0 }: { y: number; width: number; xOffset?: number }) => {
+    const buildings = [
+      { x: 0, w: 8, h: 18 }, { x: 10, w: 6, h: 12 }, { x: 18, w: 10, h: 22 },
+      { x: 30, w: 7, h: 14 }, { x: 39, w: 12, h: 26 }, { x: 53, w: 6, h: 10 },
+      { x: 61, w: 9, h: 20 }, { x: 72, w: 8, h: 15 }, { x: 82, w: 11, h: 24 },
+      { x: 95, w: 7, h: 13 }, { x: 104, w: 10, h: 19 }, { x: 116, w: 8, h: 16 },
+      { x: 126, w: 12, h: 22 }, { x: 140, w: 6, h: 11 }, { x: 148, w: 9, h: 17 },
+    ];
+    const scale = w / 120;
+    return (
+      <g>
+        {buildings.map((b, i) => (
+          <rect key={i} x={xOffset + b.x * scale} y={y - b.h * scale} width={b.w * scale} height={b.h * scale} fill="rgba(60,80,100,0.25)" />
+        ))}
+      </g>
+    );
+  };
 
   if (type === "single") return (
-    <svg width="180" height="160" viewBox="0 0 180 160">
-      <rect x="10" y="10" width="160" height="140" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
-      <rect x="16" y="16" width="148" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
-      {/* handle */}
-      <line x1="145" y1="72" x2="145" y2="88" stroke={s} strokeWidth={2} strokeLinecap="round" />
-      {/* tilt-turn arrow */}
-      <path d="M90,130 L90,22 M86,28 L90,18 L94,28" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
-      <path d="M22,80 L158,80 M152,76 L162,80 L152,84" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+    <svg width="140" height="180" viewBox="0 0 120 180">
+      <SkyDefs id="s" glassY={16} glassH={148} />
+      <rect x="10" y="10" width="100" height="160" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
+      <rect x="16" y="16" width="88" height="148" rx="1" fill={`url(#sky-s)`} stroke={frame} strokeWidth={sw} />
+      <CityLine y={164} width={88} xOffset={16} />
+      <line x1="88" y1="82" x2="88" y2="98" stroke={frame} strokeWidth={2} strokeLinecap="round" />
+      <path d="M60,158 L60,22 M56,28 L60,18 L64,28" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <path d="M22,90 L98,90 M92,86 L102,90 L92,94" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
     </svg>
   );
 
   if (type === "double") return (
     <svg width="180" height="160" viewBox="0 0 180 160">
-      <rect x="10" y="10" width="160" height="140" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
-      {/* left pane - fixed */}
-      <rect x="16" y="16" width="71" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
-      {/* right pane - tilt-turn */}
-      <rect x="93" y="16" width="71" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
-      {/* handle right pane */}
-      <line x1="100" y1="72" x2="100" y2="88" stroke={s} strokeWidth={2} strokeLinecap="round" />
-      {/* tilt-turn arrows on right */}
-      <path d="M128,130 L128,22 M124,28 L128,18 L132,28" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
-      <path d="M99,80 L158,80 M152,76 L162,80 L152,84" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <SkyDefs id="d" glassY={16} glassH={128} />
+      <rect x="10" y="10" width="160" height="140" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
+      <rect x="16" y="16" width="71" height="128" rx="1" fill={`url(#sky-d)`} stroke={frame} strokeWidth={sw} />
+      <CityLine y={144} width={71} xOffset={16} />
+      <rect x="93" y="16" width="71" height="128" rx="1" fill={`url(#sky-d)`} stroke={frame} strokeWidth={sw} />
+      <CityLine y={144} width={71} xOffset={93} />
+      <line x1="100" y1="72" x2="100" y2="88" stroke={frame} strokeWidth={2} strokeLinecap="round" />
+      <path d="M128,130 L128,22 M124,28 L128,18 L132,28" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <path d="M99,80 L158,80 M152,76 L162,80 L152,84" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
     </svg>
   );
 
   if (type === "triple") return (
     <svg width="180" height="160" viewBox="0 0 220 160">
-      <rect x="10" y="10" width="200" height="140" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
-      {/* left - fixed */}
-      <rect x="16" y="16" width="58" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
-      {/* center - fixed */}
-      <rect x="80" y="16" width="58" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
-      {/* right - tilt-turn */}
-      <rect x="144" y="16" width="58" height="128" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
-      {/* handle */}
-      <line x1="152" y1="72" x2="152" y2="88" stroke={s} strokeWidth={2} strokeLinecap="round" />
-      {/* tilt-turn arrows */}
-      <path d="M173,130 L173,22 M169,28 L173,18 L177,28" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
-      <path d="M150,80 L198,80 M192,76 L202,80 L192,84" stroke={s} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <SkyDefs id="t" glassY={16} glassH={128} />
+      <rect x="10" y="10" width="200" height="140" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
+      <rect x="16" y="16" width="58" height="128" rx="1" fill={`url(#sky-t)`} stroke={frame} strokeWidth={sw} />
+      <CityLine y={144} width={58} xOffset={16} />
+      <rect x="80" y="16" width="58" height="128" rx="1" fill={`url(#sky-t)`} stroke={frame} strokeWidth={sw} />
+      <CityLine y={144} width={58} xOffset={80} />
+      <rect x="144" y="16" width="58" height="128" rx="1" fill={`url(#sky-t)`} stroke={frame} strokeWidth={sw} />
+      <CityLine y={144} width={58} xOffset={144} />
+      <line x1="152" y1="72" x2="152" y2="88" stroke={frame} strokeWidth={2} strokeLinecap="round" />
+      <path d="M173,130 L173,22 M169,28 L173,18 L177,28" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
+      <path d="M150,80 L198,80 M192,76 L202,80 L192,84" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
     </svg>
   );
 
-  // balcony block
   return (
     <svg width="180" height="160" viewBox="0 0 180 180">
-      {/* window frame left (2/5) */}
-      <rect x="10" y="10" width="64" height="160" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
-      <rect x="16" y="16" width="52" height="148" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
-      {/* door frame right (3/5) */}
-      <rect x="80" y="10" width="90" height="160" rx="2" fill="none" stroke={s} strokeWidth={sw + 0.5} />
-      {/* door glass top */}
-      <rect x="86" y="16" width="78" height="92" rx="1" fill={glass} stroke={s} strokeWidth={sw} />
-      {/* door panel bottom */}
-      <rect x="86" y="114" width="78" height="50" rx="1" fill="rgba(189,186,180,0.12)" stroke={s} strokeWidth={sw} />
-      {/* door handle */}
-      <line x1="93" y1="90" x2="93" y2="106" stroke={s} strokeWidth={2} strokeLinecap="round" />
+      <SkyDefs id="b" glassY={16} glassH={148} />
+      <rect x="10" y="10" width="64" height="160" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
+      <rect x="16" y="16" width="52" height="148" rx="1" fill={`url(#sky-b)`} stroke={frame} strokeWidth={sw} />
+      <CityLine y={164} width={52} xOffset={16} />
+      <rect x="80" y="10" width="90" height="160" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
+      <rect x="86" y="16" width="78" height="92" rx="1" fill={`url(#sky-b)`} stroke={frame} strokeWidth={sw} />
+      <CityLine y={108} width={78} xOffset={86} />
+      <rect x="86" y="114" width="78" height="50" rx="1" fill="rgba(189,186,180,0.15)" stroke={frame} strokeWidth={sw} />
+      <line x1="93" y1="90" x2="93" y2="106" stroke={frame} strokeWidth={2} strokeLinecap="round" />
     </svg>
   );
 };
@@ -195,9 +213,8 @@ const Index = () => {
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
   const [certModal, setCertModal] = useState<string | null>(null);
-  const [selectedProfile, setSelectedProfile] = useState("novotex58");
 
-  const currentPricing = pricingByProfile[selectedProfile];
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -383,36 +400,13 @@ const Index = () => {
           <AnimatedSection>
             <SectionLabel>Цены</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-4">Цены на наши окна</h2>
-            <p className="text-muted-foreground text-body mb-8 max-w-xl">Стоимость окон ПВХ с монтажом. Выберите профильную систему для просмотра цен.</p>
-          </AnimatedSection>
-
-          {/* Profile selector */}
-          <AnimatedSection delay={0.1}>
-            <div className="mb-10">
-              <p className="text-sm font-semibold text-foreground mb-3">Выберите профильную систему:</p>
-              <div className="flex flex-wrap gap-2">
-                {profileSystems.map((p) => (
-                  <button
-                    key={p.id}
-                    onClick={() => setSelectedProfile(p.id)}
-                    className="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border"
-                    style={{
-                      backgroundColor: selectedProfile === p.id ? "hsl(var(--primary))" : "white",
-                      color: selectedProfile === p.id ? "white" : "#1C1C1C",
-                      borderColor: selectedProfile === p.id ? "hsl(var(--primary))" : "#E2DDD5",
-                    }}
-                  >
-                    {p.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с монтажом для профиля Novotex Techno 58.</p>
           </AnimatedSection>
 
           {/* Cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {currentPricing.map((card, i) => (
-              <AnimatedSection key={`${selectedProfile}-${card.type}`} delay={i * 0.08}>
+            {pricingByProfile.novotex58.map((card, i) => (
+              <AnimatedSection key={card.type} delay={i * 0.08}>
                 <div
                   className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg"
                   style={{ border: card.featured ? "2px solid hsl(var(--primary))" : "1px solid #E2DDD5" }}
