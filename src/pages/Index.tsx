@@ -214,7 +214,7 @@ const Index = () => {
   const [orderForm, setOrderForm] = useState({ name: "", phone: "" });
   const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
   const [formSubmitted, setFormSubmitted] = useState({ contact: false, order: false });
-
+  const [orderSending, setOrderSending] = useState(false);
   const certImages = [
     { img: certSpk1, title: "Свидетельство о технической компетентности" },
     { img: certSpk2, title: "Область технической компетентности" },
@@ -864,69 +864,102 @@ const Index = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="absolute inset-0 bg-black/60" onClick={() => setOrderModal(false)} />
+            <div className="absolute inset-0 bg-black/60" onClick={() => { if (!orderSending) setOrderModal(false); }} />
             <motion.div
               className="relative bg-card rounded-xl p-6 sm:p-8 w-full max-w-md shadow-2xl border border-border"
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
             >
-              <button
-                onClick={() => setOrderModal(false)}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors text-2xl leading-none"
-              >
-                ×
-              </button>
-              <h3 className="text-xl font-bold mb-2 text-foreground">Заказать звонок</h3>
-              <p className="text-sm text-muted-foreground mb-6">
-                Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут.
-              </p>
-              <div className="flex flex-col gap-4">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="* Ваше имя"
-                    value={orderForm.name}
-                    onChange={(e) => { setOrderForm({ ...orderForm, name: e.target.value }); setOrderErrors({ ...orderErrors, name: false }); }}
-                    className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`}
-                  />
-                  {orderErrors.name && <p className="text-xs text-destructive mt-1">Пожалуйста, введите ваше имя</p>}
+              {formSubmitted.order ? (
+                <div className="text-center py-4">
+                  <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center text-primary mx-auto mb-4">
+                    <Send className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Заявка отправлена!</h3>
+                  <p className="text-sm text-muted-foreground mb-6">Наш менеджер свяжется с вами в течение 15 минут.</p>
+                  <button
+                    onClick={() => { setOrderModal(false); setFormSubmitted({ ...formSubmitted, order: false }); }}
+                    className="px-6 py-2.5 rounded-lg font-semibold text-sm border border-border hover:bg-muted transition-colors"
+                  >
+                    Закрыть
+                  </button>
                 </div>
-                <div>
-                  <input
-                    type="tel"
-                    placeholder="* Телефон"
-                    value={orderForm.phone}
-                    onChange={(e) => { setOrderForm({ ...orderForm, phone: e.target.value }); setOrderErrors({ ...orderErrors, phone: false }); }}
-                    className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
-                  />
-                  {orderErrors.phone && <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>}
-                </div>
-                <button
-                  onClick={() => {
-                    const errors = { name: !orderForm.name.trim(), phone: !orderForm.phone.trim() };
-                    setOrderErrors(errors);
-                    if (errors.name || errors.phone) return;
-                    sendFormEmail("Заказ звонка — сайт Марвико", {
-                      "Имя": orderForm.name,
-                      "Телефон": orderForm.phone,
-                    });
-                    setOrderModal(false);
-                    setOrderForm({ name: "", phone: "" });
-                    setOrderErrors({ name: false, phone: false });
-                  }}
-                  className="w-full py-3.5 rounded-lg font-semibold text-white transition-colors duration-200"
-                  style={{ backgroundColor: "#C8441A" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
-                >
-                  Заказать звонок
-                </button>
-              </div>
-              <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                Или обратитесь к нам по телефону: <a href="tel:+375295677756" className="text-primary font-medium">+375 29 567-77-56</a>
-              </p>
+              ) : (
+                <>
+                  <button
+                    onClick={() => setOrderModal(false)}
+                    className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors text-2xl leading-none"
+                  >
+                    ×
+                  </button>
+                  <h3 className="text-xl font-bold mb-2 text-foreground">Заказать звонок</h3>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут.
+                  </p>
+                  <div className="flex flex-col gap-4">
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="* Ваше имя"
+                        value={orderForm.name}
+                        onChange={(e) => { setOrderForm({ ...orderForm, name: e.target.value }); setOrderErrors({ ...orderErrors, name: false }); }}
+                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`}
+                        disabled={orderSending}
+                      />
+                      {orderErrors.name && <p className="text-xs text-destructive mt-1">Пожалуйста, введите ваше имя</p>}
+                    </div>
+                    <div>
+                      <input
+                        type="tel"
+                        placeholder="* Телефон"
+                        value={orderForm.phone}
+                        onChange={(e) => { setOrderForm({ ...orderForm, phone: e.target.value }); setOrderErrors({ ...orderErrors, phone: false }); }}
+                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
+                        disabled={orderSending}
+                      />
+                      {orderErrors.phone && <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>}
+                    </div>
+                    <button
+                      disabled={orderSending}
+                      onClick={async () => {
+                        const errors = { name: !orderForm.name.trim(), phone: !orderForm.phone.trim() };
+                        setOrderErrors(errors);
+                        if (errors.name || errors.phone) return;
+                        setOrderSending(true);
+                        await sendFormEmail("Заказ звонка — сайт Марвико", {
+                          "Имя": orderForm.name,
+                          "Телефон": orderForm.phone,
+                        });
+                        setOrderSending(false);
+                        setFormSubmitted({ ...formSubmitted, order: true });
+                        setOrderForm({ name: "", phone: "" });
+                        setOrderErrors({ name: false, phone: false });
+                      }}
+                      className="w-full py-3.5 rounded-lg font-semibold text-white transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-70"
+                      style={{ backgroundColor: "#C8441A" }}
+                      onMouseEnter={(e) => { if (!orderSending) e.currentTarget.style.backgroundColor = "#A33515"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#C8441A"; }}
+                    >
+                      {orderSending ? (
+                        <>
+                          <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
+                            <path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75" />
+                          </svg>
+                          Отправка...
+                        </>
+                      ) : (
+                        "Заказать звонок"
+                      )}
+                    </button>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    Или обратитесь к нам по телефону: <a href="tel:+375295677756" className="text-primary font-medium">+375 29 567-77-56</a>
+                  </p>
+                </>
+              )}
             </motion.div>
           </motion.div>
         )}
