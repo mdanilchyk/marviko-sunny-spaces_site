@@ -190,9 +190,11 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
 
 const sendFormEmail = async (subject: string, data: Record<string, string>) => {
   try {
-    const body = Object.entries(data).map(([k, v]) => `${k}: ${v}`).join('\n');
-    const mailtoLink = `mailto:vladdani777@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(mailtoLink, '_blank');
+    await fetch("https://formsubmit.co/ajax/vladdani777@gmail.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ _subject: subject, ...data }),
+    });
     return true;
   } catch {
     return false;
