@@ -49,7 +49,11 @@ const navItems: NavItem[] = [
   },
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  onOrderClick?: () => void;
+}
+
+const Navbar = ({ onOrderClick }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
@@ -179,7 +183,10 @@ const Navbar = () => {
               <Phone className="w-4 h-4" />
               +375 (29) 567-77-56
             </a>
-            <button className="bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all duration-200">
+            <button
+              onClick={onOrderClick}
+              className="bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all duration-200"
+            >
               Заказать звонок
             </button>
           </div>
@@ -236,7 +243,10 @@ const Navbar = () => {
                     <Phone className="w-4 h-4" />
                     +375 (29) 567-77-56
                   </a>
-                  <button className="bg-primary text-primary-foreground px-5 py-3 rounded-lg font-semibold mx-4">
+                  <button
+                    onClick={() => { setMobileOpen(false); onOrderClick?.(); }}
+                    className="bg-primary text-primary-foreground px-5 py-3 rounded-lg font-semibold mx-4"
+                  >
                     Заказать звонок
                   </button>
                 </div>
