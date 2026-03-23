@@ -677,6 +677,32 @@ const Index = () => {
         )}
       </AnimatePresence>
 
+      {/* Accessories section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto section-padding">
+          <AnimatedSection>
+            <SectionLabel>Дополнительно</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-10">Также устанавливаем и продаём</h2>
+          </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {accessories.map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.08}>
+                <Link
+                  to={item.title === "Подоконники" ? "/windowsills" : "#"}
+                  className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start block"
+                >
+                  <span className="text-2xl">{item.emoji}</span>
+                  <div>
+                    <h3 className="font-bold mb-1">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground text-body">{item.desc}</p>
+                  </div>
+                </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ + Contact Form - mosokna style */}
       <section id="faq" className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
