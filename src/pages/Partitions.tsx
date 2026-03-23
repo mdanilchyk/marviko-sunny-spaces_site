@@ -1,29 +1,17 @@
 import { useState } from "react";
-import { Check, ArrowRight, Phone, Send } from "lucide-react";
+import { Check, School, Building2, ShoppingCart, Landmark, ArrowRight, Phone, Send } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
-import doorHero from "@/assets/door-hero.jpg";
-import portfolio4 from "@/assets/portfolio-4.jpg";
+import partitionsOffice from "@/assets/partitions-office.jpg";
 
-const doorTypes = [
-  {
-    title: "Балконные двери ПВХ",
-    desc: "Балконные блоки из ПВХ — окно в сочетании с дверью. Тепло, надёжно, долговечно",
-    features: ["Двухкамерный стеклопакет", "Поворотно-откидной механизм", "Белая или цветная ламинация"],
-  },
-  {
-    title: "Входные двери",
-    desc: "Входные двери из ПВХ и алюминия. Надёжная защита, современный вид, высокая теплоизоляция",
-    features: ["ПВХ и алюминий", "Многоточечный замок", "Широкий выбор заполнений", "Любые размеры"],
-  },
-  {
-    title: "Раздвижные двери",
-    desc: "Двери ПВХ с наклонно-сдвижной фурнитурой — идеальное решение там, где нет места для распашной двери",
-    features: ["Наклонно-сдвижная фурнитура", "Экономия пространства", "ПВХ профиль", "Балконы и террасы"],
-  },
+const objects = [
+  { icon: <School className="w-7 h-7" />, title: "Школы и детские сады", desc: "Безопасные и прочные конструкции, соответствующие требованиям учебных учреждений" },
+  { icon: <Building2 className="w-7 h-7" />, title: "Офисы", desc: "Функциональное зонирование пространства без капитального ремонта" },
+  { icon: <ShoppingCart className="w-7 h-7" />, title: "Магазины и торговые центры", desc: "Перегородки любой конфигурации под коммерческие задачи" },
+  { icon: <Landmark className="w-7 h-7" />, title: "Административные здания", desc: "Опыт работы на государственных и коммерческих объектах" },
 ];
 
 const sendFormEmail = async (subject: string, data: Record<string, string>) => {
@@ -39,7 +27,7 @@ const sendFormEmail = async (subject: string, data: Record<string, string>) => {
   }
 };
 
-const DoorsPage = () => {
+const PartitionsPage = () => {
   const [orderModal, setOrderModal] = useState(false);
   const [orderForm, setOrderForm] = useState({ name: "", phone: "" });
   const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
@@ -50,47 +38,35 @@ const DoorsPage = () => {
     <div className="min-h-screen bg-background">
       <Navbar onOrderClick={() => setOrderModal(true)} />
 
+      {/* Hero */}
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #3A2518)" }}>
-        <div className="absolute inset-0 opacity-15">
-          <img src={doorHero} alt="" className="w-full h-full object-cover" />
-        </div>
         <div className="container mx-auto section-padding relative z-10">
           <AnimatedSection>
-            <SectionLabel>Двери ПВХ</SectionLabel>
-            <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Надёжные двери для дома и офиса</h1>
+            <SectionLabel>Перегородки</SectionLabel>
+            <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Перегородки ПВХ</h1>
             <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Входные, балконные и раздвижные двери из качественного ПВХ-профиля.
+              Изготавливаем и устанавливаем перегородки из ПВХ для коммерческих и общественных объектов
             </p>
           </AnimatedSection>
         </div>
       </section>
 
+      {/* Objects grid */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
-            <SectionLabel>Типы дверей</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-10">Выберите тип двери</h2>
+            <SectionLabel>Объекты</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-10">Для каких объектов</h2>
           </AnimatedSection>
-          <div className="grid lg:grid-cols-3 gap-6">
-            {doorTypes.map((door, i) => (
-              <AnimatedSection key={door.title} delay={i * 0.1}>
-                <div className="rounded-xl p-6 bg-card card-shadow hover:card-shadow-hover transition-all duration-300 border border-border hover:border-primary h-full flex flex-col">
-                  <h3 className="text-xl font-bold mb-2">{door.title}</h3>
-                  <p className="text-sm text-muted-foreground text-body mb-6">{door.desc}</p>
-                  <ul className="flex flex-col gap-2.5 mb-6 flex-1">
-                    {door.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-primary shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    onClick={() => setOrderModal(true)}
-                    className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-200"
-                  >
-                    Заказать расчёт
-                  </button>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {objects.map((obj, i) => (
+              <AnimatedSection key={obj.title} delay={i * 0.1}>
+                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary h-full flex flex-col">
+                  <div className="w-14 h-14 rounded-lg bg-accent-light flex items-center justify-center text-primary mb-4">
+                    {obj.icon}
+                  </div>
+                  <h3 className="font-bold mb-2">{obj.title}</h3>
+                  <p className="text-sm text-muted-foreground text-body">{obj.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -98,35 +74,43 @@ const DoorsPage = () => {
         </div>
       </section>
 
+      {/* Photo section */}
       <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
           <AnimatedSection>
-            <div className="grid lg:grid-cols-2 gap-10 items-center">
-              <div className="rounded-xl overflow-hidden">
-                <img src={portfolio4} alt="Установка двери" className="w-full h-80 object-cover" />
-              </div>
-              <div>
-                <SectionLabel>Характеристики</SectionLabel>
-                <h2 className="text-3xl text-display mb-6">Почему двери ПВХ?</h2>
-                <div className="flex flex-col gap-4">
-                  {[
-                    { title: "Теплоизоляция", desc: "Многокамерный профиль сохраняет тепло в доме" },
-                    { title: "Безопасность", desc: "Многоточечная система запирания и стальное армирование" },
-                    { title: "Долговечность", desc: "ПВХ не ржавеет, не гниёт и не требует покраски" },
-                    { title: "Дизайн", desc: "Широкий выбор ламинации — от белого до дерева" },
-                  ].map((item) => (
-                    <div key={item.title} className="flex gap-3">
-                      <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                      <div>
-                        <div className="font-bold text-sm">{item.title}</div>
-                        <div className="text-sm text-muted-foreground">{item.desc}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <SectionLabel>Портфолио</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-10">Пример выполненной работы</h2>
+          </AnimatedSection>
+          <AnimatedSection delay={0.15}>
+            <div className="max-w-[900px] mx-auto">
+              <img
+                src={partitionsOffice}
+                alt="Офисные перегородки из ПВХ"
+                className="w-full rounded-2xl object-cover"
+                style={{ aspectRatio: "16/9" }}
+              />
+              <p className="text-sm text-muted-foreground text-center mt-4">
+                Офисные перегородки из ПВХ — зонирование помещения с дверным блоком
+              </p>
             </div>
           </AnimatedSection>
+        </div>
+      </section>
+
+      {/* CTA strip */}
+      <section className="py-16" style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))" }}>
+        <div className="container mx-auto section-padding">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <h2 className="text-2xl sm:text-3xl text-display text-primary-foreground">
+              Нужна перегородка для вашего объекта?
+            </h2>
+            <button
+              onClick={() => setOrderModal(true)}
+              className="bg-primary-foreground text-primary px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
+            >
+              Получить расчёт <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </section>
 
@@ -148,7 +132,7 @@ const DoorsPage = () => {
               ) : (
                 <>
                   <button onClick={() => setOrderModal(false)} className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors text-2xl leading-none">×</button>
-                  <h3 className="text-xl font-bold mb-2 text-foreground">Заказать расчёт</h3>
+                  <h3 className="text-xl font-bold mb-2 text-foreground">Получить расчёт</h3>
                   <p className="text-sm text-muted-foreground mb-6">Оставьте свой номер телефона и наш менеджер свяжется с вами.</p>
                   <div className="flex flex-col gap-4">
                     <div>
@@ -164,7 +148,7 @@ const DoorsPage = () => {
                       setOrderErrors(errors);
                       if (errors.name || errors.phone) return;
                       setOrderSending(true);
-                      await sendFormEmail("Расчёт двери — сайт Марвико", { "Имя": orderForm.name, "Телефон": orderForm.phone });
+                      await sendFormEmail("Расчёт перегородки — сайт Марвико", { "Имя": orderForm.name, "Телефон": orderForm.phone });
                       setOrderSending(false);
                       setFormSubmitted(true);
                       setOrderForm({ name: "", phone: "" });
@@ -185,4 +169,4 @@ const DoorsPage = () => {
   );
 };
 
-export default DoorsPage;
+export default PartitionsPage;

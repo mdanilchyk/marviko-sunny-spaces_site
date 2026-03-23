@@ -87,6 +87,8 @@ const Footer = () => {
                 { to: "/windows", label: "Окна ПВХ" },
                 { to: "/balconies", label: "Остекление балконов" },
                 { to: "/doors", label: "Двери ПВХ" },
+                { to: "/partitions", label: "Перегородки" },
+                { to: "/windowsills", label: "Подоконники" },
                 { to: "/portfolio", label: "Наши работы" },
               ].map((link) => (
                 <Link

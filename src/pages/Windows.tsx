@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
@@ -33,6 +34,21 @@ const profiles = [
   },
 ];
 
+const windowTypes = [
+  "Окна ПВХ", "Алюминиевые окна", "Окна со шпросами", "Арочные окна",
+  "Трапециевидные окна", "Треугольные окна", "Энергосберегающие",
+  "Мультифункциональные стеклопакеты", "Тонированные", "Тонированные в массе",
+];
+
+const accessories = [
+  { emoji: "🪲", title: "Москитные сетки", desc: "Внутренние и наружные. Изготавливаем под размер вашего окна" },
+  { emoji: "🔧", title: "Ручки и замки", desc: "Замена и установка ручек, замков, фурнитуры" },
+  { emoji: "🪟", title: "Стеклопакеты", desc: "Замена стеклопакетов без демонтажа рамы" },
+  { emoji: "🛡️", title: "Детские замки", desc: "Защита от открывания ребёнком. Устанавливается на любое окно" },
+  { emoji: "🏠", title: "Отливы и доборы", desc: "Отливы и доборные элементы для кровель из оцинкованной стали" },
+  { emoji: "🪜", title: "Подоконники", desc: "Стандартные и премиум подоконники. Глянцевые, матовые, под камень и дерево" },
+];
+
 const WindowsPage = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -51,6 +67,29 @@ const WindowsPage = () => {
         </div>
       </section>
 
+      {/* Window types badges */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto section-padding">
+          <AnimatedSection>
+            <SectionLabel>Типы</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-8">Виды и исполнения</h2>
+          </AnimatedSection>
+          <AnimatedSection delay={0.1}>
+            <div className="flex flex-wrap gap-3">
+              {windowTypes.map((t) => (
+                <span
+                  key={t}
+                  className="inline-block rounded-full font-semibold"
+                  style={{ backgroundColor: "#FDF3EC", color: "#C8441A", padding: "6px 16px", fontSize: "13px", fontWeight: 600 }}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Price tables */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
@@ -63,7 +102,6 @@ const WindowsPage = () => {
             {profiles.map((p, pi) => (
               <AnimatedSection key={pi} delay={pi * 0.1}>
                 <div className="rounded-xl overflow-hidden border border-border" style={p.popular ? { borderColor: "hsl(var(--primary))", boxShadow: "0 0 0 1px hsl(var(--primary)), 0 4px 20px rgba(217,79,30,0.1)" } : {}}>
-                  {/* Header */}
                   <div className="p-6 flex flex-wrap items-center gap-4 bg-card border-b border-border">
                     <div className="flex gap-4 text-sm font-mono text-muted-foreground">
                       <span className="px-3 py-1 rounded-md bg-accent-light text-primary font-semibold">{p.chambers}</span>
@@ -74,8 +112,6 @@ const WindowsPage = () => {
                       <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full ml-auto">Популярный</span>
                     )}
                   </div>
-
-                  {/* Features */}
                   <div className="p-6 bg-card border-b border-border">
                     <ul className="flex flex-wrap gap-4">
                       {p.features.map((f) => (
@@ -86,8 +122,6 @@ const WindowsPage = () => {
                       ))}
                     </ul>
                   </div>
-
-                  {/* Price grid with window drawings */}
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4">
                     {p.prices.map((item, i) => (
                       <div key={i} className="p-6 flex flex-col items-center text-center border-b sm:border-r border-border last:border-r-0 bg-card hover:bg-accent-light/50 transition-colors">
@@ -137,6 +171,32 @@ const WindowsPage = () => {
                   <h3 className="font-bold mb-2">{item.title}</h3>
                   <p className="text-sm text-muted-foreground text-body">{item.desc}</p>
                 </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Accessories section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto section-padding">
+          <AnimatedSection>
+            <SectionLabel>Дополнительно</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-10">Также устанавливаем и продаём</h2>
+          </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {accessories.map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.08}>
+                <Link
+                  to={item.title === "Подоконники" ? "/windowsills" : "#"}
+                  className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start block"
+                >
+                  <span className="text-2xl">{item.emoji}</span>
+                  <div>
+                    <h3 className="font-bold mb-1">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground text-body">{item.desc}</p>
+                  </div>
+                </Link>
               </AnimatedSection>
             ))}
           </div>

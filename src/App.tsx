@@ -7,6 +7,8 @@ import Index from "./pages/Index.tsx";
 import WindowsPage from "./pages/Windows.tsx";
 import BalconiesPage from "./pages/Balconies.tsx";
 import DoorsPage from "./pages/Doors.tsx";
+import PartitionsPage from "./pages/Partitions.tsx";
+import WindowsillsPage from "./pages/Windowsills.tsx";
 import PortfolioPage from "./pages/Portfolio.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/windows" element={<WindowsPage />} />
           <Route path="/balconies" element={<BalconiesPage />} />
           <Route path="/doors" element={<DoorsPage />} />
+          <Route path="/partitions" element={<PartitionsPage />} />
+          <Route path="/windowsills" element={<WindowsillsPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

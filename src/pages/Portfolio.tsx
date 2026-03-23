@@ -20,6 +20,14 @@ import workDoorBrown from "@/assets/work-door-brown.jpg";
 import workDoorGlass from "@/assets/work-door-glass.jpg";
 import workWindowFireplace from "@/assets/work-window-fireplace.jpg";
 
+import partitionsOffice from "@/assets/partitions-office.jpg";
+import windowsillWood from "@/assets/windowsill-wood.jpg";
+import windowsillWenge from "@/assets/windowsill-wenge.jpg";
+import windowsillOrange from "@/assets/windowsill-orange.jpg";
+import windowsillBeige from "@/assets/windowsill-beige.jpg";
+import windowsillGreen from "@/assets/windowsill-green.jpg";
+import windowsillMarble from "@/assets/windowsill-marble.jpg";
+
 const projects = [
   { img: workWindowOpen, title: "Установка окон в загородном доме", category: "Окна" },
   { img: workWindowTrees, title: "Окна с видом на сад", category: "Окна" },
@@ -33,9 +41,16 @@ const projects = [
   { img: portfolio4, title: "Входная дверь ПВХ", category: "Двери" },
   { img: portfolio5, title: "Окна на кухне", category: "Окна" },
   { img: portfolio6, title: "Остекление офиса", category: "Окна" },
+  { img: partitionsOffice, title: "Офисные перегородки из ПВХ", category: "Перегородки" },
+  { img: windowsillWood, title: "Подоконник под дерево", category: "Подоконники" },
+  { img: windowsillWenge, title: "Премиум подоконник венге", category: "Подоконники" },
+  { img: windowsillOrange, title: "Яркий цветной подоконник", category: "Подоконники" },
+  { img: windowsillBeige, title: "Светлый подоконник у балконной двери", category: "Подоконники" },
+  { img: windowsillGreen, title: "Подоконник салатовый глянец", category: "Подоконники" },
+  { img: windowsillMarble, title: "Подоконник под мрамор премиум", category: "Подоконники" },
 ];
 
-const filters = ["Все", "Окна", "Балконы", "Двери"];
+const filters = ["Все", "Окна", "Балконы", "Двери", "Перегородки", "Подоконники"];
 
 const PortfolioPage = () => {
   const [filter, setFilter] = useState("Все");
@@ -53,7 +68,7 @@ const PortfolioPage = () => {
             <SectionLabel>Портфолио</SectionLabel>
             <h1 className="text-4xl sm:text-5xl text-display mb-6">Наши работы</h1>
             <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Примеры выполненных проектов по остеклению окон, балконов и установке дверей.
+              Примеры выполненных проектов по остеклению окон, балконов, установке дверей, перегородок и подоконников.
             </p>
           </AnimatedSection>
         </div>

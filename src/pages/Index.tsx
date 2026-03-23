@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Clock, Award, ThumbsUp, Star, ChevronDown, Eye, ArrowRight, Phone, MapPin, Send, FileText, PhoneCall, ChevronLeft, ChevronRight } from "lucide-react";
+import { Shield, Clock, Award, ThumbsUp, Star, ChevronDown, Eye, ArrowRight, Phone, MapPin, Send, FileText, PhoneCall, ChevronLeft, ChevronRight, CreditCard, CalendarDays } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
@@ -77,7 +77,14 @@ const faqData = [
   { q: "Ваша специализация — исключительно пластиковые окна?", a: "Нет, мы готовы предложить своим клиентам широкий спектр услуг. Мы устанавливаем пластиковые окна и балконные двери, предлагаем зонирование пространства с помощью межкомнатных перегородок. Также мы выполняем работы по утеплению и отделке балконов. В качестве дополнения вы можете выбрать стильные откосы, ламинацию оконного профиля, необычный подоконник — эти детали помогут органично вписать окна в любой интерьер. Рулонные шторы или жалюзи помогут укрыться от яркого солнца, а москитная сетка — от докучливых насекомых." },
 ];
 
-
+const accessories = [
+  { emoji: "🪲", title: "Москитные сетки", desc: "Внутренние и наружные. Изготавливаем под размер вашего окна" },
+  { emoji: "🔧", title: "Ручки и замки", desc: "Замена и установка ручек, замков, фурнитуры" },
+  { emoji: "🪟", title: "Стеклопакеты", desc: "Замена стеклопакетов без демонтажа рамы" },
+  { emoji: "🛡️", title: "Детские замки", desc: "Защита от открывания ребёнком. Устанавливается на любое окно" },
+  { emoji: "🏠", title: "Отливы и доборы", desc: "Отливы и доборные элементы для кровель из оцинкованной стали" },
+  { emoji: "🪜", title: "Подоконники", desc: "Стандартные и премиум подоконники. Глянцевые, матовые, под камень и дерево" },
+];
 const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | "balcony"; title: string; size: string; opening: string; glass: string; furniture: string; price: string; featured: boolean }[]> = {
   novotex58: [
     { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 302 BYN", featured: false },
@@ -670,6 +677,32 @@ const Index = () => {
         )}
       </AnimatePresence>
 
+      {/* Accessories section */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto section-padding">
+          <AnimatedSection>
+            <SectionLabel>Дополнительно</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-10">Также устанавливаем и продаём</h2>
+          </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {accessories.map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.08}>
+                <Link
+                  to={item.title === "Подоконники" ? "/windowsills" : "#"}
+                  className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start block"
+                >
+                  <span className="text-2xl">{item.emoji}</span>
+                  <div>
+                    <h3 className="font-bold mb-1">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground text-body">{item.desc}</p>
+                  </div>
+                </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ + Contact Form - mosokna style */}
       <section id="faq" className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
@@ -849,6 +882,32 @@ const Index = () => {
                 </div>
               </AnimatedSection>
             ))}
+          </div>
+
+          {/* Payment block */}
+          <div className="grid sm:grid-cols-2 gap-6 mt-10">
+            <AnimatedSection delay={0.1}>
+              <div className="bg-card rounded-xl p-6 card-shadow border border-border flex gap-4 items-start">
+                <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary shrink-0">
+                  <CreditCard className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold mb-1">Удобная оплата</h3>
+                  <p className="text-sm text-muted-foreground text-body">Принимаем наличные, банковскую карту и банковский перевод на расчётный счёт</p>
+                </div>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="bg-card rounded-xl p-6 card-shadow border border-border flex gap-4 items-start">
+                <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary shrink-0">
+                  <CalendarDays className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold mb-1">Рассрочка без %</h3>
+                  <p className="text-sm text-muted-foreground text-body">От 6 до 12 месяцев. Без переплат, без поручителей, справка из банка не требуется</p>
+                </div>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
