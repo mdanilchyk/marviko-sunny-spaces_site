@@ -38,10 +38,18 @@ const navItems: NavItem[] = [
     label: "Двери",
     href: "/doors",
     submenu: [
-      { label: "Входные двери ПВХ", href: "/doors", desc: "Надёжная защита и теплоизоляция" },
-      { label: "Межкомнатные двери", href: "/doors", desc: "Стильные решения для интерьера" },
-      { label: "Балконные двери", href: "/doors", desc: "Герметичность и удобство" },
+      { label: "Балконные двери ПВХ", href: "/doors", desc: "Окно в сочетании с дверью" },
+      { label: "Входные двери", href: "/doors", desc: "Надёжная защита и теплоизоляция" },
+      { label: "Раздвижные двери", href: "/doors", desc: "Наклонно-сдвижная фурнитура" },
     ],
+  },
+  {
+    label: "Перегородки",
+    href: "/partitions",
+  },
+  {
+    label: "Подоконники",
+    href: "/windowsills",
   },
   {
     label: "Наши работы",
