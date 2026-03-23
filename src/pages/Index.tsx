@@ -583,7 +583,7 @@ const Index = () => {
       </section>
 
       {/* Certificates - subtle section */}
-      <section className="py-12 bg-background border-t border-border">
+      <section id="certificates" className="py-12 bg-background border-t border-border">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
             <div className="flex items-center gap-3 mb-6">
