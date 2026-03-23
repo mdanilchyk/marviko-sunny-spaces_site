@@ -502,7 +502,10 @@ const Index = () => {
                   placeholder="+375 29 XXX-XX-XX"
                   className="w-full px-4 py-3 rounded-lg bg-primary-foreground/10 text-primary-foreground text-sm placeholder:text-primary-foreground/50 border border-primary-foreground/20 focus:border-primary-foreground/50 focus:outline-none"
                 />
-                <button className="w-full bg-primary-foreground text-primary py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2">
+                <button
+                  onClick={() => setOrderModal(true)}
+                  className="w-full bg-primary-foreground text-primary py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2"
+                >
                   <Phone className="w-4 h-4" />
                   Заказать звонок
                 </button>
