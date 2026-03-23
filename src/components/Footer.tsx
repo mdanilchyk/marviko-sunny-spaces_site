@@ -44,8 +44,10 @@ const Footer = () => {
                 { to: "/balconies", label: "Остекление балконов" },
                 { to: "/doors", label: "Двери ПВХ" },
                 { to: "/portfolio", label: "Наши работы" },
+                { to: "/#pricing", label: "Калькулятор" },
+                { to: "/#certificates", label: "Сертификаты" },
               ].map((link) => (
-                <Link key={link.to} to={link.to} className="text-sm hover:text-primary transition-colors" style={{ color: "hsl(var(--muted-foreground))" }}>
+                <Link key={link.to} to={link.to} className="text-sm transition-colors" style={{ color: "hsl(var(--muted-foreground))" }} onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")} onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(var(--muted-foreground))")}>
                   {link.label}
                 </Link>
               ))}
