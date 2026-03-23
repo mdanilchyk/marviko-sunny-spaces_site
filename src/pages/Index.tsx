@@ -701,10 +701,11 @@ const Index = () => {
                         type="text"
                         placeholder="Иван Иванов"
                         value={contactForm.name}
-                        onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors"
+                        onChange={(e) => { setContactForm({ ...contactForm, name: e.target.value }); setContactErrors({ ...contactErrors, name: false }); }}
+                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`}
                         maxLength={100}
                       />
+                      {contactErrors.name && <p className="text-xs text-destructive mt-1">Пожалуйста, введите ваше имя</p>}
                     </div>
                     <div>
                       <label className="text-sm font-medium mb-1.5 block">Телефон</label>
@@ -712,10 +713,11 @@ const Index = () => {
                         type="tel"
                         placeholder="+375 29 XXX-XX-XX"
                         value={contactForm.phone}
-                        onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors"
+                        onChange={(e) => { setContactForm({ ...contactForm, phone: e.target.value }); setContactErrors({ ...contactErrors, phone: false }); }}
+                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
                         maxLength={20}
                       />
+                      {contactErrors.phone && <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>}
                     </div>
                     <div>
                       <label className="text-sm font-medium mb-1.5 block">Сообщение</label>
@@ -728,7 +730,16 @@ const Index = () => {
                         maxLength={1000}
                       />
                     </div>
-                    <button className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2">
+                    <button
+                      onClick={() => {
+                        const errors = { name: !contactForm.name.trim(), phone: !contactForm.phone.trim() };
+                        setContactErrors(errors);
+                        if (errors.name || errors.phone) return;
+                        alert("Спасибо! Мы свяжемся с вами в ближайшее время.");
+                        setContactForm({ name: "", phone: "", message: "" });
+                      }}
+                      className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2"
+                    >
                       <Send className="w-4 h-4" />
                       Отправить сообщение
                     </button>
