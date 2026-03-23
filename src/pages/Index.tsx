@@ -393,18 +393,10 @@ const Index = () => {
             {pricingByProfile.novotex58.map((card, i) => (
               <AnimatedSection key={card.type} delay={i * 0.08}>
                 <div
-                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg"
-                  style={{ border: card.featured ? "2px solid hsl(var(--primary))" : "1px solid #E2DDD5" }}
+                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg cursor-pointer h-full"
+                  style={{ border: "1px solid #E2DDD5" }}
+                  onClick={() => setOrderModal(true)}
                 >
-                  {card.featured && (
-                    <div
-                      className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-3 py-1 rounded-full z-10"
-                      style={{ backgroundColor: "hsl(var(--primary))", color: "white" }}
-                    >
-                      Популярный
-                    </div>
-                  )}
-
                   {/* SVG Window illustration */}
                   <div className="flex items-center justify-center py-6 px-4">
                     <PricingWindowSVG type={card.type} />
@@ -431,6 +423,7 @@ const Index = () => {
                       style={{ backgroundColor: "#C8441A" }}
                       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+                      onClick={(e) => { e.stopPropagation(); setOrderModal(true); }}
                     >
                       Заказать замер
                     </button>
