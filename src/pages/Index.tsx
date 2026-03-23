@@ -817,24 +817,30 @@ const Index = () => {
                     type="text"
                     placeholder="* Ваше имя"
                     value={orderForm.name}
-                    onChange={(e) => setOrderForm({ ...orderForm, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
+                    onChange={(e) => { setOrderForm({ ...orderForm, name: e.target.value }); setOrderErrors({ ...orderErrors, name: false }); }}
+                    className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`}
                   />
+                  {orderErrors.name && <p className="text-xs text-destructive mt-1">Пожалуйста, введите ваше имя</p>}
                 </div>
                 <div>
                   <input
                     type="tel"
                     placeholder="* Телефон"
                     value={orderForm.phone}
-                    onChange={(e) => setOrderForm({ ...orderForm, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
+                    onChange={(e) => { setOrderForm({ ...orderForm, phone: e.target.value }); setOrderErrors({ ...orderErrors, phone: false }); }}
+                    className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
                   />
+                  {orderErrors.phone && <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>}
                 </div>
                 <button
                   onClick={() => {
+                    const errors = { name: !orderForm.name.trim(), phone: !orderForm.phone.trim() };
+                    setOrderErrors(errors);
+                    if (errors.name || errors.phone) return;
                     alert("Спасибо! Мы перезвоним вам в ближайшее время.");
                     setOrderModal(false);
                     setOrderForm({ name: "", phone: "" });
+                    setOrderErrors({ name: false, phone: false });
                   }}
                   className="w-full py-3.5 rounded-lg font-semibold text-white transition-colors duration-200"
                   style={{ backgroundColor: "#C8441A" }}
