@@ -196,6 +196,8 @@ const Index = () => {
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
   const [certModal, setCertModal] = useState<string | null>(null);
+  const [orderModal, setOrderModal] = useState(false);
+  const [orderForm, setOrderForm] = useState({ name: "", phone: "" });
 
 
 
