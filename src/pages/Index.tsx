@@ -809,17 +809,8 @@ const Index = () => {
           </div>
         </div>
       </section>
-                    >
-                      <Send className="w-4 h-4" />
-                      Отправить сообщение
-                    </button>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </div>
-      </section>
+
+
 
       {/* Contacts */}
       <section className="py-20 bg-background">
