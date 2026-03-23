@@ -597,40 +597,43 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Certificates - subtle section */}
-      <section id="certificates" className="py-12 bg-background border-t border-border">
+      {/* Certificates - mosokna carousel style */}
+      <section id="certificates" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
-            <div className="flex items-center gap-3 mb-6">
-              <FileText className="w-5 h-5 text-primary" />
-              <h3 className="text-lg font-bold">Сертификаты и документы</h3>
-            </div>
+            <SectionLabel>Документы</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-3">Сертификаты соответствия</h2>
+            <p className="text-muted-foreground text-body mb-10 max-w-2xl">
+              Для изготовления своей продукции мы используем только самые высококачественные оригинальные европейские комплектующие.
+            </p>
           </AnimatedSection>
-          <div className="flex flex-wrap gap-4">
-            {[
-              { img: certSpk1, title: "Свидетельство о технической компетентности" },
-              { img: certSpk2, title: "Область технической компетентности" },
-            ].map((cert, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <button
-                  onClick={() => setCertModal(cert.img)}
-                  className="flex items-center gap-3 bg-card rounded-lg px-4 py-3 border border-border hover:border-primary transition-colors card-shadow group"
-                >
-                  <img src={cert.img} alt={cert.title} className="w-12 h-16 object-cover rounded border border-border" />
-                  <div className="text-left">
-                    <p className="text-sm font-medium group-hover:text-primary transition-colors">{cert.title}</p>
-                    <p className="text-xs text-muted-foreground">Нажмите для просмотра</p>
-                  </div>
-                </button>
-              </AnimatedSection>
-            ))}
-            <div className="flex flex-wrap gap-2 items-center ml-4">
-              {["ISO 9001", "СТБ 1108-2017", "С 2007 года"].map((badge) => (
-                <span key={badge} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border text-muted-foreground">
-                  {badge}
-                </span>
+          <div className="relative">
+            <div className="flex gap-6 overflow-hidden">
+              {certImages.map((cert, i) => (
+                <AnimatedSection key={i} delay={i * 0.1}>
+                  <button
+                    onClick={() => setCertModal(cert.img)}
+                    className="flex-shrink-0 w-[200px] sm:w-[240px] group"
+                  >
+                    <div className="bg-card rounded-xl border border-border hover:border-primary transition-all duration-300 overflow-hidden card-shadow hover:card-shadow-hover">
+                      <img
+                        src={cert.img}
+                        alt={cert.title}
+                        className="w-full h-[280px] sm:h-[320px] object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-3 text-center">{cert.title}</p>
+                  </button>
+                </AnimatedSection>
               ))}
             </div>
+          </div>
+          <div className="flex flex-wrap gap-2 items-center mt-8">
+            {["ISO 9001", "СТБ 1108-2017", "С 2007 года"].map((badge) => (
+              <span key={badge} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border text-muted-foreground">
+                {badge}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -658,8 +661,8 @@ const Index = () => {
         )}
       </AnimatePresence>
 
-      {/* FAQ + Contact Form */}
-      <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
+      {/* FAQ + Contact Form - mosokna style */}
+      <section id="faq" className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* FAQ */}
@@ -699,60 +702,113 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Contact Form */}
+            {/* Contact Form - mosokna style */}
             <div>
               <AnimatedSection>
-                <SectionLabel>Напишите нам</SectionLabel>
-                <h2 className="text-3xl sm:text-4xl text-display mb-4">Остались вопросы?</h2>
-                <p className="text-muted-foreground text-body mb-8">Оставьте заявку и мы свяжемся с вами в ближайшее время</p>
+                <h2 className="text-2xl sm:text-3xl text-display mb-2">Возникли вопросы?</h2>
+                <p className="text-muted-foreground text-body mb-8">
+                  Напишите, и наши специалисты подробно ответят вам в удобной форме.
+                </p>
               </AnimatedSection>
               <AnimatedSection delay={0.15}>
-                <div className="bg-card rounded-xl p-6 sm:p-8 card-shadow">
-                  <div className="flex flex-col gap-4">
-                    <div>
-                      <label className="text-sm font-medium mb-1.5 block">Ваше имя</label>
-                      <input
-                        type="text"
-                        placeholder="Иван Иванов"
-                        value={contactForm.name}
-                        onChange={(e) => { setContactForm({ ...contactForm, name: e.target.value }); setContactErrors({ ...contactErrors, name: false }); }}
-                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`}
-                        maxLength={100}
-                      />
-                      {contactErrors.name && <p className="text-xs text-destructive mt-1">Пожалуйста, введите ваше имя</p>}
+                {formSubmitted.contact ? (
+                  <div className="bg-card rounded-xl p-8 card-shadow text-center">
+                    <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center text-primary mx-auto mb-4">
+                      <Send className="w-7 h-7" />
                     </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1.5 block">Телефон</label>
-                      <input
-                        type="tel"
-                        placeholder="+375 29 XXX-XX-XX"
-                        value={contactForm.phone}
-                        onChange={(e) => { setContactForm({ ...contactForm, phone: e.target.value }); setContactErrors({ ...contactErrors, phone: false }); }}
-                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
-                        maxLength={20}
-                      />
-                      {contactErrors.phone && <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>}
+                    <h3 className="text-xl font-bold mb-2">Спасибо!</h3>
+                    <p className="text-sm text-muted-foreground">Мы свяжемся с вами в ближайшее время.</p>
+                  </div>
+                ) : (
+                  <div className="bg-card rounded-xl p-6 sm:p-8 card-shadow">
+                    <div className="flex flex-col gap-5">
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-sm font-medium">* Ваш вопрос</label>
+                          {contactErrors.question && (
+                            <span className="text-xs font-medium px-2 py-0.5 rounded" style={{ backgroundColor: "hsl(0 84% 60% / 0.1)", color: "hsl(var(--destructive))" }}>
+                              Обязательное поле
+                            </span>
+                          )}
+                        </div>
+                        <textarea
+                          placeholder="Опишите ваш вопрос..."
+                          rows={3}
+                          value={contactForm.question}
+                          onChange={(e) => { setContactForm({ ...contactForm, question: e.target.value }); setContactErrors({ ...contactErrors, question: false }); }}
+                          className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors resize-none ${contactErrors.question ? 'border-destructive' : 'border-border focus:border-primary'}`}
+                          maxLength={1000}
+                        />
+                      </div>
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-sm font-medium">* Ваше имя</label>
+                          {contactErrors.name && (
+                            <span className="text-xs font-medium px-2 py-0.5 rounded" style={{ backgroundColor: "hsl(0 84% 60% / 0.1)", color: "hsl(var(--destructive))" }}>
+                              Обязательное поле
+                            </span>
+                          )}
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="Иван Иванов"
+                          value={contactForm.name}
+                          onChange={(e) => { setContactForm({ ...contactForm, name: e.target.value }); setContactErrors({ ...contactErrors, name: false }); }}
+                          className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`}
+                          maxLength={100}
+                        />
+                      </div>
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-sm font-medium">* Телефон</label>
+                          {contactErrors.phone && (
+                            <span className="text-xs font-medium px-2 py-0.5 rounded" style={{ backgroundColor: "hsl(0 84% 60% / 0.1)", color: "hsl(var(--destructive))" }}>
+                              Обязательное поле
+                            </span>
+                          )}
+                        </div>
+                        <input
+                          type="tel"
+                          placeholder="+375 29 XXX-XX-XX"
+                          value={contactForm.phone}
+                          onChange={(e) => { setContactForm({ ...contactForm, phone: e.target.value }); setContactErrors({ ...contactErrors, phone: false }); }}
+                          className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
+                          maxLength={20}
+                        />
+                      </div>
+                      <button
+                        onClick={() => {
+                          const errors = {
+                            question: !contactForm.question.trim(),
+                            name: !contactForm.name.trim(),
+                            phone: !contactForm.phone.trim(),
+                          };
+                          setContactErrors(errors);
+                          if (errors.question || errors.name || errors.phone) return;
+                          sendFormEmail("Вопрос с сайта Марвико", {
+                            "Вопрос": contactForm.question,
+                            "Имя": contactForm.name,
+                            "Телефон": contactForm.phone,
+                          });
+                          setFormSubmitted({ ...formSubmitted, contact: true });
+                          setContactForm({ name: "", phone: "", question: "" });
+                        }}
+                        className="w-full py-3.5 rounded-lg font-semibold text-primary-foreground transition-colors duration-200"
+                        style={{ backgroundColor: "hsl(var(--primary))" }}
+                      >
+                        Отправить
+                      </button>
+                      <p className="text-xs text-muted-foreground text-center">
+                        Нажимая на кнопку «Отправить», Вы принимаете условия обработки персональных данных.
+                      </p>
                     </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1.5 block">Сообщение</label>
-                      <textarea
-                        placeholder="Опишите ваш вопрос или пожелания..."
-                        rows={4}
-                        value={contactForm.message}
-                        onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors resize-none"
-                        maxLength={1000}
-                      />
-                    </div>
-                    <button
-                      onClick={() => {
-                        const errors = { name: !contactForm.name.trim(), phone: !contactForm.phone.trim() };
-                        setContactErrors(errors);
-                        if (errors.name || errors.phone) return;
-                        alert("Спасибо! Мы свяжемся с вами в ближайшее время.");
-                        setContactForm({ name: "", phone: "", message: "" });
-                      }}
-                      className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2"
+                  </div>
+                )}
+              </AnimatedSection>
+            </div>
+          </div>
+        </div>
+      </section>
                     >
                       <Send className="w-4 h-4" />
                       Отправить сообщение
