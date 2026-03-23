@@ -883,6 +883,32 @@ const Index = () => {
               </AnimatedSection>
             ))}
           </div>
+
+          {/* Payment block */}
+          <div className="grid sm:grid-cols-2 gap-6 mt-10">
+            <AnimatedSection delay={0.1}>
+              <div className="bg-card rounded-xl p-6 card-shadow border border-border flex gap-4 items-start">
+                <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary shrink-0">
+                  <CreditCard className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold mb-1">Удобная оплата</h3>
+                  <p className="text-sm text-muted-foreground text-body">Принимаем наличные, банковскую карту и банковский перевод на расчётный счёт</p>
+                </div>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="bg-card rounded-xl p-6 card-shadow border border-border flex gap-4 items-start">
+                <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary shrink-0">
+                  <CalendarDays className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-bold mb-1">Рассрочка без %</h3>
+                  <p className="text-sm text-muted-foreground text-body">От 6 до 12 месяцев. Без переплат, без поручителей, справка из банка не требуется</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
