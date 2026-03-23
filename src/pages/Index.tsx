@@ -901,7 +901,10 @@ const Index = () => {
                     const errors = { name: !orderForm.name.trim(), phone: !orderForm.phone.trim() };
                     setOrderErrors(errors);
                     if (errors.name || errors.phone) return;
-                    alert("Спасибо! Мы перезвоним вам в ближайшее время.");
+                    sendFormEmail("Заказ звонка — сайт Марвико", {
+                      "Имя": orderForm.name,
+                      "Телефон": orderForm.phone,
+                    });
                     setOrderModal(false);
                     setOrderForm({ name: "", phone: "" });
                     setOrderErrors({ name: false, phone: false });
