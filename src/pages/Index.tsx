@@ -9,9 +9,9 @@ import AnimatedSection from "@/components/AnimatedSection";
 
 
 import heroImg from "@/assets/hero-interior.jpg";
-import serviceWindows from "@/assets/service-windows.jpg";
+import serviceWindows from "@/assets/window-work-1.jpg";
 import serviceBalconies from "@/assets/service-balconies.jpg";
-import serviceDoors from "@/assets/service-doors.jpg";
+import serviceDoors from "@/assets/door-real-3.jpg";
 import servicePartitions from "@/assets/partitions-real-1.jpg";
 import serviceWindowsills from "@/assets/windowsill-real-1.jpg";
 import serviceWindowWork from "@/assets/service-objects.jpg";
