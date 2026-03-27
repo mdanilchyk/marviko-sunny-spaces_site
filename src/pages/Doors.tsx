@@ -5,8 +5,13 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
-import doorHero from "@/assets/door-hero.jpg";
-import portfolio4 from "@/assets/portfolio-4.jpg";
+import doorReal1 from "@/assets/door-real-1.jpg";
+import doorReal2 from "@/assets/door-real-2.jpg";
+import doorReal3 from "@/assets/door-real-3.jpg";
+import doorReal4 from "@/assets/door-real-4.jpg";
+import doorReal5 from "@/assets/door-real-5.jpg";
+import doorReal6 from "@/assets/door-real-6.jpg";
+import doorReal7 from "@/assets/door-real-7.jpg";
 
 const doorTypes = [
   {
@@ -52,7 +57,7 @@ const DoorsPage = () => {
 
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #3A2518)" }}>
         <div className="absolute inset-0 opacity-15">
-          <img src={doorHero} alt="" className="w-full h-full object-cover" />
+          <img src={doorReal2} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="container mx-auto section-padding relative z-10">
           <AnimatedSection>
@@ -101,32 +106,25 @@ const DoorsPage = () => {
       <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
           <AnimatedSection>
-            <div className="grid lg:grid-cols-2 gap-10 items-center">
-              <div className="rounded-xl overflow-hidden">
-                <img src={portfolio4} alt="Установка двери" className="w-full h-80 object-cover" />
-              </div>
-              <div>
-                <SectionLabel>Характеристики</SectionLabel>
-                <h2 className="text-3xl text-display mb-6">Почему двери ПВХ?</h2>
-                <div className="flex flex-col gap-4">
-                  {[
-                    { title: "Теплоизоляция", desc: "Многокамерный профиль сохраняет тепло в доме" },
-                    { title: "Безопасность", desc: "Многоточечная система запирания и стальное армирование" },
-                    { title: "Долговечность", desc: "ПВХ не ржавеет, не гниёт и не требует покраски" },
-                    { title: "Дизайн", desc: "Широкий выбор ламинации — от белого до дерева" },
-                  ].map((item) => (
-                    <div key={item.title} className="flex gap-3">
-                      <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                      <div>
-                        <div className="font-bold text-sm">{item.title}</div>
-                        <div className="text-sm text-muted-foreground">{item.desc}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <SectionLabel>Примеры работ</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-10">Наши установленные двери</h2>
           </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { src: doorReal1, alt: "Раздвижная балконная дверь" },
+              { src: doorReal3, alt: "Входная дверь зелёная ПВХ" },
+              { src: doorReal4, alt: "Входная группа магазина" },
+              { src: doorReal5, alt: "Белая входная дверь ПВХ" },
+              { src: doorReal6, alt: "Дверь с ламинацией под дерево" },
+              { src: doorReal7, alt: "Входная дверь с боковой створкой" },
+            ].map((img, i) => (
+              <AnimatedSection key={i} delay={i * 0.08}>
+                <div className="rounded-xl overflow-hidden">
+                  <img src={img.src} alt={img.alt} className="w-full h-72 object-cover hover:scale-105 transition-transform duration-300" />
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 
