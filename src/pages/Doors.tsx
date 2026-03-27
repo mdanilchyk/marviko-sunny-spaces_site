@@ -109,7 +109,7 @@ const DoorsPage = () => {
             <SectionLabel>Примеры работ</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Наши установленные двери</h2>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="columns-2 lg:columns-3 gap-4 space-y-4">
             {[
               { src: doorReal1, alt: "Раздвижная балконная дверь" },
               { src: doorReal3, alt: "Входная дверь зелёная ПВХ" },
@@ -119,8 +119,8 @@ const DoorsPage = () => {
               { src: doorReal7, alt: "Входная дверь с боковой створкой" },
             ].map((img, i) => (
               <AnimatedSection key={i} delay={i * 0.08}>
-                <div className="rounded-xl overflow-hidden">
-                  <img src={img.src} alt={img.alt} className="w-full h-72 object-cover hover:scale-105 transition-transform duration-300" />
+                <div className="rounded-xl overflow-hidden break-inside-avoid">
+                  <img src={img.src} alt={img.alt} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-300" />
                 </div>
               </AnimatedSection>
             ))}
