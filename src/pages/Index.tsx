@@ -12,6 +12,9 @@ import heroImg from "@/assets/hero-interior.jpg";
 import serviceWindows from "@/assets/service-windows.jpg";
 import serviceBalconies from "@/assets/service-balconies.jpg";
 import serviceDoors from "@/assets/service-doors.jpg";
+import servicePartitions from "@/assets/partitions-real-1.jpg";
+import serviceWindowsills from "@/assets/windowsill-real-1.jpg";
+import serviceWindowWork from "@/assets/window-work-3.jpg";
 
 import workWindowOpen from "@/assets/work-window-open.jpg";
 import workWindowTrees from "@/assets/work-window-trees.jpg";
@@ -44,6 +47,27 @@ const categories = [
     img: serviceDoors,
     link: "/doors",
     price: "от 650 BYN",
+  },
+  {
+    title: "Перегородки ПВХ",
+    description: "Зонирование офисов, школ и коммерческих помещений",
+    img: servicePartitions,
+    link: "/partitions",
+    price: "по запросу",
+  },
+  {
+    title: "Подоконники",
+    description: "Стандартные и премиум. Глянцевые, матовые, под камень и дерево",
+    img: serviceWindowsills,
+    link: "/windowsills",
+    price: "от 35 BYN",
+  },
+  {
+    title: "Остекление объектов",
+    description: "Магазины, офисы, многоквартирные дома — под ключ",
+    img: serviceWindowWork,
+    link: "/windows",
+    price: "по запросу",
   },
 ];
 
