@@ -945,6 +945,22 @@ const Index = () => {
               </div>
             </AnimatedSection>
           </div>
+
+          {/* Map */}
+          <AnimatedSection delay={0.3}>
+            <h3 className="font-bold text-xl mt-10 mb-4">Мы на карте</h3>
+            <iframe
+              src="https://www.google.com/maps?q=Червень,+площадь+Свободы,+32&output=embed"
+              width="100%"
+              height="400"
+              className="rounded-xl"
+              style={{ border: "none" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Карта — г. Червень, пл. Свободы, 32"
+            />
+          </AnimatedSection>
         </div>
       </section>
 
