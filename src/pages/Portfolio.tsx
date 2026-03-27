@@ -21,12 +21,12 @@ import workDoorGlass from "@/assets/work-door-glass.jpg";
 import workWindowFireplace from "@/assets/work-window-fireplace.jpg";
 
 import partitionsOffice from "@/assets/partitions-office.jpg";
-import windowsillWood from "@/assets/windowsill-wood.jpg";
-import windowsillWenge from "@/assets/windowsill-wenge.jpg";
-import windowsillOrange from "@/assets/windowsill-orange.jpg";
-import windowsillBeige from "@/assets/windowsill-beige.jpg";
-import windowsillGreen from "@/assets/windowsill-green.jpg";
-import windowsillMarble from "@/assets/windowsill-marble.jpg";
+import windowsillReal1 from "@/assets/windowsill-real-1.jpg";
+import windowsillReal2 from "@/assets/windowsill-real-2.jpg";
+import windowsillReal3 from "@/assets/windowsill-real-3.jpg";
+import windowsillReal4 from "@/assets/windowsill-real-4.jpg";
+import windowsillReal5 from "@/assets/windowsill-real-5.jpg";
+import windowsillReal6 from "@/assets/windowsill-real-6.jpg";
 
 const projects = [
   { img: workWindowOpen, title: "Установка окон в загородном доме", category: "Окна" },
@@ -42,12 +42,12 @@ const projects = [
   { img: portfolio5, title: "Окна на кухне", category: "Окна" },
   { img: portfolio6, title: "Остекление офиса", category: "Окна" },
   { img: partitionsOffice, title: "Офисные перегородки из ПВХ", category: "Перегородки" },
-  { img: windowsillWood, title: "Подоконник под дерево", category: "Подоконники" },
-  { img: windowsillWenge, title: "Премиум подоконник венге", category: "Подоконники" },
-  { img: windowsillOrange, title: "Яркий цветной подоконник", category: "Подоконники" },
-  { img: windowsillBeige, title: "Светлый подоконник у балконной двери", category: "Подоконники" },
-  { img: windowsillGreen, title: "Подоконник салатовый глянец", category: "Подоконники" },
-  { img: windowsillMarble, title: "Подоконник под мрамор премиум", category: "Подоконники" },
+  { img: windowsillReal1, title: "Глянцевый подоконник под дерево", category: "Подоконники" },
+  { img: windowsillReal2, title: "Подоконник под мрамор с цветком", category: "Подоконники" },
+  { img: windowsillReal3, title: "Подоконник салатовый глянец", category: "Подоконники" },
+  { img: windowsillReal4, title: "Сиреневый глянцевый подоконник", category: "Подоконники" },
+  { img: windowsillReal5, title: "Подоконник под белый мрамор", category: "Подоконники" },
+  { img: windowsillReal6, title: "Подоконник в цвет интерьера", category: "Подоконники" },
 ];
 
 const filters = ["Все", "Окна", "Балконы", "Двери", "Перегородки", "Подоконники"];
