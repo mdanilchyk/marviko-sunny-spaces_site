@@ -16,12 +16,12 @@ import servicePartitions from "@/assets/partitions-real-1.jpg";
 import serviceWindowsills from "@/assets/windowsill-real-1.jpg";
 import serviceWindowWork from "@/assets/service-objects.jpg";
 
-import workWindowOpen from "@/assets/work-window-open.jpg";
-import workWindowTrees from "@/assets/work-window-trees.jpg";
 import workHouseExterior from "@/assets/work-house-exterior.jpg";
-import workDoorBrown from "@/assets/work-door-brown.jpg";
-import workDoorGlass from "@/assets/work-door-glass.jpg";
-import workWindowFireplace from "@/assets/work-window-fireplace.jpg";
+import workWindowsillGreen from "@/assets/work-windowsill-green.jpg";
+import workDoorBlinds from "@/assets/work-door-blinds.jpg";
+import workShopWindows from "@/assets/work-shop-windows.jpg";
+import workShopDoor from "@/assets/work-shop-door.jpg";
+import workFireplaceDoor from "@/assets/work-fireplace-door.jpg";
 
 import certSpk1 from "@/assets/cert-spk-1.jpg";
 import certSpk2 from "@/assets/cert-spk-2.jpg";
@@ -137,12 +137,12 @@ const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | 
 };
 
 const portfolioItems = [
-  { img: workWindowOpen, title: "Установка окон в загородном доме" },
-  { img: workWindowTrees, title: "Окна с видом на сад" },
+  { img: workShopWindows, title: "Остекление коммерческого объекта" },
+  { img: workFireplaceDoor, title: "Окна в интерьере с камином" },
   { img: workHouseExterior, title: "Остекление частного дома" },
-  { img: workDoorBrown, title: "Входная дверь ПВХ" },
-  { img: workDoorGlass, title: "Дверь со стеклопакетом" },
-  { img: workWindowFireplace, title: "Окна в интерьере" },
+  { img: workDoorBlinds, title: "Дверь ПВХ со встроенными жалюзи" },
+  { img: workShopDoor, title: "Входная группа магазина" },
+  { img: workWindowsillGreen, title: "Подоконник с видом на природу" },
 ];
 
 const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
