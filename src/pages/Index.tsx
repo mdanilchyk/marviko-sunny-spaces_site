@@ -48,6 +48,27 @@ const categories = [
     link: "/doors",
     price: "от 650 BYN",
   },
+  {
+    title: "Перегородки ПВХ",
+    description: "Зонирование офисов, школ и коммерческих помещений",
+    img: servicePartitions,
+    link: "/partitions",
+    price: "по запросу",
+  },
+  {
+    title: "Подоконники",
+    description: "Стандартные и премиум. Глянцевые, матовые, под камень и дерево",
+    img: serviceWindowsills,
+    link: "/windowsills",
+    price: "от 35 BYN",
+  },
+  {
+    title: "Остекление объектов",
+    description: "Магазины, офисы, многоквартирные дома — под ключ",
+    img: serviceWindowWork,
+    link: "/windows",
+    price: "по запросу",
+  },
 ];
 
 const whyUs = [
