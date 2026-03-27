@@ -14,7 +14,7 @@ import serviceBalconies from "@/assets/service-balconies.jpg";
 import serviceDoors from "@/assets/service-doors.jpg";
 import servicePartitions from "@/assets/partitions-real-1.jpg";
 import serviceWindowsills from "@/assets/windowsill-real-1.jpg";
-import serviceWindowWork from "@/assets/window-work-3.jpg";
+import serviceWindowWork from "@/assets/service-objects.jpg";
 
 import workWindowOpen from "@/assets/work-window-open.jpg";
 import workWindowTrees from "@/assets/work-window-trees.jpg";
