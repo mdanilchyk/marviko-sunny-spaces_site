@@ -5,8 +5,13 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
-import doorHero from "@/assets/door-hero.jpg";
-import portfolio4 from "@/assets/portfolio-4.jpg";
+import doorReal1 from "@/assets/door-real-1.jpg";
+import doorReal2 from "@/assets/door-real-2.jpg";
+import doorReal3 from "@/assets/door-real-3.jpg";
+import doorReal4 from "@/assets/door-real-4.jpg";
+import doorReal5 from "@/assets/door-real-5.jpg";
+import doorReal6 from "@/assets/door-real-6.jpg";
+import doorReal7 from "@/assets/door-real-7.jpg";
 
 const doorTypes = [
   {
