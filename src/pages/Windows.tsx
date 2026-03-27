@@ -219,6 +219,25 @@ const WindowsPage = () => {
         </div>
       </section>
 
+      {/* Work examples */}
+      <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
+        <div className="container mx-auto section-padding">
+          <AnimatedSection>
+            <SectionLabel>Портфолио</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-10">Примеры работ</h2>
+          </AnimatedSection>
+          <div className="columns-2 lg:columns-3 gap-6 space-y-6">
+            {workPhotos.map((photo, i) => (
+              <AnimatedSection key={i} delay={i * 0.08}>
+                <div className="break-inside-avoid rounded-xl overflow-hidden card-shadow">
+                  <img src={photo.img} alt={photo.title} className="w-full h-auto" />
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
