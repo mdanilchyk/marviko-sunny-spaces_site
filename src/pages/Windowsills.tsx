@@ -145,7 +145,7 @@ const WindowsillsPage = () => {
                   className="w-full rounded-xl object-cover"
                   style={{ aspectRatio: "16/9" }}
                 />
-                <p className="text-[13px] text-muted-foreground mt-2">Каталог цветов Crystallit Premium</p>
+                <p className="text-[13px] text-muted-foreground mt-2">Каталог цветов премиум подоконников</p>
               </div>
             </AnimatedSection>
           </div>
