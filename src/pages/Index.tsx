@@ -273,7 +273,7 @@ const Index = () => {
               transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
             >
               <SectionLabel>Окна Марвико</SectionLabel>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-display mb-6 text-foreground">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.1] mb-6 text-foreground">
                 Тепло. Тишина.<br />Надёжность.
               </h1>
               <p className="text-lg mb-8 text-body text-muted-foreground">
