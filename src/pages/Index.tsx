@@ -292,7 +292,7 @@ const Index = () => {
   const certImages = [
     { img: certSpk1, title: "Свидетельство о технической компетентности" },
     { img: certSpk2, title: "Область технической компетентности" },
-    { img: svidetelstvoImg, title: "Свидетельство о государственной регистрации" },
+    { img: svidetelstvoImg, title: "Сертификат соответствия Novotex Green 70 (действителен до 16.03.2028)" },
     { img: isoImg, title: "Сертификат соответствия СТБ ISO 9001-2015 (действителен до 14.05.2026)" },
   ];
 
