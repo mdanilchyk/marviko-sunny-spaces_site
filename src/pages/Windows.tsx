@@ -68,6 +68,8 @@ const accessories = [
 ];
 
 const WindowsPage = () => {
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
