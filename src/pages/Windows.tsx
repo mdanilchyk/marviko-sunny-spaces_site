@@ -99,7 +99,7 @@ const WindowsPage = () => {
               {windowTypes.map((t) => (
                 <span
                   key={t}
-                  className="inline-block rounded-full font-semibold"
+                  className="inline-block rounded-full select-none cursor-default"
                   style={{ backgroundColor: "#FDF3EC", color: "#C8441A", padding: "6px 16px", fontSize: "13px", fontWeight: 600 }}
                 >
                   {t}
