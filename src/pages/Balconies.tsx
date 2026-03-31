@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
+import OrderModal from "@/components/OrderModal";
 import balconyHero from "@/assets/balcony-hero.jpg";
 import portfolio2 from "@/assets/portfolio-2.jpg";
 
@@ -21,9 +23,11 @@ const options = [
 ];
 
 const BalconiesPage = () => {
+  const [orderModal, setOrderModal] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar onOrderClick={() => setOrderModal(true)} />
 
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #243A2A)" }}>
         <div className="absolute inset-0 opacity-20">
@@ -72,7 +76,10 @@ const BalconiesPage = () => {
                       </li>
                     ))}
                   </ul>
-                  <button className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl font-semibold hover:opacity-90 transition-all duration-200 text-base">
+                  <button
+                    onClick={() => setOrderModal(true)}
+                    className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl font-semibold hover:opacity-90 transition-all duration-200 text-base"
+                  >
                     Заказать расчёт
                   </button>
                 </div>
@@ -116,6 +123,8 @@ const BalconiesPage = () => {
       </section>
 
       <Footer />
+
+      <OrderModal open={orderModal} onClose={() => setOrderModal(false)} subject="Заказ расчёта балкона — сайт Марвико" />
     </div>
   );
 };

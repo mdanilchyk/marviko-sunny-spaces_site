@@ -273,6 +273,8 @@ const WindowsPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <OrderModal open={orderModal} onClose={() => setOrderModal(false)} subject="Заказ окна — сайт Марвико" />
     </div>
   );
 };
