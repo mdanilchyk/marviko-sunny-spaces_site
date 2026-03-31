@@ -1024,8 +1024,8 @@ const Index = () => {
               { icon: <MapPin className="w-6 h-6" />, title: "Офис", value: "г. Червень, пл. Свободы, 32, к. 206", href: undefined },
               { icon: <MapPin className="w-6 h-6" />, title: "Производство", value: "г. Червень, ул. Ленинская, 49", href: undefined },
             ].map((contact, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 text-center border border-border hover:border-primary">
+              <AnimatedSection key={i} delay={i * 0.12} variant="slide-up">
+                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 text-center border border-border hover:border-primary">
                   <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary mb-4 mx-auto">
                     {contact.icon}
                   </div>
