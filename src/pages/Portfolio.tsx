@@ -99,11 +99,8 @@ const PortfolioPage = () => {
                   className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]"
                   onClick={() => setLightbox(i)}
                 >
-                  <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: "rgba(217,79,30,0.70)" }}>
-                    <Eye className="w-8 h-8 text-primary-foreground mb-2" />
-                    <span className="text-primary-foreground text-sm font-semibold text-center px-3">{project.title}</span>
-                  </div>
+                  <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                 </div>
               </AnimatedSection>
             ))}

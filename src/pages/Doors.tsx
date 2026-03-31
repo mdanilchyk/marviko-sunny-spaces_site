@@ -127,11 +127,8 @@ const DoorsPage = () => {
                   onClick={() => setLightbox(i)}
                 >
                   <div className="relative">
-                    <img src={img.src} alt={img.alt} className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-primary/70">
-                      <Eye className="w-8 h-8 text-primary-foreground mb-2" />
-                      <span className="text-primary-foreground text-sm font-semibold text-center px-3">{img.alt}</span>
-                    </div>
+                    <img src={img.src} alt={img.alt} className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                   </div>
                 </div>
               </AnimatedSection>
