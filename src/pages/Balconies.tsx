@@ -102,7 +102,7 @@ const BalconiesPage = () => {
                   {[
                     { label: "Площадь", value: "6 м²" },
                     { label: "Срок", value: "3 дня" },
-                    { label: "Профиль", value: "Montblanc" },
+                    { label: "Профиль", value: "Novotex" },
                     { label: "Стоимость", value: "2 400 BYN" },
                   ].map((stat) => (
                     <div key={stat.label} className="bg-card rounded-lg p-4 card-shadow">
