@@ -30,12 +30,12 @@ const profiles = [
     width: "58 мм",
     glass: "Двухкамерный 32 мм",
     prices: [
-      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "302 BYN", furniture: "Winkhaus" },
-      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "395 BYN", furniture: "Winkhaus" },
-      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "535 BYN", furniture: "Winkhaus" },
-      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "590 BYN", furniture: "Winkhaus" },
+      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "302 BYN", furniture: "Accado UPT" },
+      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "395 BYN", furniture: "Accado UPT" },
+      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "535 BYN", furniture: "Accado UPT" },
+      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "590 BYN", furniture: "Accado UPT" },
     ],
-    features: ["Базовая теплоизоляция", "Белый профиль", "Немецкая фурнитура Winkhaus"],
+    features: ["Базовая теплоизоляция", "Белый профиль", "Фурнитура Accado UPT"],
   },
   {
     chambers: "5 камер",
