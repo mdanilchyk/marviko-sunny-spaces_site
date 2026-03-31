@@ -145,6 +145,16 @@ const Footer = () => {
                 +375 (29) 567-77-56
               </a>
               <a
+                href="tel:+375296828568"
+                className="flex items-center gap-3 text-sm transition-colors duration-200"
+                style={{ color: "hsl(0 0% 60%)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(0 0% 60%)")}
+              >
+                <Phone className="w-4 h-4 shrink-0" />
+                +375 (29) 682-85-68 (директор)
+              </a>
+              <a
                 href="mailto:vladdani777@gmail.com"
                 className="flex items-center gap-3 text-sm transition-colors duration-200"
                 style={{ color: "hsl(0 0% 60%)" }}
