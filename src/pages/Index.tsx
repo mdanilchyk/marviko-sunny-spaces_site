@@ -25,6 +25,8 @@ import workFireplaceDoor from "@/assets/work-fireplace-door.jpg";
 
 import certSpk1 from "@/assets/cert-spk-1.jpg";
 import certSpk2 from "@/assets/cert-spk-2.jpg";
+import svidetelstvoImg from "@/assets/cert-svidetelstvo.jpg";
+import isoImg from "@/assets/cert-iso-9001.jpg";
 
 const categories = [
   {
@@ -86,15 +88,41 @@ const processSteps = [
 ];
 
 const reviews = [
-  { name: "Анна К.", text: "Отличные окна! Стало намного теплее и тише. Ребята работали аккуратно, всё убрали за собой.", rating: 5 },
-  { name: "Игорь М.", text: "Заказывал остекление балкона. Сделали быстро, качественно. Цена приятно удивила.", rating: 5 },
-  { name: "Елена В.", text: "Установили входную дверь ПВХ. Выглядит стильно, держит тепло. Рекомендую!", rating: 5 },
+  {
+    type: "messenger" as const,
+    name: "Екатерина",
+    date: "10 окт. 2025",
+    text: "Спасибо вашему мастеру за окна — работа огонь! Очень красиво всё сделал. Ему надо отдельно от зарплаты хорошую премию выдавать — один сделал такую работу, благодарность надо писать!",
+    rating: 5,
+  },
+  {
+    type: "messenger" as const,
+    name: "Наталия Дубовик",
+    date: "вчера",
+    text: "Хочу сказать Вашей команде большое спасибо — как классно Вы работаете, как всё чётко и красиво. Когда звонишь — очень приятно разговаривать, всегда всё объясните, расскажете, поможете, не завышаете цены. Спасибо Вам огромное!",
+    rating: 5,
+  },
+  {
+    type: "messenger" as const,
+    name: "Боброви С",
+    date: "",
+    text: "Долго выбирала, где заказать окна и двери, чтобы цена и качество соответствовали запросам. Выбрала ООО «Марвико» и не прогадала! Очень довольна результатом. Окна и двери отличные, проверены временем. Спасибо за профессионализм и слаженную работу. Рекомендую тем, кто сомневается в выборе.",
+    rating: 5,
+  },
+  {
+    type: "official" as const,
+    name: "ООО «Рентал Трейд»",
+    position: "Директор Н.В. Кривоносова",
+    date: "февраль 2026",
+    text: "Обратились с заявкой об установке двери ПВХ. Хотим выразить благодарность за дверь и за её качественный монтаж. Дверь установлена идеально и быстро, отлично выглядит, очень хорошо вписалась в наш интерьер.",
+    rating: 5,
+  },
 ];
 
 const faqData = [
   { q: "Какие профили вы используете?", a: "Мы работаем с проверенными профильными системами. Все профили сертифицированы и адаптированы для климата Беларуси." },
   { q: "Сколько времени занимает установка?", a: "Стандартная установка окна занимает от 2 до 4 часов. Остекление балкона — 1 рабочий день." },
-  { q: "Есть ли гарантия?", a: "Да, мы предоставляем гарантию 10 лет на профиль, 5 лет на фурнитуру и 3 года на монтажные работы." },
+  { q: "Есть ли гарантия?", a: "Да, мы предоставляем гарантию 10 лет на профиль, 5 лет на монтажные работы и фурнитуру." },
   { q: "Вы работаете за пределами Червеня?", a: "Да, мы выполняем заказы по всей Минской области и за её пределами. Выезд замерщика бесплатный." },
   { q: "Можно ли установить окна зимой?", a: "Да, современные технологии монтажа позволяют устанавливать окна при температуре до -15°C." },
   { q: "Занимаетесь ли вы остеклением частных домов и дач?", a: "Да, мы предлагаем остекление для загородных домов, коттеджей, дачных домов. Готовы выполнить остекление балкона, веранды или террасы. У нас вы можете заказать остекление для беседки или теплицы. Предлагаем холодное и теплое остекление — в зависимости от ваших потребностей." },
@@ -102,12 +130,12 @@ const faqData = [
 ];
 
 const accessories = [
-  { emoji: "🪲", title: "Москитные сетки", desc: "Внутренние и наружные. Изготавливаем под размер вашего окна" },
+  { emoji: "🦟", title: "Москитные сетки", desc: "Внутренние и наружные. Изготавливаем под размер вашего окна" },
   { emoji: "🔧", title: "Ручки и замки", desc: "Замена и установка ручек, замков, фурнитуры" },
   { emoji: "🪟", title: "Стеклопакеты", desc: "Замена стеклопакетов без демонтажа рамы" },
-  { emoji: "🛡️", title: "Детские замки", desc: "Защита от открывания ребёнком. Устанавливается на любое окно" },
+  { emoji: "🔒", title: "Детские замки", desc: "Защита от открывания ребёнком. Устанавливается на любое окно" },
   { emoji: "🏠", title: "Отливы и доборы", desc: "Отливы и доборные элементы для кровель из оцинкованной стали" },
-  { emoji: "🪜", title: "Подоконники", desc: "Стандартные и премиум подоконники. Глянцевые, матовые, под камень и дерево" },
+  { emoji: "📏", title: "Подоконники", desc: "Стандартные и премиум подоконники. Глянцевые, матовые, под камень и дерево" },
 ];
 const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | "balcony"; title: string; size: string; opening: string; glass: string; furniture: string; price: string; featured: boolean }[]> = {
   novotex58: [
@@ -253,6 +281,8 @@ const Index = () => {
   const certImages = [
     { img: certSpk1, title: "Свидетельство о технической компетентности" },
     { img: certSpk2, title: "Область технической компетентности" },
+    { img: svidetelstvoImg, title: "Свидетельство о государственной регистрации" },
+    { img: isoImg, title: "Сертификат соответствия СТБ ISO 9001-2015 (действителен до 14.05.2026)" },
   ];
 
   return (
@@ -273,7 +303,7 @@ const Index = () => {
               transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
             >
               <SectionLabel>Окна Марвико</SectionLabel>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-display mb-6 text-foreground">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.1] mb-6 text-foreground">
                 Тепло. Тишина.<br />Надёжность.
               </h1>
               <p className="text-lg mb-8 text-body text-muted-foreground">
@@ -650,23 +680,46 @@ const Index = () => {
             <SectionLabel>Отзывы</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Что говорят клиенты</h2>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {reviews.map((review, i) => (
               <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="bg-card rounded-xl p-6 card-shadow">
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: review.rating }).map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-accent text-accent" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-body mb-4 text-muted-foreground">"{review.text}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
-                      {review.name[0]}
+                {review.type === "messenger" ? (
+                  <div className="bg-muted rounded-2xl rounded-tl-sm p-5 relative h-full flex flex-col">
+                    <div className="flex items-center gap-2 mb-3">
+                      {/* Viber icon */}
+                      <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-primary-foreground" style={{ backgroundColor: "#7360F2" }}>V</span>
+                      <span className="font-bold text-sm">{review.name}</span>
                     </div>
-                    <span className="font-semibold text-sm">{review.name}</span>
+                    <div className="flex gap-0.5 mb-2">
+                      {Array.from({ length: review.rating }).map((_, j) => (
+                        <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-body text-foreground flex-1">{review.text}</p>
+                    {review.date && (
+                      <p className="text-[11px] text-muted-foreground text-right mt-3">{review.date}</p>
+                    )}
                   </div>
-                </div>
+                ) : (
+                  <div className="bg-card rounded-xl p-5 border-2 border-primary h-full flex flex-col">
+                    <div className="flex items-center gap-2 mb-3">
+                      <FileText className="w-5 h-5 text-primary" />
+                      <div>
+                        <span className="font-bold text-sm block">{review.name}</span>
+                        {"position" in review && <span className="text-xs text-muted-foreground">{review.position}</span>}
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5 mb-2">
+                      {Array.from({ length: review.rating }).map((_, j) => (
+                        <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-body text-muted-foreground flex-1">{review.text}</p>
+                    {review.date && (
+                      <p className="text-xs text-muted-foreground mt-3">{review.date}</p>
+                    )}
+                  </div>
+                )}
               </AnimatedSection>
             ))}
           </div>
