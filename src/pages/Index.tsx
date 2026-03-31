@@ -428,7 +428,7 @@ const Index = () => {
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat, i) => (
-              <AnimatedSection key={cat.title} delay={i * 0.1}>
+              <AnimatedSection key={cat.title} delay={i * 0.12} variant="scale">
                 <Link
                   to={cat.link}
                   className="block rounded-xl overflow-hidden bg-card border border-border hover:border-primary card-shadow hover:card-shadow-hover transition-all duration-300 group"
