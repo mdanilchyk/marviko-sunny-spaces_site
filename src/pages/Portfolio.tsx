@@ -6,14 +6,6 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 
-import portfolio1 from "@/assets/portfolio-1.jpg";
-import portfolio2 from "@/assets/portfolio-2.jpg";
-import portfolio3 from "@/assets/portfolio-3.jpg";
-import portfolio4 from "@/assets/portfolio-4.jpg";
-import portfolio5 from "@/assets/portfolio-5.jpg";
-import portfolio6 from "@/assets/portfolio-6.jpg";
-
-import partitionsOffice from "@/assets/partitions-office.jpg";
 import windowsillReal1 from "@/assets/windowsill-real-1.jpg";
 import windowsillReal2 from "@/assets/windowsill-real-2.jpg";
 import windowsillReal3 from "@/assets/windowsill-real-3.jpg";
@@ -22,13 +14,6 @@ import windowsillReal5 from "@/assets/windowsill-real-5.jpg";
 import windowsillReal6 from "@/assets/windowsill-real-6.jpg";
 
 const projects = [
-  { img: portfolio1, title: "Установка окон в квартире", category: "Окна" },
-  { img: portfolio2, title: "Панорамное остекление балкона", category: "Балконы" },
-  { img: portfolio3, title: "Окна в спальне загородного дома", category: "Окна" },
-  { img: portfolio4, title: "Входная дверь ПВХ", category: "Двери" },
-  { img: portfolio5, title: "Окна на кухне", category: "Окна" },
-  { img: portfolio6, title: "Остекление офиса", category: "Окна" },
-  { img: partitionsOffice, title: "Офисные перегородки из ПВХ", category: "Перегородки" },
   { img: windowsillReal1, title: "Глянцевый подоконник под дерево", category: "Подоконники" },
   { img: windowsillReal2, title: "Подоконник под мрамор с цветком", category: "Подоконники" },
   { img: windowsillReal3, title: "Подоконник салатовый глянец", category: "Подоконники" },
