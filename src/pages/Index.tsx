@@ -284,6 +284,7 @@ const Index = () => {
   const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
   const [formSubmitted, setFormSubmitted] = useState({ contact: false, order: false });
   const [orderSending, setOrderSending] = useState(false);
+  const [portfolioLightbox, setPortfolioLightbox] = useState<number | null>(null);
   const [ctaForm, setCtaForm] = useState({ name: "", phone: "" });
   const [ctaErrors, setCtaErrors] = useState({ name: false, phone: false });
   const [ctaSending, setCtaSending] = useState(false);
