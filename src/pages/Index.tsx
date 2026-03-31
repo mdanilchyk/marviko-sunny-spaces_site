@@ -5,7 +5,7 @@ import { Shield, Clock, Award, ThumbsUp, Star, ChevronDown, Eye, ArrowRight, Pho
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
-import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedSection, { ParallaxImage } from "@/components/AnimatedSection";
 
 
 import heroImg from "@/assets/hero-interior.jpg";
