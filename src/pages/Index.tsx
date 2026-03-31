@@ -694,48 +694,81 @@ const Index = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {reviews.map((review, i) => (
               <AnimatedSection key={i} delay={i * 0.1}>
-                {review.type === "messenger" ? (
-                  <div className="bg-muted rounded-2xl rounded-tl-sm p-5 relative h-full flex flex-col">
-                    <div className="flex items-center gap-2 mb-3">
-                      {/* Viber icon */}
-                      <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-primary-foreground" style={{ backgroundColor: "#7360F2" }}>V</span>
-                      <span className="font-bold text-sm">{review.name}</span>
-                    </div>
-                    <div className="flex gap-0.5 mb-2">
-                      {Array.from({ length: review.rating }).map((_, j) => (
-                        <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
-                      ))}
-                    </div>
-                    <p className="text-sm text-body text-foreground flex-1">{review.text}</p>
-                    {review.date && (
-                      <p className="text-[11px] text-muted-foreground text-right mt-3">{review.date}</p>
-                    )}
-                  </div>
-                ) : (
-                  <div className="bg-card rounded-xl p-5 border-2 border-primary h-full flex flex-col">
-                    <div className="flex items-center gap-2 mb-3">
-                      <FileText className="w-5 h-5 text-primary" />
-                      <div>
-                        <span className="font-bold text-sm block">{review.name}</span>
-                        {"position" in review && <span className="text-xs text-muted-foreground">{review.position}</span>}
+                <button
+                  onClick={() => setReviewModal(review.screenshot)}
+                  className="text-left w-full h-full"
+                >
+                  {review.type === "messenger" ? (
+                    <div className="bg-muted rounded-2xl rounded-tl-sm p-5 relative h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-primary-foreground" style={{ backgroundColor: "#7360F2" }}>V</span>
+                        <span className="font-bold text-sm">{review.name}</span>
                       </div>
+                      <div className="flex gap-0.5 mb-2">
+                        {Array.from({ length: review.rating }).map((_, j) => (
+                          <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
+                        ))}
+                      </div>
+                      <p className="text-sm text-body text-foreground flex-1">{review.text}</p>
+                      {review.date && (
+                        <p className="text-[11px] text-muted-foreground text-right mt-3">{review.date}</p>
+                      )}
+                      <p className="text-xs text-primary mt-2 flex items-center gap-1">
+                        <Eye className="w-3.5 h-3.5" /> Показать скриншот
+                      </p>
                     </div>
-                    <div className="flex gap-0.5 mb-2">
-                      {Array.from({ length: review.rating }).map((_, j) => (
-                        <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
-                      ))}
+                  ) : (
+                    <div className="bg-card rounded-xl p-5 border-2 border-primary h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
+                      <div className="flex items-center gap-2 mb-3">
+                        <FileText className="w-5 h-5 text-primary" />
+                        <div>
+                          <span className="font-bold text-sm block">{review.name}</span>
+                          {"position" in review && <span className="text-xs text-muted-foreground">{review.position}</span>}
+                        </div>
+                      </div>
+                      <div className="flex gap-0.5 mb-2">
+                        {Array.from({ length: review.rating }).map((_, j) => (
+                          <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
+                        ))}
+                      </div>
+                      <p className="text-sm text-body text-muted-foreground flex-1">{review.text}</p>
+                      {review.date && (
+                        <p className="text-xs text-muted-foreground mt-3">{review.date}</p>
+                      )}
+                      <p className="text-xs text-primary mt-2 flex items-center gap-1">
+                        <Eye className="w-3.5 h-3.5" /> Показать оригинал
+                      </p>
                     </div>
-                    <p className="text-sm text-body text-muted-foreground flex-1">{review.text}</p>
-                    {review.date && (
-                      <p className="text-xs text-muted-foreground mt-3">{review.date}</p>
-                    )}
-                  </div>
-                )}
+                  )}
+                </button>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Review screenshot modal */}
+      <AnimatePresence>
+        {reviewModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/80"
+            onClick={() => setReviewModal(null)}
+          >
+            <motion.img
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              src={reviewModal}
+              alt="Отзыв"
+              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Certificates - mosokna carousel style */}
       <section id="certificates" className="py-20 bg-background">
