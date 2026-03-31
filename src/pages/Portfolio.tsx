@@ -13,13 +13,6 @@ import portfolio4 from "@/assets/portfolio-4.jpg";
 import portfolio5 from "@/assets/portfolio-5.jpg";
 import portfolio6 from "@/assets/portfolio-6.jpg";
 
-import workWindowOpen from "@/assets/work-window-open.jpg";
-import workWindowTrees from "@/assets/work-window-trees.jpg";
-import workHouseExterior from "@/assets/work-house-exterior.jpg";
-import workDoorBrown from "@/assets/work-door-brown.jpg";
-import workDoorGlass from "@/assets/work-door-glass.jpg";
-import workWindowFireplace from "@/assets/work-window-fireplace.jpg";
-
 import partitionsOffice from "@/assets/partitions-office.jpg";
 import windowsillReal1 from "@/assets/windowsill-real-1.jpg";
 import windowsillReal2 from "@/assets/windowsill-real-2.jpg";
@@ -29,12 +22,6 @@ import windowsillReal5 from "@/assets/windowsill-real-5.jpg";
 import windowsillReal6 from "@/assets/windowsill-real-6.jpg";
 
 const projects = [
-  { img: workWindowOpen, title: "Установка окон в загородном доме", category: "Окна" },
-  { img: workWindowTrees, title: "Окна с видом на сад", category: "Окна" },
-  { img: workHouseExterior, title: "Остекление частного дома", category: "Окна" },
-  { img: workDoorBrown, title: "Входная дверь ПВХ", category: "Двери" },
-  { img: workDoorGlass, title: "Дверь со стеклопакетом", category: "Двери" },
-  { img: workWindowFireplace, title: "Окна в интерьере", category: "Окна" },
   { img: portfolio1, title: "Установка окон в квартире", category: "Окна" },
   { img: portfolio2, title: "Панорамное остекление балкона", category: "Балконы" },
   { img: portfolio3, title: "Окна в спальне загородного дома", category: "Окна" },
