@@ -46,6 +46,8 @@ const WindowsillsPage = () => {
   const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
   const [orderSending, setOrderSending] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const allGallery = [...galleryItems, { img: windowsillCatalog, caption: "Каталог цветов премиум подоконников" }];
 
   return (
     <div className="min-h-screen bg-background">
