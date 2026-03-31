@@ -656,7 +656,7 @@ const Index = () => {
       {/* Portfolio preview - real work photos */}
       <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="fade-right">
             <div className="flex items-end justify-between mb-10">
               <div>
                 <SectionLabel>Портфолио</SectionLabel>
