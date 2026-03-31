@@ -24,7 +24,7 @@ const workPhotos = [
 
 const profiles = [
   {
-    chambers: "4 камеры",
+    chambers: "3 камеры",
     width: "58 мм",
     glass: "Двухкамерный 32 мм",
     prices: [
