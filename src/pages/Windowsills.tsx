@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, ArrowRight, Phone, Send } from "lucide-react";
+import { Check, ArrowRight, Phone, Send, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
@@ -46,6 +46,8 @@ const WindowsillsPage = () => {
   const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
   const [orderSending, setOrderSending] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const allGallery = [...galleryItems, { img: windowsillCatalog, caption: "Каталог цветов премиум подоконников" }];
 
   return (
     <div className="min-h-screen bg-background">
@@ -122,30 +124,26 @@ const WindowsillsPage = () => {
             <SectionLabel>Фотогалерея</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Примеры наших подоконников</h2>
           </AnimatedSection>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {galleryItems.map((item, i) => (
               <AnimatedSection key={i} delay={i * 0.08}>
-                <div>
-                  <img
-                    src={item.img}
-                    alt={item.caption}
-                    className="w-full rounded-xl object-cover"
-                    style={{ aspectRatio: "4/3" }}
-                  />
-                  <p className="text-[13px] text-muted-foreground mt-2">{item.caption}</p>
+                <div
+                  className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]"
+                  onClick={() => setLightbox(i)}
+                >
+                  <img src={item.img} alt={item.caption} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                 </div>
               </AnimatedSection>
             ))}
-            {/* Catalog spans 2 columns */}
-            <AnimatedSection delay={0.5} className="sm:col-span-2 lg:col-span-2">
-              <div>
-                <img
-                  src={windowsillCatalog}
-                  alt="Каталог цветов премиум подоконников"
-                  className="w-full rounded-xl object-cover"
-                  style={{ aspectRatio: "16/9" }}
-                />
-                <p className="text-[13px] text-muted-foreground mt-2">Каталог цветов премиум подоконников</p>
+            {/* Catalog spans full width */}
+            <AnimatedSection delay={0.5} className="col-span-2 lg:col-span-3">
+              <div
+                className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[21/9]"
+                onClick={() => setLightbox(galleryItems.length)}
+              >
+                <img src={windowsillCatalog} alt="Каталог цветов премиум подоконников" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
               </div>
             </AnimatedSection>
           </div>
@@ -174,6 +172,32 @@ const WindowsillsPage = () => {
       </section>
 
       <Footer />
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
+            onClick={() => setLightbox(null)}
+          >
+            <button className="absolute top-6 right-6 text-white" onClick={() => setLightbox(null)}>
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              src={allGallery[lightbox]?.img}
+              alt={allGallery[lightbox]?.caption}
+              className="max-w-full max-h-[85vh] rounded-xl object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Order Modal */}
       <AnimatePresence>
