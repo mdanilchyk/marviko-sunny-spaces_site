@@ -686,7 +686,7 @@ const Index = () => {
       {/* Reviews */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="fade-left">
             <SectionLabel>Отзывы</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Что говорят клиенты</h2>
           </AnimatedSection>
