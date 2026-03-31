@@ -279,6 +279,8 @@ const Index = () => {
   const certImages = [
     { img: certSpk1, title: "Свидетельство о технической компетентности" },
     { img: certSpk2, title: "Область технической компетентности" },
+    { img: svidetelstvoImg, title: "Свидетельство о государственной регистрации" },
+    { img: isoImg, title: "Сертификат соответствия СТБ ISO 9001-2015 (действителен до 14.05.2026)" },
   ];
 
   return (
