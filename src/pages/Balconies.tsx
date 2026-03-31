@@ -46,33 +46,33 @@ const BalconiesPage = () => {
             <SectionLabel>Варианты</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Выберите решение</h2>
           </AnimatedSection>
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {options.map((opt, i) => (
-              <AnimatedSection key={opt.title} delay={i * 0.1}>
+              <AnimatedSection key={opt.title} delay={i * 0.15} variant="scale">
                 <div
-                  className="rounded-xl p-6 bg-card transition-shadow duration-300"
+                  className={`rounded-2xl p-8 bg-card transition-all duration-300 h-full flex flex-col ${opt.popular ? 'hover:-translate-y-2' : 'hover:-translate-y-1'}`}
                   style={{
                     boxShadow: opt.popular
-                      ? "0 0 0 2px hsl(var(--primary)), 0 4px 20px rgba(217,79,30,0.1)"
-                      : "0 0 0 1px hsl(var(--border))",
+                      ? "0 0 0 2.5px hsl(var(--primary)), 0 8px 30px rgba(217,79,30,0.15)"
+                      : "0 0 0 1px hsl(var(--border)), 0 4px 16px rgba(0,0,0,0.06)",
                   }}
                 >
                   {opt.popular && (
-                    <span className="inline-block bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full mb-4">
+                    <span className="inline-block bg-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full mb-5 self-start">
                       Популярный
                     </span>
                   )}
-                  <h3 className="text-xl font-bold mb-1">{opt.title}</h3>
-                  <div className="text-2xl font-extrabold text-accent mb-6">{opt.price}</div>
-                  <ul className="flex flex-col gap-2.5 mb-6">
+                  <h3 className="text-2xl font-bold mb-2">{opt.title}</h3>
+                  <div className="text-3xl font-extrabold text-accent mb-8">{opt.price}</div>
+                  <ul className="flex flex-col gap-3 mb-8 flex-1">
                     {opt.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2 text-sm">
-                        <Check className="w-4 h-4 text-primary shrink-0" />
+                      <li key={f} className="flex items-center gap-3 text-[15px]">
+                        <Check className="w-5 h-5 text-primary shrink-0" />
                         {f}
                       </li>
                     ))}
                   </ul>
-                  <button className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-200">
+                  <button className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl font-semibold hover:opacity-90 transition-all duration-200 text-base">
                     Заказать расчёт
                   </button>
                 </div>
