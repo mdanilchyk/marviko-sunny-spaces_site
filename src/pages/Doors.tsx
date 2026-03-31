@@ -142,6 +142,32 @@ const DoorsPage = () => {
 
       <Footer />
 
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
+            onClick={() => setLightbox(null)}
+          >
+            <button className="absolute top-6 right-6 text-primary-foreground" onClick={() => setLightbox(null)}>
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              src={galleryImages[lightbox]?.src}
+              alt={galleryImages[lightbox]?.alt}
+              className="max-w-full max-h-[85vh] rounded-xl object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Order Modal */}
       <AnimatePresence>
         {orderModal && (
