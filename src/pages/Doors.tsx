@@ -50,6 +50,16 @@ const DoorsPage = () => {
   const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
   const [orderSending, setOrderSending] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
+  const galleryImages = [
+    { src: doorReal1, alt: "Раздвижная балконная дверь" },
+    { src: doorReal3, alt: "Входная дверь зелёная ПВХ" },
+    { src: doorReal4, alt: "Входная группа магазина" },
+    { src: doorReal5, alt: "Белая входная дверь ПВХ" },
+    { src: doorReal6, alt: "Дверь с ламинацией под дерево" },
+    { src: doorReal7, alt: "Входная дверь с боковой створкой" },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
