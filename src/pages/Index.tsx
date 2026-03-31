@@ -836,7 +836,7 @@ const Index = () => {
       {/* Accessories section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="blur">
             <SectionLabel>Дополнительно</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Также устанавливаем и продаём</h2>
           </AnimatedSection>
