@@ -692,7 +692,7 @@ const Index = () => {
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {reviews.map((review, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
+              <AnimatedSection key={i} delay={i * 0.1} variant="fade-right">
                 <button
                   onClick={() => setReviewModal(review.screenshot)}
                   className="text-left w-full h-full"
