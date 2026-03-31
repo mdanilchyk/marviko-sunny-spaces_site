@@ -96,13 +96,13 @@ const BalconiesPage = () => {
                 <SectionLabel>Пример работы</SectionLabel>
                 <h2 className="text-3xl text-display mb-6">Тёплый балкон под ключ</h2>
                 <p className="text-body text-muted-foreground mb-6">
-                  Полное преображение балкона: остекление профилем Montblanc Eco 70, утепление пенополистиролом, отделка ПВХ-панелями, укладка ламината, монтаж электрики.
+                  Полное преображение балкона: остекление профилем Novotex 70, утепление пенополистиролом, отделка ПВХ-панелями, укладка ламината, монтаж электрики.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { label: "Площадь", value: "6 м²" },
                     { label: "Срок", value: "3 дня" },
-                    { label: "Профиль", value: "Montblanc" },
+                    { label: "Профиль", value: "Novotex" },
                     { label: "Стоимость", value: "2 400 BYN" },
                   ].map((stat) => (
                     <div key={stat.label} className="bg-card rounded-lg p-4 card-shadow">
