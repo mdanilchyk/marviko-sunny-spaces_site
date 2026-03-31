@@ -35,7 +35,7 @@ const profiles = [
       { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "535 BYN" },
       { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "590 BYN" },
     ],
-    features: ["Базовая теплоизоляция", "Белый профиль", "Фурнитура Accado UPT"],
+    features: ["Базовая теплоизоляция", "Белый профиль", "Фурнитура: Accado, UPT, MACO"],
   },
   {
     chambers: "5 камер",
