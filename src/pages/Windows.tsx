@@ -234,7 +234,7 @@ const WindowsPage = () => {
             {workPhotos.map((photo, i) => (
               <AnimatedSection key={i} delay={i * 0.08}>
                 <div
-                  className="rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]"
+                  className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]"
                   onClick={() => setLightbox(i)}
                 >
                   <img src={photo.img} alt={photo.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
