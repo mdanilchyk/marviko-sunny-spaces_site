@@ -274,10 +274,10 @@ const Index = () => {
             >
               <SectionLabel>Окна Марвико</SectionLabel>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl text-display mb-6 text-foreground">
-                Свет и тепло<br />вашего дома
+                Тепло. Тишина.<br />Надёжность.
               </h1>
               <p className="text-lg mb-8 text-body text-muted-foreground">
-                Производство и установка окон, дверей и балконов в Червене и Минской области. Работаем с 2007 года. Гарантия 10 лет.
+                Производим и устанавливаем окна, двери и балконы с 2007 года. Бесплатный замер, профессиональный монтаж, гарантия 10 лет.
               </p>
               <div className="flex flex-wrap gap-3">
                 <a href="tel:+375295677756" className="bg-primary text-primary-foreground px-7 py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200">
