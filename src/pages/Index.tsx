@@ -184,75 +184,94 @@ const portfolioItems = [
 ];
 
 const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
-  const frame = "#BDBAB4";
-  const frameOuter = "#A8A5A0";
-  const sw = 1.5;
+  const frameStroke = "#444";
+  const frameFill = "#FFFFFF";
+  const glassStroke = "#666";
+  const glassFill = "#D6EEF8";
+  const metalFill = "#888";
+  const diagStroke = "#444";
 
-  const SkyDefs = ({ id, glassY, glassH }: { id: string; glassY: number; glassH: number }) => (
-    <defs>
-      <linearGradient id={`sky-${id}`} x1="0" y1={glassY} x2="0" y2={glassY + glassH} gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#87CEEB" />
-        <stop offset="40%" stopColor="#B8D4E8" />
-        <stop offset="70%" stopColor="#D4E8F0" />
-        <stop offset="100%" stopColor="#E8F4F8" />
-      </linearGradient>
-    </defs>
-  );
+  const hinges = (x: number, y: number, h: number, count = 3) => {
+    const items = [];
+    const sp = h / (count + 1);
+    for (let i = 1; i <= count; i++) items.push(<rect key={i} x={x} y={y + sp * i - 5} width={6} height={10} fill={metalFill} rx={1} />);
+    return items;
+  };
+  const handle = (x: number, cy: number) => <rect x={x} y={cy - 10} width={5} height={20} fill={metalFill} rx={1} />;
+  const diags = (side: "left" | "right", sx: number, sy: number, sw: number, sh: number) => {
+    if (side === "left") return <g><line x1={sx} y1={sy + sh} x2={sx + sw} y2={sy} stroke={diagStroke} strokeWidth={1.3} /><line x1={sx} y1={sy} x2={sx + sw} y2={sy + sh / 2} stroke={diagStroke} strokeWidth={1.3} /></g>;
+    return <g><line x1={sx + sw} y1={sy + sh} x2={sx} y2={sy} stroke={diagStroke} strokeWidth={1.3} /><line x1={sx + sw} y1={sy} x2={sx} y2={sy + sh / 2} stroke={diagStroke} strokeWidth={1.3} /></g>;
+  };
 
+  if (type === "single") {
+    const vw = 100, vh = 130, pad = 6, gx = 10, gy = 10, gw = 80, gh = 110;
+    return (
+      <svg width="140" height="180" viewBox={`0 0 ${vw} ${vh}`}>
+        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill={frameFill} stroke={frameStroke} strokeWidth={2.5} />
+        <rect x={gx} y={gy} width={gw} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+        {hinges(gx + gw - 3, gy, gh, 3)}
+        {handle(gx + 2, gy + gh / 2)}
+        {diags("right", gx, gy, gw, gh)}
+      </svg>
+    );
+  }
 
-  if (type === "single") return (
-    <svg width="140" height="180" viewBox="0 0 120 180">
-      <SkyDefs id="s" glassY={16} glassH={148} />
-      <rect x="10" y="10" width="100" height="160" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
-      <rect x="16" y="16" width="88" height="148" rx="1" fill={`url(#sky-s)`} stroke={frame} strokeWidth={sw} />
-      
-      <line x1="88" y1="82" x2="88" y2="98" stroke={frame} strokeWidth={2} strokeLinecap="round" />
-      <path d="M60,158 L60,22 M56,28 L60,18 L64,28" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
-      <path d="M22,90 L98,90 M92,86 L102,90 L92,94" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
-    </svg>
-  );
+  if (type === "double") {
+    const vw = 160, vh = 130, pad = 6, impW = 5;
+    const ix = pad + 4, iy = pad + 4, tw = vw - 2 * pad - 8, gh = vh - 2 * pad - 8, hw = (tw - impW) / 2;
+    const rx = ix + hw + impW;
+    return (
+      <svg width="180" height="160" viewBox={`0 0 ${vw} ${vh}`}>
+        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill={frameFill} stroke={frameStroke} strokeWidth={2.5} />
+        <rect x={ix} y={iy} width={hw} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+        <rect x={ix + hw} y={pad} width={impW} height={vh - 2 * pad} fill={metalFill} />
+        <rect x={rx} y={iy} width={hw} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+        {hinges(ix, iy, gh, 3)}
+        {handle(ix + hw - 7, iy + gh / 2)}
+        {diags("left", ix, iy, hw, gh)}
+      </svg>
+    );
+  }
 
-  if (type === "double") return (
-    <svg width="180" height="160" viewBox="0 0 180 160">
-      <SkyDefs id="d" glassY={16} glassH={128} />
-      <rect x="10" y="10" width="160" height="140" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
-      <rect x="16" y="16" width="71" height="128" rx="1" fill={`url(#sky-d)`} stroke={frame} strokeWidth={sw} />
-      
-      <rect x="93" y="16" width="71" height="128" rx="1" fill={`url(#sky-d)`} stroke={frame} strokeWidth={sw} />
-      
-      <line x1="100" y1="72" x2="100" y2="88" stroke={frame} strokeWidth={2} strokeLinecap="round" />
-      <path d="M128,130 L128,22 M124,28 L128,18 L132,28" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
-      <path d="M99,80 L158,80 M152,76 L162,80 L152,84" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
-    </svg>
-  );
+  if (type === "triple") {
+    const vw = 220, vh = 130, pad = 6, impW = 5;
+    const ix = pad + 4, iy = pad + 4, tw = vw - 2 * pad - 8, gh = vh - 2 * pad - 8, thW = (tw - 2 * impW) / 3;
+    const cx = ix + thW + impW, rx = ix + 2 * (thW + impW);
+    return (
+      <svg width="180" height="160" viewBox={`0 0 ${vw} ${vh}`}>
+        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill={frameFill} stroke={frameStroke} strokeWidth={2.5} />
+        <rect x={ix} y={iy} width={thW} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+        <rect x={ix + thW} y={pad} width={impW} height={vh - 2 * pad} fill={metalFill} />
+        <rect x={cx} y={iy} width={thW} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+        <rect x={cx + thW} y={pad} width={impW} height={vh - 2 * pad} fill={metalFill} />
+        <rect x={rx} y={iy} width={thW} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+        {hinges(cx, iy, gh, 3)}
+        {handle(cx + thW - 7, iy + gh / 2)}
+        {diags("left", cx, iy, thW, gh)}
+      </svg>
+    );
+  }
 
-  if (type === "triple") return (
-    <svg width="180" height="160" viewBox="0 0 220 160">
-      <SkyDefs id="t" glassY={16} glassH={128} />
-      <rect x="10" y="10" width="200" height="140" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
-      <rect x="16" y="16" width="58" height="128" rx="1" fill={`url(#sky-t)`} stroke={frame} strokeWidth={sw} />
-      
-      <rect x="80" y="16" width="58" height="128" rx="1" fill={`url(#sky-t)`} stroke={frame} strokeWidth={sw} />
-      
-      <rect x="144" y="16" width="58" height="128" rx="1" fill={`url(#sky-t)`} stroke={frame} strokeWidth={sw} />
-      
-      <line x1="152" y1="72" x2="152" y2="88" stroke={frame} strokeWidth={2} strokeLinecap="round" />
-      <path d="M173,130 L173,22 M169,28 L173,18 L177,28" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
-      <path d="M150,80 L198,80 M192,76 L202,80 L192,84" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
-    </svg>
-  );
-
+  // balcony
+  const vw = 180, vh = 180, pad = 6, impW = 5, frmH = 4;
+  const ix = pad + 4, iy = pad + 4, tw = vw - 2 * pad - 8, th = vh - 2 * pad - 8;
+  const dw = tw * 0.45, ww = tw - dw - impW;
+  const dtH = th * (2 / 3) - frmH / 2, dbH = th * (1 / 3) - frmH / 2;
+  const wx = ix + dw + impW;
   return (
-    <svg width="180" height="160" viewBox="0 0 180 180">
-      <SkyDefs id="b" glassY={16} glassH={148} />
-      <rect x="10" y="10" width="64" height="160" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
-      <rect x="16" y="16" width="52" height="148" rx="1" fill={`url(#sky-b)`} stroke={frame} strokeWidth={sw} />
-      
-      <rect x="80" y="10" width="90" height="160" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
-      <rect x="86" y="16" width="78" height="92" rx="1" fill={`url(#sky-b)`} stroke={frame} strokeWidth={sw} />
-      
-      <rect x="86" y="114" width="78" height="50" rx="1" fill="rgba(189,186,180,0.15)" stroke={frame} strokeWidth={sw} />
-      <line x1="93" y1="90" x2="93" y2="106" stroke={frame} strokeWidth={2} strokeLinecap="round" />
+    <svg width="180" height="160" viewBox={`0 0 ${vw} ${vh}`}>
+      <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill={frameFill} stroke={frameStroke} strokeWidth={2.5} />
+      <rect x={ix} y={iy} width={dw} height={dtH} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+      <rect x={ix} y={iy + dtH} width={dw} height={frmH} fill={metalFill} />
+      <rect x={ix} y={iy + dtH + frmH} width={dw} height={dbH} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+      <rect x={ix + dw} y={pad} width={impW} height={vh - 2 * pad} fill={metalFill} />
+      <rect x={wx} y={iy} width={ww} height={th} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+      {hinges(ix, iy, dtH, 3)}
+      {handle(ix + dw - 7, iy + dtH / 2)}
+      {diags("left", ix, iy, dw, dtH)}
+      {hinges(ix, iy + dtH + frmH, dbH, 2)}
+      {handle(ix + dw - 7, iy + dtH + frmH + dbH / 2)}
+      {diags("left", ix, iy + dtH + frmH, dw, dbH)}
     </svg>
   );
 };
