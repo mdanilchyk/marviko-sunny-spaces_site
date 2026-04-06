@@ -294,8 +294,8 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
     );
   }
 
-  // balcony — door on LEFT (~47%), window on RIGHT (~53%, upper portion only)
-  const fw = 160, fh = 140;
+  // balcony — door on LEFT, window on RIGHT (upper portion only)
+  const fw = 140, fh = 140;
   const fx = (VW - fw) / 2, fy = (VH - fh) / 2;
   const impW = 3, frmH = 3;
   const gx = fx + depth, gy = fy + depth, totalGW = fw - 2 * depth, gh = fh - 2 * depth;
