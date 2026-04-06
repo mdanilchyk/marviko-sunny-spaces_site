@@ -299,8 +299,8 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
   const fx = (VW - fw) / 2, fy = (VH - fh) / 2;
   const impW = 3, frmH = 3;
   const gx = fx + depth, gy = fy + depth, totalGW = fw - 2 * depth, gh = fh - 2 * depth;
-  // Proportions from blueprint: door 700/1500 ≈ 47%, window 800/1500 ≈ 53%
-  const doorW = Math.round(totalGW * 0.47);
+  // Door narrower than window: ~38% door, ~62% window
+  const doorW = Math.round(totalGW * 0.38);
   const winW = totalGW - doorW - impW;
   // Door split: upper 67% (1400/2100), lower 33% (700/2100)
   const dtH = Math.round(gh * 0.67 - frmH / 2);
