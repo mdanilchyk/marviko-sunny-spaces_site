@@ -38,7 +38,7 @@ const BalconiesPage = () => {
             <SectionLabel>Балконы</SectionLabel>
             <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Остекление балконов и лоджий</h1>
             <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Холодное и тёплое остекление, отделка под ключ. Превратите балкон в уютное пространство.
+              Превратите балкон в уютное пространство.
             </p>
           </AnimatedSection>
         </div>
