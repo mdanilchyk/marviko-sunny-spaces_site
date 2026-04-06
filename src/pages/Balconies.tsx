@@ -6,7 +6,7 @@ import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import OrderModal from "@/components/OrderModal";
 import balconyHero from "@/assets/balcony-hero.jpg";
-import portfolio2 from "@/assets/portfolio-2.jpg";
+
 
 const options = [
   {
@@ -89,38 +89,6 @@ const BalconiesPage = () => {
         </div>
       </section>
 
-      {/* Example */}
-      <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
-        <div className="container mx-auto section-padding">
-          <AnimatedSection>
-            <div className="grid lg:grid-cols-2 gap-10 items-center">
-              <div>
-                <SectionLabel>Пример работы</SectionLabel>
-                <h2 className="text-3xl text-display mb-6">Тёплый балкон под ключ</h2>
-                <p className="text-body text-muted-foreground mb-6">
-                  Полное преображение балкона: остекление профилем Novotex 70, утепление пенополистиролом, отделка ПВХ-панелями, укладка ламината, монтаж электрики.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { label: "Площадь", value: "6 м²" },
-                    { label: "Срок", value: "3 дня" },
-                    { label: "Профиль", value: "Novotex" },
-                    { label: "Стоимость", value: "2 400 BYN" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="bg-card rounded-lg p-4 card-shadow">
-                      <div className="text-xs text-muted-foreground mb-1">{stat.label}</div>
-                      <div className="font-bold">{stat.value}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden">
-                <img src={portfolio2} alt="Остекление балкона" className="w-full h-80 object-cover" />
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
 
       <Footer />
 

@@ -110,7 +110,7 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
       <nav className="bg-card/95 backdrop-blur-md" style={{ boxShadow: "0 1px 0 0 hsl(var(--border))" }}>
         <div className="container mx-auto section-padding flex items-center justify-between h-[68px]">
           <Link to="/" className="flex items-center shrink-0">
-            <img src={logo} alt="Марвико — окна, двери, балконы" className="h-36 w-auto" />
+            <img src={logo} alt="Марвико — окна, двери, балконы" className="h-16 w-auto" />
           </Link>
 
           <div className="hidden lg:flex items-center gap-0.5">
