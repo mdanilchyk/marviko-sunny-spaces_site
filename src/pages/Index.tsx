@@ -175,21 +175,12 @@ const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | 
 };
 
 const portfolioItems = [
-  { img: workShopWindows, title: "Остекление коммерческого объекта", category: "windows" },
-  { img: workFireplaceDoor, title: "Окна в интерьере с камином", category: "windows" },
-  { img: workHouseExterior, title: "Остекление частного дома", category: "windows" },
-  { img: workDoorBlinds, title: "Дверь ПВХ со встроенными жалюзи", category: "doors" },
-  { img: workShopDoor, title: "Входная группа магазина", category: "doors" },
-  { img: workWindowsillGreen, title: "Подоконник с видом на природу", category: "windowsills" },
-];
-
-const portfolioTabs = [
-  { key: "all", label: "Все" },
-  { key: "windows", label: "Окна" },
-  { key: "balconies", label: "Балконы" },
-  { key: "doors", label: "Двери" },
-  { key: "partitions", label: "Перегородки" },
-  { key: "windowsills", label: "Подоконники" },
+  { img: workShopWindows, title: "Остекление коммерческого объекта" },
+  { img: workFireplaceDoor, title: "Окна в интерьере с камином" },
+  { img: workHouseExterior, title: "Остекление частного дома" },
+  { img: workDoorBlinds, title: "Дверь ПВХ со встроенными жалюзи" },
+  { img: workShopDoor, title: "Входная группа магазина" },
+  { img: workWindowsillGreen, title: "Подоконник с видом на природу" },
 ];
 
 const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
@@ -371,11 +362,6 @@ const Index = () => {
   const [formSubmitted, setFormSubmitted] = useState({ contact: false, order: false });
   const [orderSending, setOrderSending] = useState(false);
   const [portfolioLightbox, setPortfolioLightbox] = useState<number | null>(null);
-  const [portfolioFilter, setPortfolioFilter] = useState("all");
-
-  const filteredPortfolio = portfolioFilter === "all"
-    ? portfolioItems
-    : portfolioItems.filter(item => item.category === portfolioFilter);
   const [ctaForm, setCtaForm] = useState({ name: "", phone: "" });
   const [ctaErrors, setCtaErrors] = useState({ name: false, phone: false });
   const [ctaSending, setCtaSending] = useState(false);
@@ -762,24 +748,9 @@ const Index = () => {
               </Link>
             </div>
           </AnimatedSection>
-          <div className="flex flex-wrap gap-2 mb-8">
-            {portfolioTabs.map((tab) => (
-              <button
-                key={tab.key}
-                onClick={() => setPortfolioFilter(tab.key)}
-                className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                  portfolioFilter === tab.key
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card text-foreground card-shadow hover:card-shadow-hover"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredPortfolio.map((item, i) => (
-              <AnimatedSection key={item.title + portfolioFilter} delay={i * 0.1} variant="scale">
+            {portfolioItems.map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.1} variant="scale">
                 <div className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]" onClick={() => setPortfolioLightbox(i)}>
                   <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
@@ -1307,8 +1278,8 @@ const Index = () => {
             <motion.img
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
-              src={filteredPortfolio[portfolioLightbox]?.img}
-              alt={filteredPortfolio[portfolioLightbox]?.title}
+              src={portfolioItems[portfolioLightbox]?.img}
+              alt={portfolioItems[portfolioLightbox]?.title}
               className="max-w-full max-h-[85vh] rounded-xl object-contain"
               onClick={(e) => e.stopPropagation()}
             />

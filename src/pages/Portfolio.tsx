@@ -1,25 +1,68 @@
 import { useState } from "react";
-import { Eye, X } from "lucide-react";
+import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 
+// Windows
+import windowWork1 from "@/assets/window-work-1.jpg";
+import windowWork2 from "@/assets/window-work-2.jpg";
+import windowWork3 from "@/assets/window-work-3.jpg";
+import windowWork4 from "@/assets/window-work-4.jpg";
+import windowWork5 from "@/assets/window-work-5.jpg";
+import windowWork6 from "@/assets/window-work-6.jpg";
+
+// Doors
+import doorReal1 from "@/assets/door-real-1.jpg";
+import doorReal3 from "@/assets/door-real-3.jpg";
+import doorReal4 from "@/assets/door-real-4.jpg";
+import doorReal5 from "@/assets/door-real-5.jpg";
+import doorReal6 from "@/assets/door-real-6.jpg";
+import doorReal7 from "@/assets/door-real-7.jpg";
+
+// Partitions
+import partitionsOffice from "@/assets/partitions-office.jpg";
+import partitionsReal1 from "@/assets/partitions-real-1.jpg";
+
+// Windowsills
 import windowsillReal1 from "@/assets/windowsill-real-1.jpg";
 import windowsillReal2 from "@/assets/windowsill-real-2.jpg";
 import windowsillReal3 from "@/assets/windowsill-real-3.jpg";
 import windowsillReal4 from "@/assets/windowsill-real-4.jpg";
 import windowsillReal5 from "@/assets/windowsill-real-5.jpg";
 import windowsillReal6 from "@/assets/windowsill-real-6.jpg";
+import windowsillReal7 from "@/assets/windowsill-real-7.jpg";
+import windowsillReal8 from "@/assets/windowsill-real-8.jpg";
 
 const projects = [
+  // Окна
+  { img: windowWork1, title: "Установка окон в частном доме", category: "Окна" },
+  { img: windowWork2, title: "Окна в цветном профиле", category: "Окна" },
+  { img: windowWork3, title: "Остекление магазина", category: "Окна" },
+  { img: windowWork4, title: "Остекление многоквартирного дома", category: "Окна" },
+  { img: windowWork5, title: "Подоконник с окном", category: "Окна" },
+  { img: windowWork6, title: "Глянцевый подоконник", category: "Окна" },
+  // Двери
+  { img: doorReal1, title: "Раздвижная балконная дверь", category: "Двери" },
+  { img: doorReal3, title: "Входная дверь зелёная ПВХ", category: "Двери" },
+  { img: doorReal4, title: "Входная группа магазина", category: "Двери" },
+  { img: doorReal5, title: "Белая входная дверь ПВХ", category: "Двери" },
+  { img: doorReal6, title: "Дверь с ламинацией под дерево", category: "Двери" },
+  { img: doorReal7, title: "Входная дверь с боковой створкой", category: "Двери" },
+  // Перегородки
+  { img: partitionsOffice, title: "Перегородка в офисе", category: "Перегородки" },
+  { img: partitionsReal1, title: "Перегородка ПВХ", category: "Перегородки" },
+  // Подоконники
   { img: windowsillReal1, title: "Глянцевый подоконник под дерево", category: "Подоконники" },
   { img: windowsillReal2, title: "Подоконник под мрамор с цветком", category: "Подоконники" },
   { img: windowsillReal3, title: "Подоконник салатовый глянец", category: "Подоконники" },
   { img: windowsillReal4, title: "Сиреневый глянцевый подоконник", category: "Подоконники" },
   { img: windowsillReal5, title: "Подоконник под белый мрамор", category: "Подоконники" },
   { img: windowsillReal6, title: "Подоконник в цвет интерьера", category: "Подоконники" },
+  { img: windowsillReal7, title: "Подоконник венге премиум", category: "Подоконники" },
+  { img: windowsillReal8, title: "Яркий оранжевый подоконник", category: "Подоконники" },
 ];
 
 const filters = ["Все", "Окна", "Двери", "Перегородки", "Подоконники"];
