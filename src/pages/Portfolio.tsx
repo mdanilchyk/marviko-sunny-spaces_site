@@ -22,7 +22,7 @@ const projects = [
   { img: windowsillReal6, title: "Подоконник в цвет интерьера", category: "Подоконники" },
 ];
 
-const filters = ["Все", "Окна", "Балконы", "Двери", "Перегородки", "Подоконники"];
+const filters = ["Все", "Окна", "Двери", "Перегородки", "Подоконники"];
 
 const PortfolioPage = () => {
   const [filter, setFilter] = useState("Все");
