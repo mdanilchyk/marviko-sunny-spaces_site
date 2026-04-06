@@ -184,93 +184,103 @@ const portfolioItems = [
 ];
 
 const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
-  const frameStroke = "#444";
-  const frameFill = "#FFFFFF";
-  const glassStroke = "#666";
-  const glassFill = "#D6EEF8";
-  const metalFill = "#888";
-  const diagStroke = "#444";
+  const frameStroke = "#BDBAB4";
+  const impostFill = "#BDBAB4";
+  const glassStroke = "#BDBAB4";
+
+  const glassDef = (id: string) => (
+    <defs>
+      <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#87CEEB" />
+        <stop offset="100%" stopColor="#E8F4F8" />
+      </linearGradient>
+    </defs>
+  );
 
   const hinges = (x: number, y: number, h: number, count = 3) => {
     const items = [];
     const sp = h / (count + 1);
-    for (let i = 1; i <= count; i++) items.push(<rect key={i} x={x} y={y + sp * i - 5} width={6} height={10} fill={metalFill} rx={1} />);
+    for (let i = 1; i <= count; i++) items.push(<rect key={i} x={x} y={y + sp * i - 4} width={4} height={8} fill="#C8C8C8" stroke="#AAAAAA" strokeWidth={0.5} rx={1} />);
     return items;
   };
-  const handle = (x: number, cy: number) => <rect x={x} y={cy - 10} width={5} height={20} fill={metalFill} rx={1} />;
+  const handle = (x: number, cy: number) => <rect x={x} y={cy - 7} width={4} height={14} fill="#BBBBBB" stroke="#999" strokeWidth={0.5} rx={1} />;
   const diags = (side: "left" | "right", sx: number, sy: number, sw: number, sh: number) => {
-    if (side === "left") return <g><line x1={sx} y1={sy + sh} x2={sx + sw} y2={sy} stroke={diagStroke} strokeWidth={1.3} /><line x1={sx} y1={sy} x2={sx + sw} y2={sy + sh / 2} stroke={diagStroke} strokeWidth={1.3} /></g>;
-    return <g><line x1={sx + sw} y1={sy + sh} x2={sx} y2={sy} stroke={diagStroke} strokeWidth={1.3} /><line x1={sx + sw} y1={sy} x2={sx} y2={sy + sh / 2} stroke={diagStroke} strokeWidth={1.3} /></g>;
+    if (side === "left") return <g opacity={0.7}><line x1={sx} y1={sy + sh} x2={sx + sw} y2={sy} stroke="#AAAAAA" strokeWidth={0.8} /><line x1={sx} y1={sy} x2={sx + sw} y2={sy + sh / 2} stroke="#AAAAAA" strokeWidth={0.8} /></g>;
+    return <g opacity={0.7}><line x1={sx + sw} y1={sy + sh} x2={sx} y2={sy} stroke="#AAAAAA" strokeWidth={0.8} /><line x1={sx + sw} y1={sy} x2={sx} y2={sy + sh / 2} stroke="#AAAAAA" strokeWidth={0.8} /></g>;
   };
 
   if (type === "single") {
     const vw = 100, vh = 130, pad = 6, gx = 10, gy = 10, gw = 80, gh = 110;
     return (
       <svg width="140" height="180" viewBox={`0 0 ${vw} ${vh}`}>
-        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill={frameFill} stroke={frameStroke} strokeWidth={2.5} />
-        <rect x={gx} y={gy} width={gw} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
-        {hinges(gx + gw - 3, gy, gh, 3)}
-        {handle(gx + 2, gy + gh / 2)}
+        {glassDef("gs")}
+        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill="white" stroke={frameStroke} strokeWidth={2} />
+        <rect x={gx} y={gy} width={gw} height={gh} rx={1} fill="url(#gs)" stroke={glassStroke} strokeWidth={1} />
+        {hinges(gx + gw - 2, gy, gh, 3)}
+        {handle(gx + 1, gy + gh / 2)}
         {diags("right", gx, gy, gw, gh)}
       </svg>
     );
   }
 
   if (type === "double") {
-    const vw = 160, vh = 130, pad = 6, impW = 5;
+    const vw = 160, vh = 130, pad = 6, impW = 3;
     const ix = pad + 4, iy = pad + 4, tw = vw - 2 * pad - 8, gh = vh - 2 * pad - 8, hw = (tw - impW) / 2;
     const rx = ix + hw + impW;
     return (
       <svg width="180" height="160" viewBox={`0 0 ${vw} ${vh}`}>
-        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill={frameFill} stroke={frameStroke} strokeWidth={2.5} />
-        <rect x={ix} y={iy} width={hw} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
-        <rect x={ix + hw} y={pad} width={impW} height={vh - 2 * pad} fill={metalFill} />
-        <rect x={rx} y={iy} width={hw} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+        {glassDef("gd")}
+        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill="white" stroke={frameStroke} strokeWidth={2} />
+        <rect x={ix} y={iy} width={hw} height={gh} rx={1} fill="url(#gd)" stroke={glassStroke} strokeWidth={1} />
+        <rect x={ix + hw} y={pad} width={impW} height={vh - 2 * pad} fill={impostFill} />
+        <rect x={rx} y={iy} width={hw} height={gh} rx={1} fill="url(#gd)" stroke={glassStroke} strokeWidth={1} />
         {hinges(ix, iy, gh, 3)}
-        {handle(ix + hw - 7, iy + gh / 2)}
+        {handle(ix + hw - 5, iy + gh / 2)}
         {diags("left", ix, iy, hw, gh)}
       </svg>
     );
   }
 
   if (type === "triple") {
-    const vw = 220, vh = 130, pad = 6, impW = 5;
+    const vw = 220, vh = 130, pad = 6, impW = 3;
     const ix = pad + 4, iy = pad + 4, tw = vw - 2 * pad - 8, gh = vh - 2 * pad - 8, thW = (tw - 2 * impW) / 3;
     const cx = ix + thW + impW, rx = ix + 2 * (thW + impW);
     return (
       <svg width="180" height="160" viewBox={`0 0 ${vw} ${vh}`}>
-        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill={frameFill} stroke={frameStroke} strokeWidth={2.5} />
-        <rect x={ix} y={iy} width={thW} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
-        <rect x={ix + thW} y={pad} width={impW} height={vh - 2 * pad} fill={metalFill} />
-        <rect x={cx} y={iy} width={thW} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
-        <rect x={cx + thW} y={pad} width={impW} height={vh - 2 * pad} fill={metalFill} />
-        <rect x={rx} y={iy} width={thW} height={gh} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+        {glassDef("gt")}
+        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill="white" stroke={frameStroke} strokeWidth={2} />
+        <rect x={ix} y={iy} width={thW} height={gh} rx={1} fill="url(#gt)" stroke={glassStroke} strokeWidth={1} />
+        <rect x={ix + thW} y={pad} width={impW} height={vh - 2 * pad} fill={impostFill} />
+        <rect x={cx} y={iy} width={thW} height={gh} rx={1} fill="url(#gt)" stroke={glassStroke} strokeWidth={1} />
+        <rect x={cx + thW} y={pad} width={impW} height={vh - 2 * pad} fill={impostFill} />
+        <rect x={rx} y={iy} width={thW} height={gh} rx={1} fill="url(#gt)" stroke={glassStroke} strokeWidth={1} />
         {hinges(cx, iy, gh, 3)}
-        {handle(cx + thW - 7, iy + gh / 2)}
+        {handle(cx + thW - 5, iy + gh / 2)}
         {diags("left", cx, iy, thW, gh)}
       </svg>
     );
   }
 
   // balcony
-  const vw = 180, vh = 180, pad = 6, impW = 5, frmH = 4;
+  const vw = 180, vh = 180, pad = 6, impW = 3, frmH = 4;
   const ix = pad + 4, iy = pad + 4, tw = vw - 2 * pad - 8, th = vh - 2 * pad - 8;
   const dw = tw * 0.45, ww = tw - dw - impW;
   const dtH = th * (2 / 3) - frmH / 2, dbH = th * (1 / 3) - frmH / 2;
   const wx = ix + dw + impW;
   return (
     <svg width="180" height="160" viewBox={`0 0 ${vw} ${vh}`}>
-      <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill={frameFill} stroke={frameStroke} strokeWidth={2.5} />
-      <rect x={ix} y={iy} width={dw} height={dtH} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
-      <rect x={ix} y={iy + dtH} width={dw} height={frmH} fill={metalFill} />
-      <rect x={ix} y={iy + dtH + frmH} width={dw} height={dbH} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
-      <rect x={ix + dw} y={pad} width={impW} height={vh - 2 * pad} fill={metalFill} />
-      <rect x={wx} y={iy} width={ww} height={th} rx={1} fill={glassFill} stroke={glassStroke} strokeWidth={1.5} />
+      {glassDef("gb")}
+      <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill="white" stroke={frameStroke} strokeWidth={2} />
+      <rect x={ix} y={iy} width={dw} height={dtH} rx={1} fill="url(#gb)" stroke={glassStroke} strokeWidth={1} />
+      <rect x={ix} y={iy + dtH} width={dw} height={frmH} fill={impostFill} />
+      <rect x={ix} y={iy + dtH + frmH} width={dw} height={dbH} rx={1} fill="url(#gb)" stroke={glassStroke} strokeWidth={1} />
+      <rect x={ix + dw} y={pad} width={impW} height={vh - 2 * pad} fill={impostFill} />
+      <rect x={wx} y={iy} width={ww} height={th} rx={1} fill="url(#gb)" stroke={glassStroke} strokeWidth={1} />
       {hinges(ix, iy, dtH, 3)}
-      {handle(ix + dw - 7, iy + dtH / 2)}
+      {handle(ix + dw - 5, iy + dtH / 2)}
       {diags("left", ix, iy, dw, dtH)}
       {hinges(ix, iy + dtH + frmH, dbH, 2)}
-      {handle(ix + dw - 7, iy + dtH + frmH + dbH / 2)}
+      {handle(ix + dw - 5, iy + dtH + frmH + dbH / 2)}
       {diags("left", ix, iy + dtH + frmH, dw, dbH)}
     </svg>
   );
