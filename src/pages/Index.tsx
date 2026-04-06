@@ -520,8 +520,7 @@ const Index = () => {
                     </div>
                     <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">{cat.title}</h3>
                     <p className="text-sm text-muted-foreground text-body mb-4 flex-1">{cat.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="bg-primary text-primary-foreground text-sm font-bold px-4 py-1.5 rounded-lg">{cat.price}</span>
+                    <div className="flex items-center justify-end">
                       <span className="flex items-center gap-1 text-primary text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
                         Подробнее <ArrowRight className="w-4 h-4" />
                       </span>
