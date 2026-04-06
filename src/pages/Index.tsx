@@ -175,21 +175,12 @@ const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | 
 };
 
 const portfolioItems = [
-  { img: workShopWindows, title: "Остекление коммерческого объекта", category: "windows" },
-  { img: workFireplaceDoor, title: "Окна в интерьере с камином", category: "windows" },
-  { img: workHouseExterior, title: "Остекление частного дома", category: "windows" },
-  { img: workDoorBlinds, title: "Дверь ПВХ со встроенными жалюзи", category: "doors" },
-  { img: workShopDoor, title: "Входная группа магазина", category: "doors" },
-  { img: workWindowsillGreen, title: "Подоконник с видом на природу", category: "windowsills" },
-];
-
-const portfolioTabs = [
-  { key: "all", label: "Все" },
-  { key: "windows", label: "Окна" },
-  { key: "balconies", label: "Балконы" },
-  { key: "doors", label: "Двери" },
-  { key: "partitions", label: "Перегородки" },
-  { key: "windowsills", label: "Подоконники" },
+  { img: workShopWindows, title: "Остекление коммерческого объекта" },
+  { img: workFireplaceDoor, title: "Окна в интерьере с камином" },
+  { img: workHouseExterior, title: "Остекление частного дома" },
+  { img: workDoorBlinds, title: "Дверь ПВХ со встроенными жалюзи" },
+  { img: workShopDoor, title: "Входная группа магазина" },
+  { img: workWindowsillGreen, title: "Подоконник с видом на природу" },
 ];
 
 const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
