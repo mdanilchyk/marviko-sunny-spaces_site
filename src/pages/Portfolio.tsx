@@ -21,6 +21,9 @@ import doorReal4 from "@/assets/door-real-4.jpg";
 import doorReal5 from "@/assets/door-real-5.jpg";
 import doorReal6 from "@/assets/door-real-6.jpg";
 import doorReal7 from "@/assets/door-real-7.jpg";
+import doorReal8 from "@/assets/door-real-8.jpg";
+import doorReal9 from "@/assets/door-real-9.jpg";
+import doorReal10 from "@/assets/door-real-10.jpg";
 
 // Partitions
 import partitionsOffice from "@/assets/partitions-office.jpg";
