@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
-import WindowDrawing from "@/components/WindowDrawing";
+import PricingWindowSVG from "@/components/PricingWindowSVG";
 
 import windowWork1 from "@/assets/window-work-1.jpg";
 import windowWork2 from "@/assets/window-work-2.jpg";
@@ -155,15 +155,8 @@ const WindowsPage = () => {
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4">
                     {p.prices.map((item, i) => (
                       <div key={i} className="p-6 flex flex-col items-center text-center border-b sm:border-r border-border last:border-r-0 bg-card hover:bg-accent-light/50 transition-colors">
-                        <div className="h-32 flex items-center justify-center mb-4 relative">
-                          <div className="absolute inset-0 rounded-lg overflow-hidden" style={{
-                            background: "linear-gradient(180deg, #e8f0f2 0%, #c8d8dc 50%, #a8c0a8 100%)",
-                          }}>
-                            <svg className="absolute bottom-0 left-0 right-0 w-full h-[40%]" viewBox="0 0 200 60" preserveAspectRatio="none">
-                              <path d="M0,60 L0,35 Q20,20 40,30 Q60,15 80,25 Q100,10 120,28 Q140,18 160,30 Q180,22 200,35 L200,60 Z" fill="rgba(80,120,80,0.25)" />
-                            </svg>
-                          </div>
-                          <WindowDrawing type={item.type} width={120} height={120} className="relative z-10" dark />
+                        <div className="flex items-center justify-center py-4">
+                          <PricingWindowSVG type={item.type} />
                         </div>
                         <p className="text-sm font-semibold mb-1">{item.title}</p>
                         <p className="text-xs font-mono text-muted-foreground mb-1">Размер {item.size} мм</p>
