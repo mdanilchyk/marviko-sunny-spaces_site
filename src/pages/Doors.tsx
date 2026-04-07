@@ -56,6 +56,9 @@ const DoorsPage = () => {
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const galleryImages = [
+    { src: doorReal8, alt: "Входная группа с алюминиевыми дверями" },
+    { src: doorReal9, alt: "Трёхстворчатая дверь с фрамугой" },
+    { src: doorReal10, alt: "Раздвижная дверь в интерьере" },
     { src: doorReal1, alt: "Раздвижная балконная дверь" },
     { src: doorReal3, alt: "Входная дверь зелёная ПВХ" },
     { src: doorReal4, alt: "Входная группа магазина" },

@@ -48,6 +48,9 @@ const projects = [
   { img: windowWork5, title: "Подоконник с окном", category: "Окна" },
   { img: windowWork6, title: "Глянцевый подоконник", category: "Окна" },
   // Двери
+  { img: doorReal8, title: "Входная группа с алюминиевыми дверями", category: "Двери" },
+  { img: doorReal9, title: "Трёхстворчатая дверь с фрамугой", category: "Двери" },
+  { img: doorReal10, title: "Раздвижная дверь в интерьере", category: "Двери" },
   { img: doorReal1, title: "Раздвижная балконная дверь", category: "Двери" },
   { img: doorReal3, title: "Входная дверь зелёная ПВХ", category: "Двери" },
   { img: doorReal4, title: "Входная группа магазина", category: "Двери" },
