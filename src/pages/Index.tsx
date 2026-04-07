@@ -417,7 +417,7 @@ const Index = () => {
           <AnimatedSection variant="blur">
             <SectionLabel>Цены</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-4">Цены на наши окна</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с монтажом для профиля Novotex Techno 58.</p>
+            <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с монтажом.</p>
           </AnimatedSection>
 
           {/* Cards grid */}
