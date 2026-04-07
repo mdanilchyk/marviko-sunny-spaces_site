@@ -44,6 +44,9 @@ import windowsillReal8 from "@/assets/windowsill-real-8.jpg";
 
 const projects = [
   // Окна
+  { img: windowWork7, title: "Остекление многоквартирного дома", category: "Окна" },
+  { img: windowWork8, title: "Окна в частном доме", category: "Окна" },
+  { img: windowWork9, title: "Окна в цветном профиле", category: "Окна" },
   { img: windowWork1, title: "Установка окон в частном доме", category: "Окна" },
   { img: windowWork2, title: "Окна в цветном профиле", category: "Окна" },
   { img: windowWork3, title: "Остекление магазина", category: "Окна" },
