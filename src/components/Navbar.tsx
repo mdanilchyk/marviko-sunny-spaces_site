@@ -25,15 +25,8 @@ const navItems: NavItem[] = [
       { label: "Цены на окна", href: "/windows", desc: "Актуальный прайс-лист" },
     ],
   },
-  {
-    label: "Балконы",
-    href: "/balconies",
-    submenu: [
-      { label: "Тёплое остекление", href: "/balconies", desc: "ПВХ профиль для круглогодичного использования" },
-      { label: "Холодное остекление", href: "/balconies", desc: "Алюминиевые раздвижные системы" },
-      
-    ],
-  },
+
+
   {
     label: "Двери",
     href: "/doors",

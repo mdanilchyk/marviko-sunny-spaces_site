@@ -43,13 +43,8 @@ const categories = [
     link: "/windows",
     price: "от 302 BYN",
   },
-  {
-    title: "Балконы и лоджии",
-    description: "Тёплое и холодное остекление балконов, отделка",
-    img: serviceBalconies,
-    link: "/balconies",
-    price: "от 450 BYN",
-  },
+
+
   {
     title: "Входные двери",
     description: "Входные, балконные двери из ПВХ",

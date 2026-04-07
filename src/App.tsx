@@ -25,7 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/windows" element={<WindowsPage />} />
-          <Route path="/balconies" element={<BalconiesPage />} />
+          
           <Route path="/doors" element={<DoorsPage />} />
           <Route path="/partitions" element={<PartitionsPage />} />
           <Route path="/windowsills" element={<WindowsillsPage />} />
