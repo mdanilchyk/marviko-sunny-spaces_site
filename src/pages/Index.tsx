@@ -11,7 +11,7 @@ import PricingWindowSVG from "@/components/PricingWindowSVG";
 
 import heroImg from "@/assets/hero-interior.jpg";
 import serviceWindows from "@/assets/window-work-1.jpg";
-import serviceBalconies from "@/assets/service-balconies.jpg";
+
 import serviceDoors from "@/assets/service-doors-hero.jpg";
 import servicePartitions from "@/assets/partitions-real-1.jpg";
 import serviceWindowsills from "@/assets/windowsill-real-1.jpg";
@@ -43,13 +43,8 @@ const categories = [
     link: "/windows",
     price: "от 302 BYN",
   },
-  {
-    title: "Балконы и лоджии",
-    description: "Тёплое и холодное остекление балконов, отделка",
-    img: serviceBalconies,
-    link: "/balconies",
-    price: "от 450 BYN",
-  },
+
+
   {
     title: "Входные двери",
     description: "Входные, балконные двери из ПВХ",

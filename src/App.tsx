@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import WindowsPage from "./pages/Windows.tsx";
-import BalconiesPage from "./pages/Balconies.tsx";
+
 import DoorsPage from "./pages/Doors.tsx";
 import PartitionsPage from "./pages/Partitions.tsx";
 import WindowsillsPage from "./pages/Windowsills.tsx";
@@ -25,7 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/windows" element={<WindowsPage />} />
-          <Route path="/balconies" element={<BalconiesPage />} />
+          
           <Route path="/doors" element={<DoorsPage />} />
           <Route path="/partitions" element={<PartitionsPage />} />
           <Route path="/windowsills" element={<WindowsillsPage />} />
