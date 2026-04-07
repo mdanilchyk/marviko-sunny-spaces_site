@@ -15,8 +15,14 @@ import windowWork3 from "@/assets/window-work-3.jpg";
 import windowWork4 from "@/assets/window-work-4.jpg";
 import windowWork5 from "@/assets/window-work-5.jpg";
 import windowWork6 from "@/assets/window-work-6.jpg";
+import windowWork7 from "@/assets/window-work-7.jpg";
+import windowWork8 from "@/assets/window-work-8.jpg";
+import windowWork9 from "@/assets/window-work-9.jpg";
 
 const workPhotos = [
+  { img: windowWork7, title: "Остекление многоквартирного дома" },
+  { img: windowWork8, title: "Окна в частном доме" },
+  { img: windowWork9, title: "Окна в цветном профиле" },
   { img: windowWork1, title: "Установка окон в частном доме" },
   { img: windowWork2, title: "Окна в цветном профиле" },
   { img: windowWork3, title: "Остекление магазина" },

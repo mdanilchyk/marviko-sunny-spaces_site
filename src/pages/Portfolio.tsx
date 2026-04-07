@@ -13,6 +13,9 @@ import windowWork3 from "@/assets/window-work-3.jpg";
 import windowWork4 from "@/assets/window-work-4.jpg";
 import windowWork5 from "@/assets/window-work-5.jpg";
 import windowWork6 from "@/assets/window-work-6.jpg";
+import windowWork7 from "@/assets/window-work-7.jpg";
+import windowWork8 from "@/assets/window-work-8.jpg";
+import windowWork9 from "@/assets/window-work-9.jpg";
 
 // Doors
 import doorReal1 from "@/assets/door-real-1.jpg";
@@ -41,6 +44,9 @@ import windowsillReal8 from "@/assets/windowsill-real-8.jpg";
 
 const projects = [
   // Окна
+  { img: windowWork7, title: "Остекление многоквартирного дома", category: "Окна" },
+  { img: windowWork8, title: "Окна в частном доме", category: "Окна" },
+  { img: windowWork9, title: "Окна в цветном профиле", category: "Окна" },
   { img: windowWork1, title: "Установка окон в частном доме", category: "Окна" },
   { img: windowWork2, title: "Окна в цветном профиле", category: "Окна" },
   { img: windowWork3, title: "Остекление магазина", category: "Окна" },
