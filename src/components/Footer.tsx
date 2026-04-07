@@ -29,7 +29,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <Link to="/" className="mb-5 inline-block">
-              <img src={marvikoLogo} alt="Марвико" className="h-14" />
+              <img src={marvikoLogo} alt="Марвико" className="h-[68px]" />
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "hsl(0 0% 60%)" }}>
               ООО «Марвико». Производство и установка окон, дверей и балконов. Работаем с 2007 года.
