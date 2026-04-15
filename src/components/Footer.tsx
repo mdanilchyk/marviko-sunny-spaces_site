@@ -82,7 +82,7 @@ const Footer = () => {
               {[
                 { to: "/windows", label: "Окна" },
                 
-                { to: "/doors", label: "Двери ПВХ" },
+                { to: "/doors", label: "Двери" },
                 { to: "/partitions", label: "Перегородки" },
                 { to: "/windowsills", label: "Подоконники" },
                 { to: "/portfolio", label: "Наши работы" },
