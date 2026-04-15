@@ -774,7 +774,7 @@ const Index = () => {
             {accessories.map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.1} variant="fade-left">
                 <Link
-                  to={item.title === "Подоконники" ? "/windowsills" : "#"}
+                  to={item.title === "Подоконники" ? "/windowsills" : "/accessories"}
                   className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start block"
                 >
                   <span className="text-2xl">{item.emoji}</span>

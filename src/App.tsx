@@ -10,6 +10,7 @@ import DoorsPage from "./pages/Doors.tsx";
 import PartitionsPage from "./pages/Partitions.tsx";
 import WindowsillsPage from "./pages/Windowsills.tsx";
 import PortfolioPage from "./pages/Portfolio.tsx";
+import AccessoriesPage from "./pages/Accessories.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/partitions" element={<PartitionsPage />} />
           <Route path="/windowsills" element={<WindowsillsPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/accessories" element={<AccessoriesPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -46,6 +46,10 @@ const navItems: NavItem[] = [
     href: "/windowsills",
   },
   {
+    label: "Аксессуары",
+    href: "/accessories",
+  },
+  {
     label: "Наши работы",
     href: "/portfolio",
   },
