@@ -80,7 +80,7 @@ const Footer = () => {
             <h4 className="font-bold mb-5 text-sm uppercase tracking-wider" style={{ color: "hsl(0 0% 80%)" }}>Продукция</h4>
             <div className="flex flex-col gap-3">
               {[
-                { to: "/windows", label: "Окна ПВХ" },
+                { to: "/windows", label: "Окна" },
                 
                 { to: "/doors", label: "Двери ПВХ" },
                 { to: "/partitions", label: "Перегородки" },
