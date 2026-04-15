@@ -276,7 +276,9 @@ const Index = () => {
                     className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors text-foreground"
                   >
                     <option value="windows">Окна ПВХ</option>
+                    <option value="alu-windows">Алюминиевые окна</option>
                     <option value="balconies">Остекление балкона</option>
+                    <option value="alu-balconies">Алюминиевые балконы</option>
                     <option value="doors">Двери ПВХ</option>
                   </select>
                 </div>
