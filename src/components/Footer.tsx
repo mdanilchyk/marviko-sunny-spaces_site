@@ -169,7 +169,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 text-sm" style={{ color: "hsl(0 0% 60%)" }}>
                 <Clock className="w-4 h-4 shrink-0" />
-                <span>Пн–Пт: 9:00 — 17:00</span>
+                <span>Пн–Суб: 09.00 — 17.00</span>
               </div>
             </div>
           </div>
