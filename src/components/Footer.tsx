@@ -81,10 +81,10 @@ const Footer = () => {
             <div className="flex flex-col gap-3">
               {[
                 { to: "/windows", label: "Окна" },
-                
                 { to: "/doors", label: "Двери" },
                 { to: "/partitions", label: "Перегородки" },
                 { to: "/windowsills", label: "Подоконники" },
+                { to: "/accessories", label: "Аксессуары" },
                 { to: "/portfolio", label: "Наши работы" },
               ].map((link) => (
                 <Link
