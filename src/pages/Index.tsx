@@ -368,7 +368,7 @@ const Index = () => {
           <AnimatedSection variant="fade-left">
             <SectionLabel>Продукция</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-4">Наши услуги</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-xl">Окна, двери, перегородки и подоконники из ПВХ и алюминия</p>
+            <p className="text-muted-foreground text-body mb-10 max-w-xl">Окна, двери и перегородки из ПВХ и алюминия</p>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat, i) => (
