@@ -27,8 +27,6 @@ const workPhotos = [
   { img: windowWork2, title: "Окна в цветном профиле" },
   { img: windowWork3, title: "Остекление магазина" },
   { img: windowWork4, title: "Остекление многоквартирного дома" },
-  { img: windowWork5, title: "Подоконник с окном" },
-  { img: windowWork6, title: "Глянцевый подоконник" },
 ];
 
 const profiles = [
