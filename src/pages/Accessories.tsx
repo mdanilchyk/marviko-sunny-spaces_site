@@ -279,21 +279,46 @@ const AccessoriesPage = () => {
           {/* Locks & cylinders */}
           <AnimatedSection delay={0.3}>
             <div className="grid sm:grid-cols-2 gap-6">
-              <div className="bg-card rounded-xl p-6 border border-border card-shadow">
-                <h3 className="font-bold mb-2">Одноточечный замок</h3>
-                <p className="text-sm text-muted-foreground">Базовый замок для балконных и входных дверей ПВХ.</p>
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden">
+                <button onClick={() => setLightbox(accSingleLock)} className="aspect-[4/3] w-full overflow-hidden">
+                  <img src={accSingleLock} alt="Одноточечный замок" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                </button>
+                <div className="p-6">
+                  <h3 className="font-bold mb-2">Одноточечный замок</h3>
+                  <p className="text-sm text-muted-foreground">Базовый замок для балконных и входных дверей ПВХ.</p>
+                </div>
               </div>
-              <div className="bg-card rounded-xl p-6 border border-border card-shadow">
-                <h3 className="font-bold mb-2">Многозапорный замок</h3>
-                <p className="text-sm text-muted-foreground">Повышенная безопасность — несколько точек запирания по всей высоте двери.</p>
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden">
+                <button onClick={() => setLightbox(accMultiLock)} className="aspect-[4/3] w-full overflow-hidden">
+                  <img src={accMultiLock} alt="Многозапорный замок" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                </button>
+                <div className="p-6">
+                  <h3 className="font-bold mb-2">Многозапорный замок</h3>
+                  <p className="text-sm text-muted-foreground">Повышенная безопасность — несколько точек запирания по всей высоте двери.</p>
+                </div>
               </div>
-              <div className="bg-card rounded-xl p-6 border border-border card-shadow">
-                <h3 className="font-bold mb-2">Цилиндры</h3>
-                <p className="text-sm text-muted-foreground">Конфигурации: ключ-ключ, ключ-барашек.</p>
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden">
+                <div className="grid grid-cols-2">
+                  <button onClick={() => setLightbox(accCylinderKey)} className="aspect-square overflow-hidden">
+                    <img src={accCylinderKey} alt="Цилиндр ключ-ключ" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </button>
+                  <button onClick={() => setLightbox(accCylinderThumb)} className="aspect-square overflow-hidden">
+                    <img src={accCylinderThumb} alt="Цилиндр ключ-барашек" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </button>
+                </div>
+                <div className="p-6">
+                  <h3 className="font-bold mb-2">Цилиндры</h3>
+                  <p className="text-sm text-muted-foreground">Конфигурации: ключ-ключ, ключ-барашек.</p>
+                </div>
               </div>
-              <div className="bg-card rounded-xl p-6 border border-border card-shadow">
-                <h3 className="font-bold mb-2">Оконная ручка</h3>
-                <p className="text-sm text-muted-foreground">Цвета: белый, коричневый, антрацит.</p>
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden">
+                <button onClick={() => setLightbox(accWindowHandle)} className="aspect-[4/3] w-full overflow-hidden">
+                  <img src={accWindowHandle} alt="Оконная ручка" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                </button>
+                <div className="p-6">
+                  <h3 className="font-bold mb-2">Оконная ручка</h3>
+                  <p className="text-sm text-muted-foreground">Цвета: белый, коричневый, антрацит.</p>
+                </div>
               </div>
             </div>
           </AnimatedSection>
