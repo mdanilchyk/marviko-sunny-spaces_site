@@ -80,7 +80,7 @@ const DoorsPage = () => {
             <SectionLabel>Двери ПВХ</SectionLabel>
             <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Надёжные двери для дома и офиса</h1>
             <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Входные, балконные и раздвижные двери из качественного ПВХ-профиля.
+              Входные, балконные и раздвижные двери из ПВХ и алюминия
             </p>
           </AnimatedSection>
         </div>
