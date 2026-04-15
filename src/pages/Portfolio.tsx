@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
+import LazyImage from "@/components/LazyImage";
 
 // Windows
 import windowWork1 from "@/assets/window-work-1.jpg";
