@@ -118,16 +118,20 @@ const PortfolioPage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((project, i) => (
-              <AnimatedSection key={project.title + filter + i} delay={i * 0.08}>
+              <AnimatedSection key={project.title + filter + i} delay={Math.min(i * 0.06, 0.4)}>
                 <div
                   className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]"
                   onClick={() => setLightbox(i)}
                 >
-                  <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <LazyImage
+                    src={project.img}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                 </div>
               </AnimatedSection>
-            ))}
+            ))
           </div>
         </div>
       </section>
