@@ -88,7 +88,7 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
               <Clock className="w-3 h-3 opacity-60" />
-              Пн–Пт 9:00–17:00
+              Пн–Суб 09.00–17.00
             </span>
           </div>
           <div className="flex items-center gap-4">
