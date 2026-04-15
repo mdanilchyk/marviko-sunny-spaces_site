@@ -85,8 +85,10 @@ const whyUs = [
 const processSteps = [
   { num: "01", title: "Заявка", desc: "Оставляете заявку на сайте или звоните" },
   { num: "02", title: "Замер", desc: "Бесплатный выезд замерщика" },
-  { num: "03", title: "Производство", desc: "Изготовление по вашим размерам" },
-  { num: "04", title: "Монтаж", desc: "Профессиональная установка" },
+  { num: "03", title: "Просчёт и консультация", desc: "Подбор оптимального решения и расчёт стоимости" },
+  { num: "04", title: "Заключение договора", desc: "Оформление документов и согласование сроков" },
+  { num: "05", title: "Производство", desc: "Изготовление по вашим размерам" },
+  { num: "06", title: "Монтаж", desc: "Профессиональная установка" },
 ];
 
 const reviews = [
@@ -566,7 +568,7 @@ const Index = () => {
             <SectionLabel>Этапы</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-12">Как мы работаем</h2>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {processSteps.map((step, i) => (
               <AnimatedSection key={step.num} delay={i * 0.15} variant="slide-up">
                 <div className="relative">
