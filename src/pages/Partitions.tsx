@@ -46,7 +46,7 @@ const PartitionsPage = () => {
             <SectionLabel>Перегородки</SectionLabel>
             <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Перегородки ПВХ</h1>
             <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Изготавливаем и устанавливаем перегородки из ПВХ для коммерческих и общественных объектов
+              Изготавливаем и устанавливаем перегородки из ПВХ и алюминия для коммерческих и общественных объектов
             </p>
           </AnimatedSection>
         </div>
