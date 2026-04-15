@@ -16,6 +16,7 @@ import serviceDoors from "@/assets/service-doors-hero.jpg";
 import servicePartitions from "@/assets/partitions-real-1.jpg";
 import serviceWindowsills from "@/assets/windowsill-real-1.jpg";
 import serviceWindowWork from "@/assets/service-objects.jpg";
+import serviceAccessories from "@/assets/acc-door-handles-colors.jpg";
 
 import workHouseExterior from "@/assets/work-house-exterior.jpg";
 import workWindowsillGreen from "@/assets/work-windowsill-green.jpg";
