@@ -9,8 +9,9 @@ Marviko window company site — design tokens in index.css, warm orange palette,
 - Footer: Viber/Telegram/Instagram as SVG icons, working anchor links to #pricing, #certificates, #faq
 - Certificates section styled like mosokna.ru with clickable images
 - Primary color: hsl(15 76% 49%) — orange
-- Pages: / /windows /doors /partitions /windowsills /portfolio (balconies removed)
-- Nav order: Главная / Окна ПВХ / Двери / Перегородки / Подоконники / Наши работы
-- Accessories section on Index and Windows pages
+- Pages: / /windows /doors /partitions /windowsills /portfolio /accessories
+- Nav order: Главная / Окна ПВХ / Двери / Перегородки / Подоконники / Аксессуары / Наши работы
+- Accessories section on Index and Windows pages links to /accessories
 - Payment block (cards + installments) in contacts section on Index
 - Windowsill gallery images generated: wood, wenge, orange, beige, green, marble, catalog
+- Accessories page: child safety locks, mosquito nets, glass units, door handles/locks
