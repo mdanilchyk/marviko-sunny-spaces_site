@@ -131,7 +131,7 @@ const PortfolioPage = () => {
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                 </div>
               </AnimatedSection>
-            ))
+            ))}
           </div>
         </div>
       </section>
