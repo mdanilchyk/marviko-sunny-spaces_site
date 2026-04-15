@@ -188,7 +188,7 @@ const portfolioItems = [
 
 const sendFormEmail = async (subject: string, data: Record<string, string>) => {
   try {
-    await fetch("https://formsubmit.co/ajax/vladdani777@gmail.com", {
+    await fetch("https://formsubmit.co/ajax/Marviko2007@mail.ru", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({ _subject: subject, ...data }),
