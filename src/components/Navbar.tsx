@@ -18,7 +18,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    label: "Окна ПВХ",
+    label: "Окна",
     href: "/windows",
     submenu: [
       { label: "Все окна ПВХ", href: "/windows", desc: "Полный каталог оконных конструкций" },

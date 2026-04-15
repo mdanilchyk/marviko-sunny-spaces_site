@@ -95,10 +95,10 @@ const WindowsPage = () => {
         </div>
         <div className="container mx-auto section-padding relative z-10">
           <AnimatedSection>
-            <SectionLabel>Окна ПВХ</SectionLabel>
-            <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Пластиковые окна для вашего дома</h1>
+            <SectionLabel>Окна</SectionLabel>
+            <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Пластиковые и алюминиевые окна для вашего дома</h1>
             <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Энергосберегающие окна с двухкамерным стеклопакетом. Бесплатный замер и доставка по Червеню и Минской области.
+              Энергосберегающие окна из ПВХ и алюминия с двухкамерным стеклопакетом. Бесплатный замер. Доставка.
             </p>
           </AnimatedSection>
         </div>
