@@ -16,6 +16,11 @@ import accDoorHandleBar from "@/assets/acc-door-handle-bar.jpg";
 import accDoorHandlesColors from "@/assets/acc-door-handles-colors.jpg";
 import accDoorHandleBrown from "@/assets/acc-door-handle-brown.jpg";
 import accPressGarnish from "@/assets/acc-press-garnish.jpg";
+import accSingleLock from "@/assets/acc-single-lock.jpg";
+import accMultiLock from "@/assets/acc-multi-lock.jpg";
+import accWindowHandle from "@/assets/acc-window-handle.jpg";
+import accCylinderKey from "@/assets/acc-cylinder-key.jpg";
+import accCylinderThumb from "@/assets/acc-cylinder-thumb.jpg";
 
 const childSafetyItems = [
   {
