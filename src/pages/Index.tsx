@@ -74,6 +74,13 @@ const categories = [
     link: "/windows",
     price: "по запросу",
   },
+  {
+    title: "Аксессуары",
+    description: "Ручки, замки, фурнитура и детская безопасность",
+    img: serviceAccessories,
+    link: "/accessories",
+    price: "от 15 BYN",
+  },
 ];
 
 const whyUs = [
