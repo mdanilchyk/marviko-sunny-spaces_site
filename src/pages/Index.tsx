@@ -38,8 +38,8 @@ import reviewRentalTrade from "@/assets/review-rental-trade.jpg";
 
 const categories = [
   {
-    title: "Пластиковые окна",
-    description: "Окна ПВХ различной формы от бюджетных до премиум класса",
+    title: "Пластиковые и алюминиевые окна",
+    description: "Окна ПВХ и алюминиевые окна различной формы от бюджетных до премиум класса",
     img: serviceWindows,
     link: "/windows",
     price: "от 302 BYN",
