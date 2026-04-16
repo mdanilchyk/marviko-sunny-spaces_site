@@ -283,7 +283,9 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
   return (
     <svg
       viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`}
-      className="w-full h-[240px]"
+      height={240}
+      width={CANVAS_W}
+      style={{ height: 240, width: "auto", maxWidth: "100%" }}
       preserveAspectRatio="xMidYMid meet"
     >
       <defs>
