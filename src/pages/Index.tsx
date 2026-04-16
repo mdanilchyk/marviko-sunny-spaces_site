@@ -684,7 +684,7 @@ const Index = () => {
                   className="text-left w-full h-full"
                 >
 {review.type === "messenger" ? (
-                    <div className="bg-white rounded-2xl rounded-tl-sm p-5 relative h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
+                    <div className="bg-white rounded-2xl rounded-tl-sm p-5 border-2 border-primary relative h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-primary-foreground" style={{ backgroundColor: "#7360F2" }}>V</span>
                         <span className="font-bold text-sm">{review.name}</span>
