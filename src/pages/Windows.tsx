@@ -62,7 +62,7 @@ const profileBrands = [
   { name: "Grunhaus Standart 70", chambers: 5, width: 70, desc: "Надёжный профиль с оптимальным соотношением цена-качество" },
   { name: "Rehau Grazio 70", chambers: 5, width: 70, desc: "Элегантный дизайн с увеличенным световым проёмом" },
   { name: "Rehau Intelio 80", chambers: 6, width: 80, desc: "Максимальная энергоэффективность для холодного климата" },
-  { name: "Brusbox Аэро 70", chambers: 5, width: 70, desc: "Современный профиль с системой микровентиляции" },
+  { name: "Brusbox Аэро 70", chambers: 5, width: 70, desc: "Энергоэффективный профиль с улучшенной тепло- и звукоизоляцией" },
   { name: "Kommerling 76", chambers: 6, width: 76, desc: "Немецкое качество, высочайшая долговечность" },
 ];
 
