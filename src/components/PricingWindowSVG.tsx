@@ -23,8 +23,8 @@ const INNER_R = 6;
 // Padding around the window for dimension arrows / labels
 const PAD_TOP = 28;
 const PAD_RIGHT = 36;
-const PAD_LEFT = 6;
-const PAD_BOTTOM = 6;
+const PAD_LEFT = 28;
+const PAD_BOTTOM = 28;
 
 const ARROW_COLOR = "#2171C1";
 const HANDLE_COLOR = "#777";
@@ -244,27 +244,39 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
   };
 
   const renderBalcony = () => {
-    const doorW = winW * 0.42;
+    // Door is full height (2100), window is shorter (1400). Ratio ≈ 0.667
+    // Door takes ~36% of total width (680/1900 in reference, here ~680/1500 ≈ 45%)
+    const doorW = winW * 0.36;
     const winPanelW = winW - doorW - GAP;
-    const gh = winH - FRAME * 2;
-
-    const doorGlassH = gh * 0.6;
-    const doorPanelH = gh - doorGlassH - 4;
+    // Window panel height relative to total (door) height
+    const winPanelH = winH * (1400 / 2100);
+    // Window sits at the TOP, aligned with door top
+    const winPanelY = winY;
 
     const dx = winX + winPanelW + GAP;
     const dy = winY + FRAME;
+    const dInnerH = winH - FRAME * 2;
+    const doorGlassH = dInnerH * 0.62;
+    const doorPanelH = dInnerH - doorGlassH - 4;
 
     return (
       <>
-        <Frame x={winX} y={winY} w={winW} h={winH} />
-        {/* window – fixed */}
-        <Glass x={winX + FRAME} y={winY + FRAME} w={winPanelW - FRAME} h={gh} id={uid} />
-        {/* divider */}
-        <rect x={winX + winPanelW - GAP / 2} y={winY} width={GAP} height={winH} fill="#ffffff" />
+        {/* Door frame – full height */}
+        <Frame x={dx - GAP} y={winY} w={doorW + GAP} h={winH} />
+        {/* Window frame – shorter, top-aligned */}
+        <Frame x={winX} y={winPanelY} w={winPanelW} h={winPanelH} />
+        {/* window – fixed (single pane) */}
+        <Glass
+          x={winX + FRAME}
+          y={winPanelY + FRAME}
+          w={winPanelW - FRAME * 2}
+          h={winPanelH - FRAME * 2}
+          id={uid}
+        />
         {/* door glass – opening */}
         <Glass x={dx} y={dy} w={doorW - FRAME} h={doorGlassH} id={uid} />
         <OpeningMark x={dx} y={dy} w={doorW - FRAME} h={doorGlassH} />
-        {/* door panel */}
+        {/* door bottom panel (solid) */}
         <rect
           x={dx}
           y={dy + doorGlassH + 4}
@@ -279,7 +291,7 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         <Hinges
           x={dx + (doorW - FRAME) - 2}
           yTop={dy + 6}
-          yBottom={dy + gh - 6}
+          yBottom={dy + dInnerH - 6}
         />
         <Handle x={dx + 4} y={dy + doorGlassH * 0.5} side="left" />
       </>
@@ -311,9 +323,39 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
       {type === "triple" && renderTriple()}
       {type === "balcony" && renderBalcony()}
 
-      {/* Dimension arrows: width on top, height on right */}
-      <HDim x1={winX} x2={winX + winW} y={winY - 14} label={String(width)} />
-      <VDim x={winX + winW + 14} y1={winY} y2={winY + winH} label={String(height)} />
+      {/* Dimension arrows */}
+      {type === "balcony" ? (
+        <>
+          {/* Window width on top (over window panel only) */}
+          <HDim
+            x1={winX}
+            x2={winX + (winW - winW * 0.36 - GAP)}
+            y={winY - 14}
+            label="1500"
+          />
+          {/* Door width on bottom */}
+          <HDim
+            x1={winX + (winW - winW * 0.36 - GAP) + GAP}
+            x2={winX + winW}
+            y={winY + winH + 16}
+            label="680"
+          />
+          {/* Window height on left */}
+          <VDim
+            x={winX - 10}
+            y1={winY}
+            y2={winY + winH * (1400 / 2100)}
+            label="1400"
+          />
+          {/* Door height on right (full) */}
+          <VDim x={winX + winW + 14} y1={winY} y2={winY + winH} label="2100" />
+        </>
+      ) : (
+        <>
+          <HDim x1={winX} x2={winX + winW} y={winY - 14} label={String(width)} />
+          <VDim x={winX + winW + 14} y1={winY} y2={winY + winH} label={String(height)} />
+        </>
+      )}
     </svg>
   );
 };
