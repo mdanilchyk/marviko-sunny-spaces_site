@@ -323,9 +323,39 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
       {type === "triple" && renderTriple()}
       {type === "balcony" && renderBalcony()}
 
-      {/* Dimension arrows: width on top, height on right */}
-      <HDim x1={winX} x2={winX + winW} y={winY - 14} label={String(width)} />
-      <VDim x={winX + winW + 14} y1={winY} y2={winY + winH} label={String(height)} />
+      {/* Dimension arrows */}
+      {type === "balcony" ? (
+        <>
+          {/* Window width on top (over window panel only) */}
+          <HDim
+            x1={winX}
+            x2={winX + (winW - winW * 0.36 - GAP)}
+            y={winY - 14}
+            label="1500"
+          />
+          {/* Door width on bottom */}
+          <HDim
+            x1={winX + (winW - winW * 0.36 - GAP) + GAP}
+            x2={winX + winW}
+            y={winY + winH + 16}
+            label="680"
+          />
+          {/* Window height on left */}
+          <VDim
+            x={winX - 10}
+            y1={winY}
+            y2={winY + winH * (1400 / 2100)}
+            label="1400"
+          />
+          {/* Door height on right (full) */}
+          <VDim x={winX + winW + 14} y1={winY} y2={winY + winH} label="2100" />
+        </>
+      ) : (
+        <>
+          <HDim x1={winX} x2={winX + winW} y={winY - 14} label={String(width)} />
+          <VDim x={winX + winW + 14} y1={winY} y2={winY + winH} label={String(height)} />
+        </>
+      )}
     </svg>
   );
 };
