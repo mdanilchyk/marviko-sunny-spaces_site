@@ -190,7 +190,7 @@ const WindowsPage = () => {
                     {p.prices.map((item, i) => (
                       <div key={i} className="p-6 flex flex-col items-center text-center border-b sm:border-r border-border last:border-r-0 bg-card hover:bg-accent-light/50 transition-colors">
                         <div className="flex items-center justify-center py-4">
-                          <PricingWindowSVG type={item.type} />
+                          <PricingWindowSVG type={item.type} width={parseInt(item.size.split("×")[1])} height={parseInt(item.size.split("×")[0])} />
                         </div>
                         <p className="text-sm font-semibold mb-1">{item.title}</p>
                         <p className="text-xs font-mono text-muted-foreground mb-1">Размер {item.size} мм</p>
