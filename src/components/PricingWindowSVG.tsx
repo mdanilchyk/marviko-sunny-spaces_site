@@ -153,23 +153,17 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
   const uid = React.useId().replace(/:/g, "");
 
   // Drawing area dimensions (inside the SVG, after padding for arrows)
-  // Aspect ratio mapping: pick a base canvas, then scale window to fit.
-  const CANVAS_W = 280;
+  // Fixed height for ALL window types; width adapts to real proportions.
   const CANVAS_H = 240;
-
-  const innerW = CANVAS_W - PAD_LEFT - PAD_RIGHT;
   const innerH = CANVAS_H - PAD_TOP - PAD_BOTTOM;
 
-  // Real aspect from props
   const ratio = width / height;
-  let winW = innerW;
-  let winH = winW / ratio;
-  if (winH > innerH) {
-    winH = innerH;
-    winW = winH * ratio;
-  }
-  const winX = PAD_LEFT + (innerW - winW) / 2;
-  const winY = PAD_TOP + (innerH - winH) / 2;
+  const winH = innerH;
+  const winW = winH * ratio;
+
+  const CANVAS_W = winW + PAD_LEFT + PAD_RIGHT;
+  const winX = PAD_LEFT;
+  const winY = PAD_TOP;
 
   const renderSingle = () => {
     const gx = winX + FRAME;
