@@ -683,8 +683,8 @@ const Index = () => {
                   onClick={() => setReviewModal(review.screenshot)}
                   className="text-left w-full h-full"
                 >
-                  {review.type === "messenger" ? (
-                    <div className="bg-muted rounded-2xl rounded-tl-sm p-5 relative h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
+{review.type === "messenger" ? (
+                    <div className="bg-white rounded-2xl rounded-tl-sm p-5 relative h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-primary-foreground" style={{ backgroundColor: "#7360F2" }}>V</span>
                         <span className="font-bold text-sm">{review.name}</span>
@@ -703,7 +703,7 @@ const Index = () => {
                       </p>
                     </div>
                   ) : (
-                    <div className="bg-card rounded-xl p-5 border-2 border-primary h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
+                    <div className="bg-white rounded-xl p-5 border-2 border-primary h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
                       <div className="flex items-center gap-2 mb-3">
                         <FileText className="w-5 h-5 text-primary" />
                         <div>
