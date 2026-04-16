@@ -23,8 +23,8 @@ const INNER_R = 6;
 // Padding around the window for dimension arrows / labels
 const PAD_TOP = 28;
 const PAD_RIGHT = 36;
-const PAD_LEFT = 6;
-const PAD_BOTTOM = 6;
+const PAD_LEFT = 28;
+const PAD_BOTTOM = 28;
 
 const ARROW_COLOR = "#2171C1";
 const HANDLE_COLOR = "#777";
