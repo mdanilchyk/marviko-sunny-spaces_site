@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Clock, Award, ThumbsUp, Star, ChevronDown, Eye, ArrowRight, Phone, MapPin, Send, FileText, PhoneCall, ChevronLeft, ChevronRight, CreditCard, CalendarDays, X } from "lucide-react";
@@ -34,6 +34,8 @@ import reviewEkaterina from "@/assets/review-ekaterina.jpg";
 import reviewNatalia from "@/assets/review-natalia.jpg";
 import reviewBobrovich from "@/assets/review-bobrovich.jpg";
 import reviewRentalTrade from "@/assets/review-rental-trade.jpg";
+import reviewRadkevich from "@/assets/review-radkevich.jpg";
+import reviewKvadroenergo from "@/assets/review-kvadroenergo.jpg";
 
 
 const categories = [
@@ -133,6 +135,24 @@ const reviews = [
     rating: 5,
     screenshot: reviewRentalTrade,
   },
+  {
+    type: "official" as const,
+    name: "Радкевич Л.И.",
+    position: "а/г Городьки, ул. Советское, 42",
+    date: "2025",
+    text: "Установили окна в доме вовремя, качественно, аккуратно. Мастера вежливые, всё объясняли по ходу работы. Не ожидали, что такой объём работы смогут выполнить настолько быстро. Цена соответствует качеству, чувствуется ответственный подход. Окна выглядят шикарно. Видно, что мастера опытные, работают на совесть.",
+    rating: 5,
+    screenshot: reviewRadkevich,
+  },
+  {
+    type: "official" as const,
+    name: "ООО «КвадроЭнерго»",
+    position: "Директор В.А. Жердетский",
+    date: "март 2026",
+    text: "Хотим выразить благодарность ООО «МАРВИКО» за работу по изготовлению и монтажу окон ПВХ. Все вопросы начиная с замера и заканчивая монтажом решались быстро и грамотно. Менеджер грамотно проконсультировал и просчитал всё с учётом особенностей нашего здания. Монтаж был выполнен качественно, с соблюдением всех оговорённых сроков.",
+    rating: 5,
+    screenshot: reviewKvadroenergo,
+  },
 ];
 
 const faqData = [
@@ -227,6 +247,7 @@ const Index = () => {
   const [ctaSending, setCtaSending] = useState(false);
   const [ctaSubmitted, setCtaSubmitted] = useState(false);
   const [reviewModal, setReviewModal] = useState<string | null>(null);
+  const reviewsRef = useRef<HTMLDivElement>(null);
   const certImages = [
     { img: certSpk1, title: "Свидетельство о технической компетентности" },
     { img: certSpk2, title: "Область технической компетентности" },
