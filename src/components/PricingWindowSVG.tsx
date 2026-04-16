@@ -59,7 +59,7 @@ const OpeningMark = ({ x, y, w, h }: { x: number; y: number; w: number; h: numbe
   const bl = { x: x + 4, y: y + h - 4 };
   const br = { x: x + w - 4, y: y + h - 4 };
   return (
-    <g stroke="#4a4a4a" strokeWidth={1.4} strokeLinecap="round" fill="none" opacity={0.85}>
+    <g stroke="#7a7a7a" strokeWidth={0.8} strokeLinecap="round" fill="none" opacity={0.4}>
       {/* turn (poворотное) — diagonal from bottom-left to top-right */}
       <line x1={bl.x} y1={bl.y} x2={br.x} y2={top} />
       {/* tilt (откидное) — triangle from bottom corners to top center */}
