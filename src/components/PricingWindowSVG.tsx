@@ -6,138 +6,159 @@ type Props = {
   height: number;
 };
 
+const FRAME = 14;
+const GAP = 6;
+const R = 10;
+const INNER_R = 6;
+
+const Glass = ({ x, y, w, h, id }: { x: number; y: number; w: number; h: number; id: string }) => (
+  <g>
+    <rect x={x} y={y} width={w} height={h} rx={INNER_R} fill={`url(#glass-${id})`} />
+    <rect x={x} y={y} width={w} height={h * 0.38} rx={INNER_R} fill={`url(#highlight-${id})`} />
+  </g>
+);
+
+const Frame = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) => (
+  <rect
+    x={x}
+    y={y}
+    width={w}
+    height={h}
+    rx={R}
+    fill="#ffffff"
+    stroke="#e0e0e0"
+    strokeWidth={1.5}
+    filter="url(#frameShadow)"
+  />
+);
+
+const Handle = ({ x, y }: { x: number; y: number }) => (
+  <rect x={x} y={y} width={5} height={24} rx={2.5} fill="#888" />
+);
+
+const OpeningCross = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) => (
+  <g opacity={0.35}>
+    <line x1={x} y1={y} x2={x + w} y2={y + h} stroke="#555" strokeWidth={1.2} />
+    <line x1={x + w} y1={y} x2={x} y2={y + h} stroke="#555" strokeWidth={1.2} />
+  </g>
+);
+
 const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
-  const frame = 14;
-  const gap = 8;
+  const uid = React.useId().replace(/:/g, "");
 
-  const Glass = ({ x, y, w, h }: any) => (
-    <g>
-      {/* основное стекло */}
-      <rect x={x} y={y} width={w} height={h} rx={6} fill="url(#glassMain)" />
-
-      {/* блик сверху */}
-      <rect x={x} y={y} width={w} height={h * 0.35} rx={6} fill="url(#glassHighlight)" />
-    </g>
-  );
-
-  const Frame = ({ x, y, w, h }: any) => (
-    <rect
-      x={x}
-      y={y}
-      width={w}
-      height={h}
-      rx={10}
-      fill="#ffffff"
-      stroke="#e7e7e7"
-      strokeWidth={2}
-      style={{
-        filter: "drop-shadow(0 8px 18px rgba(0,0,0,0.08))",
-      }}
-    />
-  );
-
-  const Handle = ({ x, y }: any) => <rect x={x} y={y} width={5} height={26} rx={3} fill="#777" />;
-
-  const OpenLines = ({ x, y, w, h }: any) => (
-    <>
-      <line x1={x} y1={y} x2={x + w} y2={y + h} stroke="#666" strokeWidth={1.6} />
-      <line x1={x + w} y1={y} x2={x} y2={y + h} stroke="#666" strokeWidth={1.6} />
-    </>
-  );
-
-  const renderSingle = () => (
-    <>
-      <Frame x={0} y={0} w={width} h={height} />
-      <Glass x={frame} y={frame} w={width - frame * 2} h={height - frame * 2} />
-      <OpenLines x={frame} y={frame} w={width - frame * 2} h={height - frame * 2} />
-      <Handle x={width - frame - 12} y={height / 2 - 13} />
-    </>
-  );
-
-  const renderDouble = () => {
-    const w = (width - gap) / 2;
-
+  const renderSingle = () => {
+    const gx = FRAME, gy = FRAME;
+    const gw = width - FRAME * 2, gh = height - FRAME * 2;
     return (
       <>
         <Frame x={0} y={0} w={width} h={height} />
+        <Glass x={gx} y={gy} w={gw} h={gh} id={uid} />
+        <OpeningCross x={gx} y={gy} w={gw} h={gh} />
+        <Handle x={width - FRAME - 11} y={height / 2 - 12} />
+      </>
+    );
+  };
 
-        {/* левая */}
-        <Glass x={frame} y={frame} w={w - frame} h={height - frame * 2} />
-
-        {/* правая */}
-        <Glass x={w + gap / 2} y={frame} w={w - frame} h={height - frame * 2} />
-        <OpenLines x={w + gap / 2} y={frame} w={w - frame} h={height - frame * 2} />
-        <Handle x={width - frame - 12} y={height / 2 - 13} />
+  const renderDouble = () => {
+    const halfW = (width - GAP) / 2;
+    const lx = FRAME, ly = FRAME;
+    const lw = halfW - FRAME, lh = height - FRAME * 2;
+    const rx = halfW + GAP, ry = FRAME;
+    const rw = halfW - FRAME, rh = lh;
+    return (
+      <>
+        <Frame x={0} y={0} w={width} h={height} />
+        {/* left – fixed */}
+        <Glass x={lx} y={ly} w={lw} h={lh} id={uid} />
+        {/* divider */}
+        <rect x={halfW - GAP / 2} y={0} width={GAP} height={height} fill="#ffffff" />
+        {/* right – opening */}
+        <Glass x={rx} y={ry} w={rw} h={rh} id={uid} />
+        <OpeningCross x={rx} y={ry} w={rw} h={rh} />
+        <Handle x={rx + 4} y={height / 2 - 12} />
       </>
     );
   };
 
   const renderTriple = () => {
-    const w = (width - gap * 2) / 3;
+    const paneW = (width - GAP * 2) / 3;
+    const gh = height - FRAME * 2;
+
+    const x1 = FRAME, w1 = paneW - FRAME;
+    const x2 = paneW + GAP, w2 = paneW - GAP;
+    const x3 = paneW * 2 + GAP, w3 = paneW - FRAME;
 
     return (
       <>
         <Frame x={0} y={0} w={width} h={height} />
-
-        {/* левая */}
-        <Glass x={frame} y={frame} w={w - frame} h={height - frame * 2} />
-
-        {/* центр */}
-        <Glass x={w + gap / 2} y={frame} w={w - frame} h={height - frame * 2} />
-        <OpenLines x={w + gap / 2} y={frame} w={w - frame} h={height - frame * 2} />
-        <Handle x={w * 2} y={height / 2 - 13} />
-
-        {/* правая */}
-        <Glass x={w * 2 + gap} y={frame} w={w - frame} h={height - frame * 2} />
+        {/* left – fixed */}
+        <Glass x={x1} y={FRAME} w={w1} h={gh} id={uid} />
+        {/* divider 1 */}
+        <rect x={paneW - GAP / 2} y={0} width={GAP} height={height} fill="#ffffff" />
+        {/* center – opening */}
+        <Glass x={x2} y={FRAME} w={w2} h={gh} id={uid} />
+        <OpeningCross x={x2} y={FRAME} w={w2} h={gh} />
+        <Handle x={x2 + w2 - 9} y={height / 2 - 12} />
+        {/* divider 2 */}
+        <rect x={paneW * 2 - GAP / 2} y={0} width={GAP} height={height} fill="#ffffff" />
+        {/* right – fixed */}
+        <Glass x={x3} y={FRAME} w={w3} h={gh} id={uid} />
       </>
     );
   };
 
   const renderBalcony = () => {
-    const doorWidth = width * 0.4;
-    const windowWidth = width - doorWidth - gap;
+    const doorW = width * 0.42;
+    const winW = width - doorW - GAP;
+    const gh = height - FRAME * 2;
+
+    const doorGlassH = gh * 0.6;
+    const doorPanelH = gh - doorGlassH - 4;
 
     return (
       <>
         <Frame x={0} y={0} w={width} h={height} />
-
-        {/* окно */}
-        <Glass x={frame} y={frame} w={windowWidth - frame} h={height - frame * 2} />
-
-        {/* дверь */}
-        <Glass x={windowWidth + gap} y={frame} w={doorWidth - frame} h={height * 0.6 - frame} />
-        <OpenLines x={windowWidth + gap} y={frame} w={doorWidth - frame} h={height * 0.6 - frame} />
-
-        {/* низ двери */}
+        {/* window – fixed */}
+        <Glass x={FRAME} y={FRAME} w={winW - FRAME} h={gh} id={uid} />
+        {/* divider */}
+        <rect x={winW - GAP / 2} y={0} width={GAP} height={height} fill="#ffffff" />
+        {/* door glass */}
+        <Glass x={winW + GAP} y={FRAME} w={doorW - FRAME} h={doorGlassH} id={uid} />
+        <OpeningCross x={winW + GAP} y={FRAME} w={doorW - FRAME} h={doorGlassH} />
+        {/* door panel */}
         <rect
-          x={windowWidth + gap}
-          y={height * 0.6}
-          width={doorWidth - frame}
-          height={height * 0.4 - frame}
-          rx={6}
-          fill="#ffffff"
-          stroke="#e7e7e7"
+          x={winW + GAP}
+          y={FRAME + doorGlassH + 4}
+          width={doorW - FRAME}
+          height={doorPanelH}
+          rx={INNER_R}
+          fill="#f5f5f5"
+          stroke="#e0e0e0"
+          strokeWidth={1}
         />
-
-        <Handle x={windowWidth + doorWidth - frame - 12} y={height * 0.5} />
+        <Handle x={winW + GAP + 6} y={FRAME + doorGlassH * 0.5} />
       </>
     );
   };
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-[240px]" preserveAspectRatio="xMidYMid meet">
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      className="w-full h-[240px]"
+      preserveAspectRatio="xMidYMid meet"
+    >
       <defs>
-        {/* основное стекло */}
-        <linearGradient id="glassMain" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#e9f6ff" />
-          <stop offset="100%" stopColor="#b8dcff" />
+        <linearGradient id={`glass-${uid}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#dceefb" />
+          <stop offset="100%" stopColor="#a2d0f5" />
         </linearGradient>
-
-        {/* блик */}
-        <linearGradient id="glassHighlight" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.6)" />
+        <linearGradient id={`highlight-${uid}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="rgba(255,255,255,0.65)" />
           <stop offset="100%" stopColor="rgba(255,255,255,0)" />
         </linearGradient>
+        <filter id="frameShadow" x="-4%" y="-4%" width="108%" height="112%">
+          <feDropShadow dx="0" dy="4" stdDeviation="8" floodColor="#000" floodOpacity="0.08" />
+        </filter>
       </defs>
 
       {type === "single" && renderSingle()}
