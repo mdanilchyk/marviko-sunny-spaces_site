@@ -651,12 +651,34 @@ const Index = () => {
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection variant="fade-left">
-            <SectionLabel>Отзывы</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-10">Что говорят клиенты</h2>
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <SectionLabel>Отзывы</SectionLabel>
+                <h2 className="text-3xl sm:text-4xl text-display">Что говорят клиенты</h2>
+              </div>
+              <div className="hidden sm:flex gap-2">
+                <button
+                  onClick={() => { const el = reviewsRef.current; if (el) el.scrollBy({ left: -340, behavior: 'smooth' }); }}
+                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => { const el = reviewsRef.current; if (el) el.scrollBy({ left: 340, behavior: 'smooth' }); }}
+                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div
+            ref={reviewsRef}
+            className="flex gap-6 overflow-x-auto pb-4 -mb-4 snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+          >
             {reviews.map((review, i) => (
-              <AnimatedSection key={i} delay={i * 0.1} variant="fade-right">
+              <div key={i} className="flex-shrink-0 w-[300px] sm:w-[320px] snap-start">
                 <button
                   onClick={() => setReviewModal(review.screenshot)}
                   className="text-left w-full h-full"
@@ -704,7 +726,7 @@ const Index = () => {
                     </div>
                   )}
                 </button>
-              </AnimatedSection>
+              </div>
             ))}
           </div>
         </div>
