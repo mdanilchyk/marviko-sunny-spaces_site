@@ -462,7 +462,7 @@ const Index = () => {
                 >
                   {/* SVG Window illustration */}
                   <div className="flex items-center justify-center py-6 px-4">
-                    <PricingWindowSVG type={card.type} />
+                    <PricingWindowSVG type={card.type} width={card.type === "single" ? 800 : card.type === "double" ? 1300 : card.type === "triple" ? 2000 : 1500} height={card.type === "balcony" ? 2100 : 1400} />
                   </div>
 
                   <div className="px-6 pb-6 flex-1 flex flex-col">
