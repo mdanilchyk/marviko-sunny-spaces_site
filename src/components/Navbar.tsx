@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, MapPin, Clock, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/marviko-logo.png";
+import logo from "@/assets/marviko-logo.svg";
 
 interface SubmenuItem {
   label: string;
