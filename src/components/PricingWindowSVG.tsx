@@ -181,9 +181,9 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         <Frame x={winX} y={winY} w={winW} h={winH} />
         <Glass x={gx} y={gy} w={gw} h={gh} id={uid} />
         <OpeningMark x={gx} y={gy} w={gw} h={gh} />
-        {/* hinges on left, handle on right */}
-        <Hinges x={gx + 2} yTop={gy + 6} yBottom={gy + gh - 6} />
-        <Handle x={gx + gw - 4} y={gy + gh / 2 - 14} side="right" />
+        {/* hinges on right, handle on left */}
+        <Hinges x={gx + gw - 2} yTop={gy + 6} yBottom={gy + gh - 6} />
+        <Handle x={gx + 4} y={gy + gh / 2 - 14} side="left" />
       </>
     );
   };
@@ -232,9 +232,9 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         {/* center – opening */}
         <Glass x={x2} y={winY + FRAME} w={w2} h={gh} id={uid} />
         <OpeningMark x={x2} y={winY + FRAME} w={w2} h={gh} />
-        {/* hinges on left of center sash, handle on right */}
-        <Hinges x={x2 + 2} yTop={winY + FRAME + 6} yBottom={winY + FRAME + gh - 6} />
-        <Handle x={x2 + w2 - 4} y={winY + FRAME + gh / 2 - 14} side="right" />
+        {/* hinges on right of center sash, handle on left */}
+        <Hinges x={x2 + w2 - 2} yTop={winY + FRAME + 6} yBottom={winY + FRAME + gh - 6} />
+        <Handle x={x2 + 4} y={winY + FRAME + gh / 2 - 14} side="left" />
         {/* divider 2 */}
         <rect x={winX + paneW * 2 - GAP / 2} y={winY} width={GAP} height={winH} fill="#ffffff" />
         {/* right – fixed */}
