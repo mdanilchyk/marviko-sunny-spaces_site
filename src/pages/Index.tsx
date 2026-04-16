@@ -34,6 +34,8 @@ import reviewEkaterina from "@/assets/review-ekaterina.jpg";
 import reviewNatalia from "@/assets/review-natalia.jpg";
 import reviewBobrovich from "@/assets/review-bobrovich.jpg";
 import reviewRentalTrade from "@/assets/review-rental-trade.jpg";
+import reviewRadkevich from "@/assets/review-radkevich.jpg";
+import reviewKvadroenergo from "@/assets/review-kvadroenergo.jpg";
 
 
 const categories = [
