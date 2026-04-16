@@ -17,8 +17,8 @@ type Props = {
 
 const FRAME = 14;
 const GAP = 6;
-const R = 10;
-const INNER_R = 6;
+const R = 0;
+const INNER_R = 0;
 
 // Padding around the window for dimension arrows / labels
 const PAD_TOP = 28;
