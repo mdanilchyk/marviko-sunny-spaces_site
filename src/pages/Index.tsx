@@ -717,8 +717,8 @@ const Index = () => {
                         ))}
                       </div>
                       <p className="text-sm text-body text-muted-foreground flex-1">{review.text}</p>
-                      {review.date && (
-                        <p className="text-xs text-muted-foreground mt-3">{review.date}</p>
+{review.date && (
+                        <p className="text-xs text-muted-foreground text-right mt-3">{review.date}</p>
                       )}
                       <p className="text-xs text-primary mt-2 flex items-center gap-1">
                         <Eye className="w-3.5 h-3.5" /> Показать оригинал
