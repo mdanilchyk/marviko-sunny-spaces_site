@@ -291,12 +291,12 @@ const AccessoriesPage = () => {
 
               {/* Cylinders */}
               <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
-                <div className="grid grid-cols-2 aspect-[4/3]">
-                  <button onClick={() => setLightbox(accCylinderKey)} className="overflow-hidden">
-                    <img src={accCylinderKey} alt="Цилиндр ключ-ключ" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                <div className="grid grid-cols-2 aspect-[4/3] bg-white">
+                  <button onClick={() => setLightbox(accCylinderKey)} className="overflow-hidden p-2">
+                    <img src={accCylinderKey} alt="Цилиндр ключ-ключ" className="w-full h-full object-contain hover:scale-105 transition-transform duration-500" />
                   </button>
-                  <button onClick={() => setLightbox(accCylinderThumb)} className="overflow-hidden">
-                    <img src={accCylinderThumb} alt="Цилиндр ключ-барашек" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  <button onClick={() => setLightbox(accCylinderThumb)} className="overflow-hidden p-2">
+                    <img src={accCylinderThumb} alt="Цилиндр ключ-барашек" className="w-full h-full object-contain hover:scale-105 transition-transform duration-500" />
                   </button>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
