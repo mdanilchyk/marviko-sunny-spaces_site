@@ -238,44 +238,44 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
   };
 
   const renderBalcony = () => {
-    const doorW = winW * 0.42;
+    // Real proportions: window 1400mm tall × ~820mm wide, door 2100mm tall × 680mm wide
+    // winH already represents the FULL door height (2100mm)
+    const doorW = winW * (680 / 1500);
     const winPanelW = winW - doorW - GAP;
-    const gh = winH - FRAME * 2;
 
-    const doorGlassH = gh * 0.6;
-    const doorPanelH = gh - doorGlassH - 4;
+    // Window panel is shorter than door — aligned to top
+    const winPanelH = winH * (1400 / 2100);
+    const wgh = winPanelH - FRAME * 2;
+
+    // Door panel: top opening glass + small bottom fixed transom (~200mm)
+    const dgh = winH - FRAME * 2;
+    const transomH = dgh * (200 / (2100 - FRAME * 2));
+    const doorGlassH = dgh - transomH - GAP;
 
     const dx = winX + winPanelW + GAP;
     const dy = winY + FRAME;
+    const dInnerW = doorW - FRAME * 2;
 
     return (
       <>
-        <Frame x={winX} y={winY} w={winW} h={winH} />
-        {/* window – fixed */}
-        <Glass x={winX + FRAME} y={winY + FRAME} w={winPanelW - FRAME} h={gh} id={uid} />
-        {/* divider */}
-        <rect x={winX + winPanelW - GAP / 2} y={winY} width={GAP} height={winH} fill="#ffffff" />
-        {/* door glass – opening */}
-        <Glass x={dx} y={dy} w={doorW - FRAME} h={doorGlassH} id={uid} />
-        <OpeningMark x={dx} y={dy} w={doorW - FRAME} h={doorGlassH} />
-        {/* door panel */}
-        <rect
-          x={dx}
-          y={dy + doorGlassH + 4}
-          width={doorW - FRAME}
-          height={doorPanelH}
-          rx={INNER_R}
-          fill="#f5f5f5"
-          stroke="#e0e0e0"
-          strokeWidth={1}
-        />
-        {/* hinges on right side of door, handle on left (near divider) */}
+        {/* Window frame (shorter, top-aligned) */}
+        <Frame x={winX} y={winY} w={winPanelW} h={winPanelH} />
+        <Glass x={winX + FRAME} y={winY + FRAME} w={winPanelW - FRAME * 2} h={wgh} id={uid} />
+
+        {/* Door frame (full height) */}
+        <Frame x={winX + winPanelW + GAP} y={winY} w={doorW} h={winH} />
+        {/* door glass – opening (tilt-and-turn) */}
+        <Glass x={dx + FRAME} y={dy} w={dInnerW} h={doorGlassH} id={uid} />
+        <OpeningMark x={dx + FRAME} y={dy} w={dInnerW} h={doorGlassH} />
+        {/* fixed bottom transom */}
+        <Glass x={dx + FRAME} y={dy + doorGlassH + GAP} w={dInnerW} h={transomH} id={uid} />
+        {/* hinges on right side of door, handle on left */}
         <Hinges
-          x={dx + (doorW - FRAME) - 2}
+          x={dx + FRAME + dInnerW - 2}
           yTop={dy + 6}
-          yBottom={dy + gh - 6}
+          yBottom={dy + doorGlassH - 6}
         />
-        <Handle x={dx + 4} y={dy + doorGlassH * 0.5} side="left" />
+        <Handle x={dx + FRAME + 4} y={dy + doorGlassH * 0.5 - 14} side="left" />
       </>
     );
   };
