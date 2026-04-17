@@ -258,64 +258,69 @@ const AccessoriesPage = () => {
             </div>
           </AnimatedSection>
 
-          {/* Press garnish */}
+          {/* Locks, cylinders, garnish — unified card grid */}
           <AnimatedSection delay={0.2}>
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div>
-                <h3 className="text-xl font-bold mb-3">Нажимной гарнитур</h3>
-                <p className="text-sm text-muted-foreground mb-4">Комплект нажимного гарнитура для входных дверей ПВХ.</p>
-                <div className="flex flex-wrap gap-2">
-                  {["Белый", "Коричневый", "Антрацит"].map((c) => (
-                    <span key={c} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border text-muted-foreground">{c}</span>
-                  ))}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Press garnish */}
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
+                <button onClick={() => setLightbox(accPressGarnish)} className="aspect-[4/3] w-full overflow-hidden">
+                  <img src={accPressGarnish} alt="Нажимной гарнитур" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                </button>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="font-bold mb-2">Нажимной гарнитур</h3>
+                  <p className="text-sm text-muted-foreground mb-4">Комплект нажимного гарнитура для входных дверей ПВХ.</p>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {["Белый", "Коричневый", "Антрацит"].map((c) => (
+                      <span key={c} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border text-muted-foreground">{c}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <button onClick={() => setLightbox(accPressGarnish)} className="rounded-xl overflow-hidden border border-border hover:border-primary transition-colors bg-card">
-                <img src={accPressGarnish} alt="Нажимной гарнитур" className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" />
-              </button>
-            </div>
-          </AnimatedSection>
 
-          {/* Locks & cylinders */}
-          <AnimatedSection delay={0.3}>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden">
+              {/* Single lock */}
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
                 <button onClick={() => setLightbox(accSingleLock)} className="aspect-[4/3] w-full overflow-hidden">
                   <img src={accSingleLock} alt="Одноточечный замок" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                 </button>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="font-bold mb-2">Одноточечный замок</h3>
                   <p className="text-sm text-muted-foreground">Базовый замок для балконных и входных дверей ПВХ.</p>
                 </div>
               </div>
-              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden">
+
+              {/* Multi-point lock */}
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
                 <button onClick={() => setLightbox(accMultiLock)} className="aspect-[4/3] w-full overflow-hidden">
                   <img src={accMultiLock} alt="Многозапорный замок" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                 </button>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="font-bold mb-2">Многозапорный замок</h3>
                   <p className="text-sm text-muted-foreground">Повышенная безопасность — несколько точек запирания по всей высоте двери.</p>
                 </div>
               </div>
-              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden">
-                <div className="grid grid-cols-2">
-                  <button onClick={() => setLightbox(accCylinderKey)} className="aspect-square overflow-hidden">
+
+              {/* Cylinders */}
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
+                <div className="grid grid-cols-2 aspect-[4/3]">
+                  <button onClick={() => setLightbox(accCylinderKey)} className="overflow-hidden">
                     <img src={accCylinderKey} alt="Цилиндр ключ-ключ" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                   </button>
-                  <button onClick={() => setLightbox(accCylinderThumb)} className="aspect-square overflow-hidden">
+                  <button onClick={() => setLightbox(accCylinderThumb)} className="overflow-hidden">
                     <img src={accCylinderThumb} alt="Цилиндр ключ-барашек" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                   </button>
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="font-bold mb-2">Цилиндры</h3>
                   <p className="text-sm text-muted-foreground">Конфигурации: ключ-ключ, ключ-барашек.</p>
                 </div>
               </div>
-              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden">
+
+              {/* Window handle */}
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
                 <button onClick={() => setLightbox(accWindowHandle)} className="aspect-[4/3] w-full overflow-hidden">
                   <img src={accWindowHandle} alt="Оконная ручка" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                 </button>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <h3 className="font-bold mb-2">Оконная ручка</h3>
                   <p className="text-sm text-muted-foreground">Цвета: белый, коричневый, антрацит.</p>
                 </div>
