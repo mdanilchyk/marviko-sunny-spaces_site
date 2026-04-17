@@ -329,11 +329,11 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
           <>
             {/* window height — left vertical arrow */}
             <VDim x={winX - 14} y1={winY} y2={winY + winPanelH} label="1400" />
-            {/* door width — top arrow above the door panel only */}
+            {/* door width — bottom arrow under the door panel */}
             <HDim
               x1={winX + winPanelW + GAP}
               x2={winX + winW}
-              y={winY - 32}
+              y={winY + winH + 14}
               label="700"
             />
           </>
