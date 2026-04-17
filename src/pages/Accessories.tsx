@@ -237,12 +237,12 @@ const AccessoriesPage = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Door handle (скоба + штанга) */}
               <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
-                <div className="grid grid-cols-2 aspect-[4/3]">
-                  <button onClick={() => setLightbox(accDoorHandleInstalled)} className="overflow-hidden">
-                    <img src={accDoorHandleInstalled} alt="Ручка-скоба" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                <div className="grid grid-cols-2 aspect-[4/3] bg-white">
+                  <button onClick={() => setLightbox(accDoorHandleInstalled)} className="overflow-hidden p-2">
+                    <img src={accDoorHandleInstalled} alt="Ручка-скоба" className="w-full h-full object-contain hover:scale-105 transition-transform duration-500" />
                   </button>
-                  <button onClick={() => setLightbox(accDoorHandleBar)} className="overflow-hidden">
-                    <img src={accDoorHandleBar} alt="Ручка-штанга" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  <button onClick={() => setLightbox(accDoorHandleBar)} className="overflow-hidden p-2">
+                    <img src={accDoorHandleBar} alt="Ручка-штанга" className="w-full h-full object-contain hover:scale-105 transition-transform duration-500" />
                   </button>
                 </div>
                 <div className="p-6 flex flex-col flex-1">
