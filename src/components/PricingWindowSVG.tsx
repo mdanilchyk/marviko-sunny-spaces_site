@@ -275,11 +275,11 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
           stroke="#d8d8d8"
           strokeWidth={1}
         />
-        {/* hinges on right side of door, handle on left */}
+        {/* hinges on right side of door — top and bottom of full door (not just glass) */}
         <Hinges
           x={dx + FRAME + dInnerW - 2}
           yTop={dy + 6}
-          yBottom={dy + doorGlassH - 6}
+          yBottom={winY + winH - FRAME - 6}
         />
         <Handle x={dx + FRAME + 4} y={dy + doorGlassH * 0.5 - 14} side="left" />
       </>
