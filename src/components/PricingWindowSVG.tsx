@@ -245,32 +245,35 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
     const doorW = winW * (700 / 1500);
     const winPanelW = winW - doorW - GAP;
 
+    // Thinner frame for balcony block — so glass area looks larger
+    const BFRAME = 8;
+
     // Window panel is shorter than door — aligned to top
     const winPanelH = winH * (1400 / 2100);
-    const wgh = winPanelH - FRAME * 2;
+    const wgh = winPanelH - BFRAME * 2;
 
     // Door: glass area equals window glass height (1400mm); below — solid PVC panel
     const doorGlassH = wgh; // identical to window glass height
     const dx = winX + winPanelW + GAP;
-    const dy = winY + FRAME;
-    const dInnerW = doorW - FRAME * 2;
+    const dy = winY + BFRAME;
+    const dInnerW = doorW - BFRAME * 2;
     const panelTop = dy + doorGlassH + GAP;
-    const panelH = winY + winH - FRAME - panelTop;
+    const panelH = winY + winH - BFRAME - panelTop;
 
     return (
       <>
         {/* Window frame (shorter, top-aligned) */}
         <Frame x={winX} y={winY} w={winPanelW} h={winPanelH} />
-        <Glass x={winX + FRAME} y={winY + FRAME} w={winPanelW - FRAME * 2} h={wgh} id={uid} />
+        <Glass x={winX + BFRAME} y={winY + BFRAME} w={winPanelW - BFRAME * 2} h={wgh} id={uid} />
 
         {/* Door frame (full height) */}
         <Frame x={winX + winPanelW + GAP} y={winY} w={doorW} h={winH} />
         {/* door glass – opening (tilt-and-turn), same height as window glass */}
-        <Glass x={dx + FRAME} y={dy} w={dInnerW} h={doorGlassH} id={uid} />
-        <OpeningMark x={dx + FRAME} y={dy} w={dInnerW} h={doorGlassH} />
+        <Glass x={dx + BFRAME} y={dy} w={dInnerW} h={doorGlassH} id={uid} />
+        <OpeningMark x={dx + BFRAME} y={dy} w={dInnerW} h={doorGlassH} />
         {/* solid white PVC panel below glass (no blue fill) */}
         <rect
-          x={dx + FRAME}
+          x={dx + BFRAME}
           y={panelTop}
           width={dInnerW}
           height={panelH}
@@ -280,11 +283,11 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         />
         {/* hinges on right side of door — top and bottom of full door (not just glass) */}
         <Hinges
-          x={dx + FRAME + dInnerW - 2}
+          x={dx + BFRAME + dInnerW - 2}
           yTop={dy + 6}
-          yBottom={winY + winH - FRAME - 6}
+          yBottom={winY + winH - BFRAME - 6}
         />
-        <Handle x={dx + FRAME + 4} y={dy + doorGlassH * 0.5 - 14} side="left" />
+        <Handle x={dx + BFRAME + 4} y={dy + doorGlassH * 0.5 - 14} side="left" />
       </>
     );
   };
