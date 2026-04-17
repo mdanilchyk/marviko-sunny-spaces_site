@@ -243,6 +243,22 @@ const AccessoriesPage = () => {
           {/* Locks, cylinders, garnish — unified card grid */}
           <AnimatedSection delay={0.2}>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Door handle (скоба + штанга) */}
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
+                <div className="grid grid-cols-2 aspect-[4/3]">
+                  <button onClick={() => setLightbox(accDoorHandleInstalled)} className="overflow-hidden">
+                    <img src={accDoorHandleInstalled} alt="Ручка-скоба" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </button>
+                  <button onClick={() => setLightbox(accDoorHandleBar)} className="overflow-hidden">
+                    <img src={accDoorHandleBar} alt="Ручка-штанга" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </button>
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="font-bold mb-2">Ручка дверная</h3>
+                  <p className="text-sm text-muted-foreground">Конфигурации: ручка-скоба, ручка-штанга. В различных цветах и размерах.</p>
+                </div>
+              </div>
+
               {/* Press garnish */}
               <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
                 <button onClick={() => setLightbox(accPressGarnish)} className="aspect-[4/3] w-full overflow-hidden">
