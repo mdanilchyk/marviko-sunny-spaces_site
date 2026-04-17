@@ -240,26 +240,6 @@ const AccessoriesPage = () => {
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Ручки и замки для дверей</h2>
           </AnimatedSection>
 
-          {/* Handle gallery */}
-          <AnimatedSection delay={0.1}>
-            <div className="mb-8">
-              <h3 className="text-xl font-bold mb-2">Ручка-скоба дверная</h3>
-              <p className="text-sm text-muted-foreground mb-6">В различных цветах, конфигурации и размерности.</p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {doorHandleImages.map((h, i) => (
-                  <div key={i} className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
-                    <button onClick={() => setLightbox(h.img)} className="aspect-[4/3] w-full overflow-hidden">
-                      <img src={h.img} alt={h.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                    </button>
-                    <div className="p-6 flex flex-col flex-1">
-                      <h4 className="font-bold text-sm">{h.title}</h4>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-
           {/* Locks, cylinders, garnish — unified card grid */}
           <AnimatedSection delay={0.2}>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
