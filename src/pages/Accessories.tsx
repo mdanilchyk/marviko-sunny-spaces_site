@@ -123,11 +123,8 @@ const glassTypes = [
 ];
 
 const doorHandleImages = [
-  { img: accDoorHandleWhite, title: "Ручка-скоба белая" },
-  { img: accDoorHandleBrown, title: "Ручка-скоба коричневая" },
-  { img: accDoorHandleInstalled, title: "Ручка-скоба на двери" },
+  { img: accDoorHandleInstalled, title: "Ручка-скоба" },
   { img: accDoorHandleBar, title: "Ручка-штанга" },
-  { img: accDoorHandlesColors, title: "Ручки в различных цветах" },
 ];
 
 const AccessoriesPage = () => {
