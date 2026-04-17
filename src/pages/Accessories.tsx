@@ -119,11 +119,6 @@ const glassTypes = [
   { title: "Стекло триплекс", desc: "Многослойное стекло — при разрушении осколки остаются на плёнке" },
 ];
 
-const doorHandleImages = [
-  { img: accDoorHandleInstalled, title: "Ручка-скоба" },
-  { img: accDoorHandleBar, title: "Ручка-штанга" },
-];
-
 const AccessoriesPage = () => {
   const [orderModal, setOrderModal] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
