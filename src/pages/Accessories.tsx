@@ -10,11 +10,8 @@ import OrderModal from "@/components/OrderModal";
 import accLockOverlay from "@/assets/acc-lock-overlay.jpg";
 import accCableLock from "@/assets/acc-cable-lock.jpg";
 import accHandleKey from "@/assets/acc-handle-key.jpg";
-import accDoorHandleWhite from "@/assets/acc-door-handle-white.jpg";
 import accDoorHandleInstalled from "@/assets/acc-door-handle-installed.jpg";
 import accDoorHandleBar from "@/assets/acc-door-handle-bar.jpg";
-import accDoorHandlesColors from "@/assets/acc-door-handles-colors.jpg";
-import accDoorHandleBrown from "@/assets/acc-door-handle-brown.jpg";
 import accPressGarnish from "@/assets/acc-press-garnish.jpg";
 import accSingleLock from "@/assets/acc-single-lock.jpg";
 import accMultiLock from "@/assets/acc-multi-lock.jpg";
@@ -120,14 +117,6 @@ const glassTypes = [
   { title: "Со шпросом", desc: "Декоративная раскладка внутри стеклопакета для создания классического стиля" },
   { title: "Противоударные", desc: "Повышенная прочность — устойчивость к ударам и взлому" },
   { title: "Стекло триплекс", desc: "Многослойное стекло — при разрушении осколки остаются на плёнке" },
-];
-
-const doorHandleImages = [
-  { img: accDoorHandleWhite, title: "Ручка-скоба белая" },
-  { img: accDoorHandleBrown, title: "Ручка-скоба коричневая" },
-  { img: accDoorHandleInstalled, title: "Ручка-скоба на двери" },
-  { img: accDoorHandleBar, title: "Ручка-штанга" },
-  { img: accDoorHandlesColors, title: "Ручки в различных цветах" },
 ];
 
 const AccessoriesPage = () => {
@@ -243,29 +232,25 @@ const AccessoriesPage = () => {
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Ручки и замки для дверей</h2>
           </AnimatedSection>
 
-          {/* Handle gallery */}
-          <AnimatedSection delay={0.1}>
-            <div className="mb-8">
-              <h3 className="text-xl font-bold mb-2">Ручка-скоба дверная</h3>
-              <p className="text-sm text-muted-foreground mb-6">В различных цветах, конфигурации и размерности.</p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {doorHandleImages.map((h, i) => (
-                  <div key={i} className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
-                    <button onClick={() => setLightbox(h.img)} className="aspect-[4/3] w-full overflow-hidden">
-                      <img src={h.img} alt={h.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                    </button>
-                    <div className="p-6 flex flex-col flex-1">
-                      <h4 className="font-bold text-sm">{h.title}</h4>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-
           {/* Locks, cylinders, garnish — unified card grid */}
           <AnimatedSection delay={0.2}>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Door handle (скоба + штанга) */}
+              <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
+                <div className="grid grid-cols-2 aspect-[4/3]">
+                  <button onClick={() => setLightbox(accDoorHandleInstalled)} className="overflow-hidden">
+                    <img src={accDoorHandleInstalled} alt="Ручка-скоба" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </button>
+                  <button onClick={() => setLightbox(accDoorHandleBar)} className="overflow-hidden">
+                    <img src={accDoorHandleBar} alt="Ручка-штанга" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  </button>
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="font-bold mb-2">Ручка дверная</h3>
+                  <p className="text-sm text-muted-foreground">Конфигурации: ручка-скоба, ручка-штанга. В различных цветах и размерах.</p>
+                </div>
+              </div>
+
               {/* Press garnish */}
               <div className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
                 <button onClick={() => setLightbox(accPressGarnish)} className="aspect-[4/3] w-full overflow-hidden">
