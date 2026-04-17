@@ -319,6 +319,26 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
       {/* Dimension arrows: width on top, height on right */}
       <HDim x1={winX} x2={winX + winW} y={winY - 14} label={String(width)} />
       <VDim x={winX + winW + 14} y1={winY} y2={winY + winH} label={String(height)} />
+
+      {/* Extra dimension arrows for balcony block: window height (1400) + door width (700) */}
+      {type === "balcony" && (() => {
+        const doorW = winW * (700 / 1500);
+        const winPanelW = winW - doorW - GAP;
+        const winPanelH = winH * (1400 / 2100);
+        return (
+          <>
+            {/* window height — left vertical arrow */}
+            <VDim x={winX - 14} y1={winY} y2={winY + winPanelH} label="1400" />
+            {/* door width — top arrow above the door panel only */}
+            <HDim
+              x1={winX + winPanelW + GAP}
+              x2={winX + winW}
+              y={winY - 32}
+              label="700"
+            />
+          </>
+        );
+      })()}
     </svg>
   );
 };
