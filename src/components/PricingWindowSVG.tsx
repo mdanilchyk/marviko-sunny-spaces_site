@@ -238,23 +238,21 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
   };
 
   const renderBalcony = () => {
-    // Real proportions: window 1400mm tall × ~820mm wide, door 2100mm tall × 680mm wide
-    // winH already represents the FULL door height (2100mm)
-    const doorW = winW * (680 / 1500);
+    // Real proportions: total 1500mm wide, window 800×1400, door 700×2100
+    const doorW = winW * (700 / 1500);
     const winPanelW = winW - doorW - GAP;
 
     // Window panel is shorter than door — aligned to top
     const winPanelH = winH * (1400 / 2100);
     const wgh = winPanelH - FRAME * 2;
 
-    // Door panel: top opening glass + small bottom fixed transom (~200mm)
-    const dgh = winH - FRAME * 2;
-    const transomH = dgh * (200 / (2100 - FRAME * 2));
-    const doorGlassH = dgh - transomH - GAP;
-
+    // Door: glass area equals window glass height (1400mm); below — solid PVC panel
+    const doorGlassH = wgh; // identical to window glass height
     const dx = winX + winPanelW + GAP;
     const dy = winY + FRAME;
     const dInnerW = doorW - FRAME * 2;
+    const panelTop = dy + doorGlassH + GAP;
+    const panelH = winY + winH - FRAME - panelTop;
 
     return (
       <>
@@ -264,11 +262,19 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
 
         {/* Door frame (full height) */}
         <Frame x={winX + winPanelW + GAP} y={winY} w={doorW} h={winH} />
-        {/* door glass – opening (tilt-and-turn) */}
+        {/* door glass – opening (tilt-and-turn), same height as window glass */}
         <Glass x={dx + FRAME} y={dy} w={dInnerW} h={doorGlassH} id={uid} />
         <OpeningMark x={dx + FRAME} y={dy} w={dInnerW} h={doorGlassH} />
-        {/* fixed bottom transom */}
-        <Glass x={dx + FRAME} y={dy + doorGlassH + GAP} w={dInnerW} h={transomH} id={uid} />
+        {/* solid white PVC panel below glass (no blue fill) */}
+        <rect
+          x={dx + FRAME}
+          y={panelTop}
+          width={dInnerW}
+          height={panelH}
+          fill="#ffffff"
+          stroke="#d8d8d8"
+          strokeWidth={1}
+        />
         {/* hinges on right side of door, handle on left */}
         <Hinges
           x={dx + FRAME + dInnerW - 2}
