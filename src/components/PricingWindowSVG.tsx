@@ -155,15 +155,18 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
   // Drawing area dimensions (inside the SVG, after padding for arrows)
   // Fixed height for ALL window types; width adapts to real proportions.
   const CANVAS_H = 240;
-  const innerH = CANVAS_H - PAD_TOP - PAD_BOTTOM;
+  // Balcony has extra arrows: left vertical (window height) + extra top arrow (door width)
+  const padLeft = type === "balcony" ? 36 : PAD_LEFT;
+  const padTop = type === "balcony" ? 46 : PAD_TOP;
+  const innerH = CANVAS_H - padTop - PAD_BOTTOM;
 
   const ratio = width / height;
   const winH = innerH;
   const winW = winH * ratio;
 
-  const CANVAS_W = winW + PAD_LEFT + PAD_RIGHT;
-  const winX = PAD_LEFT;
-  const winY = PAD_TOP;
+  const CANVAS_W = winW + padLeft + PAD_RIGHT;
+  const winX = padLeft;
+  const winY = padTop;
 
   const renderSingle = () => {
     const gx = winX + FRAME;
