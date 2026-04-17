@@ -245,14 +245,19 @@ const AccessoriesPage = () => {
 
           {/* Handle gallery */}
           <AnimatedSection delay={0.1}>
-            <div className="mb-12">
-              <h3 className="text-xl font-bold mb-6">Ручка-скоба дверная</h3>
+            <div className="mb-8">
+              <h3 className="text-xl font-bold mb-2">Ручка-скоба дверная</h3>
               <p className="text-sm text-muted-foreground mb-6">В различных цветах, конфигурации и размерности.</p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {doorHandleImages.map((h, i) => (
-                  <button key={i} onClick={() => setLightbox(h.img)} className="rounded-xl overflow-hidden border border-border hover:border-primary transition-colors bg-card aspect-square">
-                    <img src={h.img} alt={h.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                  </button>
+                  <div key={i} className="bg-card rounded-xl border border-border card-shadow overflow-hidden flex flex-col">
+                    <button onClick={() => setLightbox(h.img)} className="aspect-[4/3] w-full overflow-hidden">
+                      <img src={h.img} alt={h.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                    </button>
+                    <div className="p-6 flex flex-col flex-1">
+                      <h4 className="font-bold text-sm">{h.title}</h4>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
