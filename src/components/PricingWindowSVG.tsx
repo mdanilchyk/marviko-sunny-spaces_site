@@ -226,13 +226,13 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         {/* center – opening */}
         <Glass x={x2} y={winY + FRAME} w={w2} h={gh} id={uid} />
         <OpeningMark x={x2} y={winY + FRAME} w={w2} h={gh} />
-        {/* hinges on right of center sash, handle on left */}
-        <Hinges x={x2 + w2 - 2} yTop={winY + FRAME + 6} yBottom={winY + FRAME + gh - 6} />
-        <Handle x={x2 + 4} y={winY + FRAME + gh / 2 - 14} side="left" />
         {/* divider 2 */}
         <rect x={winX + paneW * 2 - GAP / 2} y={winY} width={GAP} height={winH} fill="#ffffff" />
         {/* right – fixed */}
         <Glass x={x3} y={winY + FRAME} w={w3} h={gh} id={uid} />
+        {/* hinges on right of center sash — drawn LAST so they sit on top of divider */}
+        <Hinges x={x2 + w2 - 2} yTop={winY + FRAME + 6} yBottom={winY + FRAME + gh - 6} />
+        <Handle x={x2 + 4} y={winY + FRAME + gh / 2 - 14} side="left" />
       </>
     );
   };
