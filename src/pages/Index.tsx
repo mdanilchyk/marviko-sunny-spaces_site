@@ -57,7 +57,7 @@ const categories = [
   },
   {
     title: "Перегородки ПВХ",
-    description: "Зонирование офисов, школ и коммерческих помещений",
+    description: "Перегородки из ПВХ и алюминия",
     img: servicePartitions,
     link: "/partitions",
     price: "по запросу",
