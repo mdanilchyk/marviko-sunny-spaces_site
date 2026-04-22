@@ -36,6 +36,12 @@ import reviewBobrovich from "@/assets/review-bobrovich.jpg";
 import reviewRentalTrade from "@/assets/review-rental-trade.jpg";
 import reviewRadkevich from "@/assets/review-radkevich.jpg";
 import reviewKvadroenergo from "@/assets/review-kvadroenergo.jpg";
+import reviewNeftebitum1 from "@/assets/review-neftebitum-1.jpg";
+import reviewNeftebitum2 from "@/assets/review-neftebitum-2.jpg";
+import reviewDsdStroyinvest from "@/assets/review-dsd-stroyinvest.jpg";
+import reviewDenisevich from "@/assets/review-denisevich.jpg";
+import reviewChervenRaipo from "@/assets/review-cherven-raipo.jpg";
+import reviewMinskoblgaz from "@/assets/review-minskoblgaz.jpg";
 
 
 const categories = [
