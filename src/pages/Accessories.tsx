@@ -180,7 +180,7 @@ const AccessoriesPage = () => {
             <SectionLabel>Москитные сетки</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-4">Изготавливаем москитные сетки</h2>
             <p className="text-muted-foreground text-body mb-10 max-w-2xl">
-              Обычные, антикошка, антимошка, антипыль. Цвета профиля: белый, серый, коричневый. Доставка по г. Червень бесплатная.
+              Обычные, антикошка, антимошка, антипыль. Цвета профиля: белый, серый, коричневый.
             </p>
           </AnimatedSection>
           <div className="space-y-6">
