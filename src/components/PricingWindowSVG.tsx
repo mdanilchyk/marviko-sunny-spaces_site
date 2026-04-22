@@ -51,13 +51,19 @@ const Frame = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) =
   />
 );
 
-/** Tilt-and-turn opening indicator: two lines from left corners meeting at the handle (right edge center). */
+/** Tilt-and-turn opening indicator:
+ *  - V-shape: two lines from left corners (hinges) to the handle on the right edge center (tilt)
+ *  - Plus a diagonal from bottom-left corner to top-right corner (turn) */
 const OpeningMark = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) => {
   const tl = { x: x + 4, y: y + 4 };
   const bl = { x: x + 4, y: y + h - 4 };
+  const tr = { x: x + w - 4, y: y + 4 };
   const handle = { x: x + w - 4, y: y + h / 2 };
   return (
     <g stroke="#7a7a7a" strokeWidth={0.9} strokeLinecap="round" fill="none" opacity={0.5}>
+      {/* turn — full diagonal from bottom-left to top-right */}
+      <line x1={bl.x} y1={bl.y} x2={tr.x} y2={tr.y} />
+      {/* tilt — V to handle */}
       <line x1={tl.x} y1={tl.y} x2={handle.x} y2={handle.y} />
       <line x1={bl.x} y1={bl.y} x2={handle.x} y2={handle.y} />
     </g>
