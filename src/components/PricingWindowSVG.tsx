@@ -51,39 +51,22 @@ const Frame = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) =
   />
 );
 
-/** Tilt-and-turn opening indicator: two diagonals from bottom corners to top center
- *  + an extra diagonal to clearly mark the sash. Strong, visible lines. */
+/** Tilt-and-turn opening indicator: two lines from left corners meeting at the handle (right edge center). */
 const OpeningMark = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) => {
-  const cx = x + w / 2;
-  const top = y + 4;
+  const tl = { x: x + 4, y: y + 4 };
   const bl = { x: x + 4, y: y + h - 4 };
-  const br = { x: x + w - 4, y: y + h - 4 };
+  const handle = { x: x + w - 4, y: y + h / 2 };
   return (
-    <g stroke="#7a7a7a" strokeWidth={0.8} strokeLinecap="round" fill="none" opacity={0.4}>
-      {/* turn (poворотное) — diagonal from bottom-left to top-right */}
-      <line x1={bl.x} y1={bl.y} x2={br.x} y2={top} />
-      {/* tilt (откидное) — triangle from bottom corners to top center */}
-      <line x1={bl.x} y1={bl.y} x2={cx} y2={top} />
-      <line x1={br.x} y1={br.y} x2={cx} y2={top} />
+    <g stroke="#7a7a7a" strokeWidth={0.9} strokeLinecap="round" fill="none" opacity={0.5}>
+      <line x1={tl.x} y1={tl.y} x2={handle.x} y2={handle.y} />
+      <line x1={bl.x} y1={bl.y} x2={handle.x} y2={handle.y} />
     </g>
   );
 };
 
-/** Handle on the opening side */
-const Handle = ({ x, y, side = "right" }: { x: number; y: number; side?: "left" | "right" }) => (
-  <g>
-    {/* base plate */}
-    <rect x={x - 3} y={y - 4} width={6} height={28} rx={2} fill="#bdbdbd" />
-    {/* lever */}
-    <rect
-      x={side === "right" ? x - 1 : x - 11}
-      y={y + 8}
-      width={12}
-      height={4}
-      rx={1.5}
-      fill={HANDLE_COLOR}
-    />
-  </g>
+/** Handle: small vertical rectangle on the right edge of the glass, vertically centered. */
+const Handle = ({ x, y }: { x: number; y: number; side?: "left" | "right" }) => (
+  <rect x={x - 2} y={y} width={4} height={20} rx={1.5} fill={HANDLE_COLOR} />
 );
 
 /** Hinges on the hinge side of the sash (top + bottom) */
@@ -178,9 +161,8 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         <Frame x={winX} y={winY} w={winW} h={winH} />
         <Glass x={gx} y={gy} w={gw} h={gh} id={uid} />
         <OpeningMark x={gx} y={gy} w={gw} h={gh} />
-        {/* hinges on right, handle on left */}
-        <Hinges x={gx + gw - 2} yTop={gy + 6} yBottom={gy + gh - 6} />
-        <Handle x={gx + 4} y={gy + gh / 2 - 14} side="left" />
+        {/* handle on right edge, vertically centered */}
+        <Handle x={gx + gw - 4} y={gy + gh / 2 - 10} />
       </>
     );
   };
@@ -204,9 +186,8 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         {/* right – opening */}
         <Glass x={rx} y={ry} w={rw} h={lh} id={uid} />
         <OpeningMark x={rx} y={ry} w={rw} h={lh} />
-        {/* hinges on right side, handle near divider (left edge of the opening sash) */}
-        <Hinges x={rx + rw - 2} yTop={ry + 6} yBottom={ry + lh - 6} />
-        <Handle x={rx + 4} y={ry + lh / 2 - 14} side="left" />
+        {/* handle on right edge, vertically centered */}
+        <Handle x={rx + rw - 4} y={ry + lh / 2 - 10} />
       </>
     );
   };
@@ -233,9 +214,8 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         <rect x={winX + paneW * 2 - GAP / 2} y={winY} width={GAP} height={winH} fill="#ffffff" />
         {/* right – fixed */}
         <Glass x={x3} y={winY + FRAME} w={w3} h={gh} id={uid} />
-        {/* hinges on right of center sash — drawn LAST so they sit on top of divider */}
-        <Hinges x={x2 + w2 - 2} yTop={winY + FRAME + 6} yBottom={winY + FRAME + gh - 6} />
-        <Handle x={x2 + 4} y={winY + FRAME + gh / 2 - 14} side="left" />
+        {/* handle on right edge of center sash, vertically centered */}
+        <Handle x={x2 + w2 - 4} y={winY + FRAME + gh / 2 - 10} />
       </>
     );
   };
@@ -281,13 +261,8 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
           stroke="#d8d8d8"
           strokeWidth={1}
         />
-        {/* hinges on right side of door — top and bottom of full door (not just glass) */}
-        <Hinges
-          x={dx + BFRAME + dInnerW - 2}
-          yTop={dy + 6}
-          yBottom={winY + winH - BFRAME - 6}
-        />
-        <Handle x={dx + BFRAME + 4} y={dy + doorGlassH * 0.5 - 14} side="left" />
+        {/* handle on right edge of door glass, vertically centered */}
+        <Handle x={dx + BFRAME + dInnerW - 4} y={dy + doorGlassH / 2 - 10} />
       </>
     );
   };
