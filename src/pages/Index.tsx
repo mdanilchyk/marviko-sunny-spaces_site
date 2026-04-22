@@ -50,7 +50,7 @@ const categories = [
 
   {
     title: "Входные двери",
-    description: "Входные, балконные двери из ПВХ",
+    description: "Входные двери из ПВХ и алюминия, балконные двери из ПВХ",
     img: serviceDoors,
     link: "/doors",
     price: "от 650 BYN",
