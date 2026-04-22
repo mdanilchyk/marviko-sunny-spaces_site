@@ -64,21 +64,9 @@ const OpeningMark = ({ x, y, w, h }: { x: number; y: number; w: number; h: numbe
   );
 };
 
-/** Handle on the opening side */
-const Handle = ({ x, y, side = "right" }: { x: number; y: number; side?: "left" | "right" }) => (
-  <g>
-    {/* base plate */}
-    <rect x={x - 3} y={y - 4} width={6} height={28} rx={2} fill="#bdbdbd" />
-    {/* lever */}
-    <rect
-      x={side === "right" ? x - 1 : x - 11}
-      y={y + 8}
-      width={12}
-      height={4}
-      rx={1.5}
-      fill={HANDLE_COLOR}
-    />
-  </g>
+/** Handle: small vertical rectangle on the right edge of the glass, vertically centered. */
+const Handle = ({ x, y }: { x: number; y: number; side?: "left" | "right" }) => (
+  <rect x={x - 2} y={y} width={4} height={20} rx={1.5} fill={HANDLE_COLOR} />
 );
 
 /** Hinges on the hinge side of the sash (top + bottom) */
