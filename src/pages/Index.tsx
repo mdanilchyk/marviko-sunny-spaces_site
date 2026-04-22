@@ -87,7 +87,7 @@ const categories = [
 
 const whyUs = [
   { icon: <Shield className="w-6 h-6" />, title: "Гарантия 10 лет", desc: "На все виды работ и материалы" },
-  { icon: <Clock className="w-6 h-6" />, title: "Работаем с 2007 года", desc: "Более 17 лет на рынке Беларуси" },
+  { icon: <Clock className="w-6 h-6" />, title: "Работаем с 2007 года", desc: "Более 19 лет на рынке Беларуси" },
   { icon: <Award className="w-6 h-6" />, title: "Сертифицированные профили", desc: "Качественные профильные системы" },
   { icon: <ThumbsUp className="w-6 h-6" />, title: "Собственное производство", desc: "г. Червень, полный цикл изготовления" },
 ];
