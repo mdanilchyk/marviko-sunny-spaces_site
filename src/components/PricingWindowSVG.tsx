@@ -51,21 +51,23 @@ const Frame = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) =
   />
 );
 
-/** Tilt-and-turn opening indicator:
- *  - V-shape: two lines from left corners (hinges) to the handle on the right edge center (tilt)
- *  - Plus a diagonal from bottom-left corner to top-right corner (turn) */
+/** Tilt-and-turn opening indicator — two separate V-shapes:
+ *  - Top V (turn): apex at the handle (right edge center), opens to the hinges on the left (top-left + bottom-left corners)
+ *  - Bottom V (tilt): apex at the bottom edge center, opens upward to the top corners */
 const OpeningMark = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) => {
   const tl = { x: x + 4, y: y + 4 };
   const bl = { x: x + 4, y: y + h - 4 };
   const tr = { x: x + w - 4, y: y + 4 };
   const handle = { x: x + w - 4, y: y + h / 2 };
+  const bottomMid = { x: x + w / 2, y: y + h - 4 };
   return (
-    <g stroke="#7a7a7a" strokeWidth={0.9} strokeLinecap="round" fill="none" opacity={0.5}>
-      {/* turn — full diagonal from bottom-left to top-right */}
-      <line x1={bl.x} y1={bl.y} x2={tr.x} y2={tr.y} />
-      {/* tilt — V to handle */}
-      <line x1={tl.x} y1={tl.y} x2={handle.x} y2={handle.y} />
-      <line x1={bl.x} y1={bl.y} x2={handle.x} y2={handle.y} />
+    <g stroke="#7a7a7a" strokeWidth={0.9} strokeLinecap="round" fill="none" opacity={0.55}>
+      {/* Turn V — from handle to both hinges (left corners) */}
+      <line x1={handle.x} y1={handle.y} x2={tl.x} y2={tl.y} />
+      <line x1={handle.x} y1={handle.y} x2={bl.x} y2={bl.y} />
+      {/* Tilt V — from bottom-center upward to both top corners */}
+      <line x1={bottomMid.x} y1={bottomMid.y} x2={tl.x} y2={tl.y} />
+      <line x1={bottomMid.x} y1={bottomMid.y} x2={tr.x} y2={tr.y} />
     </g>
   );
 };
