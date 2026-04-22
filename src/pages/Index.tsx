@@ -308,9 +308,10 @@ const Index = () => {
                   >
                     <option value="windows">Окна ПВХ</option>
                     <option value="alu-windows">Алюминиевые окна</option>
-                    <option value="balconies">Остекление балкона</option>
+                    <option value="balconies">Балкон из ПВХ</option>
                     <option value="alu-balconies">Алюминиевые балконы</option>
                     <option value="doors">Двери ПВХ</option>
+                    <option value="alu-doors">Алюминиевые двери</option>
                   </select>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
