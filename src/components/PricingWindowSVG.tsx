@@ -77,11 +77,11 @@ const Handle = ({ x, y }: { x: number; y: number; side?: "left" | "right" }) => 
   <rect x={x - 2} y={y} width={4} height={20} rx={1.5} fill={HANDLE_COLOR} />
 );
 
-/** Hinges on the hinge side of the sash (top + bottom) */
+/** Hinges on the hinge side of the sash (top + bottom) — subtle */
 const Hinges = ({ x, yTop, yBottom }: { x: number; yTop: number; yBottom: number }) => (
-  <g fill={HINGE_COLOR}>
-    <rect x={x - 2.5} y={yTop} width={5} height={10} rx={1.5} />
-    <rect x={x - 2.5} y={yBottom - 10} width={5} height={10} rx={1.5} />
+  <g fill={HINGE_COLOR} opacity={0.35}>
+    <rect x={x - 1.5} y={yTop} width={3} height={8} rx={1} />
+    <rect x={x - 1.5} y={yBottom - 8} width={3} height={8} rx={1} />
   </g>
 );
 
@@ -169,6 +169,7 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         <Frame x={winX} y={winY} w={winW} h={winH} />
         <Glass x={gx} y={gy} w={gw} h={gh} id={uid} />
         <OpeningMark x={gx} y={gy} w={gw} h={gh} />
+        <Hinges x={gx + 1} yTop={gy + 4} yBottom={gy + gh - 4} />
         {/* handle on right edge, vertically centered */}
         <Handle x={gx + gw - 4} y={gy + gh / 2 - 10} />
       </>
@@ -194,6 +195,7 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         {/* right – opening */}
         <Glass x={rx} y={ry} w={rw} h={lh} id={uid} />
         <OpeningMark x={rx} y={ry} w={rw} h={lh} />
+        <Hinges x={rx + 1} yTop={ry + 4} yBottom={ry + lh - 4} />
         {/* handle on right edge, vertically centered */}
         <Handle x={rx + rw - 4} y={ry + lh / 2 - 10} />
       </>
@@ -218,6 +220,7 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         {/* center – opening */}
         <Glass x={x2} y={winY + FRAME} w={w2} h={gh} id={uid} />
         <OpeningMark x={x2} y={winY + FRAME} w={w2} h={gh} />
+        <Hinges x={x2 + 1} yTop={winY + FRAME + 4} yBottom={winY + FRAME + gh - 4} />
         {/* divider 2 */}
         <rect x={winX + paneW * 2 - GAP / 2} y={winY} width={GAP} height={winH} fill="#ffffff" />
         {/* right – fixed */}
@@ -275,6 +278,8 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
           w={dInnerW}
           h={winH - BFRAME * 2}
         />
+        {/* hinges along the FULL door height (left edge of door) */}
+        <Hinges x={dx + BFRAME + 1} yTop={winY + BFRAME + 4} yBottom={winY + winH - BFRAME - 4} />
         {/* handle on right edge of the door, vertically centered on the WHOLE door */}
         <Handle x={dx + BFRAME + dInnerW - 4} y={winY + winH / 2 - 10} />
       </>
