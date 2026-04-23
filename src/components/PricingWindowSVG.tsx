@@ -77,11 +77,11 @@ const Handle = ({ x, y }: { x: number; y: number; side?: "left" | "right" }) => 
   <rect x={x - 2} y={y} width={4} height={20} rx={1.5} fill={HANDLE_COLOR} />
 );
 
-/** Hinges on the hinge side of the sash (top + bottom) */
+/** Hinges on the hinge side of the sash (top + bottom) — subtle */
 const Hinges = ({ x, yTop, yBottom }: { x: number; yTop: number; yBottom: number }) => (
-  <g fill={HINGE_COLOR}>
-    <rect x={x - 2.5} y={yTop} width={5} height={10} rx={1.5} />
-    <rect x={x - 2.5} y={yBottom - 10} width={5} height={10} rx={1.5} />
+  <g fill={HINGE_COLOR} opacity={0.35}>
+    <rect x={x - 1.5} y={yTop} width={3} height={8} rx={1} />
+    <rect x={x - 1.5} y={yBottom - 8} width={3} height={8} rx={1} />
   </g>
 );
 
