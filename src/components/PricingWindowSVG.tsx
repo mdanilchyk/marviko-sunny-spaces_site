@@ -169,6 +169,7 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         <Frame x={winX} y={winY} w={winW} h={winH} />
         <Glass x={gx} y={gy} w={gw} h={gh} id={uid} />
         <OpeningMark x={gx} y={gy} w={gw} h={gh} />
+        <Hinges x={gx + 1} yTop={gy + 4} yBottom={gy + gh - 4} />
         {/* handle on right edge, vertically centered */}
         <Handle x={gx + gw - 4} y={gy + gh / 2 - 10} />
       </>
