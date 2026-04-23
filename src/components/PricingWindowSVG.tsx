@@ -169,9 +169,10 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         <Frame x={winX} y={winY} w={winW} h={winH} />
         <Glass x={gx} y={gy} w={gw} h={gh} id={uid} />
         <OpeningMark x={gx} y={gy} w={gw} h={gh} />
-        <Hinges x={gx + 1} yTop={gy + 4} yBottom={gy + gh - 4} />
-        {/* handle on right edge, vertically centered */}
-        <Handle x={gx + gw - 4} y={gy + gh / 2 - 10} />
+        {/* hinges on right edge */}
+        <Hinges x={gx + gw - 1} yTop={gy + 4} yBottom={gy + gh - 4} />
+        {/* handle on left edge, vertically centered */}
+        <Handle x={gx + 4} y={gy + gh / 2 - 10} />
       </>
     );
   };
@@ -195,9 +196,10 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         {/* right – opening */}
         <Glass x={rx} y={ry} w={rw} h={lh} id={uid} />
         <OpeningMark x={rx} y={ry} w={rw} h={lh} />
-        <Hinges x={rx + 1} yTop={ry + 4} yBottom={ry + lh - 4} />
-        {/* handle on right edge, vertically centered */}
-        <Handle x={rx + rw - 4} y={ry + lh / 2 - 10} />
+        {/* hinges on right edge */}
+        <Hinges x={rx + rw - 1} yTop={ry + 4} yBottom={ry + lh - 4} />
+        {/* handle on left edge, vertically centered */}
+        <Handle x={rx + 4} y={ry + lh / 2 - 10} />
       </>
     );
   };
@@ -220,13 +222,14 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         {/* center – opening */}
         <Glass x={x2} y={winY + FRAME} w={w2} h={gh} id={uid} />
         <OpeningMark x={x2} y={winY + FRAME} w={w2} h={gh} />
-        <Hinges x={x2 + 1} yTop={winY + FRAME + 4} yBottom={winY + FRAME + gh - 4} />
+        {/* hinges on right edge of center sash */}
+        <Hinges x={x2 + w2 - 1} yTop={winY + FRAME + 4} yBottom={winY + FRAME + gh - 4} />
         {/* divider 2 */}
         <rect x={winX + paneW * 2 - GAP / 2} y={winY} width={GAP} height={winH} fill="#ffffff" />
         {/* right – fixed */}
         <Glass x={x3} y={winY + FRAME} w={w3} h={gh} id={uid} />
-        {/* handle on right edge of center sash, vertically centered */}
-        <Handle x={x2 + w2 - 4} y={winY + FRAME + gh / 2 - 10} />
+        {/* handle on left edge of center sash, vertically centered */}
+        <Handle x={x2 + 4} y={winY + FRAME + gh / 2 - 10} />
       </>
     );
   };
