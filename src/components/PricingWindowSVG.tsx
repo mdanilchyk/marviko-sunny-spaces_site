@@ -55,16 +55,16 @@ const Frame = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) =
  *  - Turn V: apex at the handle (right edge center), opens to the hinges on the left (top-left + bottom-left corners)
  *  - Tilt V: apex at the top edge center, opens downward to the bottom corners */
 const OpeningMark = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) => {
-  const tl = { x: x + 4, y: y + 4 };
-  const bl = { x: x + 4, y: y + h - 4 };
+  const tr = { x: x + w - 4, y: y + 4 };
   const br = { x: x + w - 4, y: y + h - 4 };
-  const handle = { x: x + w - 4, y: y + h / 2 };
+  const bl = { x: x + 4, y: y + h - 4 };
+  const handle = { x: x + 4, y: y + h / 2 };
   const topMid = { x: x + w / 2, y: y + 4 };
   return (
     <g stroke="#7a7a7a" strokeWidth={0.9} strokeLinecap="round" fill="none" opacity={0.55}>
-      {/* Turn V — from handle to both hinges (left corners) */}
-      <line x1={handle.x} y1={handle.y} x2={tl.x} y2={tl.y} />
-      <line x1={handle.x} y1={handle.y} x2={bl.x} y2={bl.y} />
+      {/* Turn V — from handle (left) to both hinges (right corners) */}
+      <line x1={handle.x} y1={handle.y} x2={tr.x} y2={tr.y} />
+      <line x1={handle.x} y1={handle.y} x2={br.x} y2={br.y} />
       {/* Tilt V — from top-center downward to both bottom corners */}
       <line x1={topMid.x} y1={topMid.y} x2={bl.x} y2={bl.y} />
       <line x1={topMid.x} y1={topMid.y} x2={br.x} y2={br.y} />
@@ -169,9 +169,10 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         <Frame x={winX} y={winY} w={winW} h={winH} />
         <Glass x={gx} y={gy} w={gw} h={gh} id={uid} />
         <OpeningMark x={gx} y={gy} w={gw} h={gh} />
-        <Hinges x={gx + 1} yTop={gy + 4} yBottom={gy + gh - 4} />
-        {/* handle on right edge, vertically centered */}
-        <Handle x={gx + gw - 4} y={gy + gh / 2 - 10} />
+        {/* hinges on right edge */}
+        <Hinges x={gx + gw - 1} yTop={gy + 4} yBottom={gy + gh - 4} />
+        {/* handle on left edge, vertically centered */}
+        <Handle x={gx + 4} y={gy + gh / 2 - 10} />
       </>
     );
   };
@@ -195,9 +196,10 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         {/* right – opening */}
         <Glass x={rx} y={ry} w={rw} h={lh} id={uid} />
         <OpeningMark x={rx} y={ry} w={rw} h={lh} />
-        <Hinges x={rx + 1} yTop={ry + 4} yBottom={ry + lh - 4} />
-        {/* handle on right edge, vertically centered */}
-        <Handle x={rx + rw - 4} y={ry + lh / 2 - 10} />
+        {/* hinges on right edge */}
+        <Hinges x={rx + rw - 1} yTop={ry + 4} yBottom={ry + lh - 4} />
+        {/* handle on left edge, vertically centered */}
+        <Handle x={rx + 4} y={ry + lh / 2 - 10} />
       </>
     );
   };
@@ -220,13 +222,14 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         {/* center – opening */}
         <Glass x={x2} y={winY + FRAME} w={w2} h={gh} id={uid} />
         <OpeningMark x={x2} y={winY + FRAME} w={w2} h={gh} />
-        <Hinges x={x2 + 1} yTop={winY + FRAME + 4} yBottom={winY + FRAME + gh - 4} />
+        {/* hinges on right edge of center sash */}
+        <Hinges x={x2 + w2 - 1} yTop={winY + FRAME + 4} yBottom={winY + FRAME + gh - 4} />
         {/* divider 2 */}
         <rect x={winX + paneW * 2 - GAP / 2} y={winY} width={GAP} height={winH} fill="#ffffff" />
         {/* right – fixed */}
         <Glass x={x3} y={winY + FRAME} w={w3} h={gh} id={uid} />
-        {/* handle on right edge of center sash, vertically centered */}
-        <Handle x={x2 + w2 - 4} y={winY + FRAME + gh / 2 - 10} />
+        {/* handle on left edge of center sash, vertically centered */}
+        <Handle x={x2 + 4} y={winY + FRAME + gh / 2 - 10} />
       </>
     );
   };
@@ -278,10 +281,10 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
           w={dInnerW}
           h={winH - BFRAME * 2}
         />
-        {/* hinges along the FULL door height (left edge of door) */}
-        <Hinges x={dx + BFRAME + 1} yTop={winY + BFRAME + 4} yBottom={winY + winH - BFRAME - 4} />
-        {/* handle on right edge of the door, vertically centered on the WHOLE door */}
-        <Handle x={dx + BFRAME + dInnerW - 4} y={winY + winH / 2 - 10} />
+        {/* hinges along the FULL door height (right edge of door) */}
+        <Hinges x={dx + BFRAME + dInnerW - 1} yTop={winY + BFRAME + 4} yBottom={winY + winH - BFRAME - 4} />
+        {/* handle on left edge of the door, vertically centered on the WHOLE door */}
+        <Handle x={dx + BFRAME + 4} y={winY + winH / 2 - 10} />
       </>
     );
   };
