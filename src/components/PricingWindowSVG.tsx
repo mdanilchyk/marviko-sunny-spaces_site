@@ -258,7 +258,6 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
         <Frame x={winX + winPanelW + GAP} y={winY} w={doorW} h={winH} />
         {/* door glass – opening (tilt-and-turn), same height as window glass */}
         <Glass x={dx + BFRAME} y={dy} w={dInnerW} h={doorGlassH} id={uid} />
-        <OpeningMark x={dx + BFRAME} y={dy} w={dInnerW} h={doorGlassH} />
         {/* solid white PVC panel below glass (no blue fill) */}
         <rect
           x={dx + BFRAME}
@@ -269,8 +268,15 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
           stroke="#d8d8d8"
           strokeWidth={1}
         />
-        {/* handle on right edge of door glass, vertically centered */}
-        <Handle x={dx + BFRAME + dInnerW - 4} y={dy + doorGlassH / 2 - 10} />
+        {/* Opening marks span the FULL door height (glass + panel) */}
+        <OpeningMark
+          x={dx + BFRAME}
+          y={dy}
+          w={dInnerW}
+          h={winH - BFRAME * 2}
+        />
+        {/* handle on right edge of the door, vertically centered on the WHOLE door */}
+        <Handle x={dx + BFRAME + dInnerW - 4} y={winY + winH / 2 - 10} />
       </>
     );
   };
