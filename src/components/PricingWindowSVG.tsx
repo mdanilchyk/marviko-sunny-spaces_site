@@ -55,16 +55,16 @@ const Frame = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) =
  *  - Turn V: apex at the handle (right edge center), opens to the hinges on the left (top-left + bottom-left corners)
  *  - Tilt V: apex at the top edge center, opens downward to the bottom corners */
 const OpeningMark = ({ x, y, w, h }: { x: number; y: number; w: number; h: number }) => {
-  const tl = { x: x + 4, y: y + 4 };
-  const bl = { x: x + 4, y: y + h - 4 };
+  const tr = { x: x + w - 4, y: y + 4 };
   const br = { x: x + w - 4, y: y + h - 4 };
-  const handle = { x: x + w - 4, y: y + h / 2 };
+  const bl = { x: x + 4, y: y + h - 4 };
+  const handle = { x: x + 4, y: y + h / 2 };
   const topMid = { x: x + w / 2, y: y + 4 };
   return (
     <g stroke="#7a7a7a" strokeWidth={0.9} strokeLinecap="round" fill="none" opacity={0.55}>
-      {/* Turn V — from handle to both hinges (left corners) */}
-      <line x1={handle.x} y1={handle.y} x2={tl.x} y2={tl.y} />
-      <line x1={handle.x} y1={handle.y} x2={bl.x} y2={bl.y} />
+      {/* Turn V — from handle (left) to both hinges (right corners) */}
+      <line x1={handle.x} y1={handle.y} x2={tr.x} y2={tr.y} />
+      <line x1={handle.x} y1={handle.y} x2={br.x} y2={br.y} />
       {/* Tilt V — from top-center downward to both bottom corners */}
       <line x1={topMid.x} y1={topMid.y} x2={bl.x} y2={bl.y} />
       <line x1={topMid.x} y1={topMid.y} x2={br.x} y2={br.y} />
