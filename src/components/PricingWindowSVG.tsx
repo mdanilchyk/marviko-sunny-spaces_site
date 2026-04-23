@@ -278,6 +278,8 @@ const PricingWindowSVG: React.FC<Props> = ({ type, width, height }) => {
           w={dInnerW}
           h={winH - BFRAME * 2}
         />
+        {/* hinges along the FULL door height (left edge of door) */}
+        <Hinges x={dx + BFRAME + 1} yTop={winY + BFRAME + 4} yBottom={winY + winH - BFRAME - 4} />
         {/* handle on right edge of the door, vertically centered on the WHOLE door */}
         <Handle x={dx + BFRAME + dInnerW - 4} y={winY + winH / 2 - 10} />
       </>
