@@ -62,8 +62,8 @@ const categories = [
     price: "от 650 BYN",
   },
   {
-    title: "Перегородки",
-    description: "Перегородки из ПВХ и алюминия",
+    title: "Перегородки из ПВХ и алюминия",
+    description: "Зонирование офисов, школ и коммерческих помещений",
     img: servicePartitions,
     link: "/partitions",
     price: "по запросу",
