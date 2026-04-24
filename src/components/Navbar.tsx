@@ -40,6 +40,10 @@ const navItems: NavItem[] = [
   {
     label: "Перегородки",
     href: "/partitions",
+    submenu: [
+      { label: "Перегородки из ПВХ", href: "/partitions#pvc", desc: "Лёгкие конструкции для офисов и школ" },
+      { label: "Перегородки из алюминия", href: "/partitions#aluminum", desc: "Прочные системы для бизнес-центров" },
+    ],
   },
   {
     label: "Подоконники",
