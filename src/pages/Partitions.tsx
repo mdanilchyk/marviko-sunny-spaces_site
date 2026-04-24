@@ -52,6 +52,74 @@ const PartitionsPage = () => {
         </div>
       </section>
 
+      {/* PVC Partitions */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto section-padding">
+          <AnimatedSection>
+            <SectionLabel>ПВХ</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-4">Перегородки из ПВХ</h2>
+            <p className="text-base text-muted-foreground text-body max-w-2xl mb-10">
+              Лёгкие и доступные конструкции для зонирования офисов, школ, детских садов и торговых помещений. Тёплые на ощупь, не требуют сложного ухода.
+            </p>
+          </AnimatedSection>
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <AnimatedSection delay={0.1}>
+              <img src={partitionsOffice} alt="Перегородки из ПВХ в офисе" className="w-full rounded-xl object-cover aspect-[4/3]" />
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <ul className="flex flex-col gap-3">
+                {[
+                  "Полное или частичное остекление",
+                  "Любая конфигурация и размеры",
+                  "Возможность установки дверного блока",
+                  "Большой выбор цветов и ламинации",
+                  "Доступная стоимость и быстрый монтаж",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-body">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Aluminum Partitions */}
+      <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
+        <div className="container mx-auto section-padding">
+          <AnimatedSection>
+            <SectionLabel>Алюминий</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-4">Перегородки из алюминия</h2>
+            <p className="text-base text-muted-foreground text-body max-w-2xl mb-10">
+              Прочные и стильные конструкции для современных офисов, бизнес-центров и общественных зданий. Тонкие профили, большие площади остекления, презентабельный вид.
+            </p>
+          </AnimatedSection>
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <AnimatedSection delay={0.1}>
+              <ul className="flex flex-col gap-3 lg:order-2">
+                {[
+                  "Тонкий алюминиевый профиль",
+                  "Большие стеклянные модули",
+                  "Высокая прочность и долговечность",
+                  "Тёплые и холодные системы",
+                  "Современный офисный дизайн",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-body">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <img src={partitionsReal1} alt="Алюминиевые перегородки в офисе" className="w-full rounded-xl object-cover aspect-[4/3] lg:order-1" />
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
       {/* Objects grid */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
@@ -72,28 +140,6 @@ const PartitionsPage = () => {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Photo section */}
-      <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
-        <div className="container mx-auto section-padding">
-          <AnimatedSection>
-            <SectionLabel>Портфолио</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-10">Пример выполненной работы</h2>
-          </AnimatedSection>
-          <AnimatedSection delay={0.15}>
-            <div className="grid sm:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
-              <div>
-                <img src={partitionsOffice} alt="Офисные перегородки из ПВХ" className="w-full rounded-xl object-cover aspect-[4/3]" />
-                <p className="text-sm text-muted-foreground text-center mt-3">Зонирование помещения с дверным блоком</p>
-              </div>
-              <div>
-                <img src={partitionsReal1} alt="Перегородки ПВХ в офисе" className="w-full rounded-xl object-cover aspect-[4/3]" />
-                <p className="text-sm text-muted-foreground text-center mt-3">Офисные перегородки с дверью</p>
-              </div>
-            </div>
-          </AnimatedSection>
         </div>
       </section>
 
