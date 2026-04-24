@@ -62,7 +62,7 @@ const categories = [
     price: "от 650 BYN",
   },
   {
-    title: "Перегородки ПВХ",
+    title: "Перегородки",
     description: "Перегородки из ПВХ и алюминия",
     img: servicePartitions,
     link: "/partitions",
