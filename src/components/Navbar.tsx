@@ -21,8 +21,8 @@ const navItems: NavItem[] = [
     label: "Окна",
     href: "/windows",
     submenu: [
-      { label: "Все окна ПВХ", href: "/windows", desc: "Полный каталог оконных конструкций" },
-      { label: "Цены на окна", href: "/windows", desc: "Актуальный прайс-лист" },
+      { label: "Окна ПВХ", href: "/windows#pvc", desc: "Энергоэффективные окна из ПВХ-профиля" },
+      { label: "Алюминиевые окна", href: "/windows#aluminum", desc: "Тёплые и холодные алюминиевые системы" },
     ],
   },
 
