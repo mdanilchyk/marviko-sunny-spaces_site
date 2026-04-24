@@ -55,7 +55,7 @@ const categories = [
 
 
   {
-    title: "Входные двери",
+    title: "Двери",
     description: "Входные двери из ПВХ и алюминия, балконные двери из ПВХ",
     img: serviceDoors,
     link: "/doors",
