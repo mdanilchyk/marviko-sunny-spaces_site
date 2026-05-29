@@ -83,7 +83,7 @@ const PortfolioPage = () => {
   const filtered = filter === "Все" ? projects : projects.filter((p) => p.category === filter);
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       <Navbar />
 
       <section className="dark-section py-20">
@@ -162,7 +162,7 @@ const PortfolioPage = () => {
       </AnimatePresence>
 
       <Footer />
-    </div>
+    </main>
   );
 };
 

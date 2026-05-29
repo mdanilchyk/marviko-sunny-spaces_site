@@ -304,7 +304,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       <Navbar onOrderClick={() => setOrderModal(true)} />
 
       {/* Hero - lighter warm feel */}
@@ -433,7 +433,7 @@ const Index = () => {
       </section>
 
       {/* Services - mosokna style grid cards with icons */}
-      <section className="py-20 bg-background">
+      <section id="services" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection variant="fade-left">
             <SectionLabel>Продукция</SectionLabel>
@@ -467,7 +467,7 @@ const Index = () => {
       </section>
 
       {/* Why Us */}
-      <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
+      <section id="about" className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
           <AnimatedSection variant="fade-right">
             <SectionLabel>Преимущества</SectionLabel>
@@ -1047,7 +1047,7 @@ const Index = () => {
 
 
       {/* Contacts */}
-      <section className="py-20 bg-background">
+      <section id="contacts" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection variant="fade-right">
             <SectionLabel>Контакты</SectionLabel>
@@ -1241,7 +1241,7 @@ const Index = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </main>
   );
 };
 

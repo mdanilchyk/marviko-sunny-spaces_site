@@ -38,7 +38,7 @@ const WindowsillsPage = () => {
   const allGallery = [...galleryItems, { img: windowsillCatalog, caption: "Каталог цветов премиум подоконников" }];
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       <Navbar onOrderClick={() => setOrderModal(true)} />
 
       {/* Hero */}
@@ -236,7 +236,7 @@ const WindowsillsPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </main>
   );
 };
 

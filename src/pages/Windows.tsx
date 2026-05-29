@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Check, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -85,7 +86,15 @@ const WindowsPage = () => {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [orderModal, setOrderModal] = useState(false);
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
+      <Helmet>
+        <title>Окна ПВХ в Минске — цены и установка | Марвико</title>
+        <meta
+          name="description"
+          content="Окна ПВХ в Минске от производителя. Профили Montblanc, гарантия 10 лет, бесплатный замер. Звоните: +375 29 567-77-56."
+        />
+        <link rel="canonical" href="https://marviko.by/windows" />
+      </Helmet>
       <Navbar onOrderClick={() => setOrderModal(true)} />
 
       {/* Hero */}
@@ -311,7 +320,7 @@ const WindowsPage = () => {
       </AnimatePresence>
 
       <OrderModal open={orderModal} onClose={() => setOrderModal(false)} subject="Заказ окна — сайт Марвико" />
-    </div>
+    </main>
   );
 };
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -26,7 +27,15 @@ const BalconiesPage = () => {
   const [orderModal, setOrderModal] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
+      <Helmet>
+        <title>Остекление балконов в Минске — цены | Марвико</title>
+        <meta
+          name="description"
+          content="Остекление балконов в Минске от 800 рублей. Холодное и тёплое остекление, бесплатный замер. +375 29 567-77-56."
+        />
+        <link rel="canonical" href="https://marviko.by/balconies" />
+      </Helmet>
       <Navbar onOrderClick={() => setOrderModal(true)} />
 
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #243A2A)" }}>
@@ -93,7 +102,7 @@ const BalconiesPage = () => {
       <Footer />
 
       <OrderModal open={orderModal} onClose={() => setOrderModal(false)} subject="Заказ расчёта балкона — сайт Марвико" />
-    </div>
+    </main>
   );
 };
 

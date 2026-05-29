@@ -124,7 +124,7 @@ const AccessoriesPage = () => {
   const [lightbox, setLightbox] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       <Navbar onOrderClick={() => setOrderModal(true)} />
 
       {/* Hero */}
@@ -365,7 +365,7 @@ const AccessoriesPage = () => {
       </AnimatePresence>
 
       <OrderModal open={orderModal} onClose={() => setOrderModal(false)} subject="Аксессуары — сайт Марвико" />
-    </div>
+    </main>
   );
 };
 

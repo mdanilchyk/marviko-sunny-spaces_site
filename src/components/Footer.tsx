@@ -129,7 +129,7 @@ const Footer = () => {
           {/* Contacts */}
           <div>
             <h4 className="font-bold mb-5 text-sm uppercase tracking-wider" style={{ color: "hsl(0 0% 80%)" }}>Контакты</h4>
-            <div className="flex flex-col gap-4">
+            <address className="flex flex-col gap-4 not-italic">
               <a
                 href="tel:+375295677756"
                 className="flex items-center gap-3 text-sm transition-colors duration-200"
@@ -171,7 +171,7 @@ const Footer = () => {
                 <Clock className="w-4 h-4 shrink-0" />
                 <span>Пн–Суб: 09.00 — 17.00</span>
               </div>
-            </div>
+            </address>
           </div>
         </div>
 

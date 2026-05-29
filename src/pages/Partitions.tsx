@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Check, School, Building2, ShoppingCart, Landmark, ArrowRight, Phone, Send } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -24,7 +25,15 @@ const PartitionsPage = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
+      <Helmet>
+        <title>Перегородки ПВХ в Минске — офисные и домашние | Марвико</title>
+        <meta
+          name="description"
+          content="Перегородки ПВХ в Минске. Офисные и домашние, под заказ. Бесплатный замер. Звоните: +375 29 567-77-56."
+        />
+        <link rel="canonical" href="https://marviko.by/partitions" />
+      </Helmet>
       <Navbar onOrderClick={() => setOrderModal(true)} />
 
       {/* Hero */}
@@ -153,7 +162,7 @@ const PartitionsPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </main>
   );
 };
 

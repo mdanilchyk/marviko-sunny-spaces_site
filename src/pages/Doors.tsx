@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Check, ArrowRight, Phone, Send, Eye, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -56,7 +57,15 @@ const DoorsPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
+      <Helmet>
+        <title>Двери ПВХ в Минске — входные и межкомнатные | Марвико</title>
+        <meta
+          name="description"
+          content="Двери ПВХ в Минске. Входные и межкомнатные, установка под ключ. Гарантия 10 лет. Звоните: +375 29 567-77-56."
+        />
+        <link rel="canonical" href="https://marviko.by/doors" />
+      </Helmet>
       <Navbar onOrderClick={() => setOrderModal(true)} />
 
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #3A2518)" }}>
@@ -208,7 +217,7 @@ const DoorsPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </main>
   );
 };
 
