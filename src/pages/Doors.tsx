@@ -61,7 +61,7 @@ const DoorsPage = () => {
 
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #3A2518)" }}>
         <div className="absolute inset-0 opacity-15">
-          <img src={doorReal2} alt="" className="w-full h-full object-cover" />
+          <img src={doorReal2} alt="Входные и межкомнатные двери ПВХ в Минске" className="w-full h-full object-cover" />
         </div>
         <div className="container mx-auto section-padding relative z-10">
           <AnimatedSection>

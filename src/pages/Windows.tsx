@@ -91,7 +91,7 @@ const WindowsPage = () => {
       {/* Hero */}
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #3A2518)" }}>
         <div className="absolute inset-0 opacity-15">
-          <img src={windowWork8} alt="" className="w-full h-full object-cover" />
+          <img src={windowWork8} alt="Окна ПВХ в Минске — производство и установка" className="w-full h-full object-cover" />
         </div>
         <div className="container mx-auto section-padding relative z-10">
           <AnimatedSection>

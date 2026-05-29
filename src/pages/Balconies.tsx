@@ -31,7 +31,7 @@ const BalconiesPage = () => {
 
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #243A2A)" }}>
         <div className="absolute inset-0 opacity-20">
-          <img src={balconyHero} alt="" className="w-full h-full object-cover" />
+          <img src={balconyHero} alt="Остекление балконов и лоджий в Минске — Марвико" className="w-full h-full object-cover" />
         </div>
         <div className="container mx-auto section-padding relative z-10">
           <AnimatedSection>
