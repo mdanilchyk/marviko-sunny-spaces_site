@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
+import { sendFormEmail } from "@/lib/formSubmit";
 import partitionsOffice from "@/assets/partitions-office.jpg";
 import partitionsReal1 from "@/assets/partitions-real-1.jpg";
 
@@ -14,19 +15,6 @@ const objects = [
   { icon: <ShoppingCart className="w-7 h-7" />, title: "Магазины и торговые центры", desc: "Перегородки любой конфигурации под коммерческие задачи" },
   { icon: <Landmark className="w-7 h-7" />, title: "Административные здания", desc: "Опыт работы на государственных и коммерческих объектах" },
 ];
-
-const sendFormEmail = async (subject: string, data: Record<string, string>) => {
-  try {
-    await fetch("https://formsubmit.co/ajax/Marviko2007@mail.ru", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ _subject: subject, ...data }),
-    });
-    return true;
-  } catch {
-    return false;
-  }
-};
 
 const PartitionsPage = () => {
   const [orderModal, setOrderModal] = useState(false);

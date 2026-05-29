@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
+import { sendFormEmail } from "@/lib/formSubmit";
 
 import windowsillReal1 from "@/assets/windowsill-real-1.jpg";
 import windowsillReal2 from "@/assets/windowsill-real-2.jpg";
@@ -26,19 +27,6 @@ const galleryItems = [
   { img: windowsillReal7, caption: "Подоконник венге премиум" },
   { img: windowsillReal8, caption: "Яркий оранжевый подоконник" },
 ];
-
-const sendFormEmail = async (subject: string, data: Record<string, string>) => {
-  try {
-    await fetch("https://formsubmit.co/ajax/Marviko2007@mail.ru", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ _subject: subject, ...data }),
-    });
-    return true;
-  } catch {
-    return false;
-  }
-};
 
 const WindowsillsPage = () => {
   const [orderModal, setOrderModal] = useState(false);

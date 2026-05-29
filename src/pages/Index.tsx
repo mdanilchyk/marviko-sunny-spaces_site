@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection, { ParallaxImage } from "@/components/AnimatedSection";
 import PricingWindowSVG from "@/components/PricingWindowSVG";
+import { sendFormEmail } from "@/lib/formSubmit";
 
 
 import heroImg from "@/assets/hero-interior.jpg";
@@ -273,19 +274,6 @@ const portfolioItems = [
 
 
 
-
-const sendFormEmail = async (subject: string, data: Record<string, string>) => {
-  try {
-    await fetch("https://formsubmit.co/ajax/Marviko2007@mail.ru", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({ _subject: subject, ...data }),
-    });
-    return true;
-  } catch {
-    return false;
-  }
-};
 
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);

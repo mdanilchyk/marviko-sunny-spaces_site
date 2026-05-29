@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
+import { sendFormEmail } from "@/lib/formSubmit";
 import doorReal1 from "@/assets/door-real-1.jpg";
 import doorReal2 from "@/assets/door-real-2.jpg";
 import doorReal3 from "@/assets/door-real-3.jpg";
@@ -33,19 +34,6 @@ const doorTypes = [
     features: ["Наклонно-сдвижная фурнитура", "Экономия пространства", "ПВХ профиль", "Балконы и террасы"],
   },
 ];
-
-const sendFormEmail = async (subject: string, data: Record<string, string>) => {
-  try {
-    await fetch("https://formsubmit.co/ajax/Marviko2007@mail.ru", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ _subject: subject, ...data }),
-    });
-    return true;
-  } catch {
-    return false;
-  }
-};
 
 const DoorsPage = () => {
   const [orderModal, setOrderModal] = useState(false);

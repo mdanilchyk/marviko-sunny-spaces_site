@@ -1,19 +1,7 @@
 import { useState } from "react";
 import { Phone, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const sendFormEmail = async (subject: string, data: Record<string, string>) => {
-  try {
-    await fetch("https://formsubmit.co/ajax/Marviko2007@mail.ru", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ _subject: subject, ...data }),
-    });
-    return true;
-  } catch {
-    return false;
-  }
-};
+import { sendFormEmail } from "@/lib/formSubmit";
 
 interface OrderModalProps {
   open: boolean;

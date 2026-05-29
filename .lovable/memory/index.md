@@ -3,7 +3,8 @@ Updated: now
 
 Marviko window company site — design tokens in index.css, warm orange palette, Golos Text font
 
-- Email: all forms send to vladdani777@gmail.com via formsubmit.co AJAX
+- Email: all forms send to Marviko2007@mail.ru via formsubmit.co AJAX (shared helper: src/lib/formSubmit.ts)
+- Favicons: favicon.ico, favicon.svg, apple-touch-icon.png in public/; linked from index.html
 - Navbar accepts onOrderClick prop to open order modal from Index
 - Contact form has 3 required fields: question, name, phone with "Обязательное поле" labels
 - Footer: Viber/Telegram/Instagram as SVG icons, working anchor links to #pricing, #certificates, #faq
