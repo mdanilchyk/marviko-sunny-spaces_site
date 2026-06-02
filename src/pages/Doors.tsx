@@ -40,7 +40,7 @@ const DoorsPage = () => {
 
   return (
     <PageLayout onOrderClick={() => setOrderModal(true)}>
-      <PageSeo seo={SEO_BY_PATH["/doors"]} />
+      <PageSeo seo={SEO_BY_PATH["/doors"]} path="/doors" />
 
       <PageHero
         label="Двери"

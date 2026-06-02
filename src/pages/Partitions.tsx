@@ -25,7 +25,7 @@ const PartitionsPage = () => {
 
   return (
     <PageLayout onOrderClick={() => setOrderModal(true)}>
-      <PageSeo seo={SEO_BY_PATH["/partitions"]} />
+      <PageSeo seo={SEO_BY_PATH["/partitions"]} path="/partitions" />
 
       <PageHero
         label="Перегородки"

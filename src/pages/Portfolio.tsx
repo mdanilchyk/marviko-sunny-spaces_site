@@ -25,7 +25,7 @@ const PortfolioPage = () => {
 
   return (
     <PageLayout onOrderClick={() => setOrderModal(true)}>
-      <PageSeo seo={SEO_BY_PATH["/portfolio"]} />
+      <PageSeo seo={SEO_BY_PATH["/portfolio"]} path="/portfolio" />
 
       <PageHero
         label="Портфолио"

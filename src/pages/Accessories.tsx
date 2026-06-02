@@ -32,7 +32,7 @@ const AccessoriesPage = () => {
 
   return (
     <PageLayout onOrderClick={() => setOrderModal(true)}>
-      <PageSeo seo={SEO_BY_PATH["/accessories"]} />
+      <PageSeo seo={SEO_BY_PATH["/accessories"]} path="/accessories" />
 
       <PageHero
         label="Аксессуары"

@@ -45,7 +45,7 @@ const WindowsPage = () => {
   const [orderModal, setOrderModal] = useState(false);
   return (
     <PageLayout onOrderClick={() => setOrderModal(true)}>
-      <PageSeo seo={SEO_BY_PATH["/windows"]} />
+      <PageSeo seo={SEO_BY_PATH["/windows"]} path="/windows" />
 
       {/* Hero */}
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #3A2518)" }}>

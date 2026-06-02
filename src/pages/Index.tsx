@@ -132,7 +132,7 @@ const Index = () => {
 
   return (
     <PageLayout onOrderClick={() => setOrderModal(true)}>
-      <PageSeo seo={SEO_BY_PATH["/"]} />
+      <PageSeo seo={SEO_BY_PATH["/"]} path="/" />
 
       {/* Hero - lighter warm feel */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-background">

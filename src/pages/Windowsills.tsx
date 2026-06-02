@@ -23,7 +23,7 @@ const WindowsillsPage = () => {
 
   return (
     <PageLayout onOrderClick={() => setOrderModal(true)}>
-      <PageSeo seo={SEO_BY_PATH["/windowsills"]} />
+      <PageSeo seo={SEO_BY_PATH["/windowsills"]} path="/windowsills" />
 
       <PageHero
         label="Подоконники"

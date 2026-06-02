@@ -1,5 +1,5 @@
 /** Shared contact and site metadata for marviko.by.
- *  Static JSON-LD in index.html (LocalBusiness, FAQPage) must stay in sync manually. */
+ *  JSON-LD: src/config/schema.ts, rendered via PageSeo (react-helmet-async). */
 export const SITE = {
   phone: "+375295677756",
   phoneDisplay: "+375 (29) 567-77-56",
