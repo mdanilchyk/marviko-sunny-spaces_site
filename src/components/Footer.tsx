@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Clock, Mail, ArrowRight } from "lucide-react";
-import viberIcon from "@/assets/viber-icon.png";
 import marvikoLogo from "@/assets/marviko-logo-white.svg";
+import { SITE } from "@/config/site";
+import { footerInfoLinks, footerProductLinks } from "@/data/navigation";
 
 const ViberIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
@@ -37,7 +38,7 @@ const Footer = () => {
             {/* Social icons */}
             <div className="flex items-center gap-3">
               <a
-                href="viber://chat?number=%2B375295677756"
+                href={SITE.viberHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -49,7 +50,7 @@ const Footer = () => {
                 <ViberIcon />
               </a>
               <a
-                href="https://t.me/+375295677756"
+                href={SITE.telegramHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -61,7 +62,7 @@ const Footer = () => {
                 <TelegramIcon />
               </a>
               <a
-                href="https://www.instagram.com/okna_dveri_marviko"
+                href={SITE.instagramHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -79,14 +80,7 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-5 text-sm uppercase tracking-wider" style={{ color: "hsl(0 0% 80%)" }}>Продукция</h4>
             <div className="flex flex-col gap-3">
-              {[
-                { to: "/windows", label: "Окна" },
-                { to: "/doors", label: "Двери" },
-                { to: "/partitions", label: "Перегородки" },
-                { to: "/windowsills", label: "Подоконники" },
-                { to: "/accessories", label: "Аксессуары" },
-                { to: "/portfolio", label: "Наши работы" },
-              ].map((link) => (
+              {footerProductLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
@@ -106,11 +100,7 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-5 text-sm uppercase tracking-wider" style={{ color: "hsl(0 0% 80%)" }}>Информация</h4>
             <div className="flex flex-col gap-3">
-              {[
-                { to: "/#pricing", label: "Калькулятор цен" },
-                { to: "/#certificates", label: "Сертификаты" },
-                { to: "/#faq", label: "Вопросы и ответы" },
-              ].map((link) => (
+              {footerInfoLinks.map((link) => (
                 <a
                   key={link.to}
                   href={link.to}
@@ -131,45 +121,45 @@ const Footer = () => {
             <h4 className="font-bold mb-5 text-sm uppercase tracking-wider" style={{ color: "hsl(0 0% 80%)" }}>Контакты</h4>
             <address className="flex flex-col gap-4 not-italic">
               <a
-                href="tel:+375295677756"
+                href={SITE.phoneTel}
                 className="flex items-center gap-3 text-sm transition-colors duration-200"
                 style={{ color: "hsl(0 0% 60%)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(0 0% 60%)")}
               >
                 <Phone className="w-4 h-4 shrink-0" />
-                +375 (29) 567-77-56
+                {SITE.phoneDisplay}
               </a>
               <a
-                href="tel:+375296828568"
+                href={SITE.phoneDirectorTel}
                 className="flex items-center gap-3 text-sm transition-colors duration-200"
                 style={{ color: "hsl(0 0% 60%)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(0 0% 60%)")}
               >
                 <Phone className="w-4 h-4 shrink-0" />
-                +375 (29) 682-85-68 (директор)
+                {SITE.phoneDirectorLabel}
               </a>
               <a
-                href="mailto:Marviko2007@mail.ru"
+                href={SITE.emailMailto}
                 className="flex items-center gap-3 text-sm transition-colors duration-200"
                 style={{ color: "hsl(0 0% 60%)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(0 0% 60%)")}
               >
                 <Mail className="w-4 h-4 shrink-0" />
-                Marviko2007@mail.ru
+                {SITE.email}
               </a>
               <div className="flex items-start gap-3 text-sm" style={{ color: "hsl(0 0% 60%)" }}>
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
                 <div>
-                  <p>Офис: г. Червень, пл. Свободы, 32, к. 206</p>
-                  <p className="mt-1">Производство: г. Червень, ул. Ленинская, 49</p>
+                  <p>{SITE.addressOfficeLabeled}</p>
+                  <p className="mt-1">{SITE.addressProductionLabeled}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 text-sm" style={{ color: "hsl(0 0% 60%)" }}>
                 <Clock className="w-4 h-4 shrink-0" />
-                <span>Пн–Суб: 09.00 — 17.00</span>
+                <span>{SITE.workingHours}</span>
               </div>
             </address>
           </div>

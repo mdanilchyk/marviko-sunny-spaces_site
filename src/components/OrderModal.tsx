@@ -1,26 +1,42 @@
 import { useState } from "react";
 import { Phone, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { sendFormEmail } from "@/lib/formSubmit";
+import { SITE } from "@/config/site";
+import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
+
+const DEFAULT_DESCRIPTION =
+  "Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут.";
 
 interface OrderModalProps {
   open: boolean;
   onClose: () => void;
   subject?: string;
   title?: string;
+  description?: string;
   buttonText?: string;
 }
 
-const OrderModal = ({ open, onClose, subject = "Заказ звонка — сайт Марвико", title = "Заказать звонок", buttonText = "Заказать звонок" }: OrderModalProps) => {
+const OrderModal = ({
+  open,
+  onClose,
+  subject = "Заказ звонка — сайт Марвико",
+  title = "Заказать звонок",
+  description = DEFAULT_DESCRIPTION,
+  buttonText = "Заказать звонок",
+}: OrderModalProps) => {
   const [form, setForm] = useState({ name: "", phone: "" });
   const [errors, setErrors] = useState({ name: false, phone: false });
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const handleClose = () => {
     if (!sending) {
       onClose();
-      setTimeout(() => setSubmitted(false), 300);
+      setTimeout(() => {
+        setSubmitted(false);
+        setSubmitError(false);
+      }, 300);
     }
   };
 
@@ -41,7 +57,7 @@ const OrderModal = ({ open, onClose, subject = "Заказ звонка — са
               <>
                 <button onClick={handleClose} className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors text-2xl leading-none">×</button>
                 <h3 className="text-xl font-bold mb-2 text-foreground">{title}</h3>
-                <p className="text-sm text-muted-foreground mb-6">Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут.</p>
+                <p className="text-sm text-muted-foreground mb-6">{description}</p>
                 <div className="flex flex-col gap-4">
                   <div>
                     <input type="text" placeholder="* Ваше имя" value={form.name} onChange={(e) => { setForm({ ...form, name: e.target.value }); setErrors({ ...errors, name: false }); }} className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${errors.name ? 'border-destructive' : 'border-border focus:border-primary'}`} disabled={sending} />
@@ -56,16 +72,24 @@ const OrderModal = ({ open, onClose, subject = "Заказ звонка — са
                     setErrors(errs);
                     if (errs.name || errs.phone) return;
                     setSending(true);
-                    await sendFormEmail(subject, { "Имя": form.name, "Телефон": form.phone });
+                    setSubmitError(false);
+                    const ok = await sendFormEmail(subject, { "Имя": form.name, "Телефон": form.phone });
                     setSending(false);
-                    setSubmitted(true);
-                    setForm({ name: "", phone: "" });
+                    if (ok) {
+                      setSubmitted(true);
+                      setForm({ name: "", phone: "" });
+                    } else {
+                      setSubmitError(true);
+                    }
                   }} className="w-full py-3.5 rounded-lg font-semibold text-white transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-70" style={{ backgroundColor: "#C8441A" }} onMouseEnter={(e) => { if (!sending) e.currentTarget.style.backgroundColor = "#A33515"; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#C8441A"; }}>
                     {sending ? (<><svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" /><path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75" /></svg>Отправка...</>) : buttonText}
                   </button>
+                  {submitError && (
+                    <p className="text-xs text-destructive text-center">{FORM_SUBMIT_ERROR_MESSAGE}</p>
+                  )}
                 </div>
                 <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
-                  <Phone className="w-4 h-4" /> Или обратитесь к нам по телефону: <a href="tel:+375295677756" className="text-primary font-medium">+375 29 567-77-56</a>
+                  <Phone className="w-4 h-4" /> Или обратитесь к нам по телефону: <a href={SITE.phoneTel} className="text-primary font-medium">{SITE.phoneShort}</a>
                 </p>
               </>
             )}

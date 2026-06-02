@@ -2,12 +2,20 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Clock, Award, ThumbsUp, Star, ChevronDown, Eye, ArrowRight, Phone, MapPin, Send, FileText, PhoneCall, ChevronLeft, ChevronRight, CreditCard, CalendarDays, X } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import PageLayout from "@/components/PageLayout";
+import PageSeo from "@/components/PageSeo";
+import OrderModal from "@/components/OrderModal";
+import { SEO_BY_PATH } from "@/config/seo";
+import ImageLightbox from "@/components/ImageLightbox";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection, { ParallaxImage } from "@/components/AnimatedSection";
 import PricingWindowSVG from "@/components/PricingWindowSVG";
-import { sendFormEmail } from "@/lib/formSubmit";
+import { FORM_SUBJECTS, SITE } from "@/config/site";
+import { HOMEPAGE_PRICING_CARDS, HOMEPAGE_WINDOWS_FROM_PRICE } from "@/data/pricing";
+import { HOMEPAGE_PORTFOLIO_ITEMS } from "@/data/portfolio";
+import { faqData } from "@/data/faq";
+import { reviews } from "@/data/reviews";
+import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
 
 
 import heroImg from "@/assets/hero-interior.jpg";
@@ -19,31 +27,9 @@ import serviceWindowsills from "@/assets/windowsill-real-1.jpg";
 import serviceWindowWork from "@/assets/service-objects.jpg";
 import serviceAccessories from "@/assets/acc-handle-key.jpg";
 
-import workHouseExterior from "@/assets/work-house-exterior.jpg";
-import workWindowsillGreen from "@/assets/work-windowsill-green.jpg";
-import workDoorBlinds from "@/assets/work-door-blinds.jpg";
-import workShopWindows from "@/assets/work-shop-windows.jpg";
-import workShopDoor from "@/assets/work-shop-door.jpg";
-import workFireplaceDoor from "@/assets/work-fireplace-door.jpg";
-
 import certSpk1 from "@/assets/cert-spk-1.jpg";
 import certSpk2 from "@/assets/cert-spk-2.jpg";
-import svidetelstvoImg from "@/assets/cert-svidetelstvo.jpg";
 import isoImg from "@/assets/cert-iso-9001.jpg";
-
-import reviewEkaterina from "@/assets/review-ekaterina.jpg";
-import reviewNatalia from "@/assets/review-natalia.jpg";
-import reviewBobrovich from "@/assets/review-bobrovich.jpg";
-import reviewRentalTrade from "@/assets/review-rental-trade.jpg";
-import reviewRadkevich from "@/assets/review-radkevich.jpg";
-import reviewKvadroenergo from "@/assets/review-kvadroenergo.jpg";
-import reviewNeftebitum1 from "@/assets/review-neftebitum-1.jpg";
-import reviewNeftebitum2 from "@/assets/review-neftebitum-2.jpg";
-import reviewDsdStroyinvest from "@/assets/review-dsd-stroyinvest.jpg";
-import reviewDenisevich from "@/assets/review-denisevich.jpg";
-import reviewChervenRaipo from "@/assets/review-cherven-raipo.jpg";
-import reviewMinskoblgaz from "@/assets/review-minskoblgaz.jpg";
-
 
 const categories = [
   {
@@ -51,7 +37,7 @@ const categories = [
     description: "Окна ПВХ и алюминиевые окна различной формы от бюджетных до премиум класса",
     img: serviceWindows,
     link: "/windows",
-    price: "от 302 BYN",
+    price: HOMEPAGE_WINDOWS_FROM_PRICE,
   },
 
 
@@ -108,126 +94,6 @@ const processSteps = [
   { num: "06", title: "Монтаж", desc: "Профессиональная установка" },
 ];
 
-const reviews = [
-  {
-    type: "official" as const,
-    name: "ООО «КвадроЭнерго»",
-    position: "Директор В.А. Жердетский",
-    date: "март 2026",
-    text: "Хотим выразить благодарность ООО «МАРВИКО» за работу по изготовлению и монтажу окон ПВХ. Все вопросы начиная с замера и заканчивая монтажом решались быстро и грамотно. Менеджер грамотно проконсультировал и просчитал всё с учётом особенностей нашего здания. Монтаж был выполнен качественно, с соблюдением всех оговорённых сроков.",
-    rating: 5,
-    screenshot: reviewKvadroenergo,
-  },
-  {
-    type: "official" as const,
-    name: "ООО «Рентал Трейд»",
-    position: "Директор Н.В. Кривоносова",
-    date: "февраль 2026",
-    text: "Обратились с заявкой об установке двери ПВХ. Хотим выразить благодарность за дверь и за её качественный монтаж. Дверь установлена идеально и быстро, отлично выглядит, очень хорошо вписалась в наш интерьер.",
-    rating: 5,
-    screenshot: reviewRentalTrade,
-  },
-  {
-    type: "messenger" as const,
-    name: "Наталия Дубовик",
-    date: "16 ноября 2025",
-    text: "Хочу сказать Вашей команде большое спасибо — как классно Вы работаете, как всё чётко и красиво. Когда звонишь — очень приятно разговаривать, всегда всё объясните, расскажете, поможете, не завышаете цены. Спасибо Вам огромное!",
-    rating: 5,
-    screenshot: reviewNatalia,
-  },
-  {
-    type: "messenger" as const,
-    name: "Екатерина",
-    date: "10 октября 2025",
-    text: "Спасибо вашему мастеру за окна — работа огонь! Очень красиво всё сделал. Ему надо отдельно от зарплаты хорошую премию выдавать — один сделал такую работу, благодарность надо писать!",
-    rating: 5,
-    screenshot: reviewEkaterina,
-  },
-  {
-    type: "messenger" as const,
-    name: "Бобрович С",
-    date: "28 сентября 2025",
-    text: "Долго выбирала, где заказать окна и двери, чтобы цена и качество соответствовали запросам. Выбрала ООО «Марвико» и не прогадала! Очень довольна результатом. Окна и двери отличные, проверены временем. Спасибо за профессионализм и слаженную работу. Рекомендую тем, кто сомневается в выборе.",
-    rating: 5,
-    screenshot: reviewBobrovich,
-  },
-  {
-    type: "official" as const,
-    name: "Пуховичский РГС (Минскоблгаз)",
-    position: "Главный инженер Е.Э. Цупранович",
-    date: "28 июля 2025",
-    text: "Выражаем искреннюю благодарность ООО «Марвико» за продуктивное сотрудничество в 2024–2025 гг. Отличная команда высококвалифицированных специалистов, всегда готовых реализовать проект любой сложности. Поставки осуществляются в срок, качество материалов, работ и услуг — на достаточно высоком уровне. Каждый этап сотрудничества был приятным и запоминающимся. Рекомендуем как надёжного поставщика.",
-    rating: 5,
-    screenshot: reviewMinskoblgaz,
-  },
-  {
-    type: "official" as const,
-    name: "Червенское райпо",
-    position: "Председатель правления И.В. Козловская",
-    date: "март 2025",
-    text: "В феврале 2024 г. ООО «Марвико» осуществляло поставку двери металлической, а в марте 2025 г. выполняло строительно-монтажные работы на объекте «Текущий ремонт по замене дверных и оконных блоков по адресу: г. Червень, ул. К. Маркса, 33а» (договор № 03-11 от 11 марта 2025 г.). Организация зарекомендовала себя как устойчивое предприятие и надёжный деловой партнёр. Отмечаем оперативность и высокую организованность сотрудников.",
-    rating: 5,
-    screenshot: reviewChervenRaipo,
-  },
-  {
-    type: "official" as const,
-    name: "Денисевич И.",
-    position: "Частный клиент",
-    date: "2025",
-    text: "Выражаю благодарность директору «Марвико» Кочету А.А. и нач. производства Кочету С.А. за профессионалов, которые изготавливали и устанавливали нам пластиковые окна и двери; менеджерам Иванютко А. и Бобровской Е. за дизайнерский подход по оформлению пластиковых дверей. Отдельно благодарю монтажника Грибовича В. за его «золотые руки» и мастера своего дела. Работники тактичные, вежливые, заслуживают доверия. На заданный вопрос дают профессиональный ответ. Всё сделано в срок и качественно. Здоровья вам, мира, добра и всех благ!",
-    rating: 5,
-    screenshot: reviewDenisevich,
-  },
-  {
-    type: "official" as const,
-    name: "Радкевич Л.И.",
-    position: "а/г Городьки, ул. Советское, 42",
-    date: "2025",
-    text: "Установили окна в доме вовремя, качественно, аккуратно. Мастера вежливые, всё объясняли по ходу работы. Не ожидали, что такой объём работы смогут выполнить настолько быстро. Цена соответствует качеству, чувствуется ответственный подход. Окна выглядят шикарно. Видно, что мастера опытные, работают на совесть.",
-    rating: 5,
-    screenshot: reviewRadkevich,
-  },
-  {
-    type: "official" as const,
-    name: "ООО «ДСД-СтройИнвест»",
-    position: "Директор А.С. Сушкевич",
-    date: "2024",
-    text: "Выражаем благодарность ООО «Марвико» за плодотворное сотрудничество на протяжении 2024 г., высокое качество выпускаемой продукции (окна, двери и прочие изделия из ПВХ) по договорам поставки оконных и дверных блоков ПВХ, подоконников и отливов. С организацией довольно легко работать, заявки исполняются в срок и без нареканий. Надеемся на дальнейшее плодотворное сотрудничество.",
-    rating: 5,
-    screenshot: reviewDsdStroyinvest,
-  },
-  {
-    type: "official" as const,
-    name: "УП «Нефтебитумный завод»",
-    position: "Директор А.Л. Храмцов",
-    date: "5 февраля 2024",
-    text: "В декабре 2023 г. ООО «Марвико» выполняло для нашего предприятия строительно-монтажные работы по установке оконных и дверных блоков на объектах: «Текущий ремонт ОС „Механические мастерские“» и «Текущий ремонт ОС „Производственно-бытовой корпус“». Организация зарекомендовала себя как устойчивое предприятие и надёжный деловой партнёр. Отличительная черта работы — оперативность и высокая организованность сотрудников.",
-    rating: 5,
-    screenshot: reviewNeftebitum2,
-  },
-  {
-    type: "official" as const,
-    name: "УП «Нефтебитумный завод»",
-    position: "Директор А.Л. Храмцов",
-    date: "9 июня 2023",
-    text: "В 2022 г. ООО «Марвико» выполнило для нашей организации изготовление и монтаж дверей ПВХ на объекте Унитарное предприятие «Нефтебитумный завод», Червенский район, д. Колеина (договор № 09-15 от 15.09.2022 г.). Работы выполнены с соблюдением всех требований ТКП, СН, ТНПА и СТБ. Претензий по качеству и срокам не имеем.",
-    rating: 5,
-    screenshot: reviewNeftebitum1,
-  },
-];
-
-const faqData = [
-  { q: "Почему потеют пластиковые окна?", a: "Причина кроется в герметичности конструкции. Если окна закрыты и давно не проветривались, с внутренней стороны стекла начнёт появляться конденсат. Рекомендуется регулярно проветривать помещение." },
-  { q: "Безопасны ли пластиковые окна?", a: "Да, они содержат экологически чистые и безопасные компоненты." },
-  { q: "В чём отличия профилей окон ПВХ?", a: "Оконные профили ПВХ отличаются следующими параметрами: качеством пластика; числом воздушных камер (3, 4, 5); технологией и толщиной армирования (1,5/2 мм); монтажной шириной (58, 70, 76 мм); цветом и дизайнерским решением (прямоугольные, арочные, трапециевидные окна; окна с односторонней или двухсторонней ламинацией; декоративные вставки в стеклопакет, тонировка стеклопакетов)." },
-  { q: "На что влияет количество камер в профиле ПВХ?", a: "Их число определяет, насколько хорошо профиль удерживает тепло. Для стран, где большую часть года царит прохладная погода, подходит пятикамерный профиль (70 мм). Он надёжно защищает помещение от проникновения холода." },
-  { q: "Как выбрать стеклопакет?", a: "Стеклопакет — это конструкция из двух и более стёкол, скреплённых дистанционными рамками и герметиками. Пространство между стёклами (камера) заполняют осушенным воздухом или аргоном для шумо- и теплоизоляции. Двухкамерный стеклопакет (три стекла, две камеры) подходит для отапливаемых жилых помещений и хорошо переносит морозы — конденсат начинает образовываться при температуре ниже −20°C. Однокамерный стеклопакет содержит два стекла и одну камеру." },
-  
-  { q: "Ваша специализация — исключительно пластиковые окна?", a: "Нет, мы готовы предложить своим клиентам широкий спектр услуг. Мы устанавливаем пластиковые окна и балконные двери, предлагаем зонирование пространства с помощью межкомнатных перегородок. Также мы выполняем работы по утеплению и отделке балконов. В качестве дополнения вы можете выбрать стильные откосы, ламинацию оконного профиля, необычный подоконник — эти детали помогут органично вписать окна в любой интерьер." },
-  { q: "Есть ли гарантия?", a: "Да, мы предоставляем гарантию 10 лет на профиль, 5 лет на монтажные работы и фурнитуру." },
-  { q: "Вы работаете за пределами Червеня?", a: "Да, мы выполняем заказы по всей Минской области и за её пределами. Выезд замерщика бесплатный." },
-];
-
 const accessories = [
   { emoji: "🦟", title: "Москитные сетки", desc: "Внутренние и наружные. Изготавливаем под размер вашего окна" },
   { emoji: "🔧", title: "Ручки и замки", desc: "Замена и установка ручек, замков, фурнитуры" },
@@ -236,45 +102,6 @@ const accessories = [
   { emoji: "🏠", title: "Отливы и доборы", desc: "Отливы и доборные элементы для кровель из оцинкованной стали" },
   { emoji: "📏", title: "Подоконники", desc: "Стандартные и премиум подоконники. Глянцевые, матовые, под камень и дерево" },
 ];
-const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | "balcony"; title: string; size: string; opening: string; glass: string; furniture: string; price: string; featured: boolean }[]> = {
-  novotex58: [
-    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 302 BYN", featured: false },
-    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 395 BYN", featured: true },
-    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 575 BYN", featured: false },
-    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 32 мм", furniture: "белая", price: "от 590 BYN", featured: false },
-  ],
-  novotex70: [
-    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 340 BYN", featured: false },
-    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 445 BYN", featured: true },
-    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 625 BYN", featured: false },
-    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 650 BYN", featured: false },
-  ],
-  grunhaus70: [
-    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 355 BYN", featured: false },
-    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 460 BYN", featured: true },
-    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 645 BYN", featured: false },
-    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 670 BYN", featured: false },
-  ],
-  rehau70: [
-    { type: "single", title: "Одностворчатое окно", size: "1400 × 800 мм", opening: "поворотно-откидное", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 380 BYN", featured: false },
-    { type: "double", title: "Двухстворчатое окно", size: "1400 × 1300 мм", opening: "1 створка поворотно-откидная", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 490 BYN", featured: true },
-    { type: "triple", title: "Трёхстворчатое окно", size: "1400 × 2000 мм", opening: "2 створки поворотно-откидные", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 680 BYN", featured: false },
-    { type: "balcony", title: "Балконный блок", size: "2100 × 1500 мм", opening: "окно + балконная дверь", glass: "двухкамерный 40 мм", furniture: "белая", price: "от 710 BYN", featured: false },
-  ],
-};
-
-const portfolioItems = [
-  { img: workShopWindows, title: "Остекление коммерческого объекта" },
-  { img: workFireplaceDoor, title: "Окна в интерьере с камином" },
-  { img: workHouseExterior, title: "Остекление частного дома" },
-  { img: workDoorBlinds, title: "Дверь ПВХ со встроенными жалюзи" },
-  { img: workShopDoor, title: "Входная группа магазина" },
-  { img: workWindowsillGreen, title: "Подоконник с видом на природу" },
-];
-
-
-
-
 const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
@@ -282,18 +109,18 @@ const Index = () => {
   const [contactErrors, setContactErrors] = useState({ name: false, phone: false, question: false });
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
+  const [calcSending, setCalcSending] = useState(false);
+  const [calcSubmitError, setCalcSubmitError] = useState(false);
   const [certModal, setCertModal] = useState<string | null>(null);
-  const [certIndex, setCertIndex] = useState(0);
   const [orderModal, setOrderModal] = useState(false);
-  const [orderForm, setOrderForm] = useState({ name: "", phone: "" });
-  const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
-  const [formSubmitted, setFormSubmitted] = useState({ contact: false, order: false });
-  const [orderSending, setOrderSending] = useState(false);
+  const [contactSubmitted, setContactSubmitted] = useState(false);
   const [portfolioLightbox, setPortfolioLightbox] = useState<number | null>(null);
   const [ctaForm, setCtaForm] = useState({ name: "", phone: "" });
   const [ctaErrors, setCtaErrors] = useState({ name: false, phone: false });
   const [ctaSending, setCtaSending] = useState(false);
   const [ctaSubmitted, setCtaSubmitted] = useState(false);
+  const [ctaSubmitError, setCtaSubmitError] = useState(false);
+  const [contactSubmitError, setContactSubmitError] = useState(false);
   const [reviewModal, setReviewModal] = useState<string | null>(null);
   const reviewsRef = useRef<HTMLDivElement>(null);
   const certImages = [
@@ -304,8 +131,8 @@ const Index = () => {
   ];
 
   return (
-    <main className="min-h-screen bg-background">
-      <Navbar onOrderClick={() => setOrderModal(true)} />
+    <PageLayout onOrderClick={() => setOrderModal(true)}>
+      <PageSeo seo={SEO_BY_PATH["/"]} />
 
       {/* Hero - lighter warm feel */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-background">
@@ -329,7 +156,7 @@ const Index = () => {
                 Производим и устанавливаем окна, двери и балконы с 2007 года. Бесплатный замер, профессиональный монтаж, гарантия 10 лет.
               </p>
               <div className="flex flex-wrap gap-3">
-                <a href="tel:+375295677756" className="bg-primary text-primary-foreground px-7 py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200">
+                <a href={SITE.phoneTel} className="bg-primary text-primary-foreground px-7 py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200">
                   Позвонить нам
                 </a>
                 <Link to="/portfolio" className="px-7 py-3.5 rounded-lg font-semibold transition-all duration-200 border-[1.5px] border-foreground text-foreground hover:bg-foreground hover:text-background">
@@ -396,7 +223,7 @@ const Index = () => {
                       <label className="text-sm mb-1.5 block text-muted-foreground">Ваш телефон для связи</label>
                       <input
                         type="tel"
-                        placeholder="+375 29 XXX-XX-XX"
+                        placeholder={SITE.phonePlaceholder}
                         value={calcPhone}
                         onChange={(e) => setCalcPhone(e.target.value)}
                         className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
@@ -407,25 +234,37 @@ const Index = () => {
                 </AnimatePresence>
 
                 <button
-                  onClick={() => {
+                  disabled={calcSending}
+                  onClick={async () => {
                     if (!showCalcPhone) {
                       setShowCalcPhone(true);
+                      setCalcSubmitError(false);
                     } else {
-                      sendFormEmail("Расчёт стоимости — сайт Марвико", {
+                      setCalcSending(true);
+                      setCalcSubmitError(false);
+                      const ok = await sendFormEmail("Расчёт стоимости — сайт Марвико", {
                         "Тип": formData.type,
                         "Ширина": formData.width || "не указана",
                         "Высота": formData.height || "не указана",
                         "Телефон": calcPhone,
                       });
-                      setShowCalcPhone(false);
-                      setCalcPhone("");
-                      setFormData({ type: "windows", width: "", height: "" });
+                      setCalcSending(false);
+                      if (ok) {
+                        setShowCalcPhone(false);
+                        setCalcPhone("");
+                        setFormData({ type: "windows", width: "", height: "" });
+                      } else {
+                        setCalcSubmitError(true);
+                      }
                     }
                   }}
-                  className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 mt-2"
+                  className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 mt-2 disabled:opacity-70"
                 >
-                  {showCalcPhone ? "Отправить заявку" : "Рассчитать"}
+                  {calcSending ? "Отправка..." : showCalcPhone ? "Отправить заявку" : "Рассчитать"}
                 </button>
+                {calcSubmitError && (
+                  <p className="text-xs text-destructive mt-2">{FORM_SUBMIT_ERROR_MESSAGE}</p>
+                )}
               </div>
             </motion.div>
           </div>
@@ -500,7 +339,7 @@ const Index = () => {
 
           {/* Cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {pricingByProfile.novotex58.map((card, i) => (
+            {HOMEPAGE_PRICING_CARDS.map((card, i) => (
               <AnimatedSection key={card.type} delay={i * 0.08}>
                 <div
                   className="rounded-xl flex flex-col bg-card relative transition-all duration-300 cursor-pointer h-full hover:shadow-lg"
@@ -609,7 +448,7 @@ const Index = () => {
                   <div>
                     <input
                       type="tel"
-                      placeholder="+375 29 XXX-XX-XX"
+                      placeholder={SITE.phonePlaceholder}
                       value={ctaForm.phone}
                       onChange={(e) => { setCtaForm({ ...ctaForm, phone: e.target.value }); setCtaErrors({ ...ctaErrors, phone: false }); }}
                       className={`w-full px-4 py-3 rounded-lg bg-primary-foreground/10 text-primary-foreground text-sm placeholder:text-primary-foreground/50 border focus:outline-none ${ctaErrors.phone ? 'border-red-400' : 'border-primary-foreground/20 focus:border-primary-foreground/50'}`}
@@ -624,15 +463,23 @@ const Index = () => {
                       setCtaErrors(errors);
                       if (errors.name || errors.phone) return;
                       setCtaSending(true);
-                      await sendFormEmail("Консультация с сайта Марвико", { "Имя": ctaForm.name, "Телефон": ctaForm.phone });
+                      setCtaSubmitError(false);
+                      const ok = await sendFormEmail("Консультация с сайта Марвико", { "Имя": ctaForm.name, "Телефон": ctaForm.phone });
                       setCtaSending(false);
-                      setCtaSubmitted(true);
-                      setCtaForm({ name: "", phone: "" });
+                      if (ok) {
+                        setCtaSubmitted(true);
+                        setCtaForm({ name: "", phone: "" });
+                      } else {
+                        setCtaSubmitError(true);
+                      }
                     }}
                     className="w-full bg-primary-foreground text-primary py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70"
                   >
                     {ctaSending ? (<><svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" /><path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75" /></svg>Отправка...</>) : (<><Phone className="w-4 h-4" />Заказать звонок</>)}
                   </button>
+                  {ctaSubmitError && (
+                    <p className="text-xs text-red-300 mt-2">{FORM_SUBMIT_ERROR_MESSAGE}</p>
+                  )}
                 </div>
               )}
             </div>
@@ -681,7 +528,7 @@ const Index = () => {
             </div>
           </AnimatedSection>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {portfolioItems.map((item, i) => (
+            {HOMEPAGE_PORTFOLIO_ITEMS.map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.1} variant="scale">
                 <div className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]" onClick={() => setPortfolioLightbox(i)}>
                   <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -945,7 +792,7 @@ const Index = () => {
                 </p>
               </AnimatedSection>
               <AnimatedSection delay={0.15}>
-                {formSubmitted.contact ? (
+                {contactSubmitted ? (
                   <div className="bg-card rounded-xl p-8 card-shadow text-center">
                     <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center text-primary mx-auto mb-4">
                       <Send className="w-7 h-7" />
@@ -1003,7 +850,7 @@ const Index = () => {
                         </div>
                         <input
                           type="tel"
-                          placeholder="+375 29 XXX-XX-XX"
+                          placeholder={SITE.phonePlaceholder}
                           value={contactForm.phone}
                           onChange={(e) => { setContactForm({ ...contactForm, phone: e.target.value }); setContactErrors({ ...contactErrors, phone: false }); }}
                           className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
@@ -1011,7 +858,7 @@ const Index = () => {
                         />
                       </div>
                       <button
-                        onClick={() => {
+                        onClick={async () => {
                           const errors = {
                             question: !contactForm.question.trim(),
                             name: !contactForm.name.trim(),
@@ -1019,19 +866,27 @@ const Index = () => {
                           };
                           setContactErrors(errors);
                           if (errors.question || errors.name || errors.phone) return;
-                          sendFormEmail("Вопрос с сайта Марвико", {
+                          setContactSubmitError(false);
+                          const ok = await sendFormEmail("Вопрос с сайта Марвико", {
                             "Вопрос": contactForm.question,
                             "Имя": contactForm.name,
                             "Телефон": contactForm.phone,
                           });
-                          setFormSubmitted({ ...formSubmitted, contact: true });
-                          setContactForm({ name: "", phone: "", question: "" });
+                          if (ok) {
+                            setContactSubmitted(true);
+                            setContactForm({ name: "", phone: "", question: "" });
+                          } else {
+                            setContactSubmitError(true);
+                          }
                         }}
                         className="w-full py-3.5 rounded-lg font-semibold text-primary-foreground transition-colors duration-200"
                         style={{ backgroundColor: "hsl(var(--primary))" }}
                       >
                         Отправить
                       </button>
+                      {contactSubmitError && (
+                        <p className="text-xs text-destructive text-center">{FORM_SUBMIT_ERROR_MESSAGE}</p>
+                      )}
                       <p className="text-xs text-muted-foreground text-center">
                         Нажимая на кнопку «Отправить», Вы принимаете условия обработки персональных данных.
                       </p>
@@ -1055,10 +910,10 @@ const Index = () => {
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: <Phone className="w-6 h-6" />, title: "Телефон", value: "+375 (29) 567-77-56", href: "tel:+375295677756" },
-              { icon: <Send className="w-6 h-6" />, title: "Viber / Telegram", value: "+375 (29) 567-77-56", href: "https://t.me/+375295677756" },
-              { icon: <MapPin className="w-6 h-6" />, title: "Офис", value: "г. Червень, пл. Свободы, 32, к. 206", href: undefined },
-              { icon: <MapPin className="w-6 h-6" />, title: "Производство", value: "г. Червень, ул. Ленинская, 49", href: undefined },
+              { icon: <Phone className="w-6 h-6" />, title: "Телефон", value: SITE.phoneDisplay, href: SITE.phoneTel },
+              { icon: <Send className="w-6 h-6" />, title: "Viber / Telegram", value: SITE.phoneDisplay, href: SITE.telegramHref },
+              { icon: <MapPin className="w-6 h-6" />, title: "Офис", value: SITE.addressOffice, href: undefined },
+              { icon: <MapPin className="w-6 h-6" />, title: "Производство", value: SITE.addressProduction, href: undefined },
             ].map((contact, i) => (
               <AnimatedSection key={i} delay={i * 0.12} variant="slide-up">
                 <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 text-center border border-border hover:border-primary">
@@ -1104,144 +959,19 @@ const Index = () => {
         </div>
       </section>
 
-      <Footer />
+      <OrderModal
+        open={orderModal}
+        onClose={() => setOrderModal(false)}
+        subject={FORM_SUBJECTS.defaultCall}
+        title="Заказать звонок"
+      />
 
-      {/* Order Modal */}
-      <AnimatePresence>
-        {orderModal && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="absolute inset-0 bg-black/60" onClick={() => { if (!orderSending) setOrderModal(false); }} />
-            <motion.div
-              className="relative bg-card rounded-xl p-6 sm:p-8 w-full max-w-md shadow-2xl border border-border"
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-            >
-              {formSubmitted.order ? (
-                <div className="text-center py-4">
-                  <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center text-primary mx-auto mb-4">
-                    <Send className="w-7 h-7" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">Заявка отправлена!</h3>
-                  <p className="text-sm text-muted-foreground mb-6">Наш менеджер свяжется с вами в течение 15 минут.</p>
-                  <button
-                    onClick={() => { setOrderModal(false); setFormSubmitted({ ...formSubmitted, order: false }); }}
-                    className="px-6 py-2.5 rounded-lg font-semibold text-sm border border-border hover:bg-muted transition-colors"
-                  >
-                    Закрыть
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <button
-                    onClick={() => setOrderModal(false)}
-                    className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors text-2xl leading-none"
-                  >
-                    ×
-                  </button>
-                  <h3 className="text-xl font-bold mb-2 text-foreground">Заказать звонок</h3>
-                  <p className="text-sm text-muted-foreground mb-6">
-                    Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут.
-                  </p>
-                  <div className="flex flex-col gap-4">
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="* Ваше имя"
-                        value={orderForm.name}
-                        onChange={(e) => { setOrderForm({ ...orderForm, name: e.target.value }); setOrderErrors({ ...orderErrors, name: false }); }}
-                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`}
-                        disabled={orderSending}
-                      />
-                      {orderErrors.name && <p className="text-xs text-destructive mt-1">Пожалуйста, введите ваше имя</p>}
-                    </div>
-                    <div>
-                      <input
-                        type="tel"
-                        placeholder="* Телефон"
-                        value={orderForm.phone}
-                        onChange={(e) => { setOrderForm({ ...orderForm, phone: e.target.value }); setOrderErrors({ ...orderErrors, phone: false }); }}
-                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
-                        disabled={orderSending}
-                      />
-                      {orderErrors.phone && <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>}
-                    </div>
-                    <button
-                      disabled={orderSending}
-                      onClick={async () => {
-                        const errors = { name: !orderForm.name.trim(), phone: !orderForm.phone.trim() };
-                        setOrderErrors(errors);
-                        if (errors.name || errors.phone) return;
-                        setOrderSending(true);
-                        await sendFormEmail("Заказ звонка — сайт Марвико", {
-                          "Имя": orderForm.name,
-                          "Телефон": orderForm.phone,
-                        });
-                        setOrderSending(false);
-                        setFormSubmitted({ ...formSubmitted, order: true });
-                        setOrderForm({ name: "", phone: "" });
-                        setOrderErrors({ name: false, phone: false });
-                      }}
-                      className="w-full py-3.5 rounded-lg font-semibold text-white transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-70"
-                      style={{ backgroundColor: "#C8441A" }}
-                      onMouseEnter={(e) => { if (!orderSending) e.currentTarget.style.backgroundColor = "#A33515"; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#C8441A"; }}
-                    >
-                      {orderSending ? (
-                        <>
-                          <svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" />
-                            <path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75" />
-                          </svg>
-                          Отправка...
-                        </>
-                      ) : (
-                        "Заказать звонок"
-                      )}
-                    </button>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
-                    <Phone className="w-4 h-4" />
-                    Или обратитесь к нам по телефону: <a href="tel:+375295677756" className="text-primary font-medium">+375 29 567-77-56</a>
-                  </p>
-                </>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Portfolio Lightbox */}
-      <AnimatePresence>
-        {portfolioLightbox !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
-            onClick={() => setPortfolioLightbox(null)}
-          >
-            <button className="absolute top-6 right-6 text-white" onClick={() => setPortfolioLightbox(null)}>
-              <X className="w-8 h-8" />
-            </button>
-            <motion.img
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              src={portfolioItems[portfolioLightbox]?.img}
-              alt={portfolioItems[portfolioLightbox]?.title}
-              className="max-w-full max-h-[85vh] rounded-xl object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </main>
+      <ImageLightbox
+        images={HOMEPAGE_PORTFOLIO_ITEMS.map((item) => ({ src: item.img, alt: item.title }))}
+        index={portfolioLightbox}
+        onClose={() => setPortfolioLightbox(null)}
+      />
+    </PageLayout>
   );
 };
 

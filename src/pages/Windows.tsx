@@ -1,60 +1,18 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
-import { Check, X } from "lucide-react";
+import { Check } from "lucide-react";
+import PageSeo from "@/components/PageSeo";
+import { SEO_BY_PATH } from "@/config/seo";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 import OrderModal from "@/components/OrderModal";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import ImageLightbox from "@/components/ImageLightbox";
+import PageLayout from "@/components/PageLayout";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import PricingWindowSVG from "@/components/PricingWindowSVG";
+import { WINDOW_PROFILE_PRICING } from "@/data/pricing";
+import { getWindowsWorkPhotos, toLightboxImages, WINDOWS_PAGE_HERO_IMAGE } from "@/data/portfolio";
 
-import windowWork1 from "@/assets/window-work-1.jpg";
-import windowWork2 from "@/assets/window-work-2.jpg";
-import windowWork3 from "@/assets/window-work-3.jpg";
-import windowWork4 from "@/assets/window-work-4.jpg";
-import windowWork7 from "@/assets/window-work-7.jpg";
-import windowWork8 from "@/assets/window-work-8.jpg";
-import windowWork9 from "@/assets/window-work-9.jpg";
-
-const workPhotos = [
-  { img: windowWork7, title: "Остекление многоквартирного дома" },
-  { img: windowWork8, title: "Окна в частном доме" },
-  { img: windowWork9, title: "Окна в цветном профиле" },
-  { img: windowWork1, title: "Установка окон в частном доме" },
-  { img: windowWork2, title: "Окна в цветном профиле" },
-  { img: windowWork3, title: "Остекление магазина" },
-  { img: windowWork4, title: "Остекление многоквартирного дома" },
-];
-
-const profiles = [
-  {
-    chambers: "3 камеры",
-    width: "58 мм",
-    glass: "Двухкамерный 32 мм",
-    prices: [
-      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "302 BYN" },
-      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "395 BYN" },
-      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "535 BYN" },
-      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "590 BYN" },
-    ],
-    features: ["Базовая теплоизоляция", "Белый профиль", "Фурнитура: Accado, UPT, MACO"],
-  },
-  {
-    chambers: "5 камер",
-    width: "70 мм",
-    glass: "Двухкамерный 40 мм",
-    prices: [
-      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "315 BYN" },
-      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "414 BYN" },
-      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "565 BYN" },
-      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "625 BYN" },
-    ],
-    features: ["Улучшенная теплоизоляция", "Армирование 1.5 мм", "Микропроветривание"],
-    popular: true,
-  },
-];
+const workPhotos = getWindowsWorkPhotos();
 
 const profileBrands = [
   { name: "Novotex Techno 70", chambers: 5, width: 70, desc: "Универсальный 5-камерный профиль с отличной теплоизоляцией" },
@@ -86,21 +44,13 @@ const WindowsPage = () => {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [orderModal, setOrderModal] = useState(false);
   return (
-    <main className="min-h-screen bg-background">
-      <Helmet>
-        <title>Окна ПВХ в Минске — цены и установка | Марвико</title>
-        <meta
-          name="description"
-          content="Окна ПВХ в Минске от производителя. Профили Montblanc, гарантия 10 лет, бесплатный замер. Звоните: +375 29 567-77-56."
-        />
-        <link rel="canonical" href="https://marviko.by/windows" />
-      </Helmet>
-      <Navbar onOrderClick={() => setOrderModal(true)} />
+    <PageLayout onOrderClick={() => setOrderModal(true)}>
+      <PageSeo seo={SEO_BY_PATH["/windows"]} />
 
       {/* Hero */}
       <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #3A2518)" }}>
         <div className="absolute inset-0 opacity-15">
-          <img src={windowWork8} alt="Окна ПВХ в Минске — производство и установка" className="w-full h-full object-cover" />
+          <img src={WINDOWS_PAGE_HERO_IMAGE} alt="Окна ПВХ в Минске — производство и установка" className="w-full h-full object-cover" />
         </div>
         <div className="container mx-auto section-padding relative z-10">
           <AnimatedSection>
@@ -114,7 +64,7 @@ const WindowsPage = () => {
       </section>
 
       {/* Window types badges */}
-      <section className="py-16 bg-background">
+      <section id="aluminum" className="py-16 bg-background scroll-mt-24">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
             <SectionLabel>Типы</SectionLabel>
@@ -137,7 +87,7 @@ const WindowsPage = () => {
       </section>
 
       {/* Profiles */}
-      <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
+      <section id="pvc" className="py-20 scroll-mt-24" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
           <AnimatedSection>
             <SectionLabel>Профили</SectionLabel>
@@ -172,7 +122,7 @@ const WindowsPage = () => {
           </AnimatedSection>
 
           <div className="flex flex-col gap-16">
-            {profiles.map((p, pi) => (
+            {WINDOW_PROFILE_PRICING.map((p, pi) => (
               <AnimatedSection key={pi} delay={pi * 0.1}>
                 <div className="rounded-xl overflow-hidden border border-border" style={p.popular ? { borderColor: "hsl(var(--primary))", boxShadow: "0 0 0 1px hsl(var(--primary)), 0 4px 20px rgba(217,79,30,0.1)" } : {}}>
                   <div className="p-6 flex flex-wrap items-center gap-4 bg-card border-b border-border">
@@ -292,35 +242,14 @@ const WindowsPage = () => {
         </div>
       </section>
 
-      <Footer />
-
-      <AnimatePresence>
-        {lightbox !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
-            onClick={() => setLightbox(null)}
-          >
-            <button className="absolute top-6 right-6 text-white" onClick={() => setLightbox(null)}>
-              <X className="w-8 h-8" />
-            </button>
-            <motion.img
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              src={workPhotos[lightbox]?.img}
-              alt={workPhotos[lightbox]?.title}
-              className="max-w-full max-h-[85vh] rounded-xl object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <ImageLightbox
+        images={toLightboxImages(workPhotos.map((p) => ({ img: p.img, title: p.title })))}
+        index={lightbox}
+        onClose={() => setLightbox(null)}
+      />
 
       <OrderModal open={orderModal} onClose={() => setOrderModal(false)} subject="Заказ окна — сайт Марвико" />
-    </main>
+    </PageLayout>
   );
 };
 

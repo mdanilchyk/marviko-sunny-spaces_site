@@ -3,61 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, MapPin, Clock, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/marviko-logo.svg";
-
-interface SubmenuItem {
-  label: string;
-  href: string;
-  desc?: string;
-}
-
-interface NavItem {
-  label: string;
-  href: string;
-  submenu?: SubmenuItem[];
-}
-
-const navItems: NavItem[] = [
-  {
-    label: "Окна",
-    href: "/windows",
-    submenu: [
-      { label: "Окна ПВХ", href: "/windows#pvc", desc: "Энергоэффективные окна из ПВХ-профиля" },
-      { label: "Алюминиевые окна", href: "/windows#aluminum", desc: "Тёплые и холодные алюминиевые системы" },
-    ],
-  },
-
-
-  {
-    label: "Двери",
-    href: "/doors",
-    submenu: [
-      { label: "Балконные двери ПВХ", href: "/doors", desc: "Окно в сочетании с дверью" },
-      { label: "Входные двери", href: "/doors", desc: "Надёжная защита и теплоизоляция" },
-      { label: "Раздвижные двери", href: "/doors", desc: "Наклонно-сдвижная фурнитура" },
-      { label: "Алюминиевые двери", href: "/doors", desc: "Прочность и современный дизайн" },
-    ],
-  },
-  {
-    label: "Перегородки",
-    href: "/partitions",
-    submenu: [
-      { label: "Перегородки из ПВХ", href: "/partitions#pvc", desc: "Лёгкие конструкции для офисов и школ" },
-      { label: "Перегородки из алюминия", href: "/partitions#aluminum", desc: "Прочные системы для бизнес-центров" },
-    ],
-  },
-  {
-    label: "Подоконники",
-    href: "/windowsills",
-  },
-  {
-    label: "Аксессуары",
-    href: "/accessories",
-  },
-  {
-    label: "Наши работы",
-    href: "/portfolio",
-  },
-];
+import { SITE } from "@/config/site";
+import { navItems } from "@/data/navigation";
 
 interface NavbarProps {
   onOrderClick?: () => void;
@@ -92,16 +39,16 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
               <Clock className="w-3 h-3 opacity-60" />
-              Пн–Суб 09.00–17.00
+              {SITE.workingHoursShort}
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://www.instagram.com/okna_dveri_marviko" target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition-colors">
+            <a href={SITE.instagramHref} target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center gap-1.5 hover:text-accent transition-colors">
               Instagram
             </a>
-            <a href="tel:+375295677756" className="flex items-center gap-1.5 hover:text-accent transition-colors">
+            <a href={SITE.phoneTel} className="flex items-center gap-1.5 hover:text-accent transition-colors">
               <Phone className="w-3 h-3 opacity-60" />
-              +375 (29) 567-77-56
+              {SITE.phoneDisplay}
             </a>
           </div>
         </div>
@@ -185,9 +132,9 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
           </div>
 
           <div className="hidden lg:flex items-center gap-3">
-            <a href="tel:+375295677756" className="flex items-center gap-2 text-primary font-semibold text-sm">
+            <a href={SITE.phoneTel} className="flex items-center gap-2 text-primary font-semibold text-sm">
               <Phone className="w-4 h-4" />
-              +375 (29) 567-77-56
+              {SITE.phoneDisplay}
             </a>
             <button
               onClick={onOrderClick}
@@ -245,9 +192,9 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
                 ))}
 
                 <div className="mt-3 pt-3 border-t border-border flex flex-col gap-3">
-                  <a href="tel:+375295677756" className="flex items-center gap-2 text-primary font-semibold px-4">
+                  <a href={SITE.phoneTel} className="flex items-center gap-2 text-primary font-semibold px-4">
                     <Phone className="w-4 h-4" />
-                    +375 (29) 567-77-56
+                    {SITE.phoneDisplay}
                   </a>
                   <button
                     onClick={() => { setMobileOpen(false); onOrderClick?.(); }}

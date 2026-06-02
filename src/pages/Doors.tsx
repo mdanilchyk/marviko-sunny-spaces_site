@@ -1,22 +1,18 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
-import { Check, ArrowRight, Phone, Send, Eye, X } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { Check } from "lucide-react";
+import PageSeo from "@/components/PageSeo";
+import { SEO_BY_PATH } from "@/config/seo";
+import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
+import OrderModal from "@/components/OrderModal";
+import ImageLightbox from "@/components/ImageLightbox";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
-import { motion, AnimatePresence } from "framer-motion";
-import { sendFormEmail } from "@/lib/formSubmit";
-import doorReal1 from "@/assets/door-real-1.jpg";
+import { FORM_SUBJECTS } from "@/config/site";
 import doorReal2 from "@/assets/door-real-2.jpg";
-import doorReal3 from "@/assets/door-real-3.jpg";
-import doorReal4 from "@/assets/door-real-4.jpg";
-import doorReal5 from "@/assets/door-real-5.jpg";
-import doorReal6 from "@/assets/door-real-6.jpg";
-import doorReal7 from "@/assets/door-real-7.jpg";
-import doorReal8 from "@/assets/door-real-8.jpg";
-import doorReal9 from "@/assets/door-real-9.jpg";
-import doorReal10 from "@/assets/door-real-10.jpg";
+import { getDoorsGalleryImages } from "@/data/portfolio";
+
+const SHORT_MODAL_DESCRIPTION = "Оставьте свой номер телефона и наш менеджер свяжется с вами.";
 
 const doorTypes = [
   {
@@ -38,50 +34,21 @@ const doorTypes = [
 
 const DoorsPage = () => {
   const [orderModal, setOrderModal] = useState(false);
-  const [orderForm, setOrderForm] = useState({ name: "", phone: "" });
-  const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
-  const [orderSending, setOrderSending] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [lightbox, setLightbox] = useState<number | null>(null);
 
-  const galleryImages = [
-    { src: doorReal8, alt: "Входная группа с алюминиевыми дверями" },
-    { src: doorReal9, alt: "Трёхстворчатая дверь с фрамугой" },
-    { src: doorReal10, alt: "Раздвижная дверь в интерьере" },
-    { src: doorReal1, alt: "Раздвижная балконная дверь" },
-    { src: doorReal3, alt: "Входная дверь зелёная ПВХ" },
-    { src: doorReal4, alt: "Входная группа магазина" },
-    { src: doorReal5, alt: "Белая входная дверь ПВХ" },
-    { src: doorReal6, alt: "Дверь с ламинацией под дерево" },
-    { src: doorReal7, alt: "Входная дверь с боковой створкой" },
-  ];
+  const galleryImages = getDoorsGalleryImages();
 
   return (
-    <main className="min-h-screen bg-background">
-      <Helmet>
-        <title>Двери ПВХ в Минске — входные и межкомнатные | Марвико</title>
-        <meta
-          name="description"
-          content="Двери ПВХ в Минске. Входные и межкомнатные, установка под ключ. Гарантия 10 лет. Звоните: +375 29 567-77-56."
-        />
-        <link rel="canonical" href="https://marviko.by/doors" />
-      </Helmet>
-      <Navbar onOrderClick={() => setOrderModal(true)} />
+    <PageLayout onOrderClick={() => setOrderModal(true)}>
+      <PageSeo seo={SEO_BY_PATH["/doors"]} />
 
-      <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #3A2518)" }}>
-        <div className="absolute inset-0 opacity-15">
-          <img src={doorReal2} alt="Входные и межкомнатные двери ПВХ в Минске" className="w-full h-full object-cover" />
-        </div>
-        <div className="container mx-auto section-padding relative z-10">
-          <AnimatedSection>
-            <SectionLabel>Двери</SectionLabel>
-            <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Надёжные двери для дома и офиса</h1>
-            <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Входные, балконные и раздвижные двери из ПВХ и алюминия
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+      <PageHero
+        label="Двери"
+        title="Надёжные двери для дома и офиса"
+        subtitle="Входные, балконные и раздвижные двери из ПВХ и алюминия"
+        backgroundImage={doorReal2}
+        backgroundImageAlt="Входные и межкомнатные двери ПВХ в Минске"
+      />
 
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
@@ -140,84 +107,17 @@ const DoorsPage = () => {
         </div>
       </section>
 
-      <Footer />
+      <ImageLightbox images={galleryImages} index={lightbox} onClose={() => setLightbox(null)} />
 
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightbox !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
-            onClick={() => setLightbox(null)}
-          >
-            <button className="absolute top-6 right-6 text-primary-foreground" onClick={() => setLightbox(null)}>
-              <X className="w-8 h-8" />
-            </button>
-            <motion.img
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              src={galleryImages[lightbox]?.src}
-              alt={galleryImages[lightbox]?.alt}
-              className="max-w-full max-h-[85vh] rounded-xl object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Order Modal */}
-      <AnimatePresence>
-        {orderModal && (
-          <motion.div className="fixed inset-0 z-50 flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <div className="absolute inset-0 bg-black/60" onClick={() => { if (!orderSending) setOrderModal(false); }} />
-            <motion.div className="relative bg-card rounded-xl p-6 sm:p-8 w-full max-w-md shadow-2xl border border-border" initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}>
-              {formSubmitted ? (
-                <div className="text-center py-4">
-                  <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center text-primary mx-auto mb-4"><Send className="w-7 h-7" /></div>
-                  <h3 className="text-xl font-bold mb-2">Заявка отправлена!</h3>
-                  <p className="text-sm text-muted-foreground mb-6">Наш менеджер свяжется с вами в течение 15 минут.</p>
-                  <button onClick={() => { setOrderModal(false); setFormSubmitted(false); }} className="px-6 py-2.5 rounded-lg font-semibold text-sm border border-border hover:bg-muted transition-colors">Закрыть</button>
-                </div>
-              ) : (
-                <>
-                  <button onClick={() => setOrderModal(false)} className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors text-2xl leading-none">×</button>
-                  <h3 className="text-xl font-bold mb-2 text-foreground">Заказать расчёт</h3>
-                  <p className="text-sm text-muted-foreground mb-6">Оставьте свой номер телефона и наш менеджер свяжется с вами.</p>
-                  <div className="flex flex-col gap-4">
-                    <div>
-                      <input type="text" placeholder="* Ваше имя" value={orderForm.name} onChange={(e) => { setOrderForm({ ...orderForm, name: e.target.value }); setOrderErrors({ ...orderErrors, name: false }); }} className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${orderErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`} disabled={orderSending} />
-                      {orderErrors.name && <p className="text-xs text-destructive mt-1">Пожалуйста, введите ваше имя</p>}
-                    </div>
-                    <div>
-                      <input type="tel" placeholder="* Телефон" value={orderForm.phone} onChange={(e) => { setOrderForm({ ...orderForm, phone: e.target.value }); setOrderErrors({ ...orderErrors, phone: false }); }} className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${orderErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`} disabled={orderSending} />
-                      {orderErrors.phone && <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>}
-                    </div>
-                    <button disabled={orderSending} onClick={async () => {
-                      const errors = { name: !orderForm.name.trim(), phone: !orderForm.phone.trim() };
-                      setOrderErrors(errors);
-                      if (errors.name || errors.phone) return;
-                      setOrderSending(true);
-                      await sendFormEmail("Расчёт двери — сайт Марвико", { "Имя": orderForm.name, "Телефон": orderForm.phone });
-                      setOrderSending(false);
-                      setFormSubmitted(true);
-                      setOrderForm({ name: "", phone: "" });
-                    }} className="w-full py-3.5 rounded-lg font-semibold text-white transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-70" style={{ backgroundColor: "#C8441A" }} onMouseEnter={(e) => { if (!orderSending) e.currentTarget.style.backgroundColor = "#A33515"; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#C8441A"; }}>
-                      {orderSending ? (<><svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" /><path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75" /></svg>Отправка...</>) : "Отправить заявку"}
-                    </button>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
-                    <Phone className="w-4 h-4" /> Или позвоните: <a href="tel:+375295677756" className="text-primary font-medium">+375 29 567-77-56</a>
-                  </p>
-                </>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </main>
+      <OrderModal
+        open={orderModal}
+        onClose={() => setOrderModal(false)}
+        subject={FORM_SUBJECTS.doorQuote}
+        title="Заказать расчёт"
+        description={SHORT_MODAL_DESCRIPTION}
+        buttonText="Отправить заявку"
+      />
+    </PageLayout>
   );
 };
 

@@ -101,40 +101,4 @@ export const ParallaxImage = ({
   );
 };
 
-// Animated counter for numbers
-export const AnimatedCounter = ({
-  target,
-  suffix = "",
-  prefix = "",
-  className = "",
-  duration = 2,
-}: {
-  target: number;
-  suffix?: string;
-  prefix?: string;
-  className?: string;
-  duration?: number;
-}) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const count = useTransform(
-    useScroll({ target: ref, offset: ["start end", "end center"] }).scrollYProgress,
-    [0, 0.5],
-    [0, target]
-  );
-
-  return (
-    <motion.span
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : {}}
-    >
-      {prefix}
-      <motion.span>{isInView ? target : 0}</motion.span>
-      {suffix}
-    </motion.span>
-  );
-};
-
 export default AnimatedSection;
