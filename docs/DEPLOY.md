@@ -6,19 +6,21 @@
 npm run build
 ```
 
-Скрипт создаёт статический HTML для 7 маршрутов:
+Первый раз на машине сборки:
 
-| URL | Файл на сервере | Ожидаемый размер ~ |
-|-----|-----------------|-------------------|
-| `/` | `index.html` | 7–8 KB |
-| `/windows/` | `windows/index.html` | ~2.8 KB |
-| `/doors/` | `doors/index.html` | ~2.9 KB |
-| `/partitions/` | `partitions/index.html` | ~2.9 KB |
-| `/windowsills/` | `windowsills/index.html` | ~2.8 KB |
-| `/accessories/` | `accessories/index.html` | ~2.9 KB |
-| `/portfolio/` | `portfolio/index.html` | ~2.3 KB |
+```bash
+npm run playwright:install
+```
 
-Если `windowsills/index.html` ≈ 7.7 KB — это **копия главной**, загрузите заново из `dist/`.
+Скрипт `scripts/prerender.ts` (Playwright) создаёт **полный HTML** — и `<head>`, и контент в `#root` (h1, текст) для 7 маршрутов.
+
+| URL | Файл на сервере |
+|-----|-----------------|
+| `/` | `index.html` (большой файл, вся главная) |
+| `/windows/` | `windows/index.html` |
+| … | `doors/`, `partitions/`, `windowsills/`, `accessories/`, `portfolio/` |
+
+Проверка: в `dist/windows/index.html` есть `<h1>` и текст, не пустой `<div id="root"></div>`.
 
 ## FTP
 

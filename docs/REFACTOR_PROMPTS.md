@@ -14,7 +14,8 @@
 Правила:
 - Минимальный diff, не трогать несвязанный код
 - Следовать существующим паттернам (Tailwind, SectionLabel, AnimatedSection)
-- SEO: schema.ts + PageSeo; post-build prerender в scripts/prerender.ts (head + JSON-LD в HTML), маршруты в src/config/prerender.ts
+- SEO: schema.ts + PageSeo; полный prerender в scripts/prerender.ts (Playwright, head + #root), маршруты в prerender.ts
+- Перед первым build: npm run playwright:install
 - После правок: npm run build должен проходить
 - Коммит только если я попрошу
 ```

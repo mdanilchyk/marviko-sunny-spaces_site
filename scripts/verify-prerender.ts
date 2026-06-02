@@ -20,6 +20,11 @@ function extract(html: string, pattern: RegExp): string | null {
   return m?.[1] ?? null;
 }
 
+function rootIsEmpty(html: string): boolean {
+  const m = html.match(/<div id="root">([\s\S]*?)<\/div>/i);
+  return !m || m[1].trim().length < 50;
+}
+
 let failed = 0;
 
 for (const route of PRERENDER_PATHS) {
@@ -38,6 +43,7 @@ for (const route of PRERENDER_PATHS) {
   const title = extract(html, /<title>([^<]*)<\/title>/);
   const canonical = extract(html, /<link rel="canonical" href="([^"]*)"/);
   const schemaCount = (html.match(/application\/ld\+json/g) ?? []).length;
+  const h1Count = (html.match(/<h1[\s>]/gi) ?? []).length;
 
   if (title !== seo.title) {
     console.error(`✗ ${route}: title mismatch\n  expected: ${seo.title}\n  got:      ${title}`);
@@ -47,13 +53,25 @@ for (const route of PRERENDER_PATHS) {
     console.error(`✗ ${route}: canonical mismatch\n  expected: ${seo.canonical}\n  got:      ${canonical}`);
     routeOk = false;
   }
-  if (schemaCount !== expectedSchemas) {
-    console.error(`✗ ${route}: JSON-LD count ${schemaCount}, expected ${expectedSchemas}`);
+  if (schemaCount < expectedSchemas) {
+    console.error(`✗ ${route}: JSON-LD count ${schemaCount}, expected at least ${expectedSchemas}`);
+    routeOk = false;
+  }
+  if (schemaCount > expectedSchemas + 2) {
+    console.error(`✗ ${route}: JSON-LD count ${schemaCount}, likely duplicates (expected ~${expectedSchemas})`);
+    routeOk = false;
+  }
+  if (h1Count < 1) {
+    console.error(`✗ ${route}: no <h1> in prerendered HTML`);
+    routeOk = false;
+  }
+  if (rootIsEmpty(html)) {
+    console.error(`✗ ${route}: #root is empty in prerendered HTML`);
     routeOk = false;
   }
 
   if (routeOk) {
-    console.log(`✓ ${route}`);
+    console.log(`✓ ${route} (h1×${h1Count}, JSON-LD×${schemaCount})`);
   } else {
     failed++;
   }

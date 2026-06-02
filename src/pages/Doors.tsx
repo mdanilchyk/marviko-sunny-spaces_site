@@ -39,9 +39,9 @@ const DoorsPage = () => {
   const galleryImages = getDoorsGalleryImages();
 
   return (
-    <PageLayout onOrderClick={() => setOrderModal(true)}>
+    <>
       <PageSeo seo={SEO_BY_PATH["/doors"]} path="/doors" />
-
+      <PageLayout onOrderClick={() => setOrderModal(true)}>
       <PageHero
         label="Двери"
         title="Надёжные двери для дома и офиса"
@@ -117,7 +117,8 @@ const DoorsPage = () => {
         description={SHORT_MODAL_DESCRIPTION}
         buttonText="Отправить заявку"
       />
-    </PageLayout>
+      </PageLayout>
+    </>
   );
 };
 

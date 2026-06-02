@@ -1,7 +1,21 @@
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+
+/** Keep JSON-LD in source index.html; omit from production bundle (Helmet + prerender add per route). */
+function stripIndexSchemaFromBuild(): Plugin {
+  return {
+    name: "strip-index-schema-from-build",
+    transformIndexHtml: {
+      order: "pre",
+      handler(html, ctx) {
+        if (ctx.server) return html;
+        return html.replace(/<!-- SCHEMA_START -->[\s\S]*?<!-- SCHEMA_END -->\s*/i, "");
+      },
+    },
+  };
+}
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -12,7 +26,11 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [
+    react(),
+    stripIndexSchemaFromBuild(),
+    mode === "development" && componentTagger(),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

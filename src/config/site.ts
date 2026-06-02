@@ -1,5 +1,5 @@
 /** Shared contact and site metadata for marviko.by.
- *  JSON-LD: src/config/schema.ts, rendered via PageSeo (react-helmet-async). */
+ *  JSON-LD: schema.ts; static homepage blocks in index.html (npm run sync:index-schema); PageSeo + prerender for routes. */
 export const SITE = {
   phone: "+375295677756",
   phoneDisplay: "+375 (29) 567-77-56",

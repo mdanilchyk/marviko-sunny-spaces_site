@@ -5,8 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run prerender",
+    "build": "tsx scripts/sync-index-schema.ts && vite build && npm run prerender",
+    "sync:index-schema": "tsx scripts/sync-index-schema.ts",
     "prerender": "tsx scripts/prerender.ts && tsx scripts/verify-prerender.ts",
+    "playwright:install": "PLAYWRIGHT_BROWSERS_PATH=.playwright-browsers playwright install chromium",
+    "seo:audit": "tsx scripts/seo-audit.ts",
+    "seo:audit:live": "LIVE=1 tsx scripts/seo-audit.ts",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -69,6 +73,7 @@
   "devDependencies": {
     "@eslint/js": "^9.32.0",
     "@playwright/test": "^1.57.0",
+    "playwright": "^1.57.0",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.0",
     "@testing-library/react": "^16.0.0",
