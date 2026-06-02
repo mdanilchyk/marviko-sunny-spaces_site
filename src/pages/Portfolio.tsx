@@ -1,10 +1,10 @@
 import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageSeo from "@/components/PageSeo";
+import PageHero from "@/components/PageHero";
 import ImageLightbox from "@/components/ImageLightbox";
 import { SEO_BY_PATH } from "@/config/seo";
 import OrderModal from "@/components/OrderModal";
-import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import LazyImage from "@/components/LazyImage";
 import {
@@ -27,17 +27,11 @@ const PortfolioPage = () => {
     <PageLayout onOrderClick={() => setOrderModal(true)}>
       <PageSeo seo={SEO_BY_PATH["/portfolio"]} />
 
-      <section className="dark-section py-20">
-        <div className="container mx-auto section-padding">
-          <AnimatedSection>
-            <SectionLabel>Портфолио</SectionLabel>
-            <h1 className="text-4xl sm:text-5xl text-display mb-6">Наши работы</h1>
-            <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
-              Примеры выполненных проектов по остеклению окон, балконов, установке дверей, перегородок и подоконников.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+      <PageHero
+        label="Портфолио"
+        title="Наши работы"
+        subtitle="Примеры выполненных проектов по остеклению окон, балконов, установке дверей, перегородок и подоконников."
+      />
 
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
