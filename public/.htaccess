@@ -2,8 +2,16 @@
   RewriteEngine On
   RewriteBase /
 
-  # Serve existing files and directories as-is (assets, favicon, etc.)
   RewriteRule ^index\.html$ - [L]
+
+  # Pre-rendered routes (Apache; on nginx use docs/DEPLOY.md snippet)
+  RewriteRule ^windows/?$ /windows/index.html [L]
+  RewriteRule ^doors/?$ /doors/index.html [L]
+  RewriteRule ^partitions/?$ /partitions/index.html [L]
+  RewriteRule ^windowsills/?$ /windowsills/index.html [L]
+  RewriteRule ^accessories/?$ /accessories/index.html [L]
+  RewriteRule ^portfolio/?$ /portfolio/index.html [L]
+
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
