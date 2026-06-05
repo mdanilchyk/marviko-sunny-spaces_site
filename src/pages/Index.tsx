@@ -110,6 +110,7 @@ const Index = () => {
   const [contactErrors, setContactErrors] = useState({ name: false, phone: false, question: false });
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
+  const [calcPhoneError, setCalcPhoneError] = useState(false);
   const [calcSending, setCalcSending] = useState(false);
   const [calcSubmitError, setCalcSubmitError] = useState(false);
   const [certModal, setCertModal] = useState<string | null>(null);
@@ -221,15 +222,22 @@ const Index = () => {
                       exit={{ opacity: 0, height: 0 }}
                       className="overflow-hidden"
                     >
-                      <label className="text-sm mb-1.5 block text-muted-foreground">Ваш телефон для связи</label>
+                      <label className="text-sm mb-1.5 block text-muted-foreground">* Ваш телефон для связи</label>
                       <input
                         type="tel"
                         placeholder={SITE.phonePlaceholder}
                         value={calcPhone}
-                        onChange={(e) => setCalcPhone(e.target.value)}
-                        className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
+                        onChange={(e) => {
+                          setCalcPhone(e.target.value);
+                          setCalcPhoneError(false);
+                        }}
+                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${calcPhoneError ? "border-destructive" : "border-border focus:border-primary"}`}
                         maxLength={20}
+                        required
                       />
+                      {calcPhoneError && (
+                        <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -240,7 +248,12 @@ const Index = () => {
                     if (!showCalcPhone) {
                       setShowCalcPhone(true);
                       setCalcSubmitError(false);
+                      setCalcPhoneError(false);
                     } else {
+                      if (!calcPhone.trim()) {
+                        setCalcPhoneError(true);
+                        return;
+                      }
                       setCalcSending(true);
                       setCalcSubmitError(false);
                       const ok = await sendFormEmail("Расчёт стоимости — сайт Марвико", {
@@ -254,6 +267,7 @@ const Index = () => {
                         pushFormSubmissionSuccess("price_calc");
                         setShowCalcPhone(false);
                         setCalcPhone("");
+                        setCalcPhoneError(false);
                         setFormData({ type: "windows", width: "", height: "" });
                       } else {
                         setCalcSubmitError(true);
