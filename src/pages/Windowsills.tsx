@@ -129,6 +129,7 @@ const WindowsillsPage = () => {
         open={orderModal}
         onClose={() => setOrderModal(false)}
         subject={FORM_SUBJECTS.windowsillMeasure}
+        formType="windowsill_measure"
         title="Заказать замер"
         description="Оставьте свой номер телефона и наш менеджер свяжется с вами."
         buttonText="Отправить заявку"

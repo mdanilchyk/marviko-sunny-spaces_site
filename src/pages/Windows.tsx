@@ -248,7 +248,12 @@ const WindowsPage = () => {
         onClose={() => setLightbox(null)}
       />
 
-      <OrderModal open={orderModal} onClose={() => setOrderModal(false)} subject="Заказ окна — сайт Марвико" />
+      <OrderModal
+        open={orderModal}
+        onClose={() => setOrderModal(false)}
+        subject="Заказ окна — сайт Марвико"
+        formType="window_order"
+      />
     </PageLayout>
   );
 };

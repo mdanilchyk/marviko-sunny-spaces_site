@@ -245,7 +245,12 @@ const AccessoriesPage = () => {
         onClose={() => setLightbox(null)}
       />
 
-      <OrderModal open={orderModal} onClose={() => setOrderModal(false)} subject="Аксессуары — сайт Марвико" />
+      <OrderModal
+        open={orderModal}
+        onClose={() => setOrderModal(false)}
+        subject="Аксессуары — сайт Марвико"
+        formType="accessories"
+      />
     </PageLayout>
   );
 };

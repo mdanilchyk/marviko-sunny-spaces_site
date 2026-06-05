@@ -3,6 +3,7 @@ import { Phone, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SITE } from "@/config/site";
 import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
+import { pushFormSubmissionSuccess, type GtmFormType } from "@/lib/gtm";
 
 const DEFAULT_DESCRIPTION =
   "Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут.";
@@ -11,6 +12,7 @@ interface OrderModalProps {
   open: boolean;
   onClose: () => void;
   subject?: string;
+  formType?: GtmFormType;
   title?: string;
   description?: string;
   buttonText?: string;
@@ -20,6 +22,7 @@ const OrderModal = ({
   open,
   onClose,
   subject = "Заказ звонка — сайт Марвико",
+  formType = "lead_contact",
   title = "Заказать звонок",
   description = DEFAULT_DESCRIPTION,
   buttonText = "Заказать звонок",
@@ -76,6 +79,7 @@ const OrderModal = ({
                     const ok = await sendFormEmail(subject, { "Имя": form.name, "Телефон": form.phone });
                     setSending(false);
                     if (ok) {
+                      pushFormSubmissionSuccess(formType);
                       setSubmitted(true);
                       setForm({ name: "", phone: "" });
                     } else {

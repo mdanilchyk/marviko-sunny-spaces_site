@@ -77,6 +77,7 @@ const PortfolioPage = () => {
         open={orderModal}
         onClose={() => setOrderModal(false)}
         subject="Портфолио — сайт Марвико"
+        formType="portfolio"
       />
     </PageLayout>
   );

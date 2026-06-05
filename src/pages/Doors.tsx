@@ -113,6 +113,7 @@ const DoorsPage = () => {
         open={orderModal}
         onClose={() => setOrderModal(false)}
         subject={FORM_SUBJECTS.doorQuote}
+        formType="door_quote"
         title="Заказать расчёт"
         description={SHORT_MODAL_DESCRIPTION}
         buttonText="Отправить заявку"

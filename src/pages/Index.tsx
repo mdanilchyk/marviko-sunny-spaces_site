@@ -16,6 +16,7 @@ import { HOMEPAGE_PORTFOLIO_ITEMS } from "@/data/portfolio";
 import { faqData } from "@/data/faq";
 import { reviews } from "@/data/reviews";
 import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
+import { pushFormSubmissionSuccess } from "@/lib/gtm";
 
 
 import heroImg from "@/assets/hero-interior.jpg";
@@ -250,6 +251,7 @@ const Index = () => {
                       });
                       setCalcSending(false);
                       if (ok) {
+                        pushFormSubmissionSuccess("price_calc");
                         setShowCalcPhone(false);
                         setCalcPhone("");
                         setFormData({ type: "windows", width: "", height: "" });
@@ -467,6 +469,7 @@ const Index = () => {
                       const ok = await sendFormEmail("Консультация с сайта Марвико", { "Имя": ctaForm.name, "Телефон": ctaForm.phone });
                       setCtaSending(false);
                       if (ok) {
+                        pushFormSubmissionSuccess("consultation");
                         setCtaSubmitted(true);
                         setCtaForm({ name: "", phone: "" });
                       } else {
@@ -873,6 +876,7 @@ const Index = () => {
                             "Телефон": contactForm.phone,
                           });
                           if (ok) {
+                            pushFormSubmissionSuccess("question");
                             setContactSubmitted(true);
                             setContactForm({ name: "", phone: "", question: "" });
                           } else {
@@ -963,6 +967,7 @@ const Index = () => {
         open={orderModal}
         onClose={() => setOrderModal(false)}
         subject={FORM_SUBJECTS.defaultCall}
+        formType="lead_contact"
         title="Заказать звонок"
       />
 
