@@ -108,7 +108,6 @@ const Index = () => {
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
   const [contactForm, setContactForm] = useState({ name: "", phone: "", question: "" });
   const [contactErrors, setContactErrors] = useState({ name: false, phone: false, question: false });
-  const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
   const [calcPhoneError, setCalcPhoneError] = useState(false);
   const [calcSending, setCalcSending] = useState(false);
@@ -175,7 +174,34 @@ const Index = () => {
               className="rounded-xl p-6 sm:p-8 bg-card border border-border card-shadow"
             >
               <h3 className="text-xl font-bold mb-6 text-foreground">Быстрый расчёт стоимости</h3>
-              <div className="flex flex-col gap-4">
+              <form
+                className="flex flex-col gap-4"
+                noValidate
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  if (!calcPhone.trim()) {
+                    setCalcPhoneError(true);
+                    return;
+                  }
+                  setCalcSending(true);
+                  setCalcSubmitError(false);
+                  const ok = await sendFormEmail("Расчёт стоимости — сайт Марвико", {
+                    "Тип": formData.type,
+                    "Ширина": formData.width || "не указана",
+                    "Высота": formData.height || "не указана",
+                    "Телефон": calcPhone,
+                  });
+                  setCalcSending(false);
+                  if (ok) {
+                    pushFormSubmissionSuccess("price_calc");
+                    setCalcPhone("");
+                    setCalcPhoneError(false);
+                    setFormData({ type: "windows", width: "", height: "" });
+                  } else {
+                    setCalcSubmitError(true);
+                  }
+                }}
+              >
                 <div>
                   <label className="text-sm mb-1.5 block text-muted-foreground">Тип конструкции</label>
                   <select
@@ -214,74 +240,43 @@ const Index = () => {
                   </div>
                 </div>
 
-                <AnimatePresence>
-                  {showCalcPhone && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="overflow-hidden"
-                    >
-                      <label className="text-sm mb-1.5 block text-muted-foreground">* Ваш телефон для связи</label>
-                      <input
-                        type="tel"
-                        placeholder={SITE.phonePlaceholder}
-                        value={calcPhone}
-                        onChange={(e) => {
-                          setCalcPhone(e.target.value);
-                          setCalcPhoneError(false);
-                        }}
-                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${calcPhoneError ? "border-destructive" : "border-border focus:border-primary"}`}
-                        maxLength={20}
-                        required
-                      />
-                      {calcPhoneError && (
-                        <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>
-                      )}
-                    </motion.div>
+                <div>
+                  <label className={`text-sm mb-1.5 block ${calcPhoneError ? "text-destructive" : "text-muted-foreground"}`}>
+                    * Ваш телефон для связи
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder={SITE.phonePlaceholder}
+                    value={calcPhone}
+                    onChange={(e) => {
+                      setCalcPhone(e.target.value);
+                      setCalcPhoneError(false);
+                    }}
+                    className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${calcPhoneError ? "" : "border-border focus:border-primary"}`}
+                    style={calcPhoneError ? { borderColor: "hsl(var(--destructive))", boxShadow: "0 0 0 1px hsl(var(--destructive))" } : undefined}
+                    maxLength={20}
+                    required
+                    aria-invalid={calcPhoneError}
+                    aria-describedby={calcPhoneError ? "calc-phone-error" : undefined}
+                  />
+                  {calcPhoneError && (
+                    <p id="calc-phone-error" className="text-xs mt-1" style={{ color: "hsl(var(--destructive))" }}>
+                      Пожалуйста, введите номер телефона
+                    </p>
                   )}
-                </AnimatePresence>
+                </div>
 
                 <button
+                  type="submit"
                   disabled={calcSending}
-                  onClick={async () => {
-                    if (!showCalcPhone) {
-                      setShowCalcPhone(true);
-                      setCalcSubmitError(false);
-                      setCalcPhoneError(false);
-                    } else {
-                      if (!calcPhone.trim()) {
-                        setCalcPhoneError(true);
-                        return;
-                      }
-                      setCalcSending(true);
-                      setCalcSubmitError(false);
-                      const ok = await sendFormEmail("Расчёт стоимости — сайт Марвико", {
-                        "Тип": formData.type,
-                        "Ширина": formData.width || "не указана",
-                        "Высота": formData.height || "не указана",
-                        "Телефон": calcPhone,
-                      });
-                      setCalcSending(false);
-                      if (ok) {
-                        pushFormSubmissionSuccess("price_calc");
-                        setShowCalcPhone(false);
-                        setCalcPhone("");
-                        setCalcPhoneError(false);
-                        setFormData({ type: "windows", width: "", height: "" });
-                      } else {
-                        setCalcSubmitError(true);
-                      }
-                    }
-                  }}
                   className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 mt-2 disabled:opacity-70"
                 >
-                  {calcSending ? "Отправка..." : showCalcPhone ? "Отправить заявку" : "Рассчитать"}
+                  {calcSending ? "Отправка..." : "Рассчитать"}
                 </button>
                 {calcSubmitError && (
                   <p className="text-xs text-destructive mt-2">{FORM_SUBMIT_ERROR_MESSAGE}</p>
                 )}
-              </div>
+              </form>
             </motion.div>
           </div>
         </div>
