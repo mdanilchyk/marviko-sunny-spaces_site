@@ -23,6 +23,24 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function injectHomePerformanceHints(html: string, route: (typeof PRERENDER_PATHS)[number]): string {
+  if (route !== "/") {
+    return html;
+  }
+
+  const heroMatch = html.match(/\/assets\/hero-interior-[A-Za-z0-9_-]+\.jpg/);
+  if (!heroMatch) {
+    return html;
+  }
+
+  const preloadTag = `<link rel="preload" as="image" href="${heroMatch[0]}" fetchpriority="high">`;
+  if (html.includes(preloadTag)) {
+    return html;
+  }
+
+  return html.replace("</head>", `${preloadTag}</head>`);
+}
+
 function distFileForRoute(route: (typeof PRERENDER_PATHS)[number]): string {
   if (route === "/") {
     return join(DIST, "index.html");
@@ -119,7 +137,8 @@ async function main() {
         }
 
         mkdirSync(dirname(outFile), { recursive: true });
-        writeFileSync(outFile, await page.content(), "utf8");
+        const html = injectHomePerformanceHints(await page.content(), route);
+        writeFileSync(outFile, html, "utf8");
 
         const h1 = await page.locator("h1").first().textContent();
         console.log(

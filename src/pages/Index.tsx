@@ -138,16 +138,21 @@ const Index = () => {
       {/* Hero - lighter warm feel */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-background">
         <div className="absolute inset-0">
-          <img src={heroImg} alt="Остекление балконов и окна ПВХ в Минске — Марвико" className="w-full h-full object-cover" />
+          <img
+            src={heroImg}
+            alt="Остекление балконов и окна ПВХ в Минске — Марвико"
+            className="w-full h-full object-cover"
+            fetchPriority="high"
+            decoding="async"
+          />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 100%)" }} />
           <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--background)))" }} />
         </div>
         <div className="container mx-auto section-padding relative z-10 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
             >
               <SectionLabel>Окна Марвико</SectionLabel>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6 text-foreground">
@@ -168,9 +173,8 @@ const Index = () => {
 
             {/* Quick calc form */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
               className="rounded-xl p-6 sm:p-8 bg-card border border-border card-shadow"
             >
               <h3 className="text-xl font-bold mb-6 text-foreground">Быстрый расчёт стоимости</h3>
