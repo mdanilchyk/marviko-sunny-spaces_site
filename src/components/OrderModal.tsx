@@ -6,7 +6,7 @@ import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
 import { pushFormSubmissionSuccess, type GtmFormType } from "@/lib/gtm";
 
 const DEFAULT_DESCRIPTION =
-  "Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут.";
+  "Нет времени или возможности позвонить? Оставьте свой номер телефона — наш менеджер свяжется с вами.";
 
 interface OrderModalProps {
   open: boolean;
@@ -53,7 +53,7 @@ const OrderModal = ({
               <div className="text-center py-4">
                 <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center text-primary mx-auto mb-4"><Send className="w-7 h-7" /></div>
                 <h3 className="text-xl font-bold mb-2">Заявка отправлена!</h3>
-                <p className="text-sm text-muted-foreground mb-6">Наш менеджер свяжется с вами в течение 15 минут.</p>
+                <p className="text-sm text-muted-foreground mb-6">Мы свяжемся с вами в ближайшее время.</p>
                 <button onClick={handleClose} className="px-6 py-2.5 rounded-lg font-semibold text-sm border border-border hover:bg-muted transition-colors">Закрыть</button>
               </div>
             ) : (

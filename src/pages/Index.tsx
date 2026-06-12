@@ -434,7 +434,6 @@ const Index = () => {
               <p className="text-primary-foreground/80 text-body mb-6">Специалисты нашей компании ответят на все ваши вопросы и помогут подобрать оптимальное решение для вашего дома.</p>
               <div className="flex flex-wrap gap-6 text-primary-foreground/90 text-sm">
                 <span className="flex items-center gap-2"><PhoneCall className="w-5 h-5" /> Бесплатная консультация</span>
-                <span className="flex items-center gap-2"><Clock className="w-5 h-5" /> Перезвоним за 15 минут</span>
               </div>
             </div>
             <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/20">
@@ -444,7 +443,7 @@ const Index = () => {
                     <Send className="w-7 h-7 text-primary-foreground" />
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-primary-foreground">Заявка отправлена!</h3>
-                  <p className="text-sm text-primary-foreground/80 mb-4">Наш менеджер свяжется с вами в течение 15 минут.</p>
+                  <p className="text-sm text-primary-foreground/80 mb-4">Мы свяжемся с вами в ближайшее время.</p>
                   <button onClick={() => setCtaSubmitted(false)} className="px-6 py-2.5 rounded-lg font-semibold text-sm border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 transition-colors">Закрыть</button>
                 </div>
               ) : (
