@@ -8,7 +8,7 @@ import CtaBanner from "@/components/CtaBanner";
 import OrderModal from "@/components/OrderModal";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
-import { FORM_SUBJECTS } from "@/config/site";
+import { FORM_SUBJECTS, FORM_COPY } from "@/config/site";
 import { getPortfolioByCategory } from "@/data/portfolio";
 
 const partitionPhotos = getPortfolioByCategory("Перегородки");
@@ -90,7 +90,7 @@ const PartitionsPage = () => {
         subject={FORM_SUBJECTS.partitionQuote}
         formType="partition_quote"
         title="Получить расчёт"
-        description="Оставьте свой номер телефона и наш менеджер свяжется с вами."
+        description={FORM_COPY.shortDescription}
         buttonText="Отправить заявку"
       />
     </PageLayout>

@@ -24,6 +24,13 @@ export const SITE = {
   instagramHref: "https://www.instagram.com/okna_dveri_marviko",
 } as const;
 
+export const FORM_COPY = {
+  followUp: "Мы свяжемся с вами в рабочее время.",
+  modalDescription:
+    "Нет времени или возможности позвонить? Оставьте свой номер телефона — мы свяжемся с вами в рабочее время.",
+  shortDescription: "Оставьте свой номер телефона — мы свяжемся с вами в рабочее время.",
+} as const;
+
 export const FORM_SUBJECTS = {
   defaultCall: "Заказ звонка — сайт Марвико",
   priceCalc: "Расчёт стоимости — сайт Марвико",

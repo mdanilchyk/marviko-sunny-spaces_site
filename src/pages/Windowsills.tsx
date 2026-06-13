@@ -9,7 +9,7 @@ import OrderModal from "@/components/OrderModal";
 import ImageLightbox from "@/components/ImageLightbox";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
-import { FORM_SUBJECTS } from "@/config/site";
+import { FORM_SUBJECTS, FORM_COPY } from "@/config/site";
 import { getWindowsillsGalleryItems } from "@/data/portfolio";
 import windowsillCatalog from "@/assets/windowsill-real-catalog.jpg";
 
@@ -131,7 +131,7 @@ const WindowsillsPage = () => {
         subject={FORM_SUBJECTS.windowsillMeasure}
         formType="windowsill_measure"
         title="Заказать замер"
-        description="Оставьте свой номер телефона и наш менеджер свяжется с вами."
+        description={FORM_COPY.shortDescription}
         buttonText="Отправить заявку"
       />
     </PageLayout>

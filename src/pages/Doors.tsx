@@ -8,11 +8,11 @@ import OrderModal from "@/components/OrderModal";
 import ImageLightbox from "@/components/ImageLightbox";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
-import { FORM_SUBJECTS } from "@/config/site";
+import { FORM_SUBJECTS, FORM_COPY } from "@/config/site";
 import doorReal2 from "@/assets/door-real-2.jpg";
 import { getDoorsGalleryImages } from "@/data/portfolio";
 
-const SHORT_MODAL_DESCRIPTION = "Оставьте свой номер телефона и наш менеджер свяжется с вами.";
+const SHORT_MODAL_DESCRIPTION = FORM_COPY.shortDescription;
 
 const doorTypes = [
   {
