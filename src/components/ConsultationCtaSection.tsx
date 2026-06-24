@@ -123,9 +123,7 @@ const ConsultationCtaSection = () => {
                     </>
                   )}
                 </button>
-                <p className="text-xs sm:text-sm text-primary-foreground/80 text-center">
-                  Гарантия 10 лет · Бесплатный замер · Рассрочка без %
-                </p>
+                <p className="text-xs sm:text-sm text-primary-foreground/80 text-center">{FORM_COPY.trustLine}</p>
                 {submitError && <p className="text-xs text-red-300 mt-2">{FORM_SUBMIT_ERROR_MESSAGE}</p>}
               </div>
             )}

@@ -31,8 +31,15 @@ export const windowsAluFaq: FaqItem[] = pickFaqByQuestions([
   "Вы работаете за пределами Червеня?",
 ]);
 
+/** 2 вопроса — /doors-pvh и /doors-alu */
+export const doorsPageFaq: FaqItem[] = pickFaqByQuestions([
+  "Есть ли гарантия?",
+  "Вы работаете за пределами Червеня?",
+]);
+
 export function getFaqForPath(path: string): FaqItem[] | null {
   if (path === "/windows-pvh") return windowsPvhFaq;
   if (path === "/windows-alu") return windowsAluFaq;
+  if (path === "/doors-pvh" || path === "/doors-alu") return doorsPageFaq;
   return null;
 }

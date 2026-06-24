@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingMessengerWidget from "@/components/FloatingMessengerWidget";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -12,6 +13,7 @@ const PageLayout = ({ children, onOrderClick }: PageLayoutProps) => (
     <Navbar onOrderClick={onOrderClick} />
     {children}
     <Footer />
+    <FloatingMessengerWidget />
   </main>
 );
 

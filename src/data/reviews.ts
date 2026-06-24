@@ -144,3 +144,14 @@ export const windowsPageReviews: Review[] = [
   reviews[11], // УП «Нефтебитумный завод»
 ];
 
+/** 8 отзывов для страниц /doors-pvh и /doors-alu — строгий порядок */
+export const doorsPageReviews: Review[] = [
+  reviews[1], // ООО «Рентал Трейд»
+  reviews[2], // Наталия Дубовик
+  reviews[4], // Бобрович С.
+  reviews[5], // Пуховичский РГС
+  reviews[6], // Червенское райпо
+  reviews[7], // Денисевич И.
+  reviews[9], // ООО ДСД-СтройИнвест
+  reviews[11], // УП Нефтебитумный завод
+];

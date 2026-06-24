@@ -21,12 +21,10 @@ export const navItems: NavItem[] = [
   },
   {
     label: "Двери",
-    href: "/doors",
+    href: "/doors-pvh",
     submenu: [
-      { label: "Балконные двери ПВХ", href: "/doors", desc: "Окно в сочетании с дверью" },
-      { label: "Входные двери", href: "/doors", desc: "Надёжная защита и теплоизоляция" },
-      { label: "Раздвижные двери", href: "/doors", desc: "Наклонно-сдвижная фурнитура" },
-      { label: "Алюминиевые двери", href: "/doors", desc: "Прочность и современный дизайн" },
+      { label: "Двери ПВХ", href: "/doors-pvh", desc: "Входные, балконные и раздвижные двери ПВХ" },
+      { label: "Алюминиевые двери", href: "/doors-alu", desc: "Прочные входные алюминиевые системы" },
     ],
   },
   {
@@ -52,8 +50,8 @@ export const navItems: NavItem[] = [
 ];
 
 export const footerProductLinks = [
-  { to: "/windows", label: "Окна" },
-  { to: "/doors", label: "Двери" },
+  { to: "/windows-pvh", label: "Окна" },
+  { to: "/doors-pvh", label: "Двери" },
   { to: "/partitions", label: "Перегородки" },
   { to: "/windowsills", label: "Подоконники" },
   { to: "/accessories", label: "Аксессуары" },

@@ -3,15 +3,23 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-/** 301 redirect /windows → /windows-pvh (dev server; production: .htaccess / nginx). */
-function legacyWindowsRedirect(): Plugin {
+/** 301 redirects for legacy URLs (dev server; production: .htaccess / nginx). */
+function legacyPathRedirects(): Plugin {
+  const redirects: Record<string, string> = {
+    "/windows": "/windows-pvh",
+    "/windows/": "/windows-pvh",
+    "/doors": "/doors-pvh",
+    "/doors/": "/doors-pvh",
+  };
+
   return {
-    name: "legacy-windows-redirect",
+    name: "legacy-path-redirects",
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const url = req.url?.split("?")[0] ?? "";
-        if (url === "/windows" || url === "/windows/") {
-          res.writeHead(301, { Location: "/windows-pvh" });
+        const target = redirects[url];
+        if (target) {
+          res.writeHead(301, { Location: target });
           res.end();
           return;
         }
@@ -46,7 +54,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    legacyWindowsRedirect(),
+    legacyPathRedirects(),
     stripIndexSchemaFromBuild(),
     mode === "development" && componentTagger(),
   ].filter(Boolean),

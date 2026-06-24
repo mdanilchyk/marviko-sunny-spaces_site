@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import SectionLabel from "@/components/SectionLabel";
+import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import type { FaqItem } from "@/data/faq";
 
@@ -14,10 +14,7 @@ const FaqAccordion = ({ items }: FaqAccordionProps) => {
 
   return (
     <div>
-      <AnimatedSection>
-        <SectionLabel>Вопросы</SectionLabel>
-        <h2 className="text-3xl sm:text-4xl text-display mb-10">Часто задаваемые вопросы</h2>
-      </AnimatedSection>
+      <SectionHeader label="Вопросы" title="Часто задаваемые вопросы" />
       <div className="flex flex-col gap-3">
         {items.map((faq, i) => (
           <AnimatedSection key={faq.q} delay={i * 0.05}>

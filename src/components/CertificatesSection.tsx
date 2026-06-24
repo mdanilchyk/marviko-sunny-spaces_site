@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import SectionLabel from "@/components/SectionLabel";
+import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import CertificateBadgesRow from "@/components/CertificateBadgesRow";
 import { certificateImages } from "@/data/certificates";
@@ -16,13 +16,11 @@ const CertificatesSection = ({ showBadges = true }: CertificatesSectionProps) =>
     <>
       <section id="certificates" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
-            <SectionLabel>Документы</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-3">Сертификаты соответствия</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-2xl">
-              Для изготовления своей продукции мы используем только самые высококачественные оригинальные европейские комплектующие.
-            </p>
-          </AnimatedSection>
+          <SectionHeader
+            label="Документы"
+            title="Сертификаты соответствия"
+            subtitle="Для изготовления своей продукции мы используем только самые высококачественные оригинальные европейские комплектующие."
+          />
           <div className="relative">
             <div className="flex gap-6 overflow-hidden">
               {certificateImages.map((cert, i) => (

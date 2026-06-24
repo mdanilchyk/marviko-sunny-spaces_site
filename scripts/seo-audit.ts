@@ -129,7 +129,7 @@ for (const route of PRERENDER_PATHS) {
     add("2. JSON-LD", "types-home", "fail", "/: missing LocalBusiness or FAQPage");
   }
 
-  if (["/windows-pvh", "/windows-alu", "/doors", "/partitions", "/windowsills", "/accessories"].includes(route)) {
+  if (["/windows-pvh", "/windows-alu", "/doors-pvh", "/doors-alu", "/partitions", "/windowsills", "/accessories"].includes(route)) {
     if (a.hasService) {
       add("2. JSON-LD", `service-${route}`, "ok", `${route}: Service schema in HTML`);
     } else {

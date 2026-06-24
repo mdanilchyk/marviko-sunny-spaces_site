@@ -4,13 +4,15 @@
 
   RewriteRule ^index\.html$ - [L]
 
-  # 301 redirect legacy /windows to /windows-pvh
+  # 301 redirect legacy URLs
   RewriteRule ^windows/?$ /windows-pvh/ [R=301,L]
+  RewriteRule ^doors/?$ /doors-pvh/ [R=301,L]
 
   # Pre-rendered routes (Apache; on nginx use docs/DEPLOY.md snippet)
   RewriteRule ^windows-pvh/?$ /windows-pvh/index.html [L]
   RewriteRule ^windows-alu/?$ /windows-alu/index.html [L]
-  RewriteRule ^doors/?$ /doors/index.html [L]
+  RewriteRule ^doors-pvh/?$ /doors-pvh/index.html [L]
+  RewriteRule ^doors-alu/?$ /doors-alu/index.html [L]
   RewriteRule ^partitions/?$ /partitions/index.html [L]
   RewriteRule ^windowsills/?$ /windowsills/index.html [L]
   RewriteRule ^accessories/?$ /accessories/index.html [L]

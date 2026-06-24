@@ -1,4 +1,4 @@
-import SectionLabel from "@/components/SectionLabel";
+import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 
 const BASE_PROCESS_STEPS = [
@@ -26,10 +26,7 @@ const HowWeWorkSection = ({ includeWarrantyStep = false }: HowWeWorkSectionProps
   return (
     <section id="process" className="py-20 bg-background scroll-mt-24">
       <div className="container mx-auto section-padding">
-        <AnimatedSection variant="fade-left">
-          <SectionLabel>Этапы</SectionLabel>
-          <h2 className="text-3xl sm:text-4xl text-display mb-12">Как мы работаем</h2>
-        </AnimatedSection>
+        <SectionHeader label="Этапы" title="Как мы работаем" variant="fade-left" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {steps.map((step, i) => (
             <AnimatedSection key={step.num} delay={i * 0.15} variant="slide-up">

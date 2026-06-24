@@ -18,6 +18,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import ClientReviewsSection from "@/components/ClientReviewsSection";
 import ConsultationCtaSection from "@/components/ConsultationCtaSection";
 import CertificatesSection from "@/components/CertificatesSection";
+import SectionHeader from "@/components/SectionHeader";
 import { reviews } from "@/data/reviews";
 import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
 import { pushFormSubmissionSuccess } from "@/lib/gtm";
@@ -38,7 +39,7 @@ const categories = [
     title: "Пластиковые и алюминиевые окна",
     description: "Окна ПВХ и алюминиевые окна различной формы от бюджетных до премиум класса",
     img: serviceWindows,
-    link: "/windows",
+    link: "/windows-pvh",
     price: HOMEPAGE_WINDOWS_FROM_PRICE,
   },
 
@@ -47,7 +48,7 @@ const categories = [
     title: "Двери",
     description: "Входные двери из ПВХ и алюминия, балконные двери из ПВХ",
     img: serviceDoors,
-    link: "/doors",
+    link: "/doors-pvh",
     price: "от 650 BYN",
   },
   {
@@ -68,7 +69,7 @@ const categories = [
     title: "Остекление объектов",
     description: "Магазины, офисы, многоквартирные дома — под ключ",
     img: serviceWindowWork,
-    link: "/windows",
+    link: "/windows-pvh",
     price: "по запросу",
   },
   {
@@ -95,7 +96,7 @@ const accessories = [
   { emoji: "🪟", title: "Стеклопакеты", desc: "Замена стеклопакетов без демонтажа рамы" },
   { emoji: "🔒", title: "Детские замки", desc: "Защита от открывания ребёнком. Устанавливается на любое окно" },
   { emoji: "🏠", title: "Отливы и доборы", desc: "Отливы и доборные элементы для кровель из оцинкованной стали" },
-  { emoji: "📏", title: "Подоконники", desc: "Стандартные и премиум подоконники. Глянцевые, матовые, под камень и дерево" },
+  { emoji: "📏", title: "Подоконники", desc: "Стандартные и премиум. Более 30 цветов и фактур" },
 ];
 const Index = () => {
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
@@ -268,11 +269,12 @@ const Index = () => {
       {/* Services - mosokna style grid cards with icons */}
       <section id="services" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-left">
-            <SectionLabel>Продукция</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-4">Наши услуги</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-xl">Окна, двери и перегородки из ПВХ и алюминия</p>
-          </AnimatedSection>
+          <SectionHeader
+            label="Продукция"
+            title="Наши услуги"
+            subtitle="Окна, двери и перегородки из ПВХ и алюминия"
+            variant="fade-left"
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat, i) => (
               <AnimatedSection key={cat.title} delay={i * 0.12} variant="scale" className="h-full">
@@ -304,11 +306,12 @@ const Index = () => {
       {/* Pricing - mosokna style clean cards */}
       <section id="pricing" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="blur">
-            <SectionLabel>Цены</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-4">Цены на наши окна</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с монтажом.</p>
-          </AnimatedSection>
+          <SectionHeader
+            label="Цены"
+            title="Цены на наши окна"
+            subtitle="Стоимость окон ПВХ с монтажом."
+            variant="blur"
+          />
 
           {/* Cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -383,15 +386,10 @@ const Index = () => {
         </div>
       </section>
 
-      <ConsultationCtaSection />
-
       {/* Process */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-left">
-            <SectionLabel>Этапы</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-12">Как мы работаем</h2>
-          </AnimatedSection>
+          <SectionHeader label="Этапы" title="Как мы работаем" variant="fade-left" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {processSteps.map((step, i) => (
               <AnimatedSection key={step.num} delay={i * 0.15} variant="slide-up">
@@ -414,17 +412,16 @@ const Index = () => {
       {/* Portfolio preview - real work photos */}
       <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-right">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <SectionLabel>Портфолио</SectionLabel>
-                <h2 className="text-3xl sm:text-4xl text-display">Наши работы</h2>
-              </div>
-              <Link to="/portfolio" className="hidden sm:flex items-center gap-1 text-primary font-semibold text-sm">
+          <SectionHeader
+            label="Портфолио"
+            title="Наши работы"
+            variant="fade-right"
+            action={
+              <Link to="/portfolio" className="flex items-center gap-1 text-primary font-semibold text-sm">
                 Все работы <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
-          </AnimatedSection>
+            }
+          />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {HOMEPAGE_PORTFOLIO_ITEMS.map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.1} variant="scale">
@@ -448,16 +445,13 @@ const Index = () => {
       {/* Accessories section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="blur">
-            <SectionLabel>Дополнительно</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-10">Также устанавливаем и продаём</h2>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <SectionHeader label="Дополнительно" title="Также устанавливаем и продаём" variant="blur" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
             {accessories.map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.1} variant="fade-left">
+              <AnimatedSection key={item.title} delay={i * 0.1} variant="fade-left" className="h-full">
                 <Link
                   to={item.title === "Подоконники" ? "/windowsills" : "/accessories"}
-                  className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start block"
+                  className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start h-full"
                 >
                   <span className="text-2xl">{item.emoji}</span>
                   <div>
@@ -480,13 +474,11 @@ const Index = () => {
 
             {/* Contact Form - mosokna style */}
             <div>
-              <AnimatedSection>
-                <SectionLabel>Контакты</SectionLabel>
-                <h2 className="text-2xl sm:text-3xl text-display mb-2">Возникли вопросы?</h2>
-                <p className="text-muted-foreground text-body mb-8">
-                  Напишите, и наши специалисты подробно ответят вам в удобной форме.
-                </p>
-              </AnimatedSection>
+              <SectionHeader
+                label="Контакты"
+                title="Возникли вопросы?"
+                subtitle="Напишите, и наши специалисты подробно ответят вам в удобной форме."
+              />
               <AnimatedSection delay={0.15}>
                 {contactSubmitted ? (
                   <div className="bg-card rounded-xl p-8 card-shadow text-center">
@@ -596,33 +588,32 @@ const Index = () => {
         </div>
       </section>
 
-
+      <ConsultationCtaSection />
 
       {/* Contacts */}
       <section id="contacts" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-right">
-            <SectionLabel>Контакты</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-10">Свяжитесь с нами</h2>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <SectionHeader label="Контакты" title="Свяжитесь с нами" variant="fade-right" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {[
               { icon: <Phone className="w-6 h-6" />, title: "Телефон", value: SITE.phoneDisplay, href: SITE.phoneTel },
               { icon: <Send className="w-6 h-6" />, title: "Viber / Telegram", value: SITE.phoneDisplay, href: SITE.telegramHref },
               { icon: <MapPin className="w-6 h-6" />, title: "Офис", value: SITE.addressOffice, href: undefined },
               { icon: <MapPin className="w-6 h-6" />, title: "Производство", value: SITE.addressProduction, href: undefined },
             ].map((contact, i) => (
-              <AnimatedSection key={i} delay={i * 0.12} variant="slide-up">
-                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 text-center border border-border hover:border-primary">
+              <AnimatedSection key={i} delay={i * 0.12} variant="slide-up" className="h-full">
+                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 text-center border border-border hover:border-primary h-full flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary mb-4 mx-auto">
                     {contact.icon}
                   </div>
                   <h3 className="font-bold mb-1">{contact.title}</h3>
-                  {contact.href ? (
-                    <a href={contact.href} className="text-sm text-primary font-medium">{contact.value}</a>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">{contact.value}</p>
-                  )}
+                  <div className="min-h-12 flex items-center justify-center">
+                    {contact.href ? (
+                      <a href={contact.href} className="text-sm text-primary font-medium">{contact.value}</a>
+                    ) : (
+                      <p className="text-sm text-muted-foreground">{contact.value}</p>
+                    )}
+                  </div>
                 </div>
               </AnimatedSection>
             ))}

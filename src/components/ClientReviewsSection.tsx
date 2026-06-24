@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight, Eye, FileText } from "lucide-react";
-import SectionLabel from "@/components/SectionLabel";
-import AnimatedSection from "@/components/AnimatedSection";
+import SectionHeader from "@/components/SectionHeader";
 import type { Review } from "@/data/reviews";
 
 interface ClientReviewsSectionProps {
@@ -17,13 +16,11 @@ const ClientReviewsSection = ({ reviews }: ClientReviewsSectionProps) => {
     <>
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-left">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <SectionLabel>Отзывы</SectionLabel>
-                <h2 className="text-3xl sm:text-4xl text-display">Что говорят клиенты</h2>
-              </div>
-              <div className="hidden sm:flex gap-2">
+          <SectionHeader
+            label="Отзывы"
+            title="Что говорят клиенты"
+            action={
+              <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -45,8 +42,8 @@ const ClientReviewsSection = ({ reviews }: ClientReviewsSectionProps) => {
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
-            </div>
-          </AnimatedSection>
+            }
+          />
           <div
             ref={reviewsRef}
             className="flex gap-6 overflow-x-auto pb-4 -mb-4 snap-x snap-mandatory"
