@@ -53,9 +53,9 @@ const FloatingMessengerWidget = () => {
               rel="noopener noreferrer"
               aria-label={label}
               title={label}
-              className={`pointer-events-auto w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-200 hover:scale-105 ${className}`}
+              className={`pointer-events-auto w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-200 hover:scale-105 ${className}`}
             >
-              <Icon className="w-4 h-4" />
+              <Icon className="w-5 h-5" />
             </a>
           ))}
         </motion.div>

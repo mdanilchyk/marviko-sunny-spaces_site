@@ -55,7 +55,7 @@ const WindowsPageContent = ({ seoPath, path, hero }: WindowsPageContentProps) =>
 
       <WindowsProfilesSection />
 
-      <HowWeWorkSection includeWarrantyStep />
+      <HowWeWorkSection />
 
       <WindowsWorkGallerySection />
 

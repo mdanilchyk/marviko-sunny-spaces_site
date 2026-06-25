@@ -69,8 +69,8 @@ const PriceCalcForm = ({
       ? `w-full px-4 ${inputPy} rounded-lg bg-primary-foreground/10 text-primary-foreground text-sm placeholder:text-primary-foreground/50 border focus:outline-none ${
           hasError ? "border-red-400" : "border-primary-foreground/20 focus:border-primary-foreground/50"
         }`
-      : `w-full px-4 ${inputPy} rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${
-          hasError ? "" : "border-border focus:border-primary"
+      : `w-full px-4 ${inputPy} rounded-lg bg-background text-foreground text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${
+          hasError ? "border-destructive focus:border-destructive" : "border-border focus:border-primary"
         }`;
 
   const resetForm = () => {
@@ -81,7 +81,7 @@ const PriceCalcForm = ({
 
   const shellClass = onGradient
     ? className
-    : `rounded-xl ${padding} bg-card border border-border card-shadow ${className}`;
+    : `rounded-xl ${padding} bg-card border border-border card-shadow text-foreground ${className}`;
 
   return (
     <div className={shellClass}>
