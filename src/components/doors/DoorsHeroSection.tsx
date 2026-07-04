@@ -22,21 +22,21 @@ const DoorsHeroSection = ({ hero }: DoorsHeroSectionProps) => (
     </div>
     <div className="container mx-auto section-padding relative z-10">
       <div className="flex flex-col gap-3 sm:gap-4 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
-        <AnimatedSection className="order-1">
+        <AnimatedSection className="order-1 lg:col-start-1">
           <SectionLabel>{hero.label}</SectionLabel>
-          <h1 className="text-[1.625rem] leading-[1.1] sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-display mb-2 sm:mb-4 max-w-2xl">
+          <h1 className="text-[1.625rem] sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15] mb-2 sm:mb-4 max-w-2xl">
             {hero.title}
           </h1>
+          <p
+            className="text-sm sm:text-lg text-body max-w-xl leading-relaxed"
+            style={{ color: HERO_SUBTITLE_COLOR }}
+          >
+            {hero.subtitle}
+          </p>
         </AnimatedSection>
 
         <AnimatedSection delay={0.08} className="order-2 lg:col-start-2 lg:row-span-2 lg:self-center">
           <DoorPriceCalcForm variant={hero.variant} className="w-full lg:max-w-lg lg:ml-auto" />
-        </AnimatedSection>
-
-        <AnimatedSection className="order-3 lg:col-start-1">
-          <p className="text-sm sm:text-lg lg:text-lg text-body max-w-xl leading-relaxed" style={{ color: HERO_SUBTITLE_COLOR }}>
-            {hero.subtitle}
-          </p>
         </AnimatedSection>
       </div>
     </div>

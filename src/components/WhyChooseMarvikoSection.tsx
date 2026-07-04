@@ -1,25 +1,10 @@
-import { Shield, Clock, Award, ThumbsUp, Ruler } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import CertificateBadgesRow from "@/components/CertificateBadgesRow";
 import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
-
-const defaultItems = [
-  { icon: Shield, title: "Гарантия 10 лет", desc: "На все виды работ и материалы" },
-  { icon: Clock, title: "Работаем с 2007 года", desc: "Более 19 лет на рынке Беларуси" },
-  { icon: Award, title: "Сертифицированные профили", desc: "Качественные профильные системы" },
-  { icon: ThumbsUp, title: "Собственное производство", desc: "г. Червень, полный цикл изготовления" },
-];
-
-const doorsItems = [
-  { icon: Shield, title: "Гарантия 10 лет", desc: "На все виды работ и материалы" },
-  { icon: Clock, title: "Работаем с 2007 года", desc: "Более 19 лет на рынке Беларуси" },
-  { icon: Award, title: "Сертифицированные профили", desc: "Качественные профильные системы" },
-  { icon: Ruler, title: "Бесплатный замер", desc: "Бесплатный выезд замерщика в удобное время" },
-];
+import { whyChooseDefaultItems, whyChooseDoorsItems, whyChooseLandingItems } from "@/data/whyChooseMarviko";
 
 interface WhyChooseMarvikoSectionProps {
-  variant?: "default" | "doors";
+  variant?: "default" | "landing" | "doors";
   showCertificateBadges?: boolean;
 }
 
@@ -27,7 +12,8 @@ const WhyChooseMarvikoSection = ({
   variant = "default",
   showCertificateBadges = false,
 }: WhyChooseMarvikoSectionProps) => {
-  const items = variant === "doors" ? doorsItems : defaultItems;
+  const items =
+    variant === "landing" ? whyChooseLandingItems : variant === "doors" ? whyChooseDoorsItems : whyChooseDefaultItems;
 
   return (
     <section id="about" className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
@@ -35,7 +21,7 @@ const WhyChooseMarvikoSection = ({
         <SectionHeader label="Преимущества" title="Почему выбирают Марвико" variant="fade-right" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {items.map((item, i) => {
-            const Icon = item.icon as LucideIcon;
+            const Icon = item.icon;
             return (
               <AnimatedSection key={item.title} delay={i * 0.12} variant="slide-up">
                 <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 border border-border hover:border-primary h-full flex flex-col">

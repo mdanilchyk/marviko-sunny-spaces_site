@@ -8,6 +8,7 @@ import WhyChooseMarvikoSection from "@/components/WhyChooseMarvikoSection";
 import WindowsPricingSection from "@/components/windows/WindowsPricingSection";
 import WindowsInstallmentSection from "@/components/windows/WindowsInstallmentSection";
 import WindowsProfilesSection from "@/components/windows/WindowsProfilesSection";
+import LaminationSection from "@/components/LaminationSection";
 import HowWeWorkSection from "@/components/HowWeWorkSection";
 import WindowsWorkGallerySection from "@/components/windows/WindowsWorkGallerySection";
 import ClientReviewsSection from "@/components/ClientReviewsSection";
@@ -24,9 +25,17 @@ interface WindowsPageContentProps {
   seoPath: SeoPath;
   path: string;
   hero: WindowsHeroConfig;
+  showLamination?: boolean;
+  showPricing?: boolean;
 }
 
-const WindowsPageContent = ({ seoPath, path, hero }: WindowsPageContentProps) => {
+const WindowsPageContent = ({
+  seoPath,
+  path,
+  hero,
+  showLamination = false,
+  showPricing = true,
+}: WindowsPageContentProps) => {
   const [orderModalOpen, setOrderModalOpen] = useState(false);
   const [orderModalKind, setOrderModalKind] = useState<OrderModalKind>("window");
   const pageFaq = getFaqForPath(seoPath);
@@ -47,13 +56,15 @@ const WindowsPageContent = ({ seoPath, path, hero }: WindowsPageContentProps) =>
 
       <WindowsHeroSection hero={hero} />
 
-      <WhyChooseMarvikoSection showCertificateBadges />
+      <WhyChooseMarvikoSection variant="landing" showCertificateBadges />
 
-      <WindowsPricingSection onOrderClick={openWindowOrder} />
+      {showPricing && <WindowsPricingSection onOrderClick={openWindowOrder} />}
 
       <WindowsInstallmentSection onOrderClick={openWindowOrder} />
 
       <WindowsProfilesSection />
+
+      {showLamination && <LaminationSection variant="windows" onOrderClick={openWindowOrder} />}
 
       <HowWeWorkSection />
 
