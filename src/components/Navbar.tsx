@@ -4,7 +4,11 @@ import { Menu, X, Phone, MapPin, Clock, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/marviko-logo.svg";
 import { SITE } from "@/config/site";
-import { navItems } from "@/data/navigation";
+import { navItems, type NavItem } from "@/data/navigation";
+
+function isNavActive(pathname: string, item: NavItem): boolean {
+  return pathname === item.href || (item.submenu?.some((sub) => sub.href === pathname) ?? false);
+}
 
 interface NavbarProps {
   onOrderClick?: () => void;
@@ -82,7 +86,7 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
                 <Link
                   to={item.href}
                   className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center gap-1 ${
-                    location.pathname === item.href
+                    isNavActive(location.pathname, item)
                       ? "text-primary bg-accent-light"
                       : "text-foreground hover:text-primary hover:bg-accent-light"
                   }`}
@@ -165,7 +169,7 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
                 {navItems.map((item) => (
                   <div key={item.label}>
                     <div className="flex items-center">
-                      <Link to={item.href} onClick={() => setMobileOpen(false)} className={`flex-1 px-4 py-3 rounded-lg text-base font-medium transition-colors ${location.pathname === item.href ? "text-primary bg-accent-light" : "text-foreground"}`}>
+                      <Link to={item.href} onClick={() => setMobileOpen(false)} className={`flex-1 px-4 py-3 rounded-lg text-base font-medium transition-colors ${isNavActive(location.pathname, item) ? "text-primary bg-accent-light" : "text-foreground"}`}>
                         {item.label}
                       </Link>
                       {item.submenu && (

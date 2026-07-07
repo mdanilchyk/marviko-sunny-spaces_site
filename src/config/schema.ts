@@ -1,12 +1,14 @@
-import { faqData } from "@/data/faq";
+import { faqData, windowsAluFaq, windowsPvhFaq, doorsPageFaq } from "@/data/faq";
 import { SEO_BY_PATH, type SeoPath } from "@/config/seo";
 import { SITE } from "@/config/site";
 
 export type SchemaPath = SeoPath | "not-found";
 
 const SERVICE_PATHS: SeoPath[] = [
-  "/windows",
-  "/doors",
+  "/windows-pvh",
+  "/windows-alu",
+  "/doors-pvh",
+  "/doors-alu",
   "/partitions",
   "/windowsills",
   "/accessories",
@@ -52,10 +54,10 @@ export function websiteSchema() {
   };
 }
 
-export function faqPageSchema() {
+export function faqPageSchema(items: typeof faqData = faqData) {
   return {
     "@type": "FAQPage",
-    mainEntity: faqData.map((item) => ({
+    mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.q,
       acceptedAnswer: {
@@ -122,7 +124,15 @@ export function getSchemasForPath(path: SchemaPath): Record<string, unknown>[] {
   }
 
   if (isServicePath(path)) {
-    return [withContext(serviceSchema(path)), withContext(breadcrumbSchema(path))];
+    const schemas = [withContext(serviceSchema(path)), withContext(breadcrumbSchema(path))];
+    if (path === "/windows-pvh") {
+      schemas.push(withContext(faqPageSchema(windowsPvhFaq)));
+    } else if (path === "/windows-alu") {
+      schemas.push(withContext(faqPageSchema(windowsAluFaq)));
+    } else if (path === "/doors-pvh" || path === "/doors-alu") {
+      schemas.push(withContext(faqPageSchema(doorsPageFaq)));
+    }
+    return schemas;
   }
 
   if (path === "/portfolio") {

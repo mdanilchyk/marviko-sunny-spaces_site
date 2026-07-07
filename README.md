@@ -1,5 +1,7 @@
 # Welcome to your Lovable project
 
+<!-- Test commit from vladdani777-ship-it -->
+
 ## Project info
 
 **URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID

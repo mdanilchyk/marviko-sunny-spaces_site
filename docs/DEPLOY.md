@@ -34,7 +34,9 @@ npm run playwright:install
 ## nginx (Plesk → «Дополнительные директивы nginx»)
 
 ```nginx
-location = /windows { return 301 /windows/; }
+location = /windows { return 301 /windows-pvh/; }
+location = /windows-pvh { return 301 /windows-pvh/; }
+location = /windows-alu { return 301 /windows-alu/; }
 location = /doors { return 301 /doors/; }
 location = /partitions { return 301 /partitions/; }
 location = /windowsills { return 301 /windowsills/; }

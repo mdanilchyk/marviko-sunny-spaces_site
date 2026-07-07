@@ -13,8 +13,14 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://marviko.by/doors</loc>
-    <lastmod>2026-06-02</lastmod>
+    <loc>https://marviko.by/doors-pvh</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://marviko.by/doors-alu</loc>
+    <lastmod>2026-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

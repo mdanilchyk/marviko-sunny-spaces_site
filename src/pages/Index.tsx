@@ -1,7 +1,7 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Clock, Award, ThumbsUp, Star, ChevronDown, Eye, ArrowRight, Phone, MapPin, Send, FileText, PhoneCall, ChevronLeft, ChevronRight, CreditCard, CalendarDays, X } from "lucide-react";
+import { ArrowRight, Phone, MapPin, Send, CreditCard, CalendarDays, X } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageSeo from "@/components/PageSeo";
 import OrderModal from "@/components/OrderModal";
@@ -14,6 +14,11 @@ import { FORM_SUBJECTS, SITE, FORM_COPY } from "@/config/site";
 import { HOMEPAGE_PRICING_CARDS, HOMEPAGE_WINDOWS_FROM_PRICE } from "@/data/pricing";
 import { HOMEPAGE_PORTFOLIO_ITEMS } from "@/data/portfolio";
 import { faqData } from "@/data/faq";
+import FaqAccordion from "@/components/FaqAccordion";
+import ClientReviewsSection from "@/components/ClientReviewsSection";
+import ConsultationCtaSection from "@/components/ConsultationCtaSection";
+import CertificatesSection from "@/components/CertificatesSection";
+import SectionHeader from "@/components/SectionHeader";
 import { reviews } from "@/data/reviews";
 import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
 import { pushFormSubmissionSuccess } from "@/lib/gtm";
@@ -28,16 +33,13 @@ import serviceWindowsills from "@/assets/windowsill-real-1.jpg";
 import serviceWindowWork from "@/assets/service-objects.jpg";
 import serviceAccessories from "@/assets/acc-handle-key.jpg";
 
-import certSpk1 from "@/assets/cert-spk-1.jpg";
-import certSpk2 from "@/assets/cert-spk-2.jpg";
-import isoImg from "@/assets/cert-iso-9001.jpg";
-
+import WhyChooseMarvikoSection from "@/components/WhyChooseMarvikoSection";
 const categories = [
   {
     title: "Пластиковые и алюминиевые окна",
     description: "Окна ПВХ и алюминиевые окна различной формы от бюджетных до премиум класса",
     img: serviceWindows,
-    link: "/windows",
+    link: "/windows-pvh",
     price: HOMEPAGE_WINDOWS_FROM_PRICE,
   },
 
@@ -46,7 +48,7 @@ const categories = [
     title: "Двери",
     description: "Входные двери из ПВХ и алюминия, балконные двери из ПВХ",
     img: serviceDoors,
-    link: "/doors",
+    link: "/doors-pvh",
     price: "от 650 BYN",
   },
   {
@@ -67,7 +69,7 @@ const categories = [
     title: "Остекление объектов",
     description: "Магазины, офисы, многоквартирные дома — под ключ",
     img: serviceWindowWork,
-    link: "/windows",
+    link: "/windows-pvh",
     price: "по запросу",
   },
   {
@@ -77,13 +79,6 @@ const categories = [
     link: "/accessories",
     price: "от 15 BYN",
   },
-];
-
-const whyUs = [
-  { icon: <Shield className="w-6 h-6" />, title: "Гарантия 10 лет", desc: "На все виды работ и материалы" },
-  { icon: <Clock className="w-6 h-6" />, title: "Работаем с 2007 года", desc: "Более 19 лет на рынке Беларуси" },
-  { icon: <Award className="w-6 h-6" />, title: "Сертифицированные профили", desc: "Качественные профильные системы" },
-  { icon: <ThumbsUp className="w-6 h-6" />, title: "Собственное производство", desc: "г. Червень, полный цикл изготовления" },
 ];
 
 const processSteps = [
@@ -101,10 +96,9 @@ const accessories = [
   { emoji: "🪟", title: "Стеклопакеты", desc: "Замена стеклопакетов без демонтажа рамы" },
   { emoji: "🔒", title: "Детские замки", desc: "Защита от открывания ребёнком. Устанавливается на любое окно" },
   { emoji: "🏠", title: "Отливы и доборы", desc: "Отливы и доборные элементы для кровель из оцинкованной стали" },
-  { emoji: "📏", title: "Подоконники", desc: "Стандартные и премиум подоконники. Глянцевые, матовые, под камень и дерево" },
+  { emoji: "📏", title: "Подоконники", desc: "Стандартные и премиум. Более 30 цветов и фактур" },
 ];
 const Index = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
   const [contactForm, setContactForm] = useState({ name: "", phone: "", question: "" });
   const [contactErrors, setContactErrors] = useState({ name: false, phone: false, question: false });
@@ -112,24 +106,10 @@ const Index = () => {
   const [calcPhoneError, setCalcPhoneError] = useState(false);
   const [calcSending, setCalcSending] = useState(false);
   const [calcSubmitError, setCalcSubmitError] = useState(false);
-  const [certModal, setCertModal] = useState<string | null>(null);
   const [orderModal, setOrderModal] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [portfolioLightbox, setPortfolioLightbox] = useState<number | null>(null);
-  const [ctaForm, setCtaForm] = useState({ name: "", phone: "" });
-  const [ctaErrors, setCtaErrors] = useState({ name: false, phone: false });
-  const [ctaSending, setCtaSending] = useState(false);
-  const [ctaSubmitted, setCtaSubmitted] = useState(false);
-  const [ctaSubmitError, setCtaSubmitError] = useState(false);
   const [contactSubmitError, setContactSubmitError] = useState(false);
-  const [reviewModal, setReviewModal] = useState<string | null>(null);
-  const reviewsRef = useRef<HTMLDivElement>(null);
-  const certImages = [
-    { img: certSpk1, title: "Свидетельство о технической компетентности" },
-    { img: certSpk2, title: "Область технической компетентности" },
-    
-    { img: isoImg, title: "Сертификат соответствия СТБ ISO 9001-2015 (действителен до 14.05.2026)" },
-  ];
 
   return (
     <PageLayout onOrderClick={() => setOrderModal(true)}>
@@ -289,11 +269,12 @@ const Index = () => {
       {/* Services - mosokna style grid cards with icons */}
       <section id="services" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-left">
-            <SectionLabel>Продукция</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-4">Наши услуги</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-xl">Окна, двери и перегородки из ПВХ и алюминия</p>
-          </AnimatedSection>
+          <SectionHeader
+            label="Продукция"
+            title="Наши услуги"
+            subtitle="Окна, двери и перегородки из ПВХ и алюминия"
+            variant="fade-left"
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat, i) => (
               <AnimatedSection key={cat.title} delay={i * 0.12} variant="scale" className="h-full">
@@ -320,37 +301,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Why Us */}
-      <section id="about" className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
-        <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-right">
-            <SectionLabel>Преимущества</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-10">Почему выбирают Марвико</h2>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyUs.map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.12} variant="slide-up">
-                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 border border-border hover:border-primary h-full flex flex-col">
-                  <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary mb-4">
-                    {item.icon}
-                  </div>
-                  <h3 className="font-bold mb-2">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground text-body">{item.desc}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhyChooseMarvikoSection />
 
       {/* Pricing - mosokna style clean cards */}
       <section id="pricing" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="blur">
-            <SectionLabel>Цены</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-4">Цены на наши окна</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с монтажом.</p>
-          </AnimatedSection>
+          <SectionHeader
+            label="Цены"
+            title="Цены на наши окна"
+            subtitle="Стоимость окон ПВХ с монтажом."
+            variant="blur"
+          />
 
           {/* Cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -425,90 +386,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA - Order call / consultation */}
-      <section className="py-16" style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))" }}>
-        <div className="container mx-auto section-padding">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="text-3xl sm:text-4xl text-display text-primary-foreground mb-4">Закажите бесплатную консультацию</h2>
-              <p className="text-primary-foreground/80 text-body mb-6">Специалисты нашей компании ответят на все ваши вопросы и помогут подобрать оптимальное решение для вашего дома.</p>
-              <div className="flex flex-wrap gap-6 text-primary-foreground/90 text-sm">
-                <span className="flex items-center gap-2"><PhoneCall className="w-5 h-5" /> Бесплатная консультация</span>
-              </div>
-            </div>
-            <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/20">
-              {ctaSubmitted ? (
-                <div className="text-center py-4">
-                  <div className="w-16 h-16 rounded-full bg-primary-foreground/20 flex items-center justify-center mx-auto mb-4">
-                    <Send className="w-7 h-7 text-primary-foreground" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-primary-foreground">Заявка отправлена!</h3>
-                  <p className="text-sm text-primary-foreground/80 mb-4">{FORM_COPY.followUp}</p>
-                  <button onClick={() => setCtaSubmitted(false)} className="px-6 py-2.5 rounded-lg font-semibold text-sm border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 transition-colors">Закрыть</button>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-4">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Ваше имя"
-                      value={ctaForm.name}
-                      onChange={(e) => { setCtaForm({ ...ctaForm, name: e.target.value }); setCtaErrors({ ...ctaErrors, name: false }); }}
-                      className={`w-full px-4 py-3 rounded-lg bg-primary-foreground/10 text-primary-foreground text-sm placeholder:text-primary-foreground/50 border focus:outline-none ${ctaErrors.name ? 'border-red-400' : 'border-primary-foreground/20 focus:border-primary-foreground/50'}`}
-                      disabled={ctaSending}
-                    />
-                    {ctaErrors.name && <p className="text-xs text-red-300 mt-1">Пожалуйста, введите ваше имя</p>}
-                  </div>
-                  <div>
-                    <input
-                      type="tel"
-                      placeholder={SITE.phonePlaceholder}
-                      value={ctaForm.phone}
-                      onChange={(e) => { setCtaForm({ ...ctaForm, phone: e.target.value }); setCtaErrors({ ...ctaErrors, phone: false }); }}
-                      className={`w-full px-4 py-3 rounded-lg bg-primary-foreground/10 text-primary-foreground text-sm placeholder:text-primary-foreground/50 border focus:outline-none ${ctaErrors.phone ? 'border-red-400' : 'border-primary-foreground/20 focus:border-primary-foreground/50'}`}
-                      disabled={ctaSending}
-                    />
-                    {ctaErrors.phone && <p className="text-xs text-red-300 mt-1">Пожалуйста, введите номер телефона</p>}
-                  </div>
-                  <button
-                    disabled={ctaSending}
-                    onClick={async () => {
-                      const errors = { name: !ctaForm.name.trim(), phone: !ctaForm.phone.trim() };
-                      setCtaErrors(errors);
-                      if (errors.name || errors.phone) return;
-                      setCtaSending(true);
-                      setCtaSubmitError(false);
-                      const ok = await sendFormEmail("Консультация с сайта Марвико", { "Имя": ctaForm.name, "Телефон": ctaForm.phone });
-                      setCtaSending(false);
-                      if (ok) {
-                        pushFormSubmissionSuccess("consultation");
-                        setCtaSubmitted(true);
-                        setCtaForm({ name: "", phone: "" });
-                      } else {
-                        setCtaSubmitError(true);
-                      }
-                    }}
-                    className="w-full bg-primary-foreground text-primary py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70"
-                  >
-                    {ctaSending ? (<><svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" /><path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75" /></svg>Отправка...</>) : (<><Phone className="w-4 h-4" />Заказать звонок</>)}
-                  </button>
-                  {ctaSubmitError && (
-                    <p className="text-xs text-red-300 mt-2">{FORM_SUBMIT_ERROR_MESSAGE}</p>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Process */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-left">
-            <SectionLabel>Этапы</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-12">Как мы работаем</h2>
-          </AnimatedSection>
+          <SectionHeader label="Этапы" title="Как мы работаем" variant="fade-left" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {processSteps.map((step, i) => (
               <AnimatedSection key={step.num} delay={i * 0.15} variant="slide-up">
@@ -531,17 +412,16 @@ const Index = () => {
       {/* Portfolio preview - real work photos */}
       <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-right">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <SectionLabel>Портфолио</SectionLabel>
-                <h2 className="text-3xl sm:text-4xl text-display">Наши работы</h2>
-              </div>
-              <Link to="/portfolio" className="hidden sm:flex items-center gap-1 text-primary font-semibold text-sm">
+          <SectionHeader
+            label="Портфолио"
+            title="Наши работы"
+            variant="fade-right"
+            action={
+              <Link to="/portfolio" className="flex items-center gap-1 text-primary font-semibold text-sm">
                 Все работы <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
-          </AnimatedSection>
+            }
+          />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {HOMEPAGE_PORTFOLIO_ITEMS.map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.1} variant="scale">
@@ -558,191 +438,20 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Reviews */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-left">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <SectionLabel>Отзывы</SectionLabel>
-                <h2 className="text-3xl sm:text-4xl text-display">Что говорят клиенты</h2>
-              </div>
-              <div className="hidden sm:flex gap-2">
-                <button
-                  onClick={() => { const el = reviewsRef.current; if (el) el.scrollBy({ left: -340, behavior: 'smooth' }); }}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={() => { const el = reviewsRef.current; if (el) el.scrollBy({ left: 340, behavior: 'smooth' }); }}
-                  className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-          </AnimatedSection>
-          <div
-            ref={reviewsRef}
-            className="flex gap-6 overflow-x-auto pb-4 -mb-4 snap-x snap-mandatory"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
-          >
-            {reviews.map((review, i) => (
-              <div key={i} className="flex-shrink-0 w-[300px] sm:w-[320px] snap-start">
-                <button
-                  onClick={() => setReviewModal(review.screenshot)}
-                  className="text-left w-full h-full"
-                >
-{review.type === "messenger" ? (
-                    <div className="bg-white rounded-2xl rounded-tl-sm p-5 border-2 border-primary relative h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-primary-foreground" style={{ backgroundColor: "#7360F2" }}>V</span>
-                        <span className="font-bold text-sm">{review.name}</span>
-                      </div>
-                      <div className="flex gap-0.5 mb-2">
-                        {Array.from({ length: review.rating }).map((_, j) => (
-                          <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
-                        ))}
-                      </div>
-                      <p className="text-sm text-body text-foreground flex-1">{review.text}</p>
-                      {review.date && (
-                        <p className="text-[11px] text-muted-foreground text-right mt-3">{review.date}</p>
-                      )}
-                      <p className="text-xs text-primary mt-2 flex items-center gap-1">
-                        <Eye className="w-3.5 h-3.5" /> Показать скриншот
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="bg-white rounded-xl p-5 border-2 border-primary h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
-                      <div className="flex items-center gap-2 mb-3">
-                        <FileText className="w-5 h-5 text-primary" />
-                        <div>
-                          <span className="font-bold text-sm block">{review.name}</span>
-                          {"position" in review && <span className="text-xs text-muted-foreground">{review.position}</span>}
-                        </div>
-                      </div>
-                      <div className="flex gap-0.5 mb-2">
-                        {Array.from({ length: review.rating }).map((_, j) => (
-                          <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
-                        ))}
-                      </div>
-                      <p className="text-sm text-body text-muted-foreground flex-1">{review.text}</p>
-{review.date && (
-                        <p className="text-xs text-muted-foreground text-right mt-3">{review.date}</p>
-                      )}
-                      <p className="text-xs text-primary mt-2 flex items-center gap-1">
-                        <Eye className="w-3.5 h-3.5" /> Показать оригинал
-                      </p>
-                    </div>
-                  )}
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ClientReviewsSection reviews={reviews} />
 
-      {/* Review screenshot modal */}
-      <AnimatePresence>
-        {reviewModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/80"
-            onClick={() => setReviewModal(null)}
-          >
-            <motion.img
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              src={reviewModal}
-              alt="Отзыв"
-              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Certificates - mosokna carousel style */}
-      <section id="certificates" className="py-20 bg-background">
-        <div className="container mx-auto section-padding">
-          <AnimatedSection>
-            <SectionLabel>Документы</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-3">Сертификаты соответствия</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-2xl">
-              Для изготовления своей продукции мы используем только самые высококачественные оригинальные европейские комплектующие.
-            </p>
-          </AnimatedSection>
-          <div className="relative">
-            <div className="flex gap-6 overflow-hidden">
-              {certImages.map((cert, i) => (
-                <AnimatedSection key={i} delay={i * 0.1}>
-                  <button
-                    onClick={() => setCertModal(cert.img)}
-                    className="flex-shrink-0 w-[200px] sm:w-[240px] group"
-                  >
-                    <div className="bg-card rounded-xl border border-border hover:border-primary transition-all duration-300 overflow-hidden card-shadow hover:card-shadow-hover">
-                      <img
-                        src={cert.img}
-                        alt={cert.title}
-                        className="w-full h-[280px] sm:h-[320px] object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-3 text-center">{cert.title}</p>
-                  </button>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-2 items-center mt-8">
-            {["ISO 9001", "СТБ 1108-2017", "С 2007 года"].map((badge) => (
-              <span key={badge} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border text-muted-foreground">
-                {badge}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Certificate modal */}
-      <AnimatePresence>
-        {certModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/80"
-            onClick={() => setCertModal(null)}
-          >
-            <motion.img
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              src={certModal}
-              alt="Сертификат"
-              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <CertificatesSection />
 
       {/* Accessories section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="blur">
-            <SectionLabel>Дополнительно</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-10">Также устанавливаем и продаём</h2>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <SectionHeader label="Дополнительно" title="Также устанавливаем и продаём" variant="blur" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
             {accessories.map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.1} variant="fade-left">
+              <AnimatedSection key={item.title} delay={i * 0.1} variant="fade-left" className="h-full">
                 <Link
                   to={item.title === "Подоконники" ? "/windowsills" : "/accessories"}
-                  className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start block"
+                  className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start h-full"
                 >
                   <span className="text-2xl">{item.emoji}</span>
                   <div>
@@ -761,51 +470,15 @@ const Index = () => {
         <div className="container mx-auto section-padding">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* FAQ */}
-            <div>
-              <AnimatedSection>
-                <SectionLabel>Вопросы</SectionLabel>
-                <h2 className="text-3xl sm:text-4xl text-display mb-10">Часто задаваемые вопросы</h2>
-              </AnimatedSection>
-              <div className="flex flex-col gap-3">
-                {faqData.map((faq, i) => (
-                  <AnimatedSection key={i} delay={i * 0.05}>
-                    <div className="bg-card rounded-xl card-shadow overflow-hidden">
-                      <button
-                        onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                        className="w-full flex items-center justify-between p-5 text-left"
-                      >
-                        <span className="font-semibold text-sm pr-4">{faq.q}</span>
-                        <ChevronDown className={`w-5 h-5 shrink-0 text-primary transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
-                      </button>
-                      <AnimatePresence>
-                        {openFaq === i && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="px-5 pb-5">
-                              <p className="text-sm text-muted-foreground text-body">{faq.a}</p>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </div>
+            <FaqAccordion items={faqData} />
 
             {/* Contact Form - mosokna style */}
             <div>
-              <AnimatedSection>
-                <SectionLabel>Контакты</SectionLabel>
-                <h2 className="text-2xl sm:text-3xl text-display mb-2">Возникли вопросы?</h2>
-                <p className="text-muted-foreground text-body mb-8">
-                  Напишите, и наши специалисты подробно ответят вам в удобной форме.
-                </p>
-              </AnimatedSection>
+              <SectionHeader
+                label="Контакты"
+                title="Возникли вопросы?"
+                subtitle="Напишите, и наши специалисты подробно ответят вам в удобной форме."
+              />
               <AnimatedSection delay={0.15}>
                 {contactSubmitted ? (
                   <div className="bg-card rounded-xl p-8 card-shadow text-center">
@@ -915,33 +588,32 @@ const Index = () => {
         </div>
       </section>
 
-
+      <ConsultationCtaSection />
 
       {/* Contacts */}
       <section id="contacts" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection variant="fade-right">
-            <SectionLabel>Контакты</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl text-display mb-10">Свяжитесь с нами</h2>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <SectionHeader label="Контакты" title="Свяжитесь с нами" variant="fade-right" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {[
               { icon: <Phone className="w-6 h-6" />, title: "Телефон", value: SITE.phoneDisplay, href: SITE.phoneTel },
               { icon: <Send className="w-6 h-6" />, title: "Viber / Telegram", value: SITE.phoneDisplay, href: SITE.telegramHref },
               { icon: <MapPin className="w-6 h-6" />, title: "Офис", value: SITE.addressOffice, href: undefined },
               { icon: <MapPin className="w-6 h-6" />, title: "Производство", value: SITE.addressProduction, href: undefined },
             ].map((contact, i) => (
-              <AnimatedSection key={i} delay={i * 0.12} variant="slide-up">
-                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 text-center border border-border hover:border-primary">
+              <AnimatedSection key={i} delay={i * 0.12} variant="slide-up" className="h-full">
+                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 text-center border border-border hover:border-primary h-full flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary mb-4 mx-auto">
                     {contact.icon}
                   </div>
                   <h3 className="font-bold mb-1">{contact.title}</h3>
-                  {contact.href ? (
-                    <a href={contact.href} className="text-sm text-primary font-medium">{contact.value}</a>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">{contact.value}</p>
-                  )}
+                  <div className="min-h-12 flex items-center justify-center">
+                    {contact.href ? (
+                      <a href={contact.href} className="text-sm text-primary font-medium">{contact.value}</a>
+                    ) : (
+                      <p className="text-sm text-muted-foreground">{contact.value}</p>
+                    )}
+                  </div>
                 </div>
               </AnimatedSection>
             ))}

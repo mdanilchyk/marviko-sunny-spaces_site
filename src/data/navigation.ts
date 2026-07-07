@@ -13,20 +13,18 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   {
     label: "Окна",
-    href: "/windows",
+    href: "/windows-pvh",
     submenu: [
-      { label: "Окна ПВХ", href: "/windows#pvc", desc: "Энергоэффективные окна из ПВХ-профиля" },
-      { label: "Алюминиевые окна", href: "/windows#aluminum", desc: "Тёплые и холодные алюминиевые системы" },
+      { label: "Окна ПВХ", href: "/windows-pvh", desc: "Энергоэффективные окна из ПВХ-профиля" },
+      { label: "Алюминиевые окна", href: "/windows-alu", desc: "Тёплые и холодные алюминиевые системы" },
     ],
   },
   {
     label: "Двери",
-    href: "/doors",
+    href: "/doors-pvh",
     submenu: [
-      { label: "Балконные двери ПВХ", href: "/doors", desc: "Окно в сочетании с дверью" },
-      { label: "Входные двери", href: "/doors", desc: "Надёжная защита и теплоизоляция" },
-      { label: "Раздвижные двери", href: "/doors", desc: "Наклонно-сдвижная фурнитура" },
-      { label: "Алюминиевые двери", href: "/doors", desc: "Прочность и современный дизайн" },
+      { label: "Двери ПВХ", href: "/doors-pvh", desc: "Входные, балконные и раздвижные двери ПВХ" },
+      { label: "Алюминиевые двери", href: "/doors-alu", desc: "Прочные входные алюминиевые системы" },
     ],
   },
   {
@@ -52,8 +50,8 @@ export const navItems: NavItem[] = [
 ];
 
 export const footerProductLinks = [
-  { to: "/windows", label: "Окна" },
-  { to: "/doors", label: "Двери" },
+  { to: "/windows-pvh", label: "Окна" },
+  { to: "/doors-pvh", label: "Двери" },
   { to: "/partitions", label: "Перегородки" },
   { to: "/windowsills", label: "Подоконники" },
   { to: "/accessories", label: "Аксессуары" },
