@@ -2,9 +2,13 @@ import { useState } from "react";
 import { Phone, PhoneCall, Send } from "lucide-react";
 import { FORM_COPY, FORM_SUBJECTS, SITE } from "@/config/site";
 import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
-import { pushFormSubmissionSuccess } from "@/lib/gtm";
+import { pushFormSubmissionSuccess, type GtmFormType } from "@/lib/gtm";
 
-const ConsultationCtaSection = () => {
+interface ConsultationCtaSectionProps {
+  formType?: GtmFormType;
+}
+
+const ConsultationCtaSection = ({ formType = "consultation" }: ConsultationCtaSectionProps) => {
   const [form, setForm] = useState({ name: "", phone: "" });
   const [errors, setErrors] = useState({ name: false, phone: false });
   const [sending, setSending] = useState(false);
@@ -25,7 +29,7 @@ const ConsultationCtaSection = () => {
     setSending(false);
 
     if (ok) {
-      pushFormSubmissionSuccess("consultation");
+      pushFormSubmissionSuccess(formType);
       setSubmitted(true);
       setForm({ name: "", phone: "" });
     } else {

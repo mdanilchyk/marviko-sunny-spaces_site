@@ -76,7 +76,7 @@ const WindowsPageContent = ({
 
       {pageFaq && <FaqSection items={pageFaq} />}
 
-      <ConsultationCtaSection />
+      <ConsultationCtaSection formType="consultation" />
 
       <OrderModal
         open={orderModalOpen}

@@ -54,7 +54,7 @@ const WindowsHeroSection = ({ hero }: WindowsHeroSectionProps) => (
         </AnimatedSection>
 
         <AnimatedSection delay={0.08} className="order-2 lg:col-start-2 lg:row-span-2 lg:self-center">
-          <PriceCalcForm variant={hero.variant} className="w-full lg:max-w-lg lg:ml-auto" />
+          <PriceCalcForm variant={hero.variant} className="w-full lg:max-w-lg lg:ml-auto" formType="price_calc" />
         </AnimatedSection>
 
         <AnimatedSection className="order-3 lg:col-start-1">

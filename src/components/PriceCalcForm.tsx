@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FORM_COPY, SITE } from "@/config/site";
 import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
-import { pushFormSubmissionSuccess } from "@/lib/gtm";
+import { pushFormSubmissionSuccess, type GtmFormType } from "@/lib/gtm";
 
 export type PriceCalcVariant = "pvh" | "alu" | "doors-pvh" | "doors-alu";
 export type PriceCalcFormTheme = "default" | "on-gradient";
@@ -32,6 +32,7 @@ interface PriceCalcFormProps {
   compact?: boolean;
   theme?: PriceCalcFormTheme;
   showTrustLine?: boolean;
+  formType?: GtmFormType;
 }
 
 const PriceCalcForm = ({
@@ -40,6 +41,7 @@ const PriceCalcForm = ({
   compact = false,
   theme = "default",
   showTrustLine = false,
+  formType = "price_calc",
 }: PriceCalcFormProps) => {
   const onGradient = theme === "on-gradient";
   const doorsVariant = isDoorsVariant(variant);
@@ -105,7 +107,7 @@ const PriceCalcForm = ({
           });
           setCalcSending(false);
           if (ok) {
-            pushFormSubmissionSuccess("price_calc");
+            pushFormSubmissionSuccess(formType);
             resetForm();
           } else {
             setCalcSubmitError(true);

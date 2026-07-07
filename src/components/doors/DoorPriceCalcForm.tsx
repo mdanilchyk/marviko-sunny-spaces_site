@@ -1,4 +1,5 @@
 import PriceCalcForm, { type PriceCalcFormTheme, type PriceCalcVariant } from "@/components/PriceCalcForm";
+import type { GtmFormType } from "@/lib/gtm";
 
 export type DoorPriceCalcVariant = Extract<PriceCalcVariant, "doors-pvh" | "doors-alu">;
 
@@ -8,6 +9,7 @@ interface DoorPriceCalcFormProps {
   compact?: boolean;
   theme?: PriceCalcFormTheme;
   showTrustLine?: boolean;
+  formType?: GtmFormType;
 }
 
 /** Door quote form — width, height, phone (block 02 / 12). */

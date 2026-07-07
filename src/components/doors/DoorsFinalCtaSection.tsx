@@ -21,7 +21,12 @@ const DoorsFinalCtaSection = ({ variant }: DoorsFinalCtaSectionProps) => (
 
         <AnimatedSection delay={0.08}>
           <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/20">
-            <DoorPriceCalcForm variant={variant} theme="on-gradient" showTrustLine />
+            <DoorPriceCalcForm
+              variant={variant}
+              theme="on-gradient"
+              showTrustLine
+              formType="door_quote"
+            />
           </div>
         </AnimatedSection>
       </div>
