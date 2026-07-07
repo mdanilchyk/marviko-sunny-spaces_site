@@ -106,6 +106,7 @@ const Index = () => {
   const [calcPhoneError, setCalcPhoneError] = useState(false);
   const [calcSending, setCalcSending] = useState(false);
   const [calcSubmitError, setCalcSubmitError] = useState(false);
+  const [calcSubmitted, setCalcSubmitted] = useState(false);
   const [orderModal, setOrderModal] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [portfolioLightbox, setPortfolioLightbox] = useState<number | null>(null);
@@ -165,10 +166,12 @@ const Index = () => {
                   e.preventDefault();
                   if (!calcPhone.trim()) {
                     setCalcPhoneError(true);
+                    setCalcSubmitted(false);
                     return;
                   }
                   setCalcSending(true);
                   setCalcSubmitError(false);
+                  setCalcSubmitted(false);
                   const ok = await sendFormEmail("Расчёт стоимости — сайт Марвико", {
                     "Тип": formData.type,
                     "Ширина": formData.width || "не указана",
@@ -181,6 +184,7 @@ const Index = () => {
                     setCalcPhone("");
                     setCalcPhoneError(false);
                     setFormData({ type: "windows", width: "", height: "" });
+                    setCalcSubmitted(true);
                   } else {
                     setCalcSubmitError(true);
                   }
@@ -235,6 +239,7 @@ const Index = () => {
                     onChange={(e) => {
                       setCalcPhone(e.target.value);
                       setCalcPhoneError(false);
+                      setCalcSubmitted(false);
                     }}
                     className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${calcPhoneError ? "" : "border-border focus:border-primary"}`}
                     style={calcPhoneError ? { borderColor: "hsl(var(--destructive))", boxShadow: "0 0 0 1px hsl(var(--destructive))" } : undefined}
@@ -257,6 +262,9 @@ const Index = () => {
                 >
                   {calcSending ? "Отправка..." : "Рассчитать"}
                 </button>
+                {calcSubmitted && (
+                  <p className="text-xs text-primary mt-2">Заявка отправлена! {FORM_COPY.followUp}</p>
+                )}
                 {calcSubmitError && (
                   <p className="text-xs text-destructive mt-2">{FORM_SUBMIT_ERROR_MESSAGE}</p>
                 )}

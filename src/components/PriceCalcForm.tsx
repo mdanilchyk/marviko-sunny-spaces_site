@@ -55,6 +55,7 @@ const PriceCalcForm = ({
   const [calcPhoneError, setCalcPhoneError] = useState(false);
   const [calcSending, setCalcSending] = useState(false);
   const [calcSubmitError, setCalcSubmitError] = useState(false);
+  const [calcSubmitted, setCalcSubmitted] = useState(false);
 
   const padding = compact ? "p-4 sm:p-6" : "p-6 sm:p-8";
   const titleClass = compact ? "text-lg sm:text-xl font-bold mb-3 sm:mb-4" : "text-xl font-bold mb-6";
@@ -95,10 +96,12 @@ const PriceCalcForm = ({
           e.preventDefault();
           if (!calcPhone.trim()) {
             setCalcPhoneError(true);
+            setCalcSubmitted(false);
             return;
           }
           setCalcSending(true);
           setCalcSubmitError(false);
+          setCalcSubmitted(false);
           const ok = await sendFormEmail("Расчёт стоимости — сайт Марвико", {
             Тип: doorsVariant ? DOORS_PRODUCT_LABEL[variant] : formData.type,
             Ширина: formData.width || "не указана",
@@ -109,6 +112,7 @@ const PriceCalcForm = ({
           if (ok) {
             pushFormSubmissionSuccess(formType);
             resetForm();
+            setCalcSubmitted(true);
           } else {
             setCalcSubmitError(true);
           }
@@ -162,6 +166,7 @@ const PriceCalcForm = ({
             onChange={(e) => {
               setCalcPhone(e.target.value);
               setCalcPhoneError(false);
+              setCalcSubmitted(false);
             }}
             className={fieldClass(calcPhoneError)}
             style={
@@ -197,6 +202,12 @@ const PriceCalcForm = ({
 
         {showTrustLine && (
           <p className="text-xs sm:text-sm text-primary-foreground/80 text-center">{FORM_COPY.trustLine}</p>
+        )}
+
+        {calcSubmitted && (
+          <p className={`text-xs text-center ${onGradient ? "text-primary-foreground" : "text-primary"}`}>
+            Заявка отправлена! {FORM_COPY.followUp}
+          </p>
         )}
 
         {calcSubmitError && (
