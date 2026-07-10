@@ -5,9 +5,14 @@ import type { DoorsPricingGroup } from "@/data/doorsPricing";
 interface DoorsPricingSectionProps {
   pricing: DoorsPricingGroup;
   onOrderClick: () => void;
+  itemColumnLabel?: string;
 }
 
-const DoorsPricingSection = ({ pricing, onOrderClick }: DoorsPricingSectionProps) => (
+const DoorsPricingSection = ({
+  pricing,
+  onOrderClick,
+  itemColumnLabel = "Тип двери",
+}: DoorsPricingSectionProps) => (
   <section id="pricing" className="py-20 bg-background scroll-mt-24">
     <div className="container mx-auto section-padding">
       <AnimatedSection>
@@ -24,7 +29,7 @@ const DoorsPricingSection = ({ pricing, onOrderClick }: DoorsPricingSectionProps
             <table className="w-full min-w-[720px] text-sm">
               <thead>
                 <tr className="border-b border-border bg-muted/30 text-left">
-                  <th className="px-6 py-4 font-semibold">Тип двери</th>
+                  <th className="px-6 py-4 font-semibold">{itemColumnLabel}</th>
                   <th className="px-6 py-4 font-semibold whitespace-nowrap">Размер, мм</th>
                   <th className="px-6 py-4 font-semibold">Профиль</th>
                   <th className="px-6 py-4 font-semibold">Комплектация</th>
@@ -34,7 +39,7 @@ const DoorsPricingSection = ({ pricing, onOrderClick }: DoorsPricingSectionProps
               <tbody>
                 {pricing.items.map((item) => (
                   <tr
-                    key={item.title}
+                    key={item.type}
                     className="border-b border-border last:border-b-0 hover:bg-accent-light/40 transition-colors align-top"
                   >
                     <td className="px-6 py-4 font-medium">{item.title}</td>

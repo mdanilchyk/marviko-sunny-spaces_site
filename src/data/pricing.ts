@@ -7,6 +7,31 @@ export interface WindowPriceItem {
   title: string;
   size: string;
   price: string;
+  /** Подок — значение с бланка, мм */
+  windowsill?: string;
+  /** Отлив — значение с бланка, мм */
+  drip?: string;
+}
+
+function basicWindowPrice(
+  type: WindowPriceType,
+  title: string,
+  size: string,
+  price: string,
+): WindowPriceItem {
+  return {
+    type,
+    title,
+    size,
+    price,
+    windowsill: "250",
+    drip: type === "balcony" ? "200" : "150",
+  };
+}
+
+export function formatWindowBlankPackage(item: WindowPriceItem): string | null {
+  if (!item.windowsill || !item.drip) return null;
+  return `подок ${item.windowsill} · отлив ${item.drip}`;
 }
 
 export interface WindowProfilePricing {
@@ -25,10 +50,10 @@ export const WINDOW_PROFILE_PRICING: WindowProfilePricing[] = [
     width: "58 мм",
     glass: "Двухкамерный 32 мм",
     prices: [
-      { type: "single", title: "Одностворчатое", size: "1400×800", price: "340 BYN" },
-      { type: "double", title: "Двустворчатое", size: "1400×1300", price: "450 BYN" },
-      { type: "triple", title: "Трёхстворчатое", size: "1400×2000", price: "610 BYN" },
-      { type: "balcony", title: "Балконный блок", size: "2100×1500", price: "670 BYN" },
+      basicWindowPrice("single", "Одностворчатое", "1400×800", "340 BYN"),
+      basicWindowPrice("double", "Двустворчатое", "1400×1300", "450 BYN"),
+      basicWindowPrice("triple", "Трёхстворчатое", "1400×2000", "610 BYN"),
+      basicWindowPrice("balcony", "Балконный блок", "2100×1500", "670 BYN"),
     ],
     features: ["Базовая теплоизоляция", "Белый профиль", "Фурнитура: Accado, UPT, MACO"],
   },
@@ -54,6 +79,7 @@ export interface HomepagePricingCard {
   opening: string;
   glass: string;
   furniture: string;
+  blankPackage: string | null;
   price: string;
   featured: boolean;
 }
@@ -89,6 +115,7 @@ export const HOMEPAGE_PRICING_CARDS: HomepagePricingCard[] = WINDOW_PROFILE_PRIC
       opening: meta.opening,
       glass: profile.glass.toLowerCase(),
       furniture: "белая",
+      blankPackage: formatWindowBlankPackage(item),
       price: formatHomepagePrice(item.price),
       featured: meta.featured,
     };

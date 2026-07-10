@@ -6,6 +6,8 @@ import PageLayout from "@/components/PageLayout";
 import WindowsHeroSection, { type WindowsHeroConfig } from "@/components/windows/WindowsHeroSection";
 import WhyChooseMarvikoSection from "@/components/WhyChooseMarvikoSection";
 import WindowsPricingSection from "@/components/windows/WindowsPricingSection";
+import DoorsPricingSection from "@/components/doors/DoorsPricingSection";
+import { WINDOWS_ALU_PRICING } from "@/data/windowsAluPricing";
 import WindowsInstallmentSection from "@/components/windows/WindowsInstallmentSection";
 import WindowsProfilesSection from "@/components/windows/WindowsProfilesSection";
 import LaminationSection from "@/components/LaminationSection";
@@ -27,6 +29,7 @@ interface WindowsPageContentProps {
   hero: WindowsHeroConfig;
   showLamination?: boolean;
   showPricing?: boolean;
+  showAluPricingTable?: boolean;
 }
 
 const WindowsPageContent = ({
@@ -35,6 +38,7 @@ const WindowsPageContent = ({
   hero,
   showLamination = false,
   showPricing = true,
+  showAluPricingTable = false,
 }: WindowsPageContentProps) => {
   const [orderModalOpen, setOrderModalOpen] = useState(false);
   const [orderModalKind, setOrderModalKind] = useState<OrderModalKind>("window");
@@ -59,6 +63,14 @@ const WindowsPageContent = ({
       <WhyChooseMarvikoSection variant="landing" showCertificateBadges />
 
       {showPricing && <WindowsPricingSection onOrderClick={openWindowOrder} />}
+
+      {showAluPricingTable && (
+        <DoorsPricingSection
+          pricing={WINDOWS_ALU_PRICING}
+          itemColumnLabel="Тип окна"
+          onOrderClick={openWindowOrder}
+        />
+      )}
 
       <WindowsInstallmentSection onOrderClick={openWindowOrder} />
 

@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import PricingWindowSVG from "@/components/PricingWindowSVG";
-import { WINDOW_PROFILE_PRICING } from "@/data/pricing";
+import { WINDOW_PROFILE_PRICING, formatWindowBlankPackage } from "@/data/pricing";
 
 interface WindowsPricingSectionProps {
   onOrderClick: () => void;
@@ -53,7 +53,9 @@ const WindowsPricingSection = ({ onOrderClick }: WindowsPricingSectionProps) => 
                 </ul>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-4">
-                {p.prices.map((item, i) => (
+                {p.prices.map((item, i) => {
+                  const blankPackage = formatWindowBlankPackage(item);
+                  return (
                   <div
                     key={i}
                     className="p-6 flex flex-col items-center text-center border-b sm:border-r border-border last:border-r-0 bg-card hover:bg-accent-light/50 transition-colors"
@@ -70,6 +72,9 @@ const WindowsPricingSection = ({ onOrderClick }: WindowsPricingSectionProps) => 
                     <p className="text-xs text-muted-foreground mb-1">
                       Фурнитура: <span className="font-semibold text-foreground">Accado · UPT · MACO</span>
                     </p>
+                    {blankPackage && (
+                      <p className="text-xs font-mono text-muted-foreground mb-1">{blankPackage}</p>
+                    )}
                     <p className="text-xl font-extrabold text-primary mt-1">{item.price}</p>
                     <button
                       type="button"
@@ -79,7 +84,8 @@ const WindowsPricingSection = ({ onOrderClick }: WindowsPricingSectionProps) => 
                       Заказать
                     </button>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </AnimatedSection>

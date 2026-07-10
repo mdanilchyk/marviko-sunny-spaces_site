@@ -49,7 +49,7 @@ const DoorsPageContent = ({ seoPath, path, hero, showDoorTypes = false, showLami
 
         {showLamination && <LaminationSection variant="doors" onOrderClick={() => setOrderModal(true)} />}
 
-        <HowWeWorkSection includeWarrantyStep />
+        <HowWeWorkSection />
 
         <WindowsInstallmentSection onOrderClick={() => setOrderModal(true)} />
 

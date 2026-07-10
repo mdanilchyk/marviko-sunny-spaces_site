@@ -9,7 +9,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import PricingWindowSVG from "@/components/PricingWindowSVG";
-import { WINDOW_PROFILE_PRICING } from "@/data/pricing";
+import { WINDOW_PROFILE_PRICING, formatWindowBlankPackage } from "@/data/pricing";
 import { getWindowsWorkPhotos, toLightboxImages, WINDOWS_PAGE_HERO_IMAGE } from "@/data/portfolio";
 
 const workPhotos = getWindowsWorkPhotos();
@@ -154,6 +154,9 @@ const WindowsPage = () => {
                         <p className="text-sm font-semibold mb-1">{item.title}</p>
                         <p className="text-xs font-mono text-muted-foreground mb-1">Размер {item.size} мм</p>
                         <p className="text-xs text-muted-foreground mb-1">Фурнитура: <span className="font-semibold text-foreground">Accado · UPT · MACO</span></p>
+                        {formatWindowBlankPackage(item) && (
+                          <p className="text-xs font-mono text-muted-foreground mb-1">{formatWindowBlankPackage(item)}</p>
+                        )}
                         <p className="text-xl font-extrabold text-primary mt-1">{item.price}</p>
                         <button onClick={() => setOrderModal(true)} className="mt-3 bg-primary text-primary-foreground py-2 px-5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all">
                           Заказать

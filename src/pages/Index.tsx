@@ -344,6 +344,7 @@ const Index = () => {
                       <p>Тип: {card.opening}</p>
                       <p>Стеклопакет: {card.glass}</p>
                       <p>Фурнитура: {card.furniture}</p>
+                      {card.blankPackage && <p className="font-mono">{card.blankPackage}</p>}
                     </div>
 
                     <div
