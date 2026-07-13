@@ -317,7 +317,7 @@ const Index = () => {
           <SectionHeader
             label="Цены"
             title="Цены на наши окна"
-            subtitle="Стоимость окон ПВХ с монтажом."
+            subtitle="Стоимость окон ПВХ без монтажа."
             variant="blur"
           />
 
@@ -343,8 +343,6 @@ const Index = () => {
                     <div className="text-[13px] leading-relaxed mb-3" style={{ color: "#7A7268" }}>
                       <p>Тип: {card.opening}</p>
                       <p>Стеклопакет: {card.glass}</p>
-                      <p>Фурнитура: {card.furniture}</p>
-                      {card.blankPackage && <p className="font-mono">{card.blankPackage}</p>}
                     </div>
 
                     <div

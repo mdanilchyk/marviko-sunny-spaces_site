@@ -8,6 +8,8 @@ const WindowsAluPage = () => (
     hero={WINDOWS_ALU_HERO}
     showPricing={false}
     showAluPricingTable
+    showProfiles={false}
+    whyChooseVariant="windows-alu"
   />
 );
 

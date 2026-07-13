@@ -30,6 +30,8 @@ interface WindowsPageContentProps {
   showLamination?: boolean;
   showPricing?: boolean;
   showAluPricingTable?: boolean;
+  showProfiles?: boolean;
+  whyChooseVariant?: "landing" | "windows-alu";
 }
 
 const WindowsPageContent = ({
@@ -39,6 +41,8 @@ const WindowsPageContent = ({
   showLamination = false,
   showPricing = true,
   showAluPricingTable = false,
+  showProfiles = true,
+  whyChooseVariant = "landing",
 }: WindowsPageContentProps) => {
   const [orderModalOpen, setOrderModalOpen] = useState(false);
   const [orderModalKind, setOrderModalKind] = useState<OrderModalKind>("window");
@@ -60,7 +64,7 @@ const WindowsPageContent = ({
 
       <WindowsHeroSection hero={hero} />
 
-      <WhyChooseMarvikoSection variant="landing" showCertificateBadges />
+      <WhyChooseMarvikoSection variant={whyChooseVariant} showCertificateBadges />
 
       {showPricing && <WindowsPricingSection onOrderClick={openWindowOrder} />}
 
@@ -74,7 +78,7 @@ const WindowsPageContent = ({
 
       <WindowsInstallmentSection onOrderClick={openWindowOrder} />
 
-      <WindowsProfilesSection />
+      {showProfiles && <WindowsProfilesSection />}
 
       {showLamination && <LaminationSection variant="windows" onOrderClick={openWindowOrder} />}
 

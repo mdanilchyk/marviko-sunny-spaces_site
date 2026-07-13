@@ -31,6 +31,9 @@ function basicWindowPrice(
 
 export function formatWindowBlankPackage(item: WindowPriceItem): string | null {
   if (!item.windowsill || !item.drip) return null;
+  if (item.type === "balcony") {
+    return `подок ${item.windowsill} · подоконник ${item.drip}`;
+  }
   return `подок ${item.windowsill} · отлив ${item.drip}`;
 }
 
@@ -55,19 +58,19 @@ export const WINDOW_PROFILE_PRICING: WindowProfilePricing[] = [
       basicWindowPrice("triple", "Трёхстворчатое", "1400×2000", "610 BYN"),
       basicWindowPrice("balcony", "Балконный блок", "2100×1500", "670 BYN"),
     ],
-    features: ["Базовая теплоизоляция", "Белый профиль", "Фурнитура: Accado, UPT, MACO"],
+    features: ["Базовая теплоизоляция", "Армирование 1,5 мм", "Фурнитура: Accado, UPT, MACO"],
   },
   {
     chambers: "5 камер",
     width: "70 мм",
     glass: "Двухкамерный 40 мм",
     prices: [
-      { type: "single", title: "Одностворчатое", size: "1400×800", price: "355 BYN" },
-      { type: "double", title: "Двустворчатое", size: "1400×1300", price: "475 BYN" },
-      { type: "triple", title: "Трёхстворчатое", size: "1400×2000", price: "650 BYN" },
-      { type: "balcony", title: "Балконный блок", size: "2100×1500", price: "705 BYN" },
+      basicWindowPrice("single", "Одностворчатое", "1400×800", "355 BYN"),
+      basicWindowPrice("double", "Двустворчатое", "1400×1300", "475 BYN"),
+      basicWindowPrice("triple", "Трёхстворчатое", "1400×2000", "650 BYN"),
+      basicWindowPrice("balcony", "Балконный блок", "2100×1500", "705 BYN"),
     ],
-    features: ["Улучшенная теплоизоляция", "Армирование 1.5 мм", "Микропроветривание"],
+    features: ["Улучшенная теплоизоляция", "Армирование 1,5 мм", "Микропроветривание"],
     popular: true,
   },
 ];
@@ -78,8 +81,6 @@ export interface HomepagePricingCard {
   size: string;
   opening: string;
   glass: string;
-  furniture: string;
-  blankPackage: string | null;
   price: string;
   featured: boolean;
 }
@@ -114,8 +115,6 @@ export const HOMEPAGE_PRICING_CARDS: HomepagePricingCard[] = WINDOW_PROFILE_PRIC
       size: formatHomepageSize(item.size),
       opening: meta.opening,
       glass: profile.glass.toLowerCase(),
-      furniture: "белая",
-      blankPackage: formatWindowBlankPackage(item),
       price: formatHomepagePrice(item.price),
       featured: meta.featured,
     };

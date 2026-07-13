@@ -1,10 +1,10 @@
 import CertificateBadgesRow from "@/components/CertificateBadgesRow";
 import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
-import { whyChooseDefaultItems, whyChooseDoorsItems, whyChooseLandingItems } from "@/data/whyChooseMarviko";
+import { whyChooseDefaultItems, whyChooseDoorsItems, whyChooseLandingItems, whyChooseWindowsAluItems } from "@/data/whyChooseMarviko";
 
 interface WhyChooseMarvikoSectionProps {
-  variant?: "default" | "landing" | "doors";
+  variant?: "default" | "landing" | "doors" | "windows-alu";
   showCertificateBadges?: boolean;
 }
 
@@ -13,7 +13,13 @@ const WhyChooseMarvikoSection = ({
   showCertificateBadges = false,
 }: WhyChooseMarvikoSectionProps) => {
   const items =
-    variant === "landing" ? whyChooseLandingItems : variant === "doors" ? whyChooseDoorsItems : whyChooseDefaultItems;
+    variant === "landing"
+      ? whyChooseLandingItems
+      : variant === "windows-alu"
+        ? whyChooseWindowsAluItems
+        : variant === "doors"
+          ? whyChooseDoorsItems
+          : whyChooseDefaultItems;
 
   return (
     <section id="about" className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
