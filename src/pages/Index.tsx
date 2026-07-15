@@ -10,7 +10,7 @@ import ImageLightbox from "@/components/ImageLightbox";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection, { ParallaxImage } from "@/components/AnimatedSection";
 import PricingWindowSVG from "@/components/PricingWindowSVG";
-import { FORM_SUBJECTS, SITE, FORM_COPY } from "@/config/site";
+import { FORM_SUBJECTS, SITE } from "@/config/site";
 import { HOMEPAGE_PRICING_CARDS, HOMEPAGE_WINDOWS_FROM_PRICE } from "@/data/pricing";
 import { HOMEPAGE_PORTFOLIO_ITEMS } from "@/data/portfolio";
 import { faqData } from "@/data/faq";
@@ -20,8 +20,10 @@ import ConsultationCtaSection from "@/components/ConsultationCtaSection";
 import CertificatesSection from "@/components/CertificatesSection";
 import SectionHeader from "@/components/SectionHeader";
 import { reviews } from "@/data/reviews";
+import FormSuccessModal from "@/components/FormSuccessModal";
 import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
 import { pushFormSubmissionSuccess } from "@/lib/gtm";
+import { formatPhoneInput, getPhoneValidationError } from "@/lib/phone";
 
 
 import heroImg from "@/assets/hero-interior.jpg";
@@ -164,7 +166,7 @@ const Index = () => {
                 noValidate
                 onSubmit={async (e) => {
                   e.preventDefault();
-                  if (!calcPhone.trim()) {
+                  if (getPhoneValidationError(calcPhone)) {
                     setCalcPhoneError(true);
                     setCalcSubmitted(false);
                     return;
@@ -237,20 +239,21 @@ const Index = () => {
                     placeholder={SITE.phonePlaceholder}
                     value={calcPhone}
                     onChange={(e) => {
-                      setCalcPhone(e.target.value);
+                      setCalcPhone(formatPhoneInput(e.target.value));
                       setCalcPhoneError(false);
                       setCalcSubmitted(false);
                     }}
                     className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${calcPhoneError ? "" : "border-border focus:border-primary"}`}
                     style={calcPhoneError ? { borderColor: "hsl(var(--destructive))", boxShadow: "0 0 0 1px hsl(var(--destructive))" } : undefined}
-                    maxLength={20}
+                    maxLength={17}
+                    inputMode="tel"
                     required
                     aria-invalid={calcPhoneError}
                     aria-describedby={calcPhoneError ? "calc-phone-error" : undefined}
                   />
                   {calcPhoneError && (
                     <p id="calc-phone-error" className="text-xs mt-1" style={{ color: "hsl(var(--destructive))" }}>
-                      Пожалуйста, введите номер телефона
+                      {getPhoneValidationError(calcPhone) ?? "Пожалуйста, введите номер телефона"}
                     </p>
                   )}
                 </div>
@@ -262,9 +265,6 @@ const Index = () => {
                 >
                   {calcSending ? "Отправка..." : "Рассчитать"}
                 </button>
-                {calcSubmitted && (
-                  <p className="text-xs text-primary mt-2">Заявка отправлена! {FORM_COPY.followUp}</p>
-                )}
                 {calcSubmitError && (
                   <p className="text-xs text-destructive mt-2">{FORM_SUBMIT_ERROR_MESSAGE}</p>
                 )}
@@ -487,15 +487,6 @@ const Index = () => {
                 subtitle="Напишите, и наши специалисты подробно ответят вам в удобной форме."
               />
               <AnimatedSection delay={0.15}>
-                {contactSubmitted ? (
-                  <div className="bg-card rounded-xl p-8 card-shadow text-center">
-                    <div className="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center text-primary mx-auto mb-4">
-                      <Send className="w-7 h-7" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-2">Спасибо!</h3>
-                    <p className="text-sm text-muted-foreground">{FORM_COPY.followUp}</p>
-                  </div>
-                ) : (
                   <div className="bg-card rounded-xl p-6 sm:p-8 card-shadow">
                     <div className="flex flex-col gap-5">
                       <div>
@@ -539,7 +530,7 @@ const Index = () => {
                           <label className="text-sm font-medium">* Телефон</label>
                           {contactErrors.phone && (
                             <span className="text-xs font-medium px-2 py-0.5 rounded" style={{ backgroundColor: "hsl(0 84% 60% / 0.1)", color: "hsl(var(--destructive))" }}>
-                              Обязательное поле
+                              {getPhoneValidationError(contactForm.phone) ?? "Обязательное поле"}
                             </span>
                           )}
                         </div>
@@ -547,9 +538,10 @@ const Index = () => {
                           type="tel"
                           placeholder={SITE.phonePlaceholder}
                           value={contactForm.phone}
-                          onChange={(e) => { setContactForm({ ...contactForm, phone: e.target.value }); setContactErrors({ ...contactErrors, phone: false }); }}
+                          onChange={(e) => { setContactForm({ ...contactForm, phone: formatPhoneInput(e.target.value) }); setContactErrors({ ...contactErrors, phone: false }); }}
                           className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
-                          maxLength={20}
+                          maxLength={17}
+                          inputMode="tel"
                         />
                       </div>
                       <button
@@ -557,7 +549,7 @@ const Index = () => {
                           const errors = {
                             question: !contactForm.question.trim(),
                             name: !contactForm.name.trim(),
-                            phone: !contactForm.phone.trim(),
+                            phone: Boolean(getPhoneValidationError(contactForm.phone)),
                           };
                           setContactErrors(errors);
                           if (errors.question || errors.name || errors.phone) return;
@@ -588,7 +580,6 @@ const Index = () => {
                       </p>
                     </div>
                   </div>
-                )}
               </AnimatedSection>
             </div>
           </div>
@@ -653,6 +644,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <FormSuccessModal open={calcSubmitted} onClose={() => setCalcSubmitted(false)} />
+      <FormSuccessModal open={contactSubmitted} onClose={() => setContactSubmitted(false)} />
 
       <OrderModal
         open={orderModal}

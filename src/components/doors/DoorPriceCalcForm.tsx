@@ -13,6 +13,8 @@ interface DoorPriceCalcFormProps {
 }
 
 /** Door quote form — width, height, phone (block 02 / 12). */
-const DoorPriceCalcForm = (props: DoorPriceCalcFormProps) => <PriceCalcForm {...props} />;
+const DoorPriceCalcForm = ({ formType = "door_quote", ...props }: DoorPriceCalcFormProps) => (
+  <PriceCalcForm {...props} formType={formType} />
+);
 
 export default DoorPriceCalcForm;

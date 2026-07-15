@@ -36,7 +36,11 @@ const DoorsHeroSection = ({ hero }: DoorsHeroSectionProps) => (
         </AnimatedSection>
 
         <AnimatedSection delay={0.08} className="order-2 lg:col-start-2 lg:row-span-2 lg:self-center">
-          <DoorPriceCalcForm variant={hero.variant} className="w-full lg:max-w-lg lg:ml-auto" />
+          <DoorPriceCalcForm
+            variant={hero.variant}
+            className="w-full lg:max-w-lg lg:ml-auto"
+            formType="door_quote"
+          />
         </AnimatedSection>
       </div>
     </div>

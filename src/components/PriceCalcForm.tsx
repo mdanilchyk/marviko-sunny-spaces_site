@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { FORM_COPY, SITE } from "@/config/site";
+import FormSuccessModal from "@/components/FormSuccessModal";
 import { FORM_SUBMIT_ERROR_MESSAGE, sendFormEmail } from "@/lib/formSubmit";
 import { pushFormSubmissionSuccess, type GtmFormType } from "@/lib/gtm";
+import { formatPhoneInput, getPhoneValidationError } from "@/lib/phone";
 
 export type PriceCalcVariant = "pvh" | "alu" | "doors-pvh" | "doors-alu";
 export type PriceCalcFormTheme = "default" | "on-gradient";
@@ -88,13 +90,14 @@ const PriceCalcForm = ({
 
   return (
     <div className={shellClass}>
+      <FormSuccessModal open={calcSubmitted} onClose={() => setCalcSubmitted(false)} />
       {!onGradient && <h3 className={`${titleClass} text-foreground`}>Быстрый расчёт стоимости</h3>}
       <form
         className={`flex flex-col ${fieldGap}`}
         noValidate
         onSubmit={async (e) => {
           e.preventDefault();
-          if (!calcPhone.trim()) {
+          if (getPhoneValidationError(calcPhone)) {
             setCalcPhoneError(true);
             setCalcSubmitted(false);
             return;
@@ -164,7 +167,7 @@ const PriceCalcForm = ({
             placeholder={SITE.phonePlaceholder}
             value={calcPhone}
             onChange={(e) => {
-              setCalcPhone(e.target.value);
+              setCalcPhone(formatPhoneInput(e.target.value));
               setCalcPhoneError(false);
               setCalcSubmitted(false);
             }}
@@ -174,7 +177,8 @@ const PriceCalcForm = ({
                 ? { borderColor: "hsl(var(--destructive))", boxShadow: "0 0 0 1px hsl(var(--destructive))" }
                 : undefined
             }
-            maxLength={20}
+            maxLength={17}
+            inputMode="tel"
             required
             aria-invalid={calcPhoneError}
             aria-describedby={calcPhoneError ? "calc-phone-error" : undefined}
@@ -185,7 +189,7 @@ const PriceCalcForm = ({
               className={`text-xs mt-1 ${onGradient ? "text-red-300" : ""}`}
               style={onGradient ? undefined : { color: "hsl(var(--destructive))" }}
             >
-              Пожалуйста, введите номер телефона
+              {getPhoneValidationError(calcPhone) ?? "Пожалуйста, введите номер телефона"}
             </p>
           )}
         </div>
@@ -202,12 +206,6 @@ const PriceCalcForm = ({
 
         {showTrustLine && (
           <p className="text-xs sm:text-sm text-primary-foreground/80 text-center">{FORM_COPY.trustLine}</p>
-        )}
-
-        {calcSubmitted && (
-          <p className={`text-xs text-center ${onGradient ? "text-primary-foreground" : "text-primary"}`}>
-            Заявка отправлена! {FORM_COPY.followUp}
-          </p>
         )}
 
         {calcSubmitError && (
