@@ -15,7 +15,7 @@ import ClientReviewsSection from "@/components/ClientReviewsSection";
 import CompanyStatsSection from "@/components/CompanyStatsSection";
 import FaqSection from "@/components/FaqSection";
 import DoorsFinalCtaSection from "@/components/doors/DoorsFinalCtaSection";
-import { doorsPageFaq } from "@/data/faq";
+import { doorsAluFaq, doorsPageFaq } from "@/data/faq";
 import { doorsPageReviews } from "@/data/reviews";
 import { DOORS_ALU_PRICING, DOORS_PVH_PRICING } from "@/data/doorsPricing";
 import type { DoorsHeroConfig } from "@/components/doors/doorsPageData";
@@ -41,7 +41,10 @@ const DoorsPageContent = ({ seoPath, path, hero, showDoorTypes = false, showLami
       <PageLayout onOrderClick={() => setOrderModal(true)}>
         <DoorsHeroSection hero={hero} />
 
-        <WhyChooseMarvikoSection variant="doors" showCertificateBadges />
+        <WhyChooseMarvikoSection
+          variant={hero.variant === "doors-alu" ? "doors-alu" : "doors"}
+          showCertificateBadges
+        />
 
         {showDoorTypes && <DoorsTypesSection onOrderClick={() => setOrderModal(true)} />}
 
@@ -59,7 +62,7 @@ const DoorsPageContent = ({ seoPath, path, hero, showDoorTypes = false, showLami
 
         <CompanyStatsSection />
 
-        <FaqSection items={doorsPageFaq} />
+        <FaqSection items={hero.variant === "doors-alu" ? doorsAluFaq : doorsPageFaq} />
 
         <DoorsFinalCtaSection variant={hero.variant} />
 

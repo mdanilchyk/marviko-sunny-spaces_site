@@ -1,4 +1,4 @@
-import { faqData, windowsAluFaq, windowsPvhFaq, doorsPageFaq } from "@/data/faq";
+import { faqData, windowsAluFaq, windowsPvhFaq, doorsAluFaq, doorsPageFaq } from "@/data/faq";
 import { SEO_BY_PATH, type SeoPath } from "@/config/seo";
 import { SITE } from "@/config/site";
 
@@ -129,8 +129,10 @@ export function getSchemasForPath(path: SchemaPath): Record<string, unknown>[] {
       schemas.push(withContext(faqPageSchema(windowsPvhFaq)));
     } else if (path === "/windows-alu") {
       schemas.push(withContext(faqPageSchema(windowsAluFaq)));
-    } else if (path === "/doors-pvh" || path === "/doors-alu") {
+    } else if (path === "/doors-pvh") {
       schemas.push(withContext(faqPageSchema(doorsPageFaq)));
+    } else if (path === "/doors-alu") {
+      schemas.push(withContext(faqPageSchema(doorsAluFaq)));
     }
     return schemas;
   }

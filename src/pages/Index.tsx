@@ -13,7 +13,7 @@ import PricingWindowSVG from "@/components/PricingWindowSVG";
 import { FORM_SUBJECTS, SITE } from "@/config/site";
 import { HOMEPAGE_PRICING_CARDS, HOMEPAGE_WINDOWS_FROM_PRICE } from "@/data/pricing";
 import { HOMEPAGE_PORTFOLIO_ITEMS } from "@/data/portfolio";
-import { faqData } from "@/data/faq";
+import { windowsPvhFaq } from "@/data/faq";
 import FaqAccordion from "@/components/FaqAccordion";
 import ClientReviewsSection from "@/components/ClientReviewsSection";
 import ConsultationCtaSection from "@/components/ConsultationCtaSection";
@@ -343,6 +343,7 @@ const Index = () => {
                     <div className="text-[13px] leading-relaxed mb-3" style={{ color: "#7A7268" }}>
                       <p>Тип: {card.opening}</p>
                       <p>Стеклопакет: {card.glass}</p>
+                      {card.blankPackage && <p className="font-mono">{card.blankPackage}</p>}
                     </div>
 
                     <div
@@ -477,7 +478,7 @@ const Index = () => {
         <div className="container mx-auto section-padding">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* FAQ */}
-            <FaqAccordion items={faqData} />
+            <FaqAccordion items={windowsPvhFaq} />
 
             {/* Contact Form - mosokna style */}
             <div>

@@ -53,9 +53,9 @@ export const WINDOW_PROFILE_PRICING: WindowProfilePricing[] = [
     width: "58 мм",
     glass: "Двухкамерный 32 мм",
     prices: [
-      basicWindowPrice("single", "Одностворчатое", "1400×800", "340 BYN"),
-      basicWindowPrice("double", "Двустворчатое", "1400×1300", "450 BYN"),
-      basicWindowPrice("triple", "Трёхстворчатое", "1400×2000", "610 BYN"),
+      basicWindowPrice("single", "Оконный блок ПВХ", "1400×800", "340 BYN"),
+      basicWindowPrice("double", "Оконный блок ПВХ", "1400×1300", "450 BYN"),
+      basicWindowPrice("triple", "Оконный блок ПВХ", "1400×2000", "610 BYN"),
       basicWindowPrice("balcony", "Балконный блок", "2100×1500", "670 BYN"),
     ],
     features: ["Базовая теплоизоляция", "Армирование 1,5 мм", "Фурнитура: Accado, UPT, MACO"],
@@ -65,9 +65,9 @@ export const WINDOW_PROFILE_PRICING: WindowProfilePricing[] = [
     width: "70 мм",
     glass: "Двухкамерный 40 мм",
     prices: [
-      basicWindowPrice("single", "Одностворчатое", "1400×800", "355 BYN"),
-      basicWindowPrice("double", "Двустворчатое", "1400×1300", "475 BYN"),
-      basicWindowPrice("triple", "Трёхстворчатое", "1400×2000", "650 BYN"),
+      basicWindowPrice("single", "Оконный блок ПВХ", "1400×800", "355 BYN"),
+      basicWindowPrice("double", "Оконный блок ПВХ", "1400×1300", "475 BYN"),
+      basicWindowPrice("triple", "Оконный блок ПВХ", "1400×2000", "650 BYN"),
       basicWindowPrice("balcony", "Балконный блок", "2100×1500", "705 BYN"),
     ],
     features: ["Улучшенная теплоизоляция", "Армирование 1,5 мм", "Микропроветривание"],
@@ -81,6 +81,7 @@ export interface HomepagePricingCard {
   size: string;
   opening: string;
   glass: string;
+  blankPackage: string | null;
   price: string;
   featured: boolean;
 }
@@ -89,9 +90,9 @@ const HOMEPAGE_CARD_META: Record<
   WindowPriceType,
   Pick<HomepagePricingCard, "title" | "opening" | "featured">
 > = {
-  single: { title: "Одностворчатое окно", opening: "поворотно-откидное", featured: false },
-  double: { title: "Двухстворчатое окно", opening: "1 створка поворотно-откидная", featured: true },
-  triple: { title: "Трёхстворчатое окно", opening: "2 створки поворотно-откидные", featured: false },
+  single: { title: "Оконный блок ПВХ", opening: "поворотно-откидное", featured: false },
+  double: { title: "Оконный блок ПВХ", opening: "1 створка поворотно-откидная", featured: true },
+  triple: { title: "Оконный блок ПВХ", opening: "1 створка поворотно-откидная", featured: false },
   balcony: { title: "Балконный блок", opening: "окно + балконная дверь", featured: false },
 };
 
@@ -115,6 +116,7 @@ export const HOMEPAGE_PRICING_CARDS: HomepagePricingCard[] = WINDOW_PROFILE_PRIC
       size: formatHomepageSize(item.size),
       opening: meta.opening,
       glass: profile.glass.toLowerCase(),
+      blankPackage: formatWindowBlankPackage(item),
       price: formatHomepagePrice(item.price),
       featured: meta.featured,
     };
